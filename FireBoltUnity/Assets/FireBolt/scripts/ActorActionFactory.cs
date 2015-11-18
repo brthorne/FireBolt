@@ -56,6 +56,7 @@ namespace Assets.scripts
                 enqueueDestroyActions(storyAction, domainAction, effectingAnimation, aaq);
                 enqueuetranslateActions(storyAction, domainAction, effectingAnimation, aaq);
                 enqueueRotateActions(storyAction, domainAction, effectingAnimation, aaq);
+                enqueueFunctionActions(storyAction, domainAction, effectingAnimation, aaq);
             }            
             return aaq;
         }
@@ -517,6 +518,38 @@ namespace Assets.scripts
                 {
                     aaq.Add(new Destroy(startTick, actorName));
                 }
+            }
+        }
+
+        private static void enqueueFunctionActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction,
+                                                   CM.Animation effectingAnimation, FireBoltActionList aaq)
+        {
+            foreach (CM.FunctionAction fa in domainAction.FunctionActions)
+            {
+                string functionName = fa.Name;
+                List<Tuple<string, string, string>> functionParams = new List<Tuple<string, string, string>>();
+                foreach (CM.FunctionAction.FunctionArgs param in fa.functionArgs)
+                {
+                    string argValue = "";
+                    //check each param in domain ACtion to see if argValue matches a param. If so, we want dat value.
+                    foreach (CM.DomainActionParameter domainActionParameter in domainAction.Params)
+                    {
+                        if (domainActionParameter.Name == param.argValue)
+                        {
+                            if (!getActionParameterValueName(storyAction, domainActionParameter, out argValue))
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    Debug.Log("functionAction stuff: " + param.argName + " argValue: " + argValue);
+                    functionParams.Add(new Tuple<string, string, string>(param.argName, param.argType, argValue));
+                }
+
+                float startTick = getStartTick(storyAction, fa, effectingAnimation);
+                float endTick = getEndTick(storyAction, fa, effectingAnimation, startTick);
+                //check validity
+                aaq.Add(new InGameFunction(startTick, endTick, functionName, functionParams));
             }
         }
 
