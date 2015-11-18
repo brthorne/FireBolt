@@ -44,6 +44,7 @@
       <xs:element minOccurs="1" maxOccurs="1" name="translateActions" type="ArrayOfTranslateAction" />
       <xs:element minOccurs="1" maxOccurs="1" name="rotateActions" type="ArrayOfRotateAction" />
       <xs:element minOccurs="1" maxOccurs="1" name="animateActions" type="ArrayOfAnimateAction" />
+   
     </xs:all>
     <xs:attribute name="name" type="xs:string" use="required"/>
   </xs:complexType>
@@ -128,6 +129,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+
 
   <xs:complexType name="ArrayOfAnimation">
     <xs:sequence>
