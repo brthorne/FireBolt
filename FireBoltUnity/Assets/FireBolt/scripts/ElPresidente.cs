@@ -565,6 +565,8 @@ public class ElPresidente : MonoBehaviour {
         Camera.main.backgroundColor = Color.black;
         Camera.main.cullingMask = 0;
 
+        int pic = 1;
+
         // Loop through discourse time at intervals of 5%.
         for (float i = 0; i < 100; i = i + 5)
         {
@@ -598,7 +600,7 @@ public class ElPresidente : MonoBehaviour {
 
             // Save the texture 2D as a PNG.
             byte[] bytes = screenShot.EncodeToPNG();
-            File.WriteAllBytes(@"Assets/.screens/" + i + ".png", bytes);
+            File.WriteAllBytes(@".screens/" + pic++ + ".png", bytes);
         }
 
         // Reset the main camera to its default configuration.
@@ -614,5 +616,8 @@ public class ElPresidente : MonoBehaviour {
 
         // Set that the keyframes have been generated.
         keyframesGenerated = true;
+
+        //UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
 }
