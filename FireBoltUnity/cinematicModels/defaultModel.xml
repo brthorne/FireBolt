@@ -3,6 +3,24 @@
   <smartModelSettings maxAnimationSearchDepth="2" maxActorSearchDepth="2" />
   <terrain terrainFileName="warehouse_prefab.prefab" />
   <domainActions>
+    <domainAction name="rot">
+      <params>
+        <param name="actor"/>
+        <param name="spawned"/>
+        <param name="origin"/>
+      </params>
+      <createActions >
+        <createAction actorNameParamName="spawned" originParamName="origin"/>
+      </createActions>
+      <destroyActions />
+      <translateActions/>
+      
+      <rotateActions/>
+      <animateActions />
+      <attachActions>
+        <attachAction actorNameParamName="spawned" attach="true" parentParamName="actor"/>
+      </attachActions>
+    </domainAction>
     <domainAction name="move">
       <params>
         <param name="actor" />
