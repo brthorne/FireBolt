@@ -11,7 +11,7 @@
       <property name="actor" value="pudge"/>
       <property name="spawned" value="fire_extinguisher"/>
       <property name="time" value="10-11"/>
-      <property name="origin" value="(8.5,5.0)" />
+      <property name="origin" value="(8.444445,6.333333)" />
     </action>
     <action type="run" name="step2">
       <property name="origin" value="(8.444445,6.333333)" />
@@ -40,7 +40,7 @@
       <action-type-ref name="idle" />
       <action-type-ref name="create" />
       <action-type-ref name="remove" />
-      <action-type name="rot" />
+      <action-type-ref name="rot" />
     </action-type>
     <action-type name="has-position">
       <action-type-ref name="create" />
@@ -49,7 +49,7 @@
       <action-type-ref name="move" />
       <action-type-ref name="walk" />
       <action-type-ref name="run" />
-      <action-type name="rot" />
+      <action-type-ref name="rot" />
     </action-type>
     <action-type name="has-destination">
       <action-type-ref name="move" />

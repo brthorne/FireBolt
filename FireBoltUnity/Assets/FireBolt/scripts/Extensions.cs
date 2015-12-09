@@ -174,5 +174,10 @@ namespace Assets.scripts
             }
             return theta;
         }
+
+        public static string AppendTimestamps(this string s)
+        {
+            return s + string.Format(" d:s[{0}:{1}]", ElPresidente.currentDiscourseTime, ElPresidente.currentStoryTime);
+        }
     }
 }
