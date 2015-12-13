@@ -80,6 +80,10 @@
     <action-property name="spawned" action="rot" range="A" />
   </action-properties>
   <objects>
+    <set name="O">
+      <set-ref name="A"/>
+      
+    </set>
     <set name="A">
       <constant value="pudge" />
       <constant value="skywrath_mage" />

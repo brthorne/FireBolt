@@ -38,6 +38,7 @@ namespace Assets.scripts
             //orderedActionTypes = story.ActionTypeGraph.ReverseTopologicalSort().ToArray();
 
             buildInitialState(aaq);
+            createActors(aaq);
 
             //generate FireBolt actions for the steps
             foreach (IStoryAction<UintT> storyAction in story.Actions.Values)
@@ -89,6 +90,31 @@ namespace Assets.scripts
                     continue;
                 }
                 aaq.Add(new Create(0, initPos.Actor, modelFileName, initPos.Location.ToVector3()));
+            }
+        }
+
+        private static void createActors(FireBoltActionList aaq)
+        {         
+            var actorNames = (story.ObjectSets[Impulse.v_1_336.Xml.Story.ObjectsSetName] as IFiniteObjectSet).Items.Select(c => c.Name).ToList();
+
+            Debug.Log("building main-actor creation actions");
+            foreach (var actorName in actorNames)
+            {
+                Debug.Log(string.Format("building Main-Actor based create for actor[{0}]",actorName));
+                CM.Actor actor;
+                if (!cm.TryGetActor(actorName, out actor))
+                {
+                    Debug.Log("actor [" + actorName + "] not found in cinematic model.");
+                    continue;
+                }
+
+                string modelFileName = actor.Model;
+                if (string.IsNullOrEmpty(modelFileName))
+                {
+                    Debug.Log("model name for actor[" + actorName + "] not found in cinematic model.");
+                    continue;
+                }
+                aaq.Add(new Create(0, actorName, modelFileName, new Vector3(-1000,0,1000)));
             }
         }
 
@@ -432,6 +458,12 @@ namespace Assets.scripts
             }
             return false;
         }
+
+
+        //private static string getAbstractActor(string actorName)
+        //{
+
+        //}
 
         private static void enqueueCreateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, CM.Animation effectingAnimation, FireBoltActionList aaq )
         {
