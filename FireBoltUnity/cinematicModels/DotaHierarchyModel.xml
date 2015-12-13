@@ -168,10 +168,13 @@
   
   
   <actors>
-    <actor name="Runes" model="m005.fbx">
+    <!--<actor name="O" model="button_green.fbx">
+      <animationMappings/>
+    </actor>-->
+    <actor name="Runes" model="button_green.fbx">
       <animationMappings/>
     </actor>
-    <actor name="Pudge" model="pudge_model.fbx" >
+    <actor name="pudge" model="pudge_model.fbx" >
       <animationMappings>
         <animationMapping animateActionName="throw_hook" animationName="throw_hook" loopAnimation="false"/>
         <animationMapping animateActionName="catch_hook" animationName="catch_hook" loopAnimation="false"/>
@@ -183,7 +186,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="Mirana" model="mirana_model.fbx" >
+    <actor name="mirana" model="mirana_model.fbx" >
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="mirana_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="mirana_idle" loopAnimation="true" />
@@ -192,7 +195,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="Crystal Maiden" model="crystal_maiden_model.fbx" >
+    <actor name="crystal maiden" model="crystal_maiden_model.fbx" >
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="crystal_maiden_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="crystal_maiden_idle" loopAnimation="true" />
@@ -202,7 +205,7 @@
       </animationMappings>
     </actor>
     
-    <actor name="Skywrath Mage" model="skywrath_mage_model.fbx" >
+    <actor name="skywrath mage" model="skywrath_mage_model.fbx" >
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="skywrath_mage_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="skywrath_mage_idle" loopAnimation="true" />
@@ -229,6 +232,7 @@
     <actor name="Creeps" model="m005.fbx" >
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="swm_walk" loopAnimation="true" />
+        <animationMapping animateActionName="creep_attack" animationName="pudge_attack" loopAnimation="false"/>
         <animationMapping animateActionName="die" animationName="swm_die" loopAnimation="false" />
       </animationMappings>
     </actor>

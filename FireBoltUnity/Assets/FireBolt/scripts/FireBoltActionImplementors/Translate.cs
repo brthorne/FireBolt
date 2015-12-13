@@ -65,8 +65,8 @@ namespace Assets.scripts
             lerpd.x = destination.X.HasValue ? Mathf.Lerp(origin.x,destination.X.Value, lerpPercent) : actor.transform.position.x;
             lerpd.y = destination.Y.HasValue ? Mathf.Lerp(origin.y, destination.Y.Value, lerpPercent) : actor.transform.position.y;
             lerpd.z = destination.Z.HasValue ? Mathf.Lerp(origin.z, destination.Z.Value, lerpPercent) : actor.transform.position.z;
-            Debug.Log(string.Format("translate execute [{0}] from [{1}] to [{2}] d:s[{3}:{4}]", actorName, actor.transform.position, lerpd, 
-                ElPresidente.currentDiscourseTime, ElPresidente.currentStoryTime));
+            //Debug.Log(string.Format("translate execute [{0}] from [{1}] to [{2}] d:s[{3}:{4}]", actorName, actor.transform.position, lerpd, 
+              //  ElPresidente.currentDiscourseTime, ElPresidente.currentStoryTime));
 
             actor.transform.position = lerpd;
         }

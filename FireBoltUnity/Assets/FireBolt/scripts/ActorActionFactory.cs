@@ -100,11 +100,11 @@ namespace Assets.scripts
             Debug.Log("building object set based creation actions");
             foreach (var actorName in actorNames)
             {
-                string modelFileName = string.Empty;
+                string modelFileName;
                 if(!getAbstractActorModelName(actorName, out modelFileName))
                 {
                     Debug.Log(string.Format("cannot auto-create actor[{0}]", actorName));
-                    break;
+                    continue;
                 }
                 Debug.Log(string.Format("building object set based create for actor[{0}]",actorName));                
                 aaq.Add(new Create(0, actorName, modelFileName, new Vector3(-1000,0,1000)));
@@ -455,7 +455,8 @@ namespace Assets.scripts
 
         private static bool getAbstractActorModelName(string actorName, out string modelName)
         {
-            getActorModel(actorName, out modelName);
+            if (getActorModel(actorName, out modelName))
+                return true;
             int objectSetIndex = 0;
             int actorHierarchyStepLevel = 1;
             while (string.IsNullOrEmpty(modelName) &&
@@ -474,12 +475,8 @@ namespace Assets.scripts
                 }
                 objectSetIndex++;
             }
-            if (string.IsNullOrEmpty(modelName))
-            {
-                Debug.Log(string.Format("could not find actor def in hierarchy for [{0}]",actorName));
-                return false;//didn't find actor definition.  give up on this create action and move to the next one
-            }
-            return true;
+            Debug.Log(string.Format("could not find actor def in hierarchy for [{0}]",actorName));
+            return false;//didn't find actor definition.  give up on this create action and move to the next one
         }
 
         private static void enqueueCreateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, CM.Animation effectingAnimation, FireBoltActionList aaq )
