@@ -23,7 +23,7 @@ namespace Assets.scripts
         private static string[] orderedObjectSets;
         //private static string[] orderedActionTypes;
         private static Story<UintV, UintT, IIntervalSet<UintV, UintT>> story;
-        private static Dictionary<string, Create> actorInstantiations;
+        private static Dictionary<string, bool> actorInstantiations;
 
         /// <summary>
         /// 
@@ -39,7 +39,7 @@ namespace Assets.scripts
             orderedObjectSets = story.ObjectSetGraph.ReverseTopologicalSort().ToArray();
             //orderedActionTypes = story.ActionTypeGraph.ReverseTopologicalSort().ToArray();
 
-            actorInstantiations = new Dictionary<string, Create>();
+            actorInstantiations = new Dictionary<string, bool>();
 
             //buildInitialState(aaq);
             createActors(aaq);
@@ -69,40 +69,40 @@ namespace Assets.scripts
             return false;
         }
 
-        private static void buildInitialState(FireBoltActionList aaq) //TODO actor model defaulting a la create actions
-        {
-            var interval = new UintT(new UintV(0), new UintV(1));
-            var initialPositions = from sentence in story.Sentences
-                                   where sentence is Predicate
-                                   let p = (Predicate)sentence
-                                   where p.Temporal &&      
-                                         p.Name == "at" &&
-                                         p.Time is UintT &&
-                                         p.Terms[0] is IConstant &&
-                                         p.Terms[1] is IConstant<Coordinate2D> &&
-                                         story.IntervalSet.IncludesOrMeetsStartOf<UintV, UintT>((UintT)p.Time, interval) 
-                                   select new { Actor = p.Terms[0].Name, Location = (p.Terms[1] as IConstant<Coordinate2D>).Value };
+        //private static void buildInitialState(FireBoltActionList aaq) //TODO actor model defaulting a la create actions
+        //{
+        //    var interval = new UintT(new UintV(0), new UintV(1));
+        //    var initialPositions = from sentence in story.Sentences
+        //                           where sentence is Predicate
+        //                           let p = (Predicate)sentence
+        //                           where p.Temporal &&      
+        //                                 p.Name == "at" &&
+        //                                 p.Time is UintT &&
+        //                                 p.Terms[0] is IConstant &&
+        //                                 p.Terms[1] is IConstant<Coordinate2D> &&
+        //                                 story.IntervalSet.IncludesOrMeetsStartOf<UintV, UintT>((UintT)p.Time, interval) 
+        //                           select new { Actor = p.Terms[0].Name, Location = (p.Terms[1] as IConstant<Coordinate2D>).Value };
 
-            Debug.Log("building init state creation actions");
-            foreach (var initPos in initialPositions)
-            {
-                Debug.Log(initPos.Actor + ", " + initPos.Location.ToString());
-                CM.Actor actor;
-                if (!cm.TryGetActor(initPos.Actor,out actor))
-                {
-                    Debug.Log("actor [" + initPos.Actor + "] not found in cinematic model.");
-                    continue;
-                }
+        //    Debug.Log("building init state creation actions");
+        //    foreach (var initPos in initialPositions)
+        //    {
+        //        Debug.Log(initPos.Actor + ", " + initPos.Location.ToString());
+        //        CM.Actor actor;
+        //        if (!cm.TryGetActor(initPos.Actor,out actor))
+        //        {
+        //            Debug.Log("actor [" + initPos.Actor + "] not found in cinematic model.");
+        //            continue;
+        //        }
 
-                string modelFileName = actor.Model;
-                if (string.IsNullOrEmpty(modelFileName))
-                {
-                    Debug.Log("model name for actor[" + initPos.Actor + "] not found in cinematic model.");
-                    continue;
-                }
-                aaq.Add(new Create(0, initPos.Actor, modelFileName, initPos.Location.ToVector3()));
-            }
-        }
+        //        string modelFileName = actor.Model;
+        //        if (string.IsNullOrEmpty(modelFileName))
+        //        {
+        //            Debug.Log("model name for actor[" + initPos.Actor + "] not found in cinematic model.");
+        //            continue;
+        //        }
+        //        aaq.Add(new Create(0, initPos.Actor, modelFileName, initPos.Location.ToVector3()));
+        //    }
+        //}
 
         private static void createActors(FireBoltActionList aaq)
         {         
@@ -118,9 +118,9 @@ namespace Assets.scripts
                     continue;
                 }
                 Debug.Log(string.Format("building object set based create for actor[{0}]",actorName));
-                Create create = new Create(0, actorName, modelFileName, new Vector3(-10000, 0, -10000));
+                Create create = new Create(0, actorName, modelFileName, new Vector3(-10000, 0, -10000), true);
                 aaq.Add(create);
-                actorInstantiations.Add(actorName, create);
+                actorInstantiations.Add(actorName, true);
             }
         }
 

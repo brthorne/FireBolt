@@ -39,8 +39,9 @@ namespace Assets.scripts
 				actor.SetActive(false);
 				return true;
 			}
-            actor = GameObject.Find(actorName);
-            if (actor == null)
+            
+            if (actor == null &&
+                !getActorByName(actorName, out actor))
             {
                 Debug.LogError(string.Format("actor[{0}] not found for destroy", actorName));
                 return false;

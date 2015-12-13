@@ -43,8 +43,9 @@ namespace Assets.scripts
         {
             if (actor != null)
                 return true;
-            actor = GameObject.Find(actorName);
-            if(actor == null)
+            
+            if(actor == null && 
+                !getActorByName(actorName, out actor))
             {
                 Debug.LogError("actor name [" + actorName + "] not found. cannot move");
                 return false;

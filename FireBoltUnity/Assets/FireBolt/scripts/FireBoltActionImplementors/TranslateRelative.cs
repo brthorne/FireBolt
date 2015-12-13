@@ -26,8 +26,7 @@ namespace Assets.scripts
 
         public override bool Init()
         {
-            trackedActor = GameObject.Find(trackedActorName);
-            if (trackedActor != null)
+            if (getActorByName(trackedActorName, out trackedActor))
             {
                 trackedPositionInit = trackedActor.transform.position;
                 trackedPositionLast = trackedPositionInit;

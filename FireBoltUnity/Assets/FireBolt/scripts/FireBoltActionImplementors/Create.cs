@@ -13,6 +13,7 @@ namespace Assets.scripts
         string actorName,modelName;
         Vector3 position;
 		GameObject actor;
+        bool defaultedCreate;
 
         public static bool ValidForConstruction(string actorName, string modelName)
         {
@@ -26,13 +27,14 @@ namespace Assets.scripts
             return string.Format ("Create " + actorName);
         }
 
-        public Create(float startTick, string actorName, string modelName, Vector3 position) :
+        public Create(float startTick, string actorName, string modelName, Vector3 position, bool defaultedCreate = false) :
             base(startTick, startTick)
         {
             this.startTick = startTick;
             this.actorName = actorName;
             this.modelName = modelName;
             this.position = position;
+            this.defaultedCreate = defaultedCreate;
 			this.actor = null;
         }
 
@@ -61,6 +63,8 @@ namespace Assets.scripts
             actor = GameObject.Instantiate(model, position, model.transform.rotation) as GameObject;
             actor.name = actorName;
             actor.transform.SetParent((GameObject.Find("InstantiatedObjects") as GameObject).transform, true);
+            //add actor to the main registry for quicker lookups
+            ElPresidente.createdGameObjects.Add(actor.name, actor);
 
             //add a collider so we can raycast against this thing
             if (actor.GetComponent<BoxCollider>() == null)
@@ -69,6 +73,10 @@ namespace Assets.scripts
                 Bounds bounds = getBounds(actor);
                 collider.center = new Vector3(0,0.75f,0); //TODO un-hack and find proper center of model                
                 collider.size = bounds.max - bounds.min;
+            }
+            if (defaultedCreate)
+            {
+                actor.SetActive(false);
             }
             return true;
         }

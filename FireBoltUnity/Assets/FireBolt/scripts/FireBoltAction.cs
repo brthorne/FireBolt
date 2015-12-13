@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace Assets.scripts
 {
@@ -30,6 +31,25 @@ namespace Assets.scripts
         public virtual void Stop() { }
         public virtual void Undo() { }
         public virtual void Skip() { }
+
+
+        /// <summary>
+        /// finds requested actor and sets it active
+        /// </summary>
+        /// <param name="actorName"></param>
+        /// <param name="actor"></param>
+        /// <returns></returns>
+        protected bool getActorByName(string actorName, out GameObject actor)
+        {
+            actor = null;
+            if(!ElPresidente.createdGameObjects.TryGet(actorName, out actor))
+            {
+                return false;
+            }
+            if (!actor.activeSelf)
+                actor.SetActive(true);
+            return true;
+        }
     }
 
 }

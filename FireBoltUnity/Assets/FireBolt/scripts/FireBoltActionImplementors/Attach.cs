@@ -33,24 +33,19 @@ namespace Assets.scripts
         public override bool Init()
         {
             Debug.Log("init " + ToString().AppendTimestamps());
-            if (actor == null)
-            {
-                actor = GameObject.Find(actorName);   
-                if(actor== null)
-                {
-                    Debug.Log(string.Format("attach failed to find actor[{0}] to attach", actorName).AppendTimestamps());
-                    return false;
-                }                
+            if (actor == null &&
+                !getActorByName(actorName, out actor))
+            { 
+                Debug.Log(string.Format("attach failed to find actor[{0}] to attach", actorName).AppendTimestamps());
+                return false;                              
             }
 
-            if (parent == null)
+            if (parent == null &&
+                !getActorByName(parentName, out parent))
             {
-                parent = GameObject.Find(parentName);
-                if (parent == null)
-                {
-                    Debug.Log(string.Format("attach failed to find parent[{0}] to attach to", parentName).AppendTimestamps());
-                    return false;
-                }
+                Debug.Log(string.Format("attach failed to find parent[{0}] to attach to", parentName).AppendTimestamps());
+                return false;
+
             }
 
             performAttach(attach);

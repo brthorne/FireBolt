@@ -43,6 +43,8 @@ public class ElPresidente : MonoBehaviour {
     private bool initNext = false;
     private bool initTriggered = false;
 
+    public static GameObjectRegistry createdGameObjects;
+
     public List<ProCamsLensDataTable.FOVData> lensFovData;
 
     private bool keyframesGenerated = false;
@@ -173,8 +175,8 @@ public class ElPresidente : MonoBehaviour {
             reloadTerrainBundle = requiresReload(currentInputSet.TerrainBundlePath, newInputSet.TerrainBundlePath, terrainBundleLastReadTimeStamp);
         }
 
-        Destroy(GameObject.Find("InstantiatedObjects") as GameObject);
-        if (reloadTerrainBundle) Destroy(GameObject.Find("Terrain") as GameObject);
+        if(createdGameObjects!=null)createdGameObjects.Destroy("InstantiatedObjects");
+        if (reloadTerrainBundle&&createdGameObjects!=null) createdGameObjects.Destroy("Terrain");
         initialized = false;
         initTriggered = true;
         currentInputSet = newInputSet;
@@ -205,8 +207,10 @@ public class ElPresidente : MonoBehaviour {
     /// </summary>
     private void init()
     {
-        
 
+        createdGameObjects = new GameObjectRegistry();
+        createdGameObjects.Add("Rig", GameObject.Find("Rig"));//get the camera where we can find it quickly
+        createdGameObjects.Add("Pro Cam", GameObject.Find("Pro Cam"));
         if (reloadStoryPlan)
         {
             loadStructuredImpulsePlan(currentInputSet.StoryPlanPath);
@@ -271,7 +275,9 @@ public class ElPresidente : MonoBehaviour {
         executingActorActions = new FireBoltActionList(new ActionTypeComparer());
         executingCameraActions = new FireBoltActionList(new ActionTypeComparer());
         executingDiscourseActions = new FireBoltActionList(new ActionTypeComparer());
-        new GameObject("InstantiatedObjects").transform.SetParent((GameObject.Find("FireBolt") as GameObject).transform);
+        GameObject instantiatedObjects = new GameObject("InstantiatedObjects");
+        instantiatedObjects.transform.SetParent((GameObject.Find("FireBolt") as GameObject).transform);
+        createdGameObjects.Add(instantiatedObjects.name, instantiatedObjects);
 
         if (generateKeyframes) 
         {
@@ -299,6 +305,7 @@ public class ElPresidente : MonoBehaviour {
         cinematicModel.Terrain.Location.TryParseVector3(out v);
         t.transform.position = v; 
         t.transform.SetParent(GameObject.Find("FireBolt").transform,true);
+        createdGameObjects.Add(t.name, t);
     }
 
     private void loadStructuredImpulsePlan(string storyPlanPath)
