@@ -82,9 +82,11 @@
   <objects>
     <set name="O">
       <set-ref name="A"/>
-      
     </set>
     <set name="A">
+      <set-ref name="guy"/>
+    </set>
+    <set name="guy">
       <constant value="pudge" />
       <constant value="skywrath_mage" />
       <constant value="crate" />

@@ -115,12 +115,18 @@
     </domainAction>
   </domainActions>
   <actors>
-    <actor name="pudge" model="pudge_model.fbx" pointOfInterest="0">
+    <actor name="guy" model="skywrath_mage_model.fbx" pointOfInterest="0.85">
+      <animationMappings>
+        <animationMapping animateActionName="walk" animationName="swm_walk" loopAnimation="true" />
+        <animationMapping animateActionName="idle" animationName="swm_idle" loopAnimation="true" />
+      </animationMappings>
+    </actor>
+    <!--<actor name="pudge" model="pudge_model.fbx" pointOfInterest="0">
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="pudge_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="pudge_idle" loopAnimation="true" />
       </animationMappings>
-    </actor>
+    </actor>-->
     <actor name="skywrath_mage" model="skywrath_mage_model.fbx" pointOfInterest="0">
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="swm_walk" loopAnimation="true" />
