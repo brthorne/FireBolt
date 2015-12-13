@@ -256,7 +256,7 @@ public class ElPresidente : MonoBehaviour {
 
         if (reloadStoryPlan || reloadCameraPlan)
         {            
-            CameraActionFactory.CreateActions(story, currentInputSet.CameraPlanPath, out cameraActionList, out discourseActionList);
+            CameraActionFactory.CreateActions(story, cinematicModel, currentInputSet.CameraPlanPath,  out cameraActionList, out discourseActionList);
             Debug.Log(string.Format("upstream components reloaded, rebuilding camera action queue @ [{0}].",
                                     DateTime.Now.ToString(timestampFormat)));
             cameraPlanLastReadTimeStamp = DateTime.Now;
