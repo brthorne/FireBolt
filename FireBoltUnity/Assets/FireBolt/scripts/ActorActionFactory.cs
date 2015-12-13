@@ -246,8 +246,15 @@ namespace Assets.scripts
                         Debug.LogError("actorName not set for stepId[" + storyAction.Name + "]");
                         return null;
                     }
+                    string abstractEffectorActorName;
+                    if(!getAbstractActorName(effectorActorName, out abstractEffectorActorName))
+                    {
+                        Debug.Log(string.Format("Failed to find effectorActorName[{0}] in hierarchy for stepid[{1}]", effectorActorName, storyAction.Name));
+                        return null;
+                    }
+
                     CM.Actor effectorActor;
-                    if (!cm.TryGetActor(effectorActorName,out effectorActor))
+                    if (!cm.TryGetActor(abstractEffectorActorName, out effectorActor))
                     {
                         Debug.Log(string.Format("effector actor [{0}] undefined for step[{1}]",effectorActorName,storyAction.Name));
                         return null;
@@ -465,18 +472,51 @@ namespace Assets.scripts
             {
                 if (story.ObjectSets[orderedObjectSets[objectSetIndex]].
                         Contains(new ClassConstant<string>(actorName)))
-                {
-                    actorHierarchyStepLevel++;
+                {                    
                     if (getActorModel(orderedObjectSets[objectSetIndex], out modelName))
                     {
-                        Debug.Log(string.Format("using abstract actor[{0}] for actor[{1}] level[{2}] above exact actor", orderedObjectSets[objectSetIndex], actorName, actorHierarchyStepLevel-1));
+                        Debug.Log(string.Format("using abstract actor[{0}] for actor[{1}] level[{2}] above exact actor", orderedObjectSets[objectSetIndex], actorName, actorHierarchyStepLevel));
                         return true;//quit looking up the hierarchy.  we found a more generic actor
                     }
+                    actorHierarchyStepLevel++;
                 }
                 objectSetIndex++;
             }
             Debug.Log(string.Format("could not find actor def in hierarchy for [{0}]",actorName));
             return false;//didn't find actor definition.  give up on this create action and move to the next one
+        }
+
+        private static bool getAbstractActorName(string actorName, out string abstractActorName)
+        {
+            abstractActorName = null;
+            CM.Actor actor;
+            if (cm.TryGetActor(actorName, out actor))
+            {
+                abstractActorName = actor.Name;
+                return true;
+            }
+                
+            int objectSetIndex = 0;
+            int actorHierarchyStepLevel = 1;
+            while (string.IsNullOrEmpty(abstractActorName) &&
+                  objectSetIndex < orderedObjectSets.Length &&
+                  actorHierarchyStepLevel <= cm.SmartModelSettings.ActorMaxSearchDepth)
+            {
+                if (story.ObjectSets[orderedObjectSets[objectSetIndex]].
+                        Contains(new ClassConstant<string>(actorName)))
+                {                    
+                    if (cm.TryGetActor(orderedObjectSets[objectSetIndex], out actor))
+                    {
+                        abstractActorName = actor.Name;
+                        Debug.Log(string.Format("using abstract actor[{0}] for actor[{1}] level[{2}] above exact actor", abstractActorName, actorName, actorHierarchyStepLevel));
+                        return true;//quit looking up the hierarchy.  we found a more generic actor
+                    }
+                    actorHierarchyStepLevel++;
+                }
+                objectSetIndex++;
+            }
+            Debug.Log(string.Format("could not find actor def in hierarchy for [{0}]", actorName));
+            return false;
         }
 
         private static void enqueueCreateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, CM.Animation effectingAnimation, FireBoltActionList aaq )
