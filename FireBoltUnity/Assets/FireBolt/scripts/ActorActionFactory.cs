@@ -12,6 +12,7 @@ using UintT = Impulse.v_1_336.Intervals.Interval<Impulse.v_1_336.Constants.Value
 using UintV = Impulse.v_1_336.Constants.ValueConstant<uint>;
 
 using CM = CinematicModel;
+using System.Collections.Generic;
 
 namespace Assets.scripts
 {
@@ -22,6 +23,7 @@ namespace Assets.scripts
         private static string[] orderedObjectSets;
         //private static string[] orderedActionTypes;
         private static Story<UintV, UintT, IIntervalSet<UintV, UintT>> story;
+        private static Dictionary<string, Create> actorInstantiations;
 
         /// <summary>
         /// 
@@ -36,6 +38,8 @@ namespace Assets.scripts
             ActorActionFactory.story = story;
             orderedObjectSets = story.ObjectSetGraph.ReverseTopologicalSort().ToArray();
             //orderedActionTypes = story.ActionTypeGraph.ReverseTopologicalSort().ToArray();
+
+            actorInstantiations = new Dictionary<string, Create>();
 
             //buildInitialState(aaq);
             createActors(aaq);
@@ -56,6 +60,13 @@ namespace Assets.scripts
                 enqueueAttachActions(storyAction, domainAction, effectingAnimation, aaq);
             }            
             return aaq;
+        }
+
+        private static bool actorWillBeInstantiated(string actorName)
+        {
+            if (actorInstantiations.ContainsKey(actorName))
+                return true;
+            return false;
         }
 
         private static void buildInitialState(FireBoltActionList aaq) //TODO actor model defaulting a la create actions
@@ -106,8 +117,10 @@ namespace Assets.scripts
                     Debug.Log(string.Format("cannot auto-create actor[{0}]", actorName));
                     continue;
                 }
-                Debug.Log(string.Format("building object set based create for actor[{0}]",actorName));                
-                aaq.Add(new Create(0, actorName, modelFileName, new Vector3(-1000,0,1000)));
+                Debug.Log(string.Format("building object set based create for actor[{0}]",actorName));
+                Create create = new Create(0, actorName, modelFileName, new Vector3(-10000, 0, -10000));
+                aaq.Add(create);
+                actorInstantiations.Add(actorName, create);
             }
         }
 
@@ -125,10 +138,11 @@ namespace Assets.scripts
                 {
                     if (domainActionParameter.Name == ra.ActorNameParamName)
                     {
-                        if (!getActionParameterValue(storyAction, domainActionParameter, out actorName))
+                        if (!getActionParameterValue(storyAction, domainActionParameter, out actorName) ||
+                            !actorWillBeInstantiated(actorName))
                         {
                             break;
-                        }
+                        }                     
                     }
                     else if (domainActionParameter.Name == ra.DestinationParamName)
                     {
@@ -207,7 +221,8 @@ namespace Assets.scripts
                     }
                     else if (domainActionParameter.Name == ta.ActorNameParamName)
                     {
-                        if (!getActionParameterValue(storyAction, domainActionParameter, out actorName))
+                        if (!getActionParameterValue(storyAction, domainActionParameter, out actorName)||
+                            !actorWillBeInstantiated(actorName))
                         {
                             break;
                         }
@@ -310,7 +325,8 @@ namespace Assets.scripts
 
                     if (domainActionParameter.Name == animateAction.ActorNameParamName)
                     {
-                        if (getActionParameterValue(storyAction, domainActionParameter, out actorName))
+                        if (getActionParameterValue(storyAction, domainActionParameter, out actorName) &&
+                            actorWillBeInstantiated(actorName))
                         {
                             int objectSetIndex = 0;
                             int actorHierarchyStepLevel = 1;
@@ -365,6 +381,8 @@ namespace Assets.scripts
                             }
 
                         }
+                        else
+                            break;
                     }
                 }
                 startTick = getStartTick(storyAction, animateAction, effectingAnimation);
@@ -569,7 +587,8 @@ namespace Assets.scripts
                 {
                     if (domainActionParameter.Name == da.ActorNameParamName)
                     {
-                        if (!getActionParameterValue(storyAction, domainActionParameter, out actorName))
+                        if (!getActionParameterValue(storyAction, domainActionParameter, out actorName)||
+                            !actorWillBeInstantiated(actorName))
                         {
                             break;
                         }
@@ -606,7 +625,8 @@ namespace Assets.scripts
                 }
                 attach = aa.Attach;
                 startTick = getStartTick(storyAction, aa, effectingAnimation);
-                if (Create.ValidForConstruction(actorName, parentName))
+                if (actorWillBeInstantiated(actorName) && 
+                    Create.ValidForConstruction(actorName, parentName))
                 {
                     aaq.Add(new Attach(startTick, actorName, parentName, attach));
                 }

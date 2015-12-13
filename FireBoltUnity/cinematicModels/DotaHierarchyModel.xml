@@ -1,5 +1,5 @@
 <cinematicModel xmlns="http://liquidnarrative.csc.ncsu.edu/cinematicModel/v0.1" millisPerTick="33" domainDistancePerEngineDistance="80">
-  <smartModelSettings maxActorSearchDepth="4" maxAnimationSearchDepth="4" />
+  <smartModelSettings maxActorSearchDepth="1" maxAnimationSearchDepth="1" />
   <terrain location="(-100,-2,-100)" terrainFileName="dotaTerrain.prefab"/>
   <!-- animation search depth should generally be at least as deep as actor search depth-->
   <domainActions>
@@ -58,22 +58,6 @@
       </translateActions>
       <animateActions>
         <animateAction  name="walk" actorNameParamName="actor" effector="false" endingAction="idle"/>
-      </animateActions>
-      <rotateActions/>
-    </domainAction>
-
-    <domainAction name="frostbite" >
-      <params>
-        <param name="actor" />
-        <param name="target" />
-      </params>
-      <createActions>
-      </createActions>
-      <destroyActions/>
-      <translateActions/>        
-      <animateActions>
-        <animateAction  name="frostbite" actorNameParamName="actor" effector="true" endingAction="idle"/>
-        <animateAction name="frozen" actorNameParamName="target" effector="false" endingAction="idle"/>
       </animateActions>
       <rotateActions/>
     </domainAction>
@@ -168,10 +152,7 @@
   
   
   <actors>
-    <!--<actor name="O" model="button_green.fbx">
-      <animationMappings/>
-    </actor>-->
-    <actor name="Runes" model="button_green.fbx">
+    <actor name="Runes" model="m005.fbx">
       <animationMappings/>
     </actor>
     <actor name="pudge" model="pudge_model.fbx" >
@@ -201,7 +182,6 @@
         <animationMapping animateActionName="idle" animationName="crystal_maiden_idle" loopAnimation="true" />
         <animationMapping animateActionName="frozen" animationName="crystal_maiden_idle" loopAnimation="true"/>
         <animationMapping animateActionName="die" animationName="crystal_maiden_die" loopAnimation="false"/>
-        <animationMapping animateActionName="frostbite" animationName="frostbite" loopAnimation="false"/>
       </animationMappings>
     </actor>
     
@@ -224,7 +204,7 @@
       </animationMappings>
     </actor> 
 
-    <actor name="Couriers" model="m005.fbx">
+    <actor name="dire_courier" model="m005.fbx">
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="courier_walk" loopAnimation="true" />
       </animationMappings>
