@@ -37,7 +37,7 @@ namespace Assets.scripts
             orderedObjectSets = story.ObjectSetGraph.ReverseTopologicalSort().ToArray();
             //orderedActionTypes = story.ActionTypeGraph.ReverseTopologicalSort().ToArray();
 
-            buildInitialState(aaq);
+            //buildInitialState(aaq);
             createActors(aaq);
 
             //generate FireBolt actions for the steps
@@ -97,23 +97,16 @@ namespace Assets.scripts
         {         
             var actorNames = (story.ObjectSets[Impulse.v_1_336.Xml.Story.ObjectsSetName] as IFiniteObjectSet).Items.Select(c => c.Name).ToList();
 
-            Debug.Log("building main-actor creation actions");
+            Debug.Log("building object set based creation actions");
             foreach (var actorName in actorNames)
             {
-                Debug.Log(string.Format("building Main-Actor based create for actor[{0}]",actorName));
-                CM.Actor actor;
-                if (!cm.TryGetActor(actorName, out actor))
+                string modelFileName = string.Empty;
+                if(!getAbstractActorModelName(actorName, out modelFileName))
                 {
-                    Debug.Log("actor [" + actorName + "] not found in cinematic model.");
-                    continue;
+                    Debug.Log(string.Format("cannot auto-create actor[{0}]", actorName));
+                    break;
                 }
-
-                string modelFileName = actor.Model;
-                if (string.IsNullOrEmpty(modelFileName))
-                {
-                    Debug.Log("model name for actor[" + actorName + "] not found in cinematic model.");
-                    continue;
-                }
+                Debug.Log(string.Format("building object set based create for actor[{0}]",actorName));                
                 aaq.Add(new Create(0, actorName, modelFileName, new Vector3(-1000,0,1000)));
             }
         }
@@ -460,10 +453,34 @@ namespace Assets.scripts
         }
 
 
-        //private static string getAbstractActor(string actorName)
-        //{
-
-        //}
+        private static bool getAbstractActorModelName(string actorName, out string modelName)
+        {
+            getActorModel(actorName, out modelName);
+            int objectSetIndex = 0;
+            int actorHierarchyStepLevel = 1;
+            while (string.IsNullOrEmpty(modelName) &&
+                  objectSetIndex < orderedObjectSets.Length &&
+                  actorHierarchyStepLevel <= cm.SmartModelSettings.ActorMaxSearchDepth)
+            {
+                if (story.ObjectSets[orderedObjectSets[objectSetIndex]].
+                        Contains(new ClassConstant<string>(actorName)))
+                {
+                    actorHierarchyStepLevel++;
+                    if (getActorModel(orderedObjectSets[objectSetIndex], out modelName))
+                    {
+                        Debug.Log(string.Format("using abstract actor[{0}] for actor[{1}] level[{2}] above exact actor", orderedObjectSets[objectSetIndex], actorName, actorHierarchyStepLevel-1));
+                        return true;//quit looking up the hierarchy.  we found a more generic actor
+                    }
+                }
+                objectSetIndex++;
+            }
+            if (string.IsNullOrEmpty(modelName))
+            {
+                Debug.Log(string.Format("could not find actor def in hierarchy for [{0}]",actorName));
+                return false;//didn't find actor definition.  give up on this create action and move to the next one
+            }
+            return true;
+        }
 
         private static void enqueueCreateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, CM.Animation effectingAnimation, FireBoltActionList aaq )
         {
@@ -479,28 +496,8 @@ namespace Assets.scripts
                     {
                         if (getActionParameterValue(storyAction, domainActionParameter, out actorName))//actorName is defined, we can look up a model
                         {
-                            getActorModel(actorName, out modelName);
-                            int objectSetIndex = 0;
-                            int actorHierarchyStepLevel = 1;                           
-                            while(string.IsNullOrEmpty(modelName) &&
-                                  objectSetIndex < orderedObjectSets.Length &&
-                                  actorHierarchyStepLevel <= cm.SmartModelSettings.ActorMaxSearchDepth)
-                            {
-                                if (story.ObjectSets[orderedObjectSets[objectSetIndex]].
-                                        Contains(new ClassConstant<string>(actorName)) )
-                                {
-                                    actorHierarchyStepLevel++;
-                                    if (getActorModel(orderedObjectSets[objectSetIndex], out modelName))
-                                    {
-                                        break;//quit looking up the hierarchy.  we found a more generic actor
-                                    }
-                                }
-                                objectSetIndex++;
-                            }
-                            if (string.IsNullOrEmpty(modelName))
-                            {
-                                break;//didn't find actor definition.  give up on this create action and move to the next one
-                            }
+                            if (!getAbstractActorModelName(actorName, out modelName))
+                                break; //we failed to find the actor within the hierarchy
                         }
                     }
                     else if (domainActionParameter.Name == ca.OriginParamName)

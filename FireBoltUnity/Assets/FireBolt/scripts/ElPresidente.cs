@@ -323,6 +323,13 @@ public class ElPresidente : MonoBehaviour {
         return actorsAndAnimations;
     }
 
+
+
+    public bool IsPaused()
+    {
+        return Time.timeScale == 0f;
+    }
+
     /// <summary>
     /// suspends/resumes execution 
     /// </summary>

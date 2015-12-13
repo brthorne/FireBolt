@@ -168,6 +168,9 @@
   
   
   <actors>
+    <actor name="Runes" model="m005.fbx">
+      <animationMappings/>
+    </actor>
     <actor name="Pudge" model="pudge_model.fbx" >
       <animationMappings>
         <animationMapping animateActionName="throw_hook" animationName="throw_hook" loopAnimation="false"/>
@@ -209,7 +212,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="Main-Actors" model="m005.fbx">
+    <actor name="Main-Actors" model="crystal_maiden_model.fbx">
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="crystal_maiden_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="crystal_maiden_idle" loopAnimation="true" />
@@ -217,8 +220,6 @@
         <animationMapping animateActionName="die" animationName="crystal_maiden_die" loopAnimation="false"/>
       </animationMappings>
     </actor> 
-
-
 
     <actor name="Couriers" model="m005.fbx">
       <animationMappings>

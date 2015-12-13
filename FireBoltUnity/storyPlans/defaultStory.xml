@@ -84,18 +84,18 @@
       <set-ref name="A"/>
     </set>
     <set name="A">
-      <set-ref name="guy"/>
+      <set-ref name="Main-Actors"/>
     </set>
-    <set name="guy">
+    <set name="Main-Actors">
       <constant value="pudge" />
       <constant value="skywrath_mage" />
       <constant value="crate" />
       <constant value="fire_extinguisher" />
     </set>
-    <set name="Main-Actors">
+    <!--<set name="Main-Actors">
       <constant value="pudge"/>
       <constant value="skywrath_mage"/>
-    </set>
+    </set>-->
   </objects>
   <sentences />
 </story>
