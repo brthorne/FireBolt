@@ -389,6 +389,10 @@
     <animation fileName="courier_walk.fbx" name="courier_walk">
       <animationIndices/>
     </animation>
+    
+    <animation fileName="humanoid_idle.fbx" name="idle">
+      <animationIndices/>
+    </animation>
 
 
 

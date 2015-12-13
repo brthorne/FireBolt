@@ -113,7 +113,7 @@ namespace Assets.scripts
             {
                 if (!actorActuallyDoesStuff(actorName))
                 {
-                    Debug.Log(string.Format("not instantiating actor[{0}] as he does nothing in this impulse", actorName));
+                    //Debug.Log(string.Format("not instantiating actor[{0}] as he does nothing in this impulse", actorName));
                     continue;
                 }
                 string modelFileName;
@@ -309,20 +309,23 @@ namespace Assets.scripts
             return effectingAnimation;
         }
 
-        private static void enqueueAnimateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, 
+        private static void enqueueAnimateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction,
                                                   CM.Animation effectingAnimation, FireBoltActionList aaq)
-        {            
-            foreach(CM.AnimateAction animateAction in domainAction.AnimateActions)
+        {
+            foreach (CM.AnimateAction animateAction in domainAction.AnimateActions)
             {
                 string actorName = null;
+                string abstractActorName = null;
                 float startTick = 0;
                 float endTick = 0;
                 CM.AnimationMapping animMapping = null;
                 CM.AnimationMapping stateMapping = null;
                 CM.Animation animation = null;
+                CM.Animation stateAnimation = new CM.Animation();
+
 
                 string endName = !string.IsNullOrEmpty(animateAction.End) ? animateAction.End : string.Empty;
-                string animateActionName = animateAction.Name;             
+                string animateActionName = animateAction.Name;
 
                 //PURPOSE: if domain action parameter is the name of an animateAction for that domain action as defined in the cinematic model,
                 //then use the parameter value as the animateAction name.
@@ -334,52 +337,32 @@ namespace Assets.scripts
                     if (domainActionParameter.Name.Equals(animateAction.Name))
                     {
                         getActionParameterValue(storyAction, domainActionParameter, out animateActionName);
-                        endName = animateActionName;                        
+                        endName = animateActionName;
                         break;
                     }
                 }
 
                 foreach (CM.DomainActionParameter domainActionParameter in domainAction.Params)
                 {
-
                     if (domainActionParameter.Name == animateAction.ActorNameParamName)
                     {
                         if (getActionParameterValue(storyAction, domainActionParameter, out actorName) &&
                             actorWillBeInstantiated(actorName))
                         {
-                            int objectSetIndex = 0;
-                            int actorHierarchyStepLevel = 1;
-                            string abstractActorName = actorName;
-                            getAnimationMapping(abstractActorName, animateActionName, out animMapping);
-
-                            //TODO extract method
-                            //abstract actor lookup if we didn't find an exact actor name match
-                            while (objectSetIndex < orderedObjectSets.Length &&
-                                  actorHierarchyStepLevel < cm.SmartModelSettings.ActorMaxSearchDepth &&
-                                  animMapping == null)
+                            abstractActorName = actorName;
+                            if(getAbstractActorName(actorName, out abstractActorName))
                             {
-
-                                if (story.ObjectSets[orderedObjectSets[objectSetIndex]].
-                                    Contains(new ClassConstant<string>(actorName)))
+                                //this forces all levels of hierarchy to implement all animations if we want them played
+                                //we can't partially look up levels above for some things
+                                //iterate back and forth between finding matching hierarchical parents and looking for mappings to alleviate
+                                if(!getAnimationMapping(abstractActorName, animateActionName, out animMapping))
                                 {
-                                    actorHierarchyStepLevel++;
-                                    abstractActorName = orderedObjectSets[objectSetIndex];
-                                    if (getAnimationMapping(abstractActorName, animateActionName, out animMapping))
-                                    {
-                                        break;
-                                        //found our mapping
-                                    }
-                                }
-                                objectSetIndex++;
-                            }
-
-
-                            if (animMapping == null)
-                            {
-                                Debug.Log("cinematic model animation instance undefined for actor[" +
+                                    Debug.Log("cinematic model animation instance undefined for actor[" +
                                     abstractActorName + "] animateAction[" + animateActionName + "]");
-                                break;
+                                    break;
+                                }
                             }
+
                             //we have a valid mapping, let's use it to find an animation for this actor 
                             animation = cm.FindAnimation(animMapping.AnimationName);
                             if (animation == null)
@@ -391,17 +374,19 @@ namespace Assets.scripts
                             //end name is optional, we don't have to do this for the animation to be valid
                             if (!string.IsNullOrEmpty(endName))
                             {
-                                getAnimationMapping(actorName, endName, out stateMapping);
+                                getAnimationMapping(abstractActorName, endName, out stateMapping);
                                 if (!(stateMapping == null))
                                 {
-                                    endName = cm.FindAnimation(stateMapping.AnimationName).FileName;
-                                    //Debug.Log("end name: " + endName);
+                                    stateAnimation = cm.FindAnimation(stateMapping.AnimationName);
+
+                                    if(stateAnimation == null)
+                                    {
+                                        Debug.Log(string.Format("state animation name [{0}] undefined", stateMapping.AnimationName));
+                                        break;
+                                    }                                    
                                 }
                             }
-
                         }
-                        else
-                            break;
                     }
                 }
                 startTick = getStartTick(storyAction, animateAction, effectingAnimation);
@@ -409,8 +394,8 @@ namespace Assets.scripts
 
                 if (AnimateMecanim.ValidForConstruction(actorName, animation))
                 {
-                 //   Debug.Log("actor: " + actorName + " animMappingName: " + animMapping.AnimationName + " animateActionName: " + animMapping.AnimateActionName + " loop: " + animMapping.LoopAnimation);
-                    aaq.Add(new AnimateMecanim(startTick, endTick, actorName, animation.FileName, animMapping.LoopAnimation, endName));
+                    //   Debug.Log("actor: " + actorName + " animMappingName: " + animMapping.AnimationName + " animateActionName: " + animMapping.AnimateActionName + " loop: " + animMapping.LoopAnimation);
+                    aaq.Add(new AnimateMecanim(startTick, endTick, actorName, animation.FileName, animMapping.LoopAnimation, stateAnimation.FileName));
                 }
             }
         }
@@ -467,7 +452,7 @@ namespace Assets.scripts
             CM.Actor actor;
             if (!cm.TryGetActor(actorName, out actor))
             {
-                Debug.Log("actor[" + actorName + "] not found in cinematic model");
+                //Debug.Log("actor[" + actorName + "] not found in cinematic model");
             }
             else
             {                
