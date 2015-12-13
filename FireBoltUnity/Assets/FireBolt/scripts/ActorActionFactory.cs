@@ -105,23 +105,42 @@ namespace Assets.scripts
         //}
 
         private static void createActors(FireBoltActionList aaq)
-        {         
+        {
             var actorNames = (story.ObjectSets[Impulse.v_1_336.Xml.Story.ObjectsSetName] as IFiniteObjectSet).Items.Select(c => c.Name).ToList();
 
             Debug.Log("building object set based creation actions");
             foreach (var actorName in actorNames)
             {
+                if (!actorActuallyDoesStuff(actorName))
+                {
+                    Debug.Log(string.Format("not instantiating actor[{0}] as he does nothing in this impulse", actorName));
+                    continue;
+                }
                 string modelFileName;
-                if(!getAbstractActorModelName(actorName, out modelFileName))
+                if (!getAbstractActorModelName(actorName, out modelFileName))
                 {
                     Debug.Log(string.Format("cannot auto-create actor[{0}]", actorName));
                     continue;
                 }
-                Debug.Log(string.Format("building object set based create for actor[{0}]",actorName));
+                Debug.Log(string.Format("building object set based create for actor[{0}]", actorName));
                 Create create = new Create(0, actorName, modelFileName, new Vector3(-10000, 0, -10000), true);
                 aaq.Add(create);
                 actorInstantiations.Add(actorName, true);
             }
+        }
+
+        private static bool actorActuallyDoesStuff(string actorName)
+        {
+            foreach(var action in story.Actions)
+            {
+                IActionProperty ap;
+                if(action.Value.TryGetProperty("actor",out ap) &&
+                   (string)ap.Value.Value == actorName)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private static void enqueueRotateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, 
