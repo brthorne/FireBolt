@@ -7,11 +7,17 @@
       <property name="time" value="0-1" />
       <property name="actor" value="pudge" />
     </action>
+    <action type="rot" name="rot1">
+      <property name="actor" value="pudge"/>
+      <property name="spawned" value="fire_extinguisher"/>
+      <property name="time" value="10-11"/>
+      <property name="origin" value="(8.444445,6.333333)" />
+    </action>
     <action type="run" name="step2">
       <property name="origin" value="(8.444445,6.333333)" />
       <property name="destination" value="(8.444445,-5.416668)" />
       <property name="end-angle" value="356.531750440598" />
-      <property name="time" value="1-1469" />
+      <property name="time" value="500-1469" />
       <property name="actor" value="pudge" />
     </action>
     <action type="run" name="step3">
@@ -34,6 +40,7 @@
       <action-type-ref name="idle" />
       <action-type-ref name="create" />
       <action-type-ref name="remove" />
+      <action-type-ref name="rot" />
     </action-type>
     <action-type name="has-position">
       <action-type-ref name="create" />
@@ -42,6 +49,7 @@
       <action-type-ref name="move" />
       <action-type-ref name="walk" />
       <action-type-ref name="run" />
+      <action-type-ref name="rot" />
     </action-type>
     <action-type name="has-destination">
       <action-type-ref name="move" />
@@ -60,6 +68,7 @@
     <action-type name="idle" />
     <action-type name="create" />
     <action-type name="remove" />
+    <action-type name="rot" />
   </action-types>
   <action-properties>
     <action-property name="actor" action="Actions" range="A" />
@@ -68,6 +77,7 @@
     <action-property name="origin" action="has-origin" range="coordinate2d" />
     <action-property name="destination" action="has-destination" range="coordinate2d" />
     <action-property name="end-angle" action="has-end-angle" range="y-degrees" />
+    <action-property name="spawned" action="rot" range="A" />
   </action-properties>
   <objects>
     <set name="A">

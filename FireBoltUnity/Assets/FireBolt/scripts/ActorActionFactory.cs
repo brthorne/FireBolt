@@ -52,6 +52,7 @@ namespace Assets.scripts
                 enqueueDestroyActions(storyAction, domainAction, effectingAnimation, aaq);
                 enqueuetranslateActions(storyAction, domainAction, effectingAnimation, aaq);
                 enqueueRotateActions(storyAction, domainAction, effectingAnimation, aaq);
+                enqueueAttachActions(storyAction, domainAction, effectingAnimation, aaq);
             }            
             return aaq;
         }
@@ -105,7 +106,7 @@ namespace Assets.scripts
                 {
                     if (domainActionParameter.Name == ra.ActorNameParamName)
                     {
-                        if (!getActionParameterValueName(storyAction, domainActionParameter, out actorName))
+                        if (!getActionParameterValue(storyAction, domainActionParameter, out actorName))
                         {
                             break;
                         }
@@ -187,7 +188,7 @@ namespace Assets.scripts
                     }
                     else if (domainActionParameter.Name == ta.ActorNameParamName)
                     {
-                        if (!getActionParameterValueName(storyAction, domainActionParameter, out actorName))
+                        if (!getActionParameterValue(storyAction, domainActionParameter, out actorName))
                         {
                             break;
                         }
@@ -272,7 +273,7 @@ namespace Assets.scripts
                     //  Debug.Log("beforeset: " + animateAction.Name + " " +  domainActionParameter.Name);
                     if (domainActionParameter.Name.Equals(animateAction.Name))
                     {
-                        getActionParameterValueName(storyAction, domainActionParameter, out animateActionName);
+                        getActionParameterValue(storyAction, domainActionParameter, out animateActionName);
                         endName = animateActionName;                        
                         break;
                     }
@@ -283,7 +284,7 @@ namespace Assets.scripts
 
                     if (domainActionParameter.Name == animateAction.ActorNameParamName)
                     {
-                        if (getActionParameterValueName(storyAction, domainActionParameter, out actorName))
+                        if (getActionParameterValue(storyAction, domainActionParameter, out actorName))
                         {
                             int objectSetIndex = 0;
                             int actorHierarchyStepLevel = 1;
@@ -384,13 +385,13 @@ namespace Assets.scripts
             return offset;
         }
 
-        private static bool getActionParameterValueName(IStoryAction<UintT> storyAction, CM.DomainActionParameter domainActionParameter, out string parameterValueName)
+        private static bool getActionParameterValue(IStoryAction<UintT> storyAction, CM.DomainActionParameter domainActionParameter, out string parameterValueName)
         {
             parameterValueName = null;
-            IActionProperty actorNameProperty;
-            if (storyAction.TryGetProperty(domainActionParameter.Name, out actorNameProperty))
+            IActionProperty ParamNameProperty;
+            if (storyAction.TryGetProperty(domainActionParameter.Name, out ParamNameProperty))
             {
-                parameterValueName = actorNameProperty.Value.Name;
+                parameterValueName = ParamNameProperty.Value.Name;
                 return true;
             }
             Debug.Log(domainActionParameter.Name + " not set for stepId[" + storyAction.Name + "]");
@@ -444,7 +445,7 @@ namespace Assets.scripts
                 {
                     if (domainActionParameter.Name == ca.ActorNameParamName)
                     {
-                        if (getActionParameterValueName(storyAction, domainActionParameter, out actorName))//actorName is defined, we can look up a model
+                        if (getActionParameterValue(storyAction, domainActionParameter, out actorName))//actorName is defined, we can look up a model
                         {
                             getActorModel(actorName, out modelName);
                             int objectSetIndex = 0;
@@ -502,7 +503,7 @@ namespace Assets.scripts
                 {
                     if (domainActionParameter.Name == da.ActorNameParamName)
                     {
-                        if (!getActionParameterValueName(storyAction, domainActionParameter, out actorName))
+                        if (!getActionParameterValue(storyAction, domainActionParameter, out actorName))
                         {
                             break;
                         }
@@ -512,6 +513,36 @@ namespace Assets.scripts
                 if (Destroy.ValidForConstruction(actorName))
                 {
                     aaq.Add(new Destroy(startTick, actorName));
+                }
+            }
+        }
+
+        private static void enqueueAttachActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, CM.Animation effectingAnimation, FireBoltActionList aaq)
+        {
+            foreach (CM.AttachAction aa in domainAction.AttachActions)
+            {
+                float startTick = 0;
+                string actorName = null;
+                string parentName = null;
+                bool attach = false;                
+                foreach (CM.DomainActionParameter domainActionParameter in domainAction.Params)
+                {
+                    if (domainActionParameter.Name == aa.ActorNameParamName)
+                    {
+                        getActionParameterValue(storyAction, domainActionParameter, out actorName);
+                        //TODO fail gracefully if we don't find actor param value                       
+                    }
+                    else if (domainActionParameter.Name == aa.ParentParamName)
+                    {
+                        getActionParameterValue(storyAction, domainActionParameter, out parentName);                       
+                        //TODO fail gracefully if we don't find parent param value
+                    }                    
+                }
+                attach = aa.Attach;
+                startTick = getStartTick(storyAction, aa, effectingAnimation);
+                if (Create.ValidForConstruction(actorName, parentName))
+                {
+                    aaq.Add(new Attach(startTick, actorName, parentName, attach));
                 }
             }
         }

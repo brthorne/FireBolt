@@ -119,6 +119,7 @@
     <Compile Include="ModelStructure\Actor.cs" />
     <Compile Include="ModelStructure\CinematicModel.cs" />
     <Compile Include="ModelStructure\FireBoltActions\AnimateAction.cs" />
+    <Compile Include="ModelStructure\FireBoltActions\AttachAction.cs" />
     <Compile Include="ModelStructure\FireBoltActions\RotateAction.cs" />
     <Compile Include="ModelStructure\FireBoltActions\TranslateAction.cs" />
     <Compile Include="ModelStructure\FireBoltActions\DestroyAction.cs" />
