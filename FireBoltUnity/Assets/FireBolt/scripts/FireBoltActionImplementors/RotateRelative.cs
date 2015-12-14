@@ -45,17 +45,19 @@ namespace Assets.scripts
                 return true;                
 
             //get our actor
-            actor = GameObject.Find(actorName);                                           
-            if (actor == null)
+                                                     
+            if (actor == null &&
+                !getActorByName(actorName, out actor))
             {
                 Debug.LogError("actor name [" + actorName + "] not found. cannot rotate");
                 return false;
             }
+
             startOrientation = actor.transform.rotation.eulerAngles;
 
             //find actor that should be tracked
-            trackedActor = GameObject.Find(trackedActorName);
-            if (trackedActor == null)
+            if (trackedActor == null &&
+                !getActorByName(trackedActorName, out trackedActor))
             {
                 Debug.LogError(string.Format("actor to track [{0}] by actor [{1}] not found.  cannot rotate",trackedActorName, actorName));
                 return false;
@@ -64,7 +66,7 @@ namespace Assets.scripts
             return true;
         }
 
-        public override void Execute()
+        public override void Execute(float currentTime)
         {
             setRotation();
         }

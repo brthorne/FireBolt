@@ -65,12 +65,14 @@ namespace Assets.scripts
                 startOrientation = actor.transform.rotation.eulerAngles;
                 return true;
             }
-            actor = GameObject.Find(actorName);
-            if(actor == null)
+            
+            if(actor == null &&
+               !getActorByName(actorName, out actor))
             {
                 Debug.LogError("actor name [" + actorName + "] not found. cannot rotate");
                 return false;
             }
+
 			startOrientation = actor.transform.rotation.eulerAngles;
         
             // i must away to el Presidente and discover what happens when I scrub back to the middle of an action
@@ -86,23 +88,7 @@ namespace Assets.scripts
             return true;
         }
 
-        //not the best name, but we are reducing the rotation value between -180 and 180 degrees, 
-        //so we always take the shortest way round to our target
-        //private float bindToSemiCircle(float theta)
-        //{
-        //    theta = theta % 360;
-        //    while (theta > 180)
-        //    {
-        //        theta -= 360;
-        //    }
-        //    while(theta < -180)
-        //    {
-        //        theta += 360;
-        //    }
-        //    return theta;
-        //}
-
-        public override void Execute()
+        public override void Execute(float currentTime)
         {
             if (endTick - startTick < 1)
                 return;
@@ -116,7 +102,7 @@ namespace Assets.scripts
                                               targetOrientation.Z.HasValue ? startOrientation.z : currentRotation.z);
 
             //how much of our rotate duration has elapsed?
-            float percentCompleted = (ElPresidente.currentStoryTime - startTick) / (endTick - startTick);
+            float percentCompleted = (currentTime - startTick) / (endTick - startTick);
             
             Vector3 currentRotationAmount = rotationChangeRequired * percentCompleted;
 

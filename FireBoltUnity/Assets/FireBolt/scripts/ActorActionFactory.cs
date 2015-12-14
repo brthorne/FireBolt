@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 
 using UnityEngine;
-using UnityEngine.UI;
 
 using LN.Utilities;
+
 using Impulse.v_1_336;
 using Impulse.v_1_336.Sentences;
-using Impulse.v_1_336.Intervals;
 using Impulse.v_1_336.Constants;
 using UintT = Impulse.v_1_336.Intervals.Interval<Impulse.v_1_336.Constants.ValueConstant<uint>, uint>;
 using UintV = Impulse.v_1_336.Constants.ValueConstant<uint>;
 
 using CM = CinematicModel;
+using System.Collections.Generic;
 
 namespace Assets.scripts
 {
@@ -26,6 +23,7 @@ namespace Assets.scripts
         private static string[] orderedObjectSets;
         //private static string[] orderedActionTypes;
         private static Story<UintV, UintT, IIntervalSet<UintV, UintT>> story;
+        private static Dictionary<string, bool> actorInstantiations;
 
         /// <summary>
         /// 
@@ -41,7 +39,10 @@ namespace Assets.scripts
             orderedObjectSets = story.ObjectSetGraph.ReverseTopologicalSort().ToArray();
             //orderedActionTypes = story.ActionTypeGraph.ReverseTopologicalSort().ToArray();
 
-            buildInitialState(aaq);
+            actorInstantiations = new Dictionary<string, bool>();
+
+            //buildInitialState(aaq);
+            createActors(aaq);
 
             //generate FireBolt actions for the steps
             foreach (IStoryAction<UintT> storyAction in story.Actions.Values)
@@ -56,43 +57,90 @@ namespace Assets.scripts
                 enqueueDestroyActions(storyAction, domainAction, effectingAnimation, aaq);
                 enqueuetranslateActions(storyAction, domainAction, effectingAnimation, aaq);
                 enqueueRotateActions(storyAction, domainAction, effectingAnimation, aaq);
+                enqueueAttachActions(storyAction, domainAction, effectingAnimation, aaq);
             }            
             return aaq;
         }
 
-        private static void buildInitialState(FireBoltActionList aaq) //TODO actor model defaulting a la create actions
+        private static bool actorWillBeInstantiated(string actorName)
         {
-            var interval = new UintT(new UintV(0), new UintV(1));
-            var initialPositions = from sentence in story.Sentences
-                                   where sentence is Predicate
-                                   let p = (Predicate)sentence
-                                   where p.Temporal &&      
-                                         p.Name == "at" &&
-                                         p.Time is UintT &&
-                                         p.Terms[0] is IConstant &&
-                                         p.Terms[1] is IConstant<Coordinate2D> &&
-                                         story.IntervalSet.IncludesOrMeetsStartOf<UintV, UintT>((UintT)p.Time, interval) 
-                                   select new { Actor = p.Terms[0].Name, Location = (p.Terms[1] as IConstant<Coordinate2D>).Value };
+            if (actorInstantiations.ContainsKey(actorName))
+                return true;
+            return false;
+        }
 
-            Debug.Log("building init state creation actions");
-            foreach (var initPos in initialPositions)
+        //private static void buildInitialState(FireBoltActionList aaq) //TODO actor model defaulting a la create actions
+        //{
+        //    var interval = new UintT(new UintV(0), new UintV(1));
+        //    var initialPositions = from sentence in story.Sentences
+        //                           where sentence is Predicate
+        //                           let p = (Predicate)sentence
+        //                           where p.Temporal &&      
+        //                                 p.Name == "at" &&
+        //                                 p.Time is UintT &&
+        //                                 p.Terms[0] is IConstant &&
+        //                                 p.Terms[1] is IConstant<Coordinate2D> &&
+        //                                 story.IntervalSet.IncludesOrMeetsStartOf<UintV, UintT>((UintT)p.Time, interval) 
+        //                           select new { Actor = p.Terms[0].Name, Location = (p.Terms[1] as IConstant<Coordinate2D>).Value };
+
+        //    Debug.Log("building init state creation actions");
+        //    foreach (var initPos in initialPositions)
+        //    {
+        //        Debug.Log(initPos.Actor + ", " + initPos.Location.ToString());
+        //        CM.Actor actor;
+        //        if (!cm.TryGetActor(initPos.Actor,out actor))
+        //        {
+        //            Debug.Log("actor [" + initPos.Actor + "] not found in cinematic model.");
+        //            continue;
+        //        }
+
+        //        string modelFileName = actor.Model;
+        //        if (string.IsNullOrEmpty(modelFileName))
+        //        {
+        //            Debug.Log("model name for actor[" + initPos.Actor + "] not found in cinematic model.");
+        //            continue;
+        //        }
+        //        aaq.Add(new Create(0, initPos.Actor, modelFileName, initPos.Location.ToVector3()));
+        //    }
+        //}
+
+        private static void createActors(FireBoltActionList aaq)
+        {
+            var actorNames = (story.ObjectSets[Impulse.v_1_336.Xml.Story.ObjectsSetName] as IFiniteObjectSet).Items.Select(c => c.Name).ToList();
+
+            Debug.Log("building object set based creation actions");
+            foreach (var actorName in actorNames)
             {
-                Debug.Log(initPos.Actor + ", " + initPos.Location.ToString());
-                CM.Actor actor;
-                if (!cm.TryGetActor(initPos.Actor,out actor))
+                if (!actorActuallyDoesStuff(actorName))
                 {
-                    Debug.Log("actor [" + initPos.Actor + "] not found in cinematic model.");
+                    //Debug.Log(string.Format("not instantiating actor[{0}] as he does nothing in this impulse", actorName));
                     continue;
                 }
-
-                string modelFileName = actor.Model;
-                if (string.IsNullOrEmpty(modelFileName))
+                string modelFileName;
+                if (!getAbstractActorModelName(actorName, out modelFileName))
                 {
-                    Debug.Log("model name for actor[" + initPos.Actor + "] not found in cinematic model.");
+                    Debug.Log(string.Format("cannot auto-create actor[{0}]", actorName));
                     continue;
                 }
-                aaq.Add(new Create(0, initPos.Actor, modelFileName, initPos.Location.ToVector3()));
+                Debug.Log(string.Format("building object set based create for actor[{0}]", actorName));
+                Create create = new Create(0, actorName, modelFileName, new Vector3(-10000, 0, -10000), true);
+                aaq.Add(create);
+                actorInstantiations.Add(actorName, true);
             }
+        }
+
+        private static bool actorActuallyDoesStuff(string actorName)
+        {
+            foreach(var action in story.Actions)
+            {
+                IActionProperty ap;
+                if(action.Value.TryGetProperty("actor",out ap) &&
+                   (string)ap.Value.Value == actorName)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private static void enqueueRotateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, 
@@ -109,10 +157,11 @@ namespace Assets.scripts
                 {
                     if (domainActionParameter.Name == ra.ActorNameParamName)
                     {
-                        if (!getActionParameterValueName(storyAction, domainActionParameter, out actorName))
+                        if (!getActionParameterValue(storyAction, domainActionParameter, out actorName) ||
+                            !actorWillBeInstantiated(actorName))
                         {
                             break;
-                        }
+                        }                     
                     }
                     else if (domainActionParameter.Name == ra.DestinationParamName)
                     {
@@ -191,7 +240,8 @@ namespace Assets.scripts
                     }
                     else if (domainActionParameter.Name == ta.ActorNameParamName)
                     {
-                        if (!getActionParameterValueName(storyAction, domainActionParameter, out actorName))
+                        if (!getActionParameterValue(storyAction, domainActionParameter, out actorName)||
+                            !actorWillBeInstantiated(actorName))
                         {
                             break;
                         }
@@ -230,8 +280,15 @@ namespace Assets.scripts
                         Debug.LogError("actorName not set for stepId[" + storyAction.Name + "]");
                         return null;
                     }
+                    string abstractEffectorActorName;
+                    if(!getAbstractActorName(effectorActorName, out abstractEffectorActorName))
+                    {
+                        Debug.Log(string.Format("Failed to find effectorActorName[{0}] in hierarchy for stepid[{1}]", effectorActorName, storyAction.Name));
+                        return null;
+                    }
+
                     CM.Actor effectorActor;
-                    if (!cm.TryGetActor(effectorActorName,out effectorActor))
+                    if (!cm.TryGetActor(abstractEffectorActorName, out effectorActor))
                     {
                         Debug.Log(string.Format("effector actor [{0}] undefined for step[{1}]",effectorActorName,storyAction.Name));
                         return null;
@@ -252,20 +309,23 @@ namespace Assets.scripts
             return effectingAnimation;
         }
 
-        private static void enqueueAnimateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, 
+        private static void enqueueAnimateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction,
                                                   CM.Animation effectingAnimation, FireBoltActionList aaq)
-        {            
-            foreach(CM.AnimateAction animateAction in domainAction.AnimateActions)
+        {
+            foreach (CM.AnimateAction animateAction in domainAction.AnimateActions)
             {
                 string actorName = null;
+                string abstractActorName = null;
                 float startTick = 0;
                 float endTick = 0;
                 CM.AnimationMapping animMapping = null;
                 CM.AnimationMapping stateMapping = null;
                 CM.Animation animation = null;
+                CM.Animation stateAnimation = new CM.Animation();
+
 
                 string endName = !string.IsNullOrEmpty(animateAction.End) ? animateAction.End : string.Empty;
-                string animateActionName = animateAction.Name;             
+                string animateActionName = animateAction.Name;
 
                 //PURPOSE: if domain action parameter is the name of an animateAction for that domain action as defined in the cinematic model,
                 //then use the parameter value as the animateAction name.
@@ -276,52 +336,33 @@ namespace Assets.scripts
                     //  Debug.Log("beforeset: " + animateAction.Name + " " +  domainActionParameter.Name);
                     if (domainActionParameter.Name.Equals(animateAction.Name))
                     {
-                        getActionParameterValueName(storyAction, domainActionParameter, out animateActionName);
-                        endName = animateActionName;                        
+                        getActionParameterValue(storyAction, domainActionParameter, out animateActionName);
+                        endName = animateActionName;
                         break;
                     }
                 }
 
                 foreach (CM.DomainActionParameter domainActionParameter in domainAction.Params)
                 {
-
                     if (domainActionParameter.Name == animateAction.ActorNameParamName)
                     {
-                        if (getActionParameterValueName(storyAction, domainActionParameter, out actorName))
+                        if (getActionParameterValue(storyAction, domainActionParameter, out actorName) &&
+                            actorWillBeInstantiated(actorName))
                         {
-                            int objectSetIndex = 0;
-                            int actorHierarchyStepLevel = 1;
-                            string abstractActorName = actorName;
-                            getAnimationMapping(abstractActorName, animateActionName, out animMapping);
-
-                            //TODO extract method
-                            //abstract actor lookup if we didn't find an exact actor name match
-                            while (objectSetIndex < orderedObjectSets.Length &&
-                                  actorHierarchyStepLevel < cm.SmartModelSettings.ActorMaxSearchDepth &&
-                                  animMapping == null)
+                            abstractActorName = actorName;
+                            if(getAbstractActorName(actorName, out abstractActorName))
                             {
-
-                                if (story.ObjectSets[orderedObjectSets[objectSetIndex]].
-                                    Contains(new ClassConstant<string>(actorName)))
+                                //this forces all levels of hierarchy to implement all animations if we want them played
+                                //we can't partially look up levels above for some things
+                                //iterate back and forth between finding matching hierarchical parents and looking for mappings to alleviate
+                                if(!getAnimationMapping(abstractActorName, animateActionName, out animMapping))
                                 {
-                                    actorHierarchyStepLevel++;
-                                    abstractActorName = orderedObjectSets[objectSetIndex];
-                                    if (getAnimationMapping(abstractActorName, animateActionName, out animMapping))
-                                    {
-                                        break;
-                                        //found our mapping
-                                    }
-                                }
-                                objectSetIndex++;
-                            }
-
-
-                            if (animMapping == null)
-                            {
-                                Debug.Log("cinematic model animation instance undefined for actor[" +
+                                    Debug.Log("cinematic model animation instance undefined for actor[" +
                                     abstractActorName + "] animateAction[" + animateActionName + "]");
-                                break;
+                                    break;
+                                }
                             }
+
                             //we have a valid mapping, let's use it to find an animation for this actor 
                             animation = cm.FindAnimation(animMapping.AnimationName);
                             if (animation == null)
@@ -333,14 +374,18 @@ namespace Assets.scripts
                             //end name is optional, we don't have to do this for the animation to be valid
                             if (!string.IsNullOrEmpty(endName))
                             {
-                                getAnimationMapping(actorName, endName, out stateMapping);
+                                getAnimationMapping(abstractActorName, endName, out stateMapping);
                                 if (!(stateMapping == null))
                                 {
-                                    endName = cm.FindAnimation(stateMapping.AnimationName).FileName;
-                                    //Debug.Log("end name: " + endName);
+                                    stateAnimation = cm.FindAnimation(stateMapping.AnimationName);
+
+                                    if(stateAnimation == null)
+                                    {
+                                        Debug.Log(string.Format("state animation name [{0}] undefined", stateMapping.AnimationName));
+                                        break;
+                                    }                                    
                                 }
                             }
-
                         }
                     }
                 }
@@ -349,8 +394,8 @@ namespace Assets.scripts
 
                 if (AnimateMecanim.ValidForConstruction(actorName, animation))
                 {
-                 //   Debug.Log("actor: " + actorName + " animMappingName: " + animMapping.AnimationName + " animateActionName: " + animMapping.AnimateActionName + " loop: " + animMapping.LoopAnimation);
-                    aaq.Add(new AnimateMecanim(startTick, endTick, actorName, animation.FileName, animMapping.LoopAnimation, endName));
+                    //   Debug.Log("actor: " + actorName + " animMappingName: " + animMapping.AnimationName + " animateActionName: " + animMapping.AnimateActionName + " loop: " + animMapping.LoopAnimation);
+                    aaq.Add(new AnimateMecanim(startTick, endTick, actorName, animation.FileName, animMapping.LoopAnimation, stateAnimation.FileName));
                 }
             }
         }
@@ -388,13 +433,13 @@ namespace Assets.scripts
             return offset;
         }
 
-        private static bool getActionParameterValueName(IStoryAction<UintT> storyAction, CM.DomainActionParameter domainActionParameter, out string parameterValueName)
+        private static bool getActionParameterValue(IStoryAction<UintT> storyAction, CM.DomainActionParameter domainActionParameter, out string parameterValueName)
         {
             parameterValueName = null;
-            IActionProperty actorNameProperty;
-            if (storyAction.TryGetProperty(domainActionParameter.Name, out actorNameProperty))
+            IActionProperty ParamNameProperty;
+            if (storyAction.TryGetProperty(domainActionParameter.Name, out ParamNameProperty))
             {
-                parameterValueName = actorNameProperty.Value.Name;
+                parameterValueName = ParamNameProperty.Value.Name;
                 return true;
             }
             Debug.Log(domainActionParameter.Name + " not set for stepId[" + storyAction.Name + "]");
@@ -407,7 +452,7 @@ namespace Assets.scripts
             CM.Actor actor;
             if (!cm.TryGetActor(actorName, out actor))
             {
-                Debug.Log("actor[" + actorName + "] not found in cinematic model");
+                //Debug.Log("actor[" + actorName + "] not found in cinematic model");
             }
             else
             {                
@@ -436,6 +481,66 @@ namespace Assets.scripts
             return false;
         }
 
+
+        private static bool getAbstractActorModelName(string actorName, out string modelName)
+        {
+            if (getActorModel(actorName, out modelName))
+                return true;
+            int objectSetIndex = 0;
+            int actorHierarchyStepLevel = 1;
+            while (string.IsNullOrEmpty(modelName) &&
+                  objectSetIndex < orderedObjectSets.Length &&
+                  actorHierarchyStepLevel <= cm.SmartModelSettings.ActorMaxSearchDepth)
+            {
+                if (story.ObjectSets[orderedObjectSets[objectSetIndex]].
+                        Contains(new ClassConstant<string>(actorName)))
+                {                    
+                    if (getActorModel(orderedObjectSets[objectSetIndex], out modelName))
+                    {
+                        Debug.Log(string.Format("using abstract actor[{0}] for actor[{1}] level[{2}] above exact actor", orderedObjectSets[objectSetIndex], actorName, actorHierarchyStepLevel));
+                        return true;//quit looking up the hierarchy.  we found a more generic actor
+                    }
+                    actorHierarchyStepLevel++;
+                }
+                objectSetIndex++;
+            }
+            Debug.Log(string.Format("could not find actor def in hierarchy for [{0}]",actorName));
+            return false;//didn't find actor definition.  give up on this create action and move to the next one
+        }
+
+        private static bool getAbstractActorName(string actorName, out string abstractActorName)
+        {
+            abstractActorName = null;
+            CM.Actor actor;
+            if (cm.TryGetActor(actorName, out actor))
+            {
+                abstractActorName = actor.Name;
+                return true;
+            }
+                
+            int objectSetIndex = 0;
+            int actorHierarchyStepLevel = 1;
+            while (string.IsNullOrEmpty(abstractActorName) &&
+                  objectSetIndex < orderedObjectSets.Length &&
+                  actorHierarchyStepLevel <= cm.SmartModelSettings.ActorMaxSearchDepth)
+            {
+                if (story.ObjectSets[orderedObjectSets[objectSetIndex]].
+                        Contains(new ClassConstant<string>(actorName)))
+                {                    
+                    if (cm.TryGetActor(orderedObjectSets[objectSetIndex], out actor))
+                    {
+                        abstractActorName = actor.Name;
+                        Debug.Log(string.Format("using abstract actor[{0}] for actor[{1}] level[{2}] above exact actor", abstractActorName, actorName, actorHierarchyStepLevel));
+                        return true;//quit looking up the hierarchy.  we found a more generic actor
+                    }
+                    actorHierarchyStepLevel++;
+                }
+                objectSetIndex++;
+            }
+            Debug.Log(string.Format("could not find actor def in hierarchy for [{0}]", actorName));
+            return false;
+        }
+
         private static void enqueueCreateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, CM.Animation effectingAnimation, FireBoltActionList aaq )
         {
             foreach (CM.CreateAction ca in domainAction.CreateActions)
@@ -448,30 +553,10 @@ namespace Assets.scripts
                 {
                     if (domainActionParameter.Name == ca.ActorNameParamName)
                     {
-                        if (getActionParameterValueName(storyAction, domainActionParameter, out actorName))//actorName is defined, we can look up a model
+                        if (getActionParameterValue(storyAction, domainActionParameter, out actorName))//actorName is defined, we can look up a model
                         {
-                            getActorModel(actorName, out modelName);
-                            int objectSetIndex = 0;
-                            int actorHierarchyStepLevel = 1;                           
-                            while(string.IsNullOrEmpty(modelName) &&
-                                  objectSetIndex < orderedObjectSets.Length &&
-                                  actorHierarchyStepLevel <= cm.SmartModelSettings.ActorMaxSearchDepth)
-                            {
-                                if (story.ObjectSets[orderedObjectSets[objectSetIndex]].
-                                        Contains(new ClassConstant<string>(actorName)) )
-                                {
-                                    actorHierarchyStepLevel++;
-                                    if (getActorModel(orderedObjectSets[objectSetIndex], out modelName))
-                                    {
-                                        break;//quit looking up the hierarchy.  we found a more generic actor
-                                    }
-                                }
-                                objectSetIndex++;
-                            }
-                            if (string.IsNullOrEmpty(modelName))
-                            {
-                                break;//didn't find actor definition.  give up on this create action and move to the next one
-                            }
+                            if (!getAbstractActorModelName(actorName, out modelName))
+                                break; //we failed to find the actor within the hierarchy
                         }
                     }
                     else if (domainActionParameter.Name == ca.OriginParamName)
@@ -506,7 +591,8 @@ namespace Assets.scripts
                 {
                     if (domainActionParameter.Name == da.ActorNameParamName)
                     {
-                        if (!getActionParameterValueName(storyAction, domainActionParameter, out actorName))
+                        if (!getActionParameterValue(storyAction, domainActionParameter, out actorName)||
+                            !actorWillBeInstantiated(actorName))
                         {
                             break;
                         }
@@ -516,6 +602,37 @@ namespace Assets.scripts
                 if (Destroy.ValidForConstruction(actorName))
                 {
                     aaq.Add(new Destroy(startTick, actorName));
+                }
+            }
+        }
+
+        private static void enqueueAttachActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, CM.Animation effectingAnimation, FireBoltActionList aaq)
+        {
+            foreach (CM.AttachAction aa in domainAction.AttachActions)
+            {
+                float startTick = 0;
+                string actorName = null;
+                string parentName = null;
+                bool attach = false;                
+                foreach (CM.DomainActionParameter domainActionParameter in domainAction.Params)
+                {
+                    if (domainActionParameter.Name == aa.ActorNameParamName)
+                    {
+                        getActionParameterValue(storyAction, domainActionParameter, out actorName);
+                        //TODO fail gracefully if we don't find actor param value                       
+                    }
+                    else if (domainActionParameter.Name == aa.ParentParamName)
+                    {
+                        getActionParameterValue(storyAction, domainActionParameter, out parentName);                       
+                        //TODO fail gracefully if we don't find parent param value
+                    }                    
+                }
+                attach = aa.Attach;
+                startTick = getStartTick(storyAction, aa, effectingAnimation);
+                if (actorWillBeInstantiated(actorName) && 
+                    Create.ValidForConstruction(actorName, parentName))
+                {
+                    aaq.Add(new Attach(startTick, actorName, parentName, attach));
                 }
             }
         }

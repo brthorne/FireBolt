@@ -10,12 +10,9 @@ namespace Assets.scripts
 {
     public class Shake : FireBoltAction
     {
-        float lastUpdateTime;
         float shakeValue;
-
         string cameraName;
-
-
+        GameObject actor;
         ShakeCam shakeCam;
 
 
@@ -35,8 +32,9 @@ namespace Assets.scripts
 
         public override bool Init()
         {
-            GameObject actor = GameObject.Find(cameraName);
-            if (actor == null)
+
+            if (actor == null &&
+                !getActorByName(cameraName, out actor))
             {
                 Debug.LogError("actor name [" + cameraName + "] not found. cannot shake");
                 return false;
@@ -53,7 +51,7 @@ namespace Assets.scripts
             return true;
         }
 
-        public override void Execute()
+        public override void Execute(float currentTime)
         {
                        
         }

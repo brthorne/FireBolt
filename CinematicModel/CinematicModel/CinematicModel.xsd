@@ -44,6 +44,7 @@
       <xs:element minOccurs="1" maxOccurs="1" name="translateActions" type="ArrayOfTranslateAction" />
       <xs:element minOccurs="1" maxOccurs="1" name="rotateActions" type="ArrayOfRotateAction" />
       <xs:element minOccurs="1" maxOccurs="1" name="animateActions" type="ArrayOfAnimateAction" />
+      <xs:element minOccurs="1" maxOccurs="1" name="attachActions" type="ArrayOfAttachAction"/>
     </xs:all>
     <xs:attribute name="name" type="xs:string" use="required"/>
   </xs:complexType>
@@ -126,6 +127,20 @@
         <xs:attribute name="effector" type="xs:boolean" use="optional" default="false"/>
         <xs:attribute name="endingAction" type="xs:string" use ="optional" />
       </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ArrayOfAttachAction">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="attachAction" type="AttachAction" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AttachAction">
+    <xs:complexContent mixed="false">
+      <xs:extension base="FireBoltAction">
+        <xs:attribute name="attach" type="xs:boolean" use="required"/>
+        <xs:attribute name="parentParamName" type="xs:string" use="optional"/>
+      </xs:extension>      
     </xs:complexContent>
   </xs:complexType>
 

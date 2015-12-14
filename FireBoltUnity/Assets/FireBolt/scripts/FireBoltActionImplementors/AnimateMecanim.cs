@@ -13,7 +13,7 @@ namespace Assets.scripts
         private Animator animator;
         private AnimationClip animation;
         private AnimationClip state;
-        AnimatorOverrideController animatorOverride;
+        AnimatorOverrideController overrideController;
         private int stopTriggerHash;
         private bool loop;
         private static readonly string animationToOverride = "_87_a_U1_M_P_idle_Neutral__Fb_p0_No_1";
@@ -34,50 +34,87 @@ namespace Assets.scripts
             this.actorName = actorName;
             this.animName = animName;
 			this.loop = loop;
+            this.assignEndState = !string.IsNullOrEmpty(endingName);
             this.stateName = endingName; 
             stopTriggerHash = Animator.StringToHash("stop");
         }
 
         public override bool Init()
         {
-			if (actor != null && animatorOverride != null)
-			{
-				animatorOverride[animationToOverride] = animation;
-                animator.runtimeAnimatorController = animatorOverride;
-                if (assignEndState)
-                    animatorOverride[stateToOverride] = state;
-				return true;
-			}
-            actor = GameObject.Find(actorName);
-            if (actor == null)
+            //short circuit if this has clearly been initialized before
+            if(animator && overrideController && animation && 
+                (!assignEndState ||(assignEndState && state)))
+            {
+                assignAnimations();
+                animator.runtimeAnimatorController = overrideController;
+                return true;
+            }
+
+            if (!findAnimations()) return false;
+            //get the actor this animate action is supposed to affect
+            if(actor == null &&
+               !getActorByName(actorName, out actor))
             {
                 Debug.LogError("actor[" + actorName + "] not found.  cannot animate");
                 return false;
             }
 
+            //get the actor's current animator if it exists
             animator = actor.GetComponent<Animator>();
             if (animator == null)
             {
                 animator = actor.AddComponent<Animator>();
             }
             animator.applyRootMotion = false;
-            //doing all this every time we start an animation seems expensive. what else can we do?
-            animatorOverride = new AnimatorOverrideController();
-            animatorOverride.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AnimatorControllers/Generic");
-            animator.runtimeAnimatorController = animatorOverride;
 
-            if(ElPresidente.Instance.GetActiveAssetBundle().Contains(animName))
+            //find or make an override controller
+            if (animator.runtimeAnimatorController is AnimatorOverrideController)
+            {
+                overrideController = (AnimatorOverrideController) animator.runtimeAnimatorController;
+            }
+            else
+            {
+                overrideController = new AnimatorOverrideController();
+                overrideController.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AnimatorControllers/Generic");
+                animator.runtimeAnimatorController = overrideController;
+            }
+
+            assignAnimations();
+            return true;
+        }
+
+        private void assignAnimations()
+        {
+            overrideController[animationToOverride] = animation;
+            if (assignEndState)
+                overrideController[stateToOverride] = state;
+        }
+
+        private bool findAnimations()
+        {
+            //find animations
+            if (ElPresidente.Instance.GetActiveAssetBundle().Contains(animName))
             {
                 animation = ElPresidente.Instance.GetActiveAssetBundle().LoadAsset<AnimationClip>(animName);
 
                 if (animation == null)
                 {
-                    Debug.LogError(string.Format("unable to find animation [{0}] in asset bundle[{1}]",animName, ElPresidente.Instance.GetActiveAssetBundle().name));
+                    Debug.LogError(string.Format("unable to find animation [{0}] in asset bundle[{1}]", animName, ElPresidente.Instance.GetActiveAssetBundle().name));
                     return false;
                 }
-
+                if (loop)
+                {
+                    animation.wrapMode = WrapMode.Loop;
+                }
+                else
+                    animation.wrapMode = WrapMode.Once;
             }
-            if (!string.IsNullOrEmpty(stateName) && ElPresidente.Instance.GetActiveAssetBundle().Contains(stateName) ) 
+            else
+            {
+                Debug.Log(string.Format("asset bundle [{0}] does not contain animation[{1}]", ElPresidente.Instance.GetActiveAssetBundle().name, animName));
+            }
+
+            if (!string.IsNullOrEmpty(stateName) && ElPresidente.Instance.GetActiveAssetBundle().Contains(stateName))
             {
                 assignEndState = true;
                 state = ElPresidente.Instance.GetActiveAssetBundle().LoadAsset<AnimationClip>(stateName);
@@ -87,32 +124,11 @@ namespace Assets.scripts
                     if (state == null) return false;
                 }
             }
-            
-
-            //TODO build animation controller dynamically and avoid having to do overriding.  
-            //This allows us to avoid packaging a default animation that may not be valid 
-            //for the rig of a given actor that it's supposed to be played on.
-            //It would also remove the reconfigure on download issue of the animation type and name.
-
-            //we can't do this!  creating new animator controllers is a function only available in the UnityEditor library ftl
-            //can i just not load the old animation? indeed we can do just not that!
-            if (!animation) 
+            else if (!string.IsNullOrEmpty(stateName) && !ElPresidente.Instance.GetActiveAssetBundle().Contains(stateName))
             {
-                Debug.LogError("Missing animation asset");
-                Debug.Log(animName);
+                Debug.Log(string.Format("should have looked up a state animation[{0}] and failed ", stateName));
+                return false;
             }
-            if (assignEndState && !state)
-            {
-                Debug.LogError("Missing state asset");
-            }
-
-			if (loop) {
-				animation.wrapMode = WrapMode.Loop;
-			} else
-				animation.wrapMode = WrapMode.Once;			
-            animatorOverride[animationToOverride] = animation;
-            if (assignEndState)
-                animatorOverride[stateToOverride] = state;
             return true;
         }
 
@@ -125,10 +141,10 @@ namespace Assets.scripts
             animator.SetTrigger(stopTriggerHash);
         }
 
-        public override void Execute() 
+        public override void Execute(float currentTime) 
         {
 		    //let it roll          
-            float at = Mathf.Repeat ((ElPresidente.currentStoryTime - startTick)/1000, animation.length);
+            float at = Mathf.Repeat ((currentTime - startTick)/1000, animation.length);
             animator.CrossFade( "animating", 0, 0, at/animation.length);
 	    }
 
