@@ -146,7 +146,8 @@ namespace Assets.scripts
                     if(rotateWith!=null)
                         cameraActionList.Add(rotateWith);
                     // Shake it off
-                    cameraActionList.Add(new Shake(movementStartTime, fragmentEndTime, cameraName, fragment.Shake));
+                    if(fragment.Shake > float.Epsilon)
+                        cameraActionList.Add(new Shake(movementStartTime, fragmentEndTime, cameraName, fragment.Shake));
 
                     currentDiscourseTime = fragmentEndTime;
                 }

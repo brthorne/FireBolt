@@ -115,8 +115,7 @@ namespace Assets.scripts
             GameObject framingTarget = null; 
             if (framings != null && framings.Count > 0)
             {
-                framingTarget = GameObject.Find(framings[0].FramingTarget) as GameObject;
-                if (framingTarget != null)
+                if (getActorByName(framings[0].FramingTarget, out framingTarget))
                 {                                        
                     Bounds targetBounds = framingTarget.GetComponent<BoxCollider>().bounds;                                        
                     targetBounds.BuildDebugBox();
@@ -244,7 +243,7 @@ namespace Assets.scripts
             }
 
             if (!tempCameraPosition.Y.HasValue && framings.Count > 0 && framings[0] != null)//we still haven't set height.  place camera at subject's point of interest
-            {
+            {                
                 tempCameraPosition.Y = findTargetLookAtPoint(framings[0].FramingTarget, GameObject.Find(framings[0].FramingTarget).GetComponent<BoxCollider>().bounds).y;
             }
 
@@ -274,10 +273,10 @@ namespace Assets.scripts
         private void angleCameraTo(string targetName, AngleSetting angleSetting)
         {
             // Look up the target game object given its name.
-            GameObject angleTarget = GameObject.Find(targetName);
+            GameObject angleTarget;
 
             // Check if the target was found in the scene.
-            if (angleTarget != null)
+            if (getActorByName(targetName, out angleTarget))
             {
                 Bounds targetBounds = angleTarget.GetComponent<BoxCollider>().bounds;
                 if (!tempCameraPosition.Y.HasValue)//only allow angle to adjust height if it is not set manually
@@ -384,8 +383,9 @@ namespace Assets.scripts
             Vector2 subjectToCameraIdeal = new Vector2(framingTarget.transform.forward.x, framingTarget.transform.forward.z);  
             if (direction != null)
             {
-                GameObject directionTarget = GameObject.Find(direction.Target) as GameObject;
-                if (directionTarget != null)
+                GameObject directionTarget;
+                if (getActorByName(direction.Target, out directionTarget) &&
+                    directionTarget != null)
                 {
                     Quaternion savedRotation = directionTarget.transform.rotation;
                     switch (direction.Heading)
@@ -451,8 +451,9 @@ namespace Assets.scripts
 
         private bool findCamera()
         {
-            camera = GameObject.Find(cameraName) as GameObject;
-            if (camera == null)
+            
+            if (camera == null &&
+                !getActorByName(cameraName, out camera))
             {
                 Debug.LogError(string.Format("could not find camera[{0}] at time d:s[{1}:{2}].  This is really bad.  What did you do to the camera?",
                     cameraName, ElPresidente.Instance.CurrentDiscourseTime, ElPresidente.Instance.CurrentStoryTime));
@@ -483,8 +484,8 @@ namespace Assets.scripts
             }
 
             //try to find the target as an actor
-            var target = GameObject.Find(focusTarget);
-            if (target == null)
+            GameObject target;
+            if (!getActorByName(focusTarget, out target))
             {
                 Debug.Log("actor name [" + focusTarget + "] not found. cannot change focus");
                 return false;
@@ -510,9 +511,9 @@ namespace Assets.scripts
             else
             {
                 //we can't read anchor string as planar coords.  hopefully this is the name of an actor
-                GameObject actorToAnchorOn = GameObject.Find(anchor) as GameObject;
+                GameObject actorToAnchorOn;
 
-                if (actorToAnchorOn == null)                    
+                if (!getActorByName(anchor, out actorToAnchorOn))                    
                 {
                     //sadly there is no such thing.  we should complain and then try to get on with business
                     Debug.LogError(string.Format("anchor actor [{0}] not found at time d:s[{1}:{2}].  calculating anchor freely.", 

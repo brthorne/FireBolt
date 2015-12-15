@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <story name="000000000" xmlns="http://liquidnarrative.csc.ncsu.edu/impulse/v1.336">
   <actions>
-    <action type="create" name="step1">
+    <!--<action type="create" name="step1">
       <property name="position" value="(8.444445,6.333333)" />
       <property name="end-angle" value="349.824446678162" />
       <property name="time" value="0-1" />
       <property name="actor" value="pudge" />
-    </action>
+    </action>-->
     <action type="rot" name="rot1">
       <property name="actor" value="pudge"/>
       <property name="spawned" value="fire_extinguisher"/>
@@ -80,12 +80,22 @@
     <action-property name="spawned" action="rot" range="A" />
   </action-properties>
   <objects>
+    <set name="O">
+      <set-ref name="A"/>
+    </set>
     <set name="A">
+      <set-ref name="Main-Actors"/>
+    </set>
+    <set name="Main-Actors">
       <constant value="pudge" />
       <constant value="skywrath_mage" />
       <constant value="crate" />
       <constant value="fire_extinguisher" />
     </set>
+    <!--<set name="Main-Actors">
+      <constant value="pudge"/>
+      <constant value="skywrath_mage"/>
+    </set>-->
   </objects>
   <sentences />
 </story>

@@ -65,12 +65,14 @@ namespace Assets.scripts
                 startOrientation = actor.transform.rotation.eulerAngles;
                 return true;
             }
-            actor = GameObject.Find(actorName);
-            if(actor == null)
+            
+            if(actor == null &&
+               !getActorByName(actorName, out actor))
             {
                 Debug.LogError("actor name [" + actorName + "] not found. cannot rotate");
                 return false;
             }
+
 			startOrientation = actor.transform.rotation.eulerAngles;
         
             // i must away to el Presidente and discover what happens when I scrub back to the middle of an action
@@ -85,22 +87,6 @@ namespace Assets.scripts
             Debug.Log(this.ToString());
             return true;
         }
-
-        //not the best name, but we are reducing the rotation value between -180 and 180 degrees, 
-        //so we always take the shortest way round to our target
-        //private float bindToSemiCircle(float theta)
-        //{
-        //    theta = theta % 360;
-        //    while (theta > 180)
-        //    {
-        //        theta -= 360;
-        //    }
-        //    while(theta < -180)
-        //    {
-        //        theta += 360;
-        //    }
-        //    return theta;
-        //}
 
         public override void Execute(float currentTime)
         {

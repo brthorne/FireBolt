@@ -52,14 +52,11 @@ namespace Assets.scripts
 
             if (!findAnimations()) return false;
             //get the actor this animate action is supposed to affect
-            if(actor == null)
+            if(actor == null &&
+               !getActorByName(actorName, out actor))
             {
-                actor = GameObject.Find(actorName);
-                if (actor == null)
-                {
-                    Debug.LogError("actor[" + actorName + "] not found.  cannot animate");
-                    return false;
-                }
+                Debug.LogError("actor[" + actorName + "] not found.  cannot animate");
+                return false;
             }
 
             //get the actor's current animator if it exists
@@ -115,6 +112,7 @@ namespace Assets.scripts
             else
             {
                 Debug.Log(string.Format("asset bundle [{0}] does not contain animation[{1}]", ElPresidente.Instance.GetActiveAssetBundle().name, animName));
+                return false;
             }
 
             if (!string.IsNullOrEmpty(stateName) && ElPresidente.Instance.GetActiveAssetBundle().Contains(stateName))
