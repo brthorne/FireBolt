@@ -7,7 +7,7 @@ public class FireBolt_Initialization : MonoBehaviour
 	void Awake () 
     {
         ElPresidente elPresidente = this.GetComponent<ElPresidente>();
-        elPresidente.Init(true);
+        elPresidente.Init(null, 40, false, false, true);
 	}
 	
 	// Update is called once per frame

@@ -88,7 +88,9 @@ public class ElPresidente : MonoBehaviour {
     public float CurrentDiscourseTime { get { return currentDiscourseTime; } }
 
     //number of milliseconds to advance the story and discourse time on update
-    private uint? timeUpdateIncrement; 
+    private uint? timeUpdateIncrement;
+    private bool generateVideoFrames;
+    private uint videoFrameNumber;
 
     void Start()
     {
@@ -157,10 +159,25 @@ public class ElPresidente : MonoBehaviour {
     /// and reloads the whole shebang...almost like you would expect.</param>
     /// <param name="generateKeyframes">optional default false. makes keyframes for display over scrubber.
     /// locks down the UI for some time at startup to execute whole cinematic once all speedy like</param>
-    public void Init(InputSet newInputSet, uint? timeUpdateIncrement=null, bool forceFullReload=false, bool generateKeyframes=false)
+    public void Init(InputSet newInputSet, uint? timeUpdateIncrement=null, bool forceFullReload=false, bool generateKeyframes=false, bool generateVideoFrames=false)
     {
         this.timeUpdateIncrement = timeUpdateIncrement;
-        this.generateKeyframes = generateKeyframes;        
+        this.generateKeyframes = generateKeyframes;
+        this.generateVideoFrames = generateVideoFrames;
+
+        if (generateVideoFrames)
+        {
+            // Find the canvase game object.
+            GameObject canvasGO = GameObject.Find("Canvas");
+
+            // Get the canvas component from the game object.
+            Canvas canvas = canvasGO.GetComponent<Canvas>();
+
+            // Toggle the canvas display off.
+            canvas.enabled = false;
+
+        }
+
         if (whereWeAt == null) //if there is no slider to display them on, don't generate keyframes
         {
             this.generateKeyframes = false;
@@ -426,6 +443,36 @@ public class ElPresidente : MonoBehaviour {
         executingDiscourseActions.ExecuteList(ElPresidente.currentDiscourseTime);
         executingActorActions.ExecuteList(ElPresidente.currentStoryTime);
         executingCameraActions.ExecuteList(ElPresidente.currentDiscourseTime);
+
+        if (generateVideoFrames)
+        {
+            // Initialize the render texture and texture 2D.
+            RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 24);
+            Texture2D screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+
+            // Render the texture.
+            Camera.main.targetTexture = rt;
+            Camera.main.Render();
+
+            // Read the rendered texture into the texture 2D.
+            RenderTexture.active = rt;
+            screenShot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+
+            // Clean everything up.
+            Camera.main.targetTexture = null;
+            RenderTexture.active = null;
+            Destroy(rt);
+            Destroy(screenShot);
+
+            // Save the texture 2D as a PNG.
+            byte[] bytes = screenShot.EncodeToPNG();
+            File.WriteAllBytes(@".screens/" + videoFrameNumber + ".png", bytes);
+            videoFrameNumber++;
+
+            // Quit if we have passed the end of the discourse.
+            if (cameraActionList.EndDiscourseTime < currentDiscourseTime)
+                Application.Quit();
+        }
     }
 
     /// <summary>
