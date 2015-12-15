@@ -1,14 +1,66 @@
-<?xml version="1.0" encoding="utf-8"?>
-<cameraPlan name="000000000" xmlns="http://liquidnarrative.csc.ncsu.edu/oshmirto/v0.1">
+<?xml version="1.0"?>
+<cameraPlan xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://liquidnarrative.csc.ncsu.edu/oshmirto/v0.1">
   <blocks>
-    <block storyTime="1470">
+    <block storyTime="11854">
       <shotFragments>
-        <shotFragment anchor="2.222222,-5.583335" pan="89.50607" duration="1326" height="1" f-stop="5.6" lens="25mm" shake="0">
-          <framings />
-          <movements>
-            <movement type="Dolly" directive="To" subject="2.611111,6.277777" />
-            <!--<movement type="Pan" directive="To" subject="89.20425" />-->
-          </movements>
+        <shotFragment duration="68">
+          <framings>
+            <framing framingType="Full" framingTarget="Pudge" />
+          </framings>
+        </shotFragment>
+      </shotFragments>
+    </block>
+    <block storyTime="11610">
+      <shotFragments>
+        <shotFragment duration="66">
+          <framings>
+            <framing framingType="Full" framingTarget="Pudge" />
+          </framings>
+        </shotFragment>
+      </shotFragments>
+    </block>
+    <block storyTime="11380">
+      <shotFragments>
+        <shotFragment duration="112">
+          <framings>
+            <framing framingType="Full" framingTarget="Pudge" />
+          </framings>
+        </shotFragment>
+      </shotFragments>
+    </block>
+    <block storyTime="11316">
+      <shotFragments>
+        <shotFragment duration="36">
+          <framings>
+            <framing framingType="Full" framingTarget="Pudge" />
+          </framings>
+        </shotFragment>
+      </shotFragments>
+    </block>
+    <block storyTime="11082">
+      <shotFragments>
+        <shotFragment duration="8">
+          <framings>
+            <framing framingType="Full" framingTarget="Pudge" />
+          </framings>
+        </shotFragment>
+      </shotFragments>
+    </block>
+    <block storyTime="9908">
+      <shotFragments>
+        <shotFragment duration="50">
+          <framings>
+            <framing framingType="Full" framingTarget="Pudge" />
+          </framings>
+        </shotFragment>
+      </shotFragments>
+    </block>
+    <block storyTime="11090">
+      <shotFragments>
+        <shotFragment duration="22">
+          <framings>
+            <framing framingType="Full" framingTarget="Pudge" />
+          </framings>
         </shotFragment>
       </shotFragments>
     </block>

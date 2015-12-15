@@ -223,7 +223,7 @@
         <animationMapping animateActionName="attack" animationName="skywrath_mage_attack" loopAnimation="false"/>
       </animationMappings>
     </actor>
-    <actor name="Wisp" model="phantom_lancer.fbx" >
+    <actor name="Wisp" model="phantom_lancer_model.fbx" >
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="phantom_lancer_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="phantom_lancer_idle" loopAnimation="true" />

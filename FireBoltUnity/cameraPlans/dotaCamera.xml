@@ -5,7 +5,7 @@
       <shotFragments>
         <shotFragment duration="68">
           <framings>
-            <framing framingType="Full" framingTarget="pudge" />
+            <framing framingType="Full" framingTarget="Pudge" />
           </framings>
         </shotFragment>
       </shotFragments>
@@ -14,7 +14,7 @@
       <shotFragments>
         <shotFragment duration="66">
           <framings>
-            <framing framingType="Full" framingTarget="pudge" />
+            <framing framingType="Full" framingTarget="Pudge" />
           </framings>
         </shotFragment>
       </shotFragments>
@@ -23,7 +23,7 @@
       <shotFragments>
         <shotFragment duration="112">
           <framings>
-            <framing framingType="Full" framingTarget="pudge" />
+            <framing framingType="Full" framingTarget="Pudge" />
           </framings>
         </shotFragment>
       </shotFragments>
@@ -32,7 +32,7 @@
       <shotFragments>
         <shotFragment duration="36">
           <framings>
-            <framing framingType="Full" framingTarget="pudge" />
+            <framing framingType="Full" framingTarget="Pudge" />
           </framings>
         </shotFragment>
       </shotFragments>
@@ -41,7 +41,7 @@
       <shotFragments>
         <shotFragment duration="8">
           <framings>
-            <framing framingType="Full" framingTarget="pudge" />
+            <framing framingType="Full" framingTarget="Pudge" />
           </framings>
         </shotFragment>
       </shotFragments>
@@ -50,7 +50,7 @@
       <shotFragments>
         <shotFragment duration="50">
           <framings>
-            <framing framingType="Full" framingTarget="pudge" />
+            <framing framingType="Full" framingTarget="Pudge" />
           </framings>
         </shotFragment>
       </shotFragments>
@@ -59,7 +59,7 @@
       <shotFragments>
         <shotFragment duration="22">
           <framings>
-            <framing framingType="Full" framingTarget="pudge" />
+            <framing framingType="Full" framingTarget="Pudge" />
           </framings>
         </shotFragment>
       </shotFragments>
