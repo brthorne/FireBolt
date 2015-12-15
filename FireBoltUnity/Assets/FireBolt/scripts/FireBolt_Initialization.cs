@@ -4,7 +4,7 @@ using System.Collections;
 public class FireBolt_Initialization : MonoBehaviour 
 {
 	// Use this for initialization
-	void Awake () 
+	void Start () 
     {
         ElPresidente elPresidente = this.GetComponent<ElPresidente>();
         elPresidente.Init(null,40,false,false);

@@ -1,34 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <story name="000000000" xmlns="http://liquidnarrative.csc.ncsu.edu/impulse/v1.336">
   <actions>
-    <!--<action type="create" name="step1">
-      <property name="position" value="(8.444445,6.333333)" />
-      <property name="end-angle" value="349.824446678162" />
+    <action type="create" name="step1">
+      <property name="position" value="(1.744792,6.640625)" />
+      <property name="end-angle" value="0" />
       <property name="time" value="0-1" />
       <property name="actor" value="pudge" />
-    </action>-->
-    <action type="rot" name="rot1">
-      <property name="actor" value="pudge"/>
-      <property name="spawned" value="fire_extinguisher"/>
-      <property name="time" value="10-11"/>
-      <property name="origin" value="(8.444445,6.333333)" />
     </action>
-    <action type="run" name="step2">
-      <property name="origin" value="(8.444445,6.333333)" />
-      <property name="destination" value="(8.444445,-5.416668)" />
-      <property name="end-angle" value="356.531750440598" />
-      <property name="time" value="500-1469" />
+    <action type="walk" name="step2">
+      <property name="origin" value="(1.744792,6.640625)" />
+      <property name="destination" value="(1.692708,-5.546876)" />
+      <property name="end-angle" value="56.52724" />
+      <property name="time" value="1-3047" />
       <property name="actor" value="pudge" />
     </action>
-    <action type="run" name="step3">
-      <property name="origin" value="(8.444445,-5.416668)" />
-      <property name="destination" value="(8.583333,6.444445)" />
-      <property name="end-angle" value="176.531707763672" />
-      <property name="time" value="1469-2952" />
-      <property name="actor" value="pudge" />
-    </action>
-    <action type="idle" name="step4">
-      <property name="time" value="2952-60000" />
+    <action type="idle" name="step3">
+      <property name="time" value="3047-60000" />
       <property name="actor" value="pudge" />
     </action>
   </actions>
@@ -40,7 +27,6 @@
       <action-type-ref name="idle" />
       <action-type-ref name="create" />
       <action-type-ref name="remove" />
-      <action-type-ref name="rot" />
     </action-type>
     <action-type name="has-position">
       <action-type-ref name="create" />
@@ -49,7 +35,6 @@
       <action-type-ref name="move" />
       <action-type-ref name="walk" />
       <action-type-ref name="run" />
-      <action-type-ref name="rot" />
     </action-type>
     <action-type name="has-destination">
       <action-type-ref name="move" />
@@ -68,7 +53,6 @@
     <action-type name="idle" />
     <action-type name="create" />
     <action-type name="remove" />
-    <action-type name="rot" />
   </action-types>
   <action-properties>
     <action-property name="actor" action="Actions" range="A" />
@@ -77,25 +61,14 @@
     <action-property name="origin" action="has-origin" range="coordinate2d" />
     <action-property name="destination" action="has-destination" range="coordinate2d" />
     <action-property name="end-angle" action="has-end-angle" range="y-degrees" />
-    <action-property name="spawned" action="rot" range="A" />
   </action-properties>
   <objects>
-    <set name="O">
-      <set-ref name="A"/>
-    </set>
     <set name="A">
-      <set-ref name="Main-Actors"/>
-    </set>
-    <set name="Main-Actors">
       <constant value="pudge" />
       <constant value="skywrath_mage" />
       <constant value="crate" />
       <constant value="fire_extinguisher" />
     </set>
-    <!--<set name="Main-Actors">
-      <constant value="pudge"/>
-      <constant value="skywrath_mage"/>
-    </set>-->
   </objects>
   <sentences />
 </story>
