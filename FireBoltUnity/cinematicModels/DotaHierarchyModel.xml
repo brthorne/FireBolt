@@ -181,7 +181,7 @@
       </animationMappings>
     </actor>
     
-    <actor name="pudge" model="pudge_model.fbx" >
+    <actor name="Pudge" model="pudge_model.fbx" >
       <animationMappings>
         <animationMapping animateActionName="throw_hook" animationName="throw_hook" loopAnimation="false"/>
         <animationMapping animateActionName="catch_hook" animationName="catch_hook" loopAnimation="false"/>
@@ -194,7 +194,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="mirana" model="mirana_model.fbx" >
+    <actor name="Mirana" model="mirana_model.fbx" >
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="mirana_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="mirana_idle" loopAnimation="true" />
@@ -204,7 +204,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="crystal maiden" model="crystal_maiden_model.fbx" >
+    <actor name="Crystal Maiden" model="crystal_maiden_model.fbx" >
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="crystal_maiden_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="crystal_maiden_idle" loopAnimation="true" />
@@ -214,7 +214,7 @@
       </animationMappings>
     </actor>
     
-    <actor name="skywrath mage" model="skywrath_mage_model.fbx" >
+    <actor name="Skywrath Mage" model="skywrath_mage_model.fbx" >
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="skywrath_mage_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="skywrath_mage_idle" loopAnimation="true" />
@@ -223,7 +223,7 @@
         <animationMapping animateActionName="attack" animationName="skywrath_mage_attack" loopAnimation="false"/>
       </animationMappings>
     </actor>
-    <actor name="wisp" model="phantom_lancer.fbx" >
+    <actor name="Wisp" model="phantom_lancer.fbx" >
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="phantom_lancer_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="phantom_lancer_idle" loopAnimation="true" />
@@ -233,7 +233,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="dazzle" model="dazzle_model.fbx" >
+    <actor name="Dazzle" model="dazzle_model.fbx" >
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="crystal_maiden_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="crystal_maiden_idle" loopAnimation="true" />
@@ -243,7 +243,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="legion commander" model="rikimaru_model.fbx" >
+    <actor name="Legion Commander" model="rikimaru_model.fbx" >
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="rikimaru_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="rikimaru_idle" loopAnimation="true" />
@@ -253,7 +253,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="mirana" model="mirana_model.fbx" >
+    <actor name="Mirana" model="mirana_model.fbx" >
       <animationMappings>
         <animationMapping animateActionName="attack" animationName="mirana_attack" loopAnimation="false" />
         <animationMapping animateActionName="walk" animationName="mirana_walk" loopAnimation="true" />
@@ -263,7 +263,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="ancient apparition" model="death_prophet_model.fbx" >
+    <actor name="Ancient Apparition" model="death_prophet_model.fbx" >
       <animationMappings>
         <animationMapping animateActionName="attack" animationName="skywrath_mage_attack_2" loopAnimation="false" />
         <animationMapping animateActionName="walk" animationName="skywrath_mage_walk" loopAnimation="true" />
@@ -273,7 +273,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="morphling" model="naga_siren_model.fbx" >
+    <actor name="Morphling" model="naga_siren_model.fbx" >
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="naga_siren_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="naga_siren_idle" loopAnimation="true" />
@@ -283,7 +283,7 @@
       </animationMappings>
     </actor>
     
-    <actor name="ember spirit" model="templar_assassin_model.fbx" >
+    <actor name="Ember Spirit" model="templar_assassin_model.fbx" >
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="rikimaru_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="rikimaru_idle" loopAnimation="true" />
