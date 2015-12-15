@@ -112,6 +112,7 @@ namespace Assets.scripts
             else
             {
                 Debug.Log(string.Format("asset bundle [{0}] does not contain animation[{1}]", ElPresidente.Instance.GetActiveAssetBundle().name, animName));
+                return false;
             }
 
             if (!string.IsNullOrEmpty(stateName) && ElPresidente.Instance.GetActiveAssetBundle().Contains(stateName))
