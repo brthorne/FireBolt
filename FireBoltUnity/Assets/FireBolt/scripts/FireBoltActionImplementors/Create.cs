@@ -41,7 +41,8 @@ namespace Assets.scripts
         public override bool Init()
         {
             Debug.Log(string.Format("init create model[{0}] for actor [{1}]",modelName, actorName));
-            if (actor != null)
+            if (!defaultedCreate &&
+                ElPresidente.createdGameObjects.TryGet(actorName, out actor))
             {
                 actor.SetActive(true);
                 actor.transform.position = position;
