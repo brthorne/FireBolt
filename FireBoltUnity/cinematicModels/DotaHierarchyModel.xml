@@ -223,13 +223,13 @@
         <animationMapping animateActionName="attack" animationName="skywrath_mage_attack" loopAnimation="false"/>
       </animationMappings>
     </actor>
-    <actor name="wisp" model="wind_runner_model.fbx" >
+    <actor name="wisp" model="phantom_lancer.fbx" >
       <animationMappings>
-        <animationMapping animateActionName="walk" animationName="crystal_maiden_walk" loopAnimation="true" />
-        <animationMapping animateActionName="idle" animationName="crystal_maiden_idle" loopAnimation="true" />
-        <animationMapping animateActionName="frozen" animationName="crystal_maiden_idle" loopAnimation="true"/>
-        <animationMapping animateActionName="die" animationName="crystal_maiden_die" loopAnimation="false"/>
-        <animationMapping animateActionName="attack" animationName="crystal_maiden_attack" loopAnimation="false"/>
+        <animationMapping animateActionName="walk" animationName="phantom_lancer_walk" loopAnimation="true" />
+        <animationMapping animateActionName="idle" animationName="phantom_lancer_idle" loopAnimation="true" />
+        <animationMapping animateActionName="frozen" animationName="phantom_lancer_idle" loopAnimation="true"/>
+        <animationMapping animateActionName="die" animationName="phantom_lancer_die" loopAnimation="false"/>
+        <animationMapping animateActionName="attack" animationName="phantom_lancer_attack" loopAnimation="false"/>
       </animationMappings>
     </actor>
 
@@ -239,17 +239,17 @@
         <animationMapping animateActionName="idle" animationName="crystal_maiden_idle" loopAnimation="true" />
         <animationMapping animateActionName="frozen" animationName="crystal_maiden_idle" loopAnimation="true"/>
         <animationMapping animateActionName="die" animationName="crystal_maiden_die" loopAnimation="false"/>
-        <animationMapping animateActionName="attack" animationName="crystal_maiden_attack" loopAnimation="false"/>
+        <animationMapping animateActionName="attack" animationName="phantom_lancer_attack_upward" loopAnimation="false"/>
       </animationMappings>
     </actor>
 
-    <actor name="legion commander" model="wraith_king_model.fbx" >
+    <actor name="legion commander" model="rikimaru_model.fbx" >
       <animationMappings>
-        <animationMapping animateActionName="walk" animationName="pudge_walk" loopAnimation="true" />
-        <animationMapping animateActionName="idle" animationName="pudge_idle" loopAnimation="true" />
-        <animationMapping animateActionName="frozen" animationName="pudge_idle" loopAnimation="true"/>
-        <animationMapping animateActionName="die" animationName="pudge_die" loopAnimation="false"/>
-        <animationMapping animateActionName="attack" animationName="pudge_attack" loopAnimation="false"/>
+        <animationMapping animateActionName="walk" animationName="rikimaru_walk" loopAnimation="true" />
+        <animationMapping animateActionName="idle" animationName="rikimaru_idle" loopAnimation="true" />
+        <animationMapping animateActionName="frozen" animationName="rikimaru_idle" loopAnimation="true"/>
+        <animationMapping animateActionName="die" animationName="rikimaru_die" loopAnimation="false"/>
+        <animationMapping animateActionName="attack" animationName="rikimaru_attack" loopAnimation="false"/>
       </animationMappings>
     </actor>
 
@@ -275,21 +275,21 @@
 
     <actor name="morphling" model="naga_siren_model.fbx" >
       <animationMappings>
-        <animationMapping animateActionName="walk" animationName="pudge_walk" loopAnimation="true" />
-        <animationMapping animateActionName="idle" animationName="pudge_idle" loopAnimation="true" />
-        <animationMapping animateActionName="frozen" animationName="pudge_idle" loopAnimation="true"/>
-        <animationMapping animateActionName="die" animationName="pudge_die" loopAnimation="false"/>
-        <animationMapping animateActionName="attack" animationName="pudge_attack" loopAnimation="false"/>
+        <animationMapping animateActionName="walk" animationName="naga_siren_walk" loopAnimation="true" />
+        <animationMapping animateActionName="idle" animationName="naga_siren_idle" loopAnimation="true" />
+        <animationMapping animateActionName="frozen" animationName="naga_siren_idle" loopAnimation="true"/>
+        <animationMapping animateActionName="die" animationName="naga_siren_die" loopAnimation="false"/>
+        <animationMapping animateActionName="attack" animationName="naga_siren_attack" loopAnimation="false"/>
       </animationMappings>
     </actor>
     
     <actor name="ember spirit" model="templar_assassin_model.fbx" >
       <animationMappings>
-        <animationMapping animateActionName="walk" animationName="pudge_walk" loopAnimation="true" />
-        <animationMapping animateActionName="idle" animationName="pudge_idle" loopAnimation="true" />
-        <animationMapping animateActionName="frozen" animationName="pudge_idle" loopAnimation="true"/>
-        <animationMapping animateActionName="die" animationName="pudge_die" loopAnimation="false"/>
-        <animationMapping animateActionName="attack" animationName="pudge_attack" loopAnimation="false"/>
+        <animationMapping animateActionName="walk" animationName="rikimaru_walk" loopAnimation="true" />
+        <animationMapping animateActionName="idle" animationName="rikimaru_idle" loopAnimation="true" />
+        <animationMapping animateActionName="frozen" animationName="rikimaru_idle" loopAnimation="true"/>
+        <animationMapping animateActionName="die" animationName="rikimaru_die" loopAnimation="false"/>
+        <animationMapping animateActionName="attack" animationName="rikimaru_attack_2" loopAnimation="false"/>
       </animationMappings>
     </actor> 
 
@@ -492,6 +492,84 @@
       <animationIndices/>
     </animation>
     <animation fileName="humanoid_idle.fbx" name="idle">
+      <animationIndices/>
+    </animation>
+
+    <animation fileName="naga_siren_idle.fbx" name="naga_siren_idle">
+      <animationIndices/>
+    </animation>
+    <animation fileName="naga_siren_attack.fbx" name="naga_siren_attack">
+      <animationIndices/>
+    </animation>
+    <animation fileName="naga_siren_attack_2.fbx" name="naga_siren_attack_2">
+      <animationIndices/>
+    </animation>
+    <animation fileName="naga_siren_attack_3.fbx" name="naga_siren_attack_3">
+      <animationIndices/>
+    </animation>
+    <animation fileName="naga_siren_walk.fbx" name="naga_siren_walk">
+      <animationIndices/>
+    </animation>
+    <animation fileName="naga_siren_riptide.fbx" name="naga_siren_riptide">
+      <animationIndices/>
+    </animation>
+    <animation fileName="naga_siren_die.fbx" name="naga_siren_die">
+    <animationIndices>
+      <animationIndex name="onTheGround"  timeOffset="2500"/>
+    </animationIndices>
+    </animation>
+
+    <animation fileName="phantom_lancer_attack_overhand.fbx" name="phantom_lancer_attack_overhand">
+      <animationIndices/>
+    </animation>
+    <animation fileName="phantom_lancer_attack_jump.fbx" name="phantom_lancer_attack_jump">
+      <animationIndices/>
+    </animation>
+    <animation fileName="phantom_lancer_attack_kick.fbx" name="phantom_lancer_attack_kick">
+      <animationIndices/>
+    </animation>
+    <animation fileName="phantom_lancer_die.fbx" name="phantom_lancer_die">
+    <animationIndices>
+      <animationIndex name="onTheGround"  timeOffset="1250"/>
+    </animationIndices>
+    </animation>
+    <animation fileName="phantom_lancer_attack_upward.fbx" name="phantom_lancer_attack_upward">
+      <animationIndices/>
+    </animation>
+    <animation fileName="phantom_lancer_attack_spin.fbx" name="phantom_lancer_attack_spin">
+      <animationIndices/>
+    </animation>
+    <animation fileName="phantom_lancer_walk.fbx" name="phantom_lancer_walk">
+      <animationIndices/>
+    </animation>
+    <animation fileName="phantom_lancer_attack.fbx" name="phantom_lancer_attack">
+      <animationIndices/>
+    </animation>
+    <animation fileName="phantom_lancer_idle.fbx" name="phantom_lancer_idle">
+      <animationIndices/>
+    </animation>
+
+    <animation fileName="rikimaru_walk.fbx" name="rikimaru_walk">
+      <animationIndices/>
+    </animation>
+    <animation fileName="rikimaru_die.fbx" name="rikimaru_die">
+      <animationIndices>
+        <animationIndex name="onTheGround"  timeOffset="1500"/>
+      </animationIndices>
+    </animation>
+    <animation fileName="rikimaru_attack.fbx" name="rikimaru_attack">
+      <animationIndices/>
+    </animation>
+    <animation fileName="rikimaru_attack_2.fbx" name="rikimaru_attack_2">
+      <animationIndices/>
+    </animation>
+    <animation fileName="rikimaru_backstab.fbx" name="rikimaru_backstab">
+      <animationIndices/>
+    </animation>
+    <animation fileName="rikimaru_idle.fbx" name="rikimaru_idle">
+      <animationIndices/>
+    </animation>
+    <animation fileName="rikimaru_smoke_screen.fbx" name="rikimaru_smoke_screen">
       <animationIndices/>
     </animation>
   </animations>
