@@ -611,8 +611,7 @@ public class ElPresidente : MonoBehaviour {
 
         int pic = 1;
 
-        RenderTexture rt = null;
-        Texture2D screenShot = null;
+        // Create a camera object for taking pictures.
         GameObject testCameraGO = new GameObject();
         Camera test = testCameraGO.AddComponent<Camera>();
 
@@ -627,10 +626,10 @@ public class ElPresidente : MonoBehaviour {
             yield return new WaitForEndOfFrame();
 
             // Initialize the render texture and texture 2D.
-            rt = new RenderTexture(Screen.width, Screen.height, 24);
-            screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+            RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 24);
+            Texture2D screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
 
-            // Create a new camera object and position it where the main camera is.
+            // Position the frame capturer at the same position as the main camera.
             testCameraGO.transform.position = Camera.main.transform.position;
             testCameraGO.transform.rotation = Camera.main.transform.rotation;
 
@@ -638,11 +637,13 @@ public class ElPresidente : MonoBehaviour {
             test.targetTexture = rt;
             test.Render();
 
-            // Read the rendered texture into the texture 2D and reset the camera.
+            // Read the rendered texture into the texture 2D.
             RenderTexture.active = rt;
             screenShot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
             test.targetTexture = null;
             RenderTexture.active = null;
+            Destroy(rt);
+            Destroy(screenShot);
 
             // Save the texture 2D as a PNG.
             byte[] bytes = screenShot.EncodeToPNG();
