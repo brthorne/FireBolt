@@ -87,6 +87,9 @@ public class ElPresidente : MonoBehaviour {
     public float CurrentStoryTime { get { return currentStoryTime; } }
     public float CurrentDiscourseTime { get { return currentDiscourseTime; } }
 
+    //number of milliseconds to advance the story and discourse time on update
+    private uint? timeUpdateIncrement; 
+
     void Start()
     {
         Instance = this;
@@ -118,14 +121,15 @@ public class ElPresidente : MonoBehaviour {
         }
         return lensIndex;
     }
-    
+
     /// <summary>
     /// wrapper for default args Init to use from UI button as default args methods are not visible in UI click event assignment in inspector
     /// </summary>
     /// <param name="a"></param>
+    [Obsolete("write your own script to interact with Init(InputSet, uint?, bool, bool")]
     public void Init(float a)
     {
-        Init(null, true);
+        Init(null, null, true);
     }
 
     /// <summary>
@@ -135,17 +139,28 @@ public class ElPresidente : MonoBehaviour {
     /// <param name="generateKeyframes">toggles keyframe generation.  
     /// Keyframe generation runs the entire story through and may take 
     /// a large amount of time to initialize.</param>
+    [Obsolete("write your own script to interact with Init(InputSet, uint?, bool, bool")]
     public void Init(bool generateKeyframes)
     {
         Debug.Log(string.Format("reload keyframes[{0}]",generateKeyframes));
-        Init(null, false, generateKeyframes);
+        Init(null, null, false, generateKeyframes);
     }
 
-    //new class to hold specified input file paths.  
-
-    public void Init(InputSet newInputSet, bool forceFullReload=false, bool generateKeyframes=true)
+    /// <summary>
+    /// Use this method to start FireBolt.
+    /// </summary>
+    /// <param name="newInputSet">specify input file locations in an InputSet.  accepts null and 
+    /// uses the default paths and names.</param>
+    /// <param name="timeUpdateIncrement">optional. defaults null.  specifies number of milliseconds
+    /// to force the execution to jump everyframe.  Uses Time.deltaTime if null.</param>
+    /// <param name="forceFullReload">optional, defaults false.  true ignores timestamps on input files
+    /// and reloads the whole shebang...almost like you would expect.</param>
+    /// <param name="generateKeyframes">optional default false. makes keyframes for display over scrubber.
+    /// locks down the UI for some time at startup to execute whole cinematic once all speedy like</param>
+    public void Init(InputSet newInputSet, uint? timeUpdateIncrement=null, bool forceFullReload=false, bool generateKeyframes=false)
     {
-        this.generateKeyframes = generateKeyframes;
+        this.timeUpdateIncrement = timeUpdateIncrement;
+        this.generateKeyframes = generateKeyframes;        
         if (whereWeAt == null) //if there is no slider to display them on, don't generate keyframes
         {
             this.generateKeyframes = false;
@@ -298,12 +313,11 @@ public class ElPresidente : MonoBehaviour {
 
     private void instantiateTerrain()
     {
-        GameObject go = (terrain.LoadAsset(cinematicModel.Terrain.TerrainFileName) as GameObject);
-        var t = Instantiate(go)as GameObject;
-        t.name = "Terrain";
+        var terrainPrefab = terrain.LoadAsset(cinematicModel.Terrain.TerrainFileName);
         Vector3 v;
         cinematicModel.Terrain.Location.TryParseVector3(out v);
-        t.transform.position = v; 
+        var t = Instantiate(terrainPrefab,v,Quaternion.identity)as GameObject;
+        t.name = "Terrain";
         t.transform.SetParent(GameObject.Find("FireBolt").transform,true);
         createdGameObjects.Add(t.name, t);
     }
@@ -364,6 +378,20 @@ public class ElPresidente : MonoBehaviour {
         }            
     }
 
+    private void updateCurrentTime()
+    {
+        if (timeUpdateIncrement.HasValue)
+        {
+            currentStoryTime += timeUpdateIncrement.Value;
+            currentDiscourseTime += timeUpdateIncrement.Value;
+        }
+        else
+        {
+            currentStoryTime += Time.deltaTime * 1000;
+            currentDiscourseTime += Time.deltaTime * 1000;
+        }        
+    }
+
     void Update()
     {
         if (!initialized && initNext)
@@ -371,9 +399,8 @@ public class ElPresidente : MonoBehaviour {
         else if (!initialized)
             return;
 
-        currentStoryTime += Time.deltaTime * 1000;
-        currentDiscourseTime += Time.deltaTime * 1000;
-
+        updateCurrentTime();
+        
         if (debugText != null)
             debugText.text = currentDiscourseTime.ToString() + " : " + currentStoryTime.ToString();
         if (whereWeAt && currentDiscourseTime < cameraActionList.EndDiscourseTime)
