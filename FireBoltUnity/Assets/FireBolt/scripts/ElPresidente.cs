@@ -571,35 +571,41 @@ public class ElPresidente : MonoBehaviour {
         canvas.enabled = false;
 
         // Store the main camera's default settings.
-        CameraClearFlags defClearFlags = Camera.main.clearFlags;
-        Color defBackgroundColor = Camera.main.backgroundColor;
-        int defCullingMask = Camera.main.cullingMask;
+        //CameraClearFlags defClearFlags = Camera.main.clearFlags;
+        //Color defBackgroundColor = Camera.main.backgroundColor;
+        //int defCullingMask = Camera.main.cullingMask;
 
         // Make the main camera display a black screen while the system iterates through the keyframes.
-        Camera.main.clearFlags = CameraClearFlags.SolidColor;
-        Camera.main.backgroundColor = Color.black;
-        Camera.main.cullingMask = 0;
+        //Camera.main.clearFlags = CameraClearFlags.SolidColor;
+        //Camera.main.backgroundColor = Color.black;
+        //Camera.main.cullingMask = 0;
+
+        float totalMillis = cameraActionList.EndDiscourseTime;
 
         int pic = 1;
 
+        RenderTexture rt = null;
+        Texture2D screenShot = null;
+        GameObject testCameraGO = new GameObject();
+        Camera test = testCameraGO.AddComponent<Camera>();
+
         // Loop through discourse time at intervals of 5%.
-        for (float i = 0; i < 100; i = i + 5)
+        for (int i = 0; i < totalMillis; i = i + 40)
         {
             // Set the time based on the current loop.
-            setTime(i / 100);
+            //goToDiscourseTime(i);
+            setTime(i / totalMillis);
 
             // Allow the frame to process.
             yield return new WaitForEndOfFrame();
 
             // Initialize the render texture and texture 2D.
-            RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 24);
-            Texture2D screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+            rt = new RenderTexture(Screen.width, Screen.height, 24);
+            screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
 
             // Create a new camera object and position it where the main camera is.
-            GameObject testCameraGO = new GameObject();
             testCameraGO.transform.position = Camera.main.transform.position;
             testCameraGO.transform.rotation = Camera.main.transform.rotation;
-            Camera test = testCameraGO.AddComponent<Camera>();
 
             // Render the texture.
             test.targetTexture = rt;
@@ -610,8 +616,6 @@ public class ElPresidente : MonoBehaviour {
             screenShot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
             test.targetTexture = null;
             RenderTexture.active = null;
-            Destroy(rt);
-            Destroy(testCameraGO);
 
             // Save the texture 2D as a PNG.
             byte[] bytes = screenShot.EncodeToPNG();
@@ -619,9 +623,9 @@ public class ElPresidente : MonoBehaviour {
         }
 
         // Reset the main camera to its default configuration.
-        Camera.main.clearFlags = defClearFlags;
-        Camera.main.backgroundColor = defBackgroundColor;
-        Camera.main.cullingMask = defCullingMask;
+        //Camera.main.clearFlags = defClearFlags;
+        //Camera.main.backgroundColor = defBackgroundColor;
+        //Camera.main.cullingMask = defCullingMask;
 
         // Toggle the canvas display back on.
         canvas.enabled = true;
