@@ -43,10 +43,13 @@ namespace Assets.scripts
         public override bool Init()
         {
             Debug.Log(string.Format("init create model[{0}] for actor [{1}]",modelName, actorName));
-            if (!defaultedCreate &&
-                ElPresidente.createdGameObjects.TryGet(actorName, out actor))
+            if (ElPresidente.createdGameObjects.TryGet(actorName, out actor))
             {
-                actor.SetActive(true);
+                if (defaultedCreate)
+                    actor.SetActive(false);
+                else
+                    actor.SetActive(true);
+
                 actor.transform.position = position;
                 if(orientation.HasValue)
                     actor.transform.rotation = Quaternion.Euler(orientation.Value);
