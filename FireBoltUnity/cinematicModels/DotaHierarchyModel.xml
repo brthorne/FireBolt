@@ -171,7 +171,7 @@
   
   
   <actors>
-    <actor name="Main-Actors" model="crystal_maiden_model.fbx">
+    <actor name="Main-Actors" model="crystal_maiden_model.fbx" pointOfInterest="0.8" >
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="crystal_maiden_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="crystal_maiden_idle" loopAnimation="true" />
@@ -181,7 +181,7 @@
       </animationMappings>
     </actor>
     
-    <actor name="Pudge" model="pudge_model.fbx" >
+    <actor name="Pudge" model="pudge_model.fbx" pointOfInterest="0.8">
       <animationMappings>
         <animationMapping animateActionName="throw_hook" animationName="throw_hook" loopAnimation="false"/>
         <animationMapping animateActionName="catch_hook" animationName="catch_hook" loopAnimation="false"/>
@@ -194,7 +194,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="Mirana" model="mirana_model.fbx" >
+    <actor name="Mirana" model="mirana_model.fbx" pointOfInterest="0.8">
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="mirana_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="mirana_idle" loopAnimation="true" />
@@ -204,7 +204,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="Crystal Maiden" model="crystal_maiden_model.fbx" >
+    <actor name="Crystal Maiden" model="crystal_maiden_model.fbx" pointOfInterest="0.8">
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="crystal_maiden_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="crystal_maiden_idle" loopAnimation="true" />
@@ -214,7 +214,7 @@
       </animationMappings>
     </actor>
     
-    <actor name="Skywrath Mage" model="skywrath_mage_model.fbx" >
+    <actor name="Skywrath Mage" model="skywrath_mage_model.fbx" pointOfInterest="0.8">
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="skywrath_mage_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="skywrath_mage_idle" loopAnimation="true" />
@@ -223,7 +223,7 @@
         <animationMapping animateActionName="attack" animationName="skywrath_mage_attack" loopAnimation="false"/>
       </animationMappings>
     </actor>
-    <actor name="Wisp" model="phantom_lancer_model.fbx" >
+    <actor name="Wisp" model="phantom_lancer_model.fbx" pointOfInterest="0.8">
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="phantom_lancer_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="phantom_lancer_idle" loopAnimation="true" />
@@ -233,7 +233,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="Dazzle" model="dazzle_model.fbx" >
+    <actor name="Dazzle" model="dazzle_model.fbx" pointOfInterest="0.8">
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="crystal_maiden_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="crystal_maiden_idle" loopAnimation="true" />
@@ -243,7 +243,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="Legion Commander" model="rikimaru_model.fbx" >
+    <actor name="Legion Commander" model="rikimaru_model.fbx" pointOfInterest="0.8">
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="rikimaru_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="rikimaru_idle" loopAnimation="true" />
@@ -253,7 +253,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="Mirana" model="mirana_model.fbx" >
+    <actor name="Mirana" model="mirana_model.fbx" pointOfInterest="0.8">
       <animationMappings>
         <animationMapping animateActionName="attack" animationName="mirana_attack" loopAnimation="false" />
         <animationMapping animateActionName="walk" animationName="mirana_walk" loopAnimation="true" />
@@ -263,7 +263,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="Ancient Apparition" model="death_prophet_model.fbx" >
+    <actor name="Ancient Apparition" model="death_prophet_model.fbx" pointOfInterest="0.8">
       <animationMappings>
         <animationMapping animateActionName="attack" animationName="skywrath_mage_attack_2" loopAnimation="false" />
         <animationMapping animateActionName="walk" animationName="skywrath_mage_walk" loopAnimation="true" />
@@ -273,7 +273,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="Morphling" model="naga_siren_model.fbx" >
+    <actor name="Morphling" model="naga_siren_model.fbx" pointOfInterest="0.8">
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="naga_siren_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="naga_siren_idle" loopAnimation="true" />
@@ -283,7 +283,7 @@
       </animationMappings>
     </actor>
     
-    <actor name="Ember Spirit" model="templar_assassin_model.fbx" >
+    <actor name="Ember Spirit" model="templar_assassin_model.fbx" pointOfInterest="0.8">
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="rikimaru_walk" loopAnimation="true" />
         <animationMapping animateActionName="idle" animationName="rikimaru_idle" loopAnimation="true" />
@@ -293,7 +293,7 @@
       </animationMappings>
     </actor> 
 
-    <actor name="Towers" model="tower.prefab" >
+    <actor name="Towers" model="tower.prefab" pointOfInterest="0.8">
       <animationMappings/>
     </actor>
     <actor name="Runes" model="m005.fbx">
@@ -308,7 +308,7 @@
       </animationMappings>
     </actor>
 
-    <actor name="Creeps" model="goblin_model.fbx" >
+    <actor name="Creeps" model="goblin_model.fbx" pointOfInterest="0.8">
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="bad_melee_walk" loopAnimation="true" />
         <animationMapping animateActionName="creep_attack" animationName="pudge_attack" loopAnimation="false"/>
@@ -316,7 +316,7 @@
         <animationMapping animateActionName="idle" animationName="bad_melee_idle" loopAnimation="true"/>
       </animationMappings>
     </actor>
-    <actor name="npc_dota_creep_badguys_melee" model="creep_bad_melee_model.fbx" >
+    <actor name="npc_dota_creep_badguys_melee" model="creep_bad_melee_model.fbx" pointOfInterest="0.8">
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="bad_melee_walk" loopAnimation="true" />
         <animationMapping animateActionName="creep_attack" animationName="bad_melee_attack" loopAnimation="false"/>
@@ -324,7 +324,7 @@
         <animationMapping animateActionName="idle" animationName="bad_melee_idle" loopAnimation="true"/>
       </animationMappings>
     </actor>
-    <actor name="npc_dota_creep_goodguys_melee" model="creep_good_melee_model.fbx" >
+    <actor name="npc_dota_creep_goodguys_melee" model="creep_good_melee_model.fbx" pointOfInterest="0.8">
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="good_melee_walk" loopAnimation="true" />
         <animationMapping animateActionName="creep_attack" animationName="good_melee_attack" loopAnimation="false"/>
@@ -332,7 +332,7 @@
         <animationMapping animateActionName="idle" animationName="good_melee_idle" loopAnimation="true"/>
       </animationMappings>
     </actor>    
-    <actor name="npc_dota_creep_badguys_ranged" model="creep_bad_ranged_model.fbx" >
+    <actor name="npc_dota_creep_badguys_ranged" model="creep_bad_ranged_model.fbx" pointOfInterest="0.8">
       <animationMappings>
         <animationMapping animateActionName="die" animationName="bad_ranged_die" loopAnimation="false" />
         <animationMapping animateActionName="creep_attack" animationName="bad_ranged_attack" loopAnimation="false"/>
@@ -340,7 +340,7 @@
         <animationMapping animateActionName="idle" animationName="bad_ranged_idle" loopAnimation="true"/>
       </animationMappings>
     </actor>
-    <actor name="npc_dota_creep_goodguys_ranged" model="creep_good_ranged_model.fbx" >
+    <actor name="npc_dota_creep_goodguys_ranged" model="creep_good_ranged_model.fbx" pointOfInterest="0.8">
       <animationMappings>
         <animationMapping animateActionName="walk" animationName="good_ranged_walk" loopAnimation="true" />
         <animationMapping animateActionName="die" animationName="good_ranged_die" loopAnimation="false" />
