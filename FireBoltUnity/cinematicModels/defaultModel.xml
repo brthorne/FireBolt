@@ -12,6 +12,7 @@
       </params>
       <createActions />
       <destroyActions />
+      <attachActions />
       <translateActions>
         <translateAction actorNameParamName="actor" destinationParamName="destination" originParamName="origin" />
       </translateActions>
@@ -29,6 +30,7 @@
       </params>
       <createActions />
       <destroyActions />
+      <attachActions />
       <translateActions>
         <translateAction actorNameParamName="actor" destinationParamName="destination" originParamName="origin" />
       </translateActions>
@@ -48,6 +50,7 @@
       </params>
       <createActions />
       <destroyActions />
+      <attachActions />
       <translateActions>
         <translateAction actorNameParamName="actor" destinationParamName="destination" originParamName="origin" />
       </translateActions>
@@ -64,6 +67,7 @@
       </params>
       <createActions />
       <destroyActions />
+      <attachActions />
       <translateActions />
       <rotateActions />
       <animateActions>
@@ -77,12 +81,12 @@
         <param name="end-angle" />
       </params>
       <createActions>
-        <createAction actorNameParamName="actor" originParamName="position" orientationParamName="end-angle"/>
+        <createAction actorNameParamName="actor" originParamName="position" orientationParamName="end-angle" />
       </createActions>
       <destroyActions />
+      <attachActions />
       <translateActions />
-      <rotateActions>
-      </rotateActions>
+      <rotateActions />
       <animateActions />
     </domainAction>
     <domainAction name="remove">
@@ -93,6 +97,7 @@
       <destroyActions>
         <destroyAction actorNameParamName="actor" />
       </destroyActions>
+      <attachActions />
       <translateActions />
       <rotateActions />
       <animateActions />
@@ -103,6 +108,7 @@
       </params>
       <createActions />
       <destroyActions />
+      <attachActions />
       <translateActions />
       <rotateActions />
       <animateActions>
@@ -125,7 +131,7 @@
         <animationMapping animateActionName="attack" animationName="swm_attack" loopAnimation="true" />
       </animationMappings>
     </actor>
-    <actor name="crate" model="crate.fbx" pointOfInterest="0">
+    <actor name="crate" model="Big_box.FBX" pointOfInterest="0">
       <animationMappings />
     </actor>
     <actor name="fire_extinguisher" model="fire_extinguisher.fbx" pointOfInterest="0">

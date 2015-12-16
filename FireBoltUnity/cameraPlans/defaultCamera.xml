@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <cameraPlan name="000000000" xmlns="http://liquidnarrative.csc.ncsu.edu/oshmirto/v0.1">
   <blocks>
-    <block storyTime="1">
+    <block storyTime="2">
       <shotFragments>
-        <shotFragment anchor="8.880208,6.640625" pan="-91.61149" duration="2875" height="1" f-stop="5.6" lens="25mm" shake="0">
+        <shotFragment anchor="9.375,1.718749" pan="-92.33732" duration="4742" focus="pudge" f-stop="5.6" lens="25mm" shake="0">
+          <angle angleSetting="Medium" target="pudge" />
           <framings />
-          <movements>
-            <movement type="Dolly" directive="To" subject="8.671875,-5.598959" />
-            <movement type="Pan" directive="To" subject="-88.94688" />
-          </movements>
+          <movements />
         </shotFragment>
       </shotFragments>
     </block>

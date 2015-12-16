@@ -2,21 +2,31 @@
 <story name="000000000" xmlns="http://liquidnarrative.csc.ncsu.edu/impulse/v1.336">
   <actions>
     <action type="create" name="step1">
-      <property name="position" value="(1.744792,6.640625)" />
-      <property name="end-angle" value="180" />
+      <property name="position" value="(1.901042,6.09375)" />
+      <property name="end-angle" value="0" />
       <property name="time" value="0-1" />
       <property name="actor" value="pudge" />
     </action>
     <action type="walk" name="step2">
-      <property name="origin" value="(1.744792,6.640625)" />
-      <property name="destination" value="(1.692708,-5.546876)" />
-      <property name="end-angle" value="180.52724" />
-      <property name="time" value="1-3047" />
+      <property name="origin" value="(1.901042,6.09375)" />
+      <property name="destination" value="(1.979167,-5.104168)" />
+      <property name="end-angle" value="-170.9605" />
+      <property name="time" value="1-2800" />
       <property name="actor" value="pudge" />
     </action>
     <action type="idle" name="step3">
-      <property name="time" value="3047-60000" />
+      <property name="time" value="2800-60000" />
       <property name="actor" value="pudge" />
+    </action>
+    <action type="create" name="step4">
+      <property name="position" value="(3.776042,1.640624)" />
+      <property name="end-angle" value="203.3742" />
+      <property name="time" value="0-1" />
+      <property name="actor" value="crate" />
+    </action>
+    <action type="idle" name="step5">
+      <property name="time" value="1-60000" />
+      <property name="actor" value="crate" />
     </action>
   </actions>
   <action-types>
@@ -27,6 +37,7 @@
       <action-type-ref name="idle" />
       <action-type-ref name="create" />
       <action-type-ref name="remove" />
+      <action-type-ref name="attack" />
     </action-type>
     <action-type name="has-position">
       <action-type-ref name="create" />
@@ -53,6 +64,7 @@
     <action-type name="idle" />
     <action-type name="create" />
     <action-type name="remove" />
+    <action-type name="attack" />
   </action-types>
   <action-properties>
     <action-property name="actor" action="Actions" range="A" />

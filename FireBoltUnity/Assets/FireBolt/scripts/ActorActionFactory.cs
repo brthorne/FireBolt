@@ -23,7 +23,7 @@ namespace Assets.scripts
         private static string[] orderedObjectSets;
         //private static string[] orderedActionTypes;
         private static Story<UintV, UintT, IIntervalSet<UintV, UintT>> story;
-        private static Dictionary<string, bool> actorInstantiations;
+        private static Dictionary<string, bool> implicitActorInstantiations;
 
         /// <summary>
         /// 
@@ -31,7 +31,7 @@ namespace Assets.scripts
         /// <param name="storyPlanPath">path to the story plan to load</param>
         /// <param name="cinematicModelPath">path to the cinematic model to load</param>
         /// <returns></returns>
-        public static FireBoltActionList CreateStoryActions(Story<UintV, UintT, IIntervalSet<UintV, UintT>> story, CM.CinematicModel cm)
+        public static FireBoltActionList CreateStoryActions(Story<UintV, UintT, IIntervalSet<UintV, UintT>> story, CM.CinematicModel cm, bool implicitActorCreation)
         {
             ActorActionFactory.cm = cm;
             FireBoltActionList aaq = new FireBoltActionList();            
@@ -39,10 +39,11 @@ namespace Assets.scripts
             orderedObjectSets = story.ObjectSetGraph.ReverseTopologicalSort().ToArray();
             //orderedActionTypes = story.ActionTypeGraph.ReverseTopologicalSort().ToArray();
 
-            actorInstantiations = new Dictionary<string, bool>();
+            implicitActorInstantiations = new Dictionary<string, bool>();
 
             //buildInitialState(aaq);
-            createActors(aaq);
+            if(implicitActorCreation)
+                createActors(aaq);
 
             //generate FireBolt actions for the steps
             foreach (IStoryAction<UintT> storyAction in story.Actions.Values)
@@ -53,18 +54,18 @@ namespace Assets.scripts
                 CM.Animation effectingAnimation = getEffectingAnimation(storyAction, domainAction);
 
                 enqueueCreateActions(storyAction, domainAction, effectingAnimation, aaq);
-                enqueueAnimateActions(storyAction, domainAction, effectingAnimation, aaq);
-                enqueueDestroyActions(storyAction, domainAction, effectingAnimation, aaq);
-                enqueuetranslateActions(storyAction, domainAction, effectingAnimation, aaq);
-                enqueueRotateActions(storyAction, domainAction, effectingAnimation, aaq);
-                enqueueAttachActions(storyAction, domainAction, effectingAnimation, aaq);
+                enqueueAnimateActions(storyAction, domainAction, effectingAnimation, aaq, implicitActorCreation);
+                enqueueDestroyActions(storyAction, domainAction, effectingAnimation, aaq, implicitActorCreation);
+                enqueuetranslateActions(storyAction, domainAction, effectingAnimation, aaq, implicitActorCreation);
+                enqueueRotateActions(storyAction, domainAction, effectingAnimation, aaq, implicitActorCreation);
+                enqueueAttachActions(storyAction, domainAction, effectingAnimation, aaq, implicitActorCreation);
             }            
             return aaq;
         }
 
         private static bool actorWillBeInstantiated(string actorName)
         {
-            if (actorInstantiations.ContainsKey(actorName))
+            if (implicitActorInstantiations.ContainsKey(actorName))
                 return true;
             return false;
         }
@@ -125,7 +126,7 @@ namespace Assets.scripts
                 Debug.Log(string.Format("building object set based create for actor[{0}]", actorName));
                 Create create = new Create(0, actorName, modelFileName, new Vector3(-10000, 0, -10000), null, true);
                 aaq.Add(create);
-                actorInstantiations.Add(actorName, true);
+                implicitActorInstantiations.Add(actorName, true);
             }
         }
 
@@ -157,7 +158,7 @@ namespace Assets.scripts
         }
 
         private static void enqueueRotateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, 
-                                                 CM.Animation effectingAnimation, FireBoltActionList aaq)
+                                                 CM.Animation effectingAnimation, FireBoltActionList aaq, bool implicitActorInstantiation)
         {
             foreach (CM.RotateAction ra in domainAction.RotateActions)
             {
@@ -171,7 +172,7 @@ namespace Assets.scripts
                     if (domainActionParameter.Name == ra.ActorNameParamName)
                     {
                         if (!getActionParameterValue(storyAction, domainActionParameter, out actorName) ||
-                            !actorWillBeInstantiated(actorName))
+                            (implicitActorInstantiation && !actorWillBeInstantiated(actorName)))
                         {
                             break;
                         }                     
@@ -210,7 +211,7 @@ namespace Assets.scripts
         }
 
         private static void enqueuetranslateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, 
-                                               CM.Animation effectingAnimation, FireBoltActionList aaq)
+                                               CM.Animation effectingAnimation, FireBoltActionList aaq, bool implicitActorInstantiation)
         {
             foreach (CM.TranslateAction ta in domainAction.TranslateActions)
             {
@@ -254,7 +255,7 @@ namespace Assets.scripts
                     else if (domainActionParameter.Name == ta.ActorNameParamName)
                     {
                         if (!getActionParameterValue(storyAction, domainActionParameter, out actorName)||
-                            !actorWillBeInstantiated(actorName))
+                            (implicitActorInstantiation && !actorWillBeInstantiated(actorName)))
                         {
                             break;
                         }
@@ -323,7 +324,7 @@ namespace Assets.scripts
         }
 
         private static void enqueueAnimateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction,
-                                                  CM.Animation effectingAnimation, FireBoltActionList aaq)
+                                                  CM.Animation effectingAnimation, FireBoltActionList aaq, bool implicitActorInstantiation)
         {
             foreach (CM.AnimateAction animateAction in domainAction.AnimateActions)
             {
@@ -360,7 +361,7 @@ namespace Assets.scripts
                     if (domainActionParameter.Name == animateAction.ActorNameParamName)
                     {
                         if (getActionParameterValue(storyAction, domainActionParameter, out actorName) &&
-                            actorWillBeInstantiated(actorName))
+                            (!implicitActorInstantiation || actorWillBeInstantiated(actorName)))
                         {
                             abstractActorName = actorName;
                             if(getAbstractActorName(actorName, out abstractActorName))
@@ -611,7 +612,8 @@ namespace Assets.scripts
         }
 
         private static void enqueueDestroyActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, 
-                                                    CM.Animation effectingAnimation, FireBoltActionList aaq)
+                                                  CM.Animation effectingAnimation, FireBoltActionList aaq,
+                                                  bool implicitActorInstantiation)
         {
             foreach (CM.DestroyAction da in domainAction.DestroyActions)
             {
@@ -622,7 +624,7 @@ namespace Assets.scripts
                     if (domainActionParameter.Name == da.ActorNameParamName)
                     {
                         if (!getActionParameterValue(storyAction, domainActionParameter, out actorName)||
-                            !actorWillBeInstantiated(actorName))
+                            (implicitActorInstantiation && !actorWillBeInstantiated(actorName)))
                         {
                             break;
                         }
@@ -636,7 +638,8 @@ namespace Assets.scripts
             }
         }
 
-        private static void enqueueAttachActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, CM.Animation effectingAnimation, FireBoltActionList aaq)
+        private static void enqueueAttachActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, CM.Animation effectingAnimation, 
+                                                 FireBoltActionList aaq, bool implicitActorInstantiation)
         {
             foreach (CM.AttachAction aa in domainAction.AttachActions)
             {
@@ -659,7 +662,7 @@ namespace Assets.scripts
                 }
                 attach = aa.Attach;
                 startTick = getStartTick(storyAction, aa, effectingAnimation);
-                if (actorWillBeInstantiated(actorName) && 
+                if ((!implicitActorInstantiation || actorWillBeInstantiated(actorName)) && 
                     Create.ValidForConstruction(actorName, parentName))
                 {
                     aaq.Add(new Attach(startTick, actorName, parentName, attach));
