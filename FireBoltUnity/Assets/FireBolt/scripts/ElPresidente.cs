@@ -330,6 +330,10 @@ public class ElPresidente : MonoBehaviour {
     private void instantiateTerrain()
     {
         var terrainPrefab = terrain.LoadAsset(cinematicModel.Terrain.TerrainFileName);
+        if (!terrainPrefab)
+        {
+            Debug.Log(string.Format("terrain [{0}] not found in asset bundle", cinematicModel.Terrain.TerrainFileName));
+        }
         Vector3 v;
         cinematicModel.Terrain.Location.TryParseVector3(out v);
         var t = Instantiate(terrainPrefab,v,Quaternion.identity)as GameObject;
