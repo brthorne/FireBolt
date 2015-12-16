@@ -6,8 +6,8 @@ using UnityEngine;
 using LN.Utilities;
 
 using Impulse.v_1_336;
-using Impulse.v_1_336.Sentences;
 using Impulse.v_1_336.Constants;
+
 using UintT = Impulse.v_1_336.Intervals.Interval<Impulse.v_1_336.Constants.ValueConstant<uint>, uint>;
 using UintV = Impulse.v_1_336.Constants.ValueConstant<uint>;
 
@@ -123,7 +123,7 @@ namespace Assets.scripts
                     continue;
                 }
                 Debug.Log(string.Format("building object set based create for actor[{0}]", actorName));
-                Create create = new Create(0, actorName, modelFileName, new Vector3(-10000, 0, -10000), true);
+                Create create = new Create(0, actorName, modelFileName, new Vector3(-10000, 0, -10000), null, true);
                 aaq.Add(create);
                 actorInstantiations.Add(actorName, true);
             }
@@ -139,6 +139,19 @@ namespace Assets.scripts
                 {
                     return true;
                 }
+            }
+            return false;
+        }
+
+        private static bool tryConvertOrientation(IActionProperty targetOrientation, out float targetDegrees)
+        {
+            targetDegrees = 0;
+            if (targetOrientation.Value.Value is float)
+            {
+                targetDegrees = (float)targetOrientation.Value.Value;
+                if (targetOrientation.Range.Name == "x+degrees")
+                    targetDegrees = targetDegrees.convertSourceEngineToUnityRotation();
+                return true;
             }
             return false;
         }
@@ -549,6 +562,9 @@ namespace Assets.scripts
                 string actorName = null;
                 string modelName = null;
                 Vector3 destination = new Vector3();
+                Vector3? Orientation = null;
+                float targetDegrees; 
+
                 foreach (CM.DomainActionParameter domainActionParameter in domainAction.Params)
                 {
                     if (domainActionParameter.Name == ca.ActorNameParamName)
@@ -571,11 +587,25 @@ namespace Assets.scripts
                             Debug.LogError("origin not set for stepId[" + storyAction.Name + "]");
                         }                        
                     }
+                    else if (domainActionParameter.Name == ca.OrientationParamName)
+                    {
+                        IActionProperty orientationProperty;
+                        if (storyAction.TryGetProperty(domainActionParameter.Name, out orientationProperty) &&
+                            tryConvertOrientation(orientationProperty, out targetDegrees))
+                        {
+                            Orientation = new Vector3(0, targetDegrees, 0);
+                        }
+                        else
+                        {
+                            Debug.LogError("origin not set for stepId[" + storyAction.Name + "]");
+                        }
+                    }
+
                 }
                 startTick = getStartTick(storyAction, ca, effectingAnimation);                
                 if(Create.ValidForConstruction(actorName,modelName))
                 {
-                    aaq.Add(new Create(startTick, actorName, modelName, destination));
+                    aaq.Add(new Create(startTick, actorName, modelName, destination, Orientation));
                 }                
             }
         }
