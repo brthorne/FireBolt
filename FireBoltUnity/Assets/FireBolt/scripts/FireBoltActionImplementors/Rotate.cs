@@ -63,6 +63,7 @@ namespace Assets.scripts
             if (actor != null)
             {
                 startOrientation = actor.transform.rotation.eulerAngles;
+                actor.SetActive(true);
                 return true;
             }
             

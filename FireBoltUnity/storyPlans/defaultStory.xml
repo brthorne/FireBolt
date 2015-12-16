@@ -2,27 +2,31 @@
 <story name="000000000" xmlns="http://liquidnarrative.csc.ncsu.edu/impulse/v1.336">
   <actions>
     <action type="create" name="step1">
-      <property name="position" value="(2.161458,6.484375)" />
-      <property name="end-angle" value="177.5805" />
+      <property name="position" value="(1.901042,6.09375)" />
+      <property name="end-angle" value="0" />
       <property name="time" value="0-1" />
       <property name="actor" value="pudge" />
     </action>
-    <action type="create" name="step2">
-      <property name="position" value="(1.458333,6.302083)" />
-      <property name="end-angle" value="-173.3952" />
-      <property name="time" value="1-2" />
+    <action type="walk" name="step2">
+      <property name="origin" value="(1.901042,6.09375)" />
+      <property name="destination" value="(1.979167,-5.104168)" />
+      <property name="end-angle" value="-170.9605" />
+      <property name="time" value="1-2800" />
       <property name="actor" value="pudge" />
     </action>
-    <action type="walk" name="step3">
-      <property name="origin" value="(1.458333,6.302083)" />
-      <property name="destination" value="(1.432292,-3.88021)" />
-      <property name="end-angle" value="-173.3952" />
-      <property name="time" value="2-2547" />
+    <action type="idle" name="step3">
+      <property name="time" value="2800-60000" />
       <property name="actor" value="pudge" />
     </action>
-    <action type="idle" name="step4">
-      <property name="time" value="2547-60000" />
-      <property name="actor" value="pudge" />
+    <action type="create" name="step4">
+      <property name="position" value="(3.776042,1.640624)" />
+      <property name="end-angle" value="203.3742" />
+      <property name="time" value="0-1" />
+      <property name="actor" value="crate" />
+    </action>
+    <action type="idle" name="step5">
+      <property name="time" value="1-60000" />
+      <property name="actor" value="crate" />
     </action>
   </actions>
   <action-types>

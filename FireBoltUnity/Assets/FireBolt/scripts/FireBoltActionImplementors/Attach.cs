@@ -49,6 +49,7 @@ namespace Assets.scripts
             }
 
             performAttach(attach);
+            actor.SetActive(true);
             return true;
         }
 

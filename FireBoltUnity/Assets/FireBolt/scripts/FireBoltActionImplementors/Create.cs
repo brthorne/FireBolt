@@ -28,7 +28,7 @@ namespace Assets.scripts
             return string.Format ("Create " + actorName);
         }
 
-        public Create(float startTick, string actorName, string modelName, Vector3 position, Vector3? orientation=null, bool defaultedCreate = false) :
+        public Create(float startTick, string actorName, string modelName, Vector3 position, Vector3? orientation=null, bool defaultedCreate=false) :
             base(startTick, startTick)
         {
             this.startTick = startTick;
@@ -43,7 +43,7 @@ namespace Assets.scripts
         public override bool Init()
         {
             Debug.Log(string.Format("init create model[{0}] for actor [{1}]",modelName, actorName));
-            if (ElPresidente.createdGameObjects.TryGet(actorName, out actor))
+            if (getActorByName(actorName, out actor))
             {
                 if (defaultedCreate)
                     actor.SetActive(false);
@@ -71,7 +71,16 @@ namespace Assets.scripts
             Quaternion actorOrientation = orientation.HasValue ?Quaternion.Euler(orientation.Value) : model.transform.rotation;
             actor = GameObject.Instantiate(model, position, actorOrientation) as GameObject;
             actor.name = actorName;
-            actor.transform.SetParent((GameObject.Find("InstantiatedObjects") as GameObject).transform, true);
+
+            GameObject instanceContainer;
+            if (ElPresidente.createdGameObjects.TryGet("InstantiatedObjects", out instanceContainer))
+            {               
+                actor.transform.SetParent(instanceContainer.transform, true);
+            }
+            else
+            {
+                Debug.Log(string.Format("could not find InstantiatedObjects in createdGameObjects registry.  cannot add [{0}] in the hierarchy", actor));
+            }
             //add actor to the main registry for quicker lookups
             ElPresidente.createdGameObjects.Add(actor.name, actor);
 
@@ -115,7 +124,14 @@ namespace Assets.scripts
 		{
             Debug.Log ("Undo create");
 			if (actor != null)
-			    actor.SetActive (false);
+            {
+                actor.SetActive(false);
+            }
+            if (defaultedCreate)
+            {
+                actor.transform.position = position;
+            }
+			    
 		}
 
         public override void Skip()

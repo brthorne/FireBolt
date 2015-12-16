@@ -86,11 +86,15 @@ public class ElPresidente : MonoBehaviour {
 
     public float CurrentStoryTime { get { return currentStoryTime; } }
     public float CurrentDiscourseTime { get { return currentDiscourseTime; } }
+    public uint EndDiscourseTime {
+        get { return cameraActionList != null ? cameraActionList.EndDiscourseTime : 0; }}
 
     //number of milliseconds to advance the story and discourse time on update
     private uint? timeUpdateIncrement;
     private bool generateVideoFrames;
     private uint videoFrameNumber;
+
+    private bool implicitActorCreation;
 
     void Start()
     {
@@ -159,11 +163,13 @@ public class ElPresidente : MonoBehaviour {
     /// and reloads the whole shebang...almost like you would expect.</param>
     /// <param name="generateKeyframes">optional default false. makes keyframes for display over scrubber.
     /// locks down the UI for some time at startup to execute whole cinematic once all speedy like</param>
-    public void Init(InputSet newInputSet, uint? timeUpdateIncrement=null, bool forceFullReload=false, bool generateKeyframes=false, bool generateVideoFrames=false)
+    public void Init(InputSet newInputSet=null, uint? timeUpdateIncrement=null, bool forceFullReload=false, 
+        bool generateKeyframes=false, bool generateVideoFrames=false, bool implicitActorCreation=false)
     {
         this.timeUpdateIncrement = timeUpdateIncrement;
         this.generateKeyframes = generateKeyframes;
         this.generateVideoFrames = generateVideoFrames;
+        this.implicitActorCreation = implicitActorCreation;
 
         if (generateVideoFrames)
         {
@@ -285,7 +291,7 @@ public class ElPresidente : MonoBehaviour {
 
         if (reloadStoryPlan || reloadActorsAndAnimationsBundle || reloadCinematicModel)
         {        
-            actorActionList = ActorActionFactory.CreateStoryActions(story, cinematicModel);
+            actorActionList = ActorActionFactory.CreateStoryActions(story, cinematicModel, implicitActorCreation);
             Debug.Log(string.Format("upstream components reloaded, rebuilding actor action queue @ [{0}].",
                                     DateTime.Now.ToString(timestampFormat)));
         }

@@ -3,7 +3,7 @@
   <blocks>
     <block storyTime="2">
       <shotFragments>
-        <shotFragment anchor="1.276042,-6.145834" pan="0" duration="2282" focus="pudge" f-stop="5.6" lens="25mm" shake="10">
+        <shotFragment anchor="9.375,1.718749" pan="-92.33732" duration="4742" focus="pudge" f-stop="5.6" lens="25mm" shake="0">
           <angle angleSetting="Medium" target="pudge" />
           <framings />
           <movements />
