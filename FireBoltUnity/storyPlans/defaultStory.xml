@@ -2,20 +2,26 @@
 <story name="000000000" xmlns="http://liquidnarrative.csc.ncsu.edu/impulse/v1.336">
   <actions>
     <action type="create" name="step1">
-      <property name="position" value="(1.744792,6.640625)" />
-      <property name="end-angle" value="180" />
+      <property name="position" value="(2.161458,6.484375)" />
+      <property name="end-angle" value="177.5805" />
       <property name="time" value="0-1" />
       <property name="actor" value="pudge" />
     </action>
-    <action type="walk" name="step2">
-      <property name="origin" value="(1.744792,6.640625)" />
-      <property name="destination" value="(1.692708,-5.546876)" />
-      <property name="end-angle" value="180.52724" />
-      <property name="time" value="1-3047" />
+    <action type="create" name="step2">
+      <property name="position" value="(1.458333,6.302083)" />
+      <property name="end-angle" value="-173.3952" />
+      <property name="time" value="1-2" />
       <property name="actor" value="pudge" />
     </action>
-    <action type="idle" name="step3">
-      <property name="time" value="3047-60000" />
+    <action type="walk" name="step3">
+      <property name="origin" value="(1.458333,6.302083)" />
+      <property name="destination" value="(1.432292,-3.88021)" />
+      <property name="end-angle" value="-173.3952" />
+      <property name="time" value="2-2547" />
+      <property name="actor" value="pudge" />
+    </action>
+    <action type="idle" name="step4">
+      <property name="time" value="2547-60000" />
       <property name="actor" value="pudge" />
     </action>
   </actions>
@@ -27,6 +33,7 @@
       <action-type-ref name="idle" />
       <action-type-ref name="create" />
       <action-type-ref name="remove" />
+      <action-type-ref name="attack" />
     </action-type>
     <action-type name="has-position">
       <action-type-ref name="create" />
@@ -53,6 +60,7 @@
     <action-type name="idle" />
     <action-type name="create" />
     <action-type name="remove" />
+    <action-type name="attack" />
   </action-types>
   <action-properties>
     <action-property name="actor" action="Actions" range="A" />

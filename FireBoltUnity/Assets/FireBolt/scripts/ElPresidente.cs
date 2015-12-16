@@ -241,7 +241,8 @@ public class ElPresidente : MonoBehaviour {
 
         createdGameObjects = new GameObjectRegistry();
         createdGameObjects.Add("Rig", GameObject.Find("Rig"));//get the camera where we can find it quickly
-        createdGameObjects.Add("Pro Cam", GameObject.Find("Pro Cam"));
+        GameObject proCam = GameObject.Find("Pro Cam");
+        createdGameObjects.Add(proCam.name, proCam);
         if (reloadStoryPlan)
         {
             loadStructuredImpulsePlan(currentInputSet.StoryPlanPath);
