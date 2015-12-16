@@ -626,7 +626,7 @@ public class ElPresidente : MonoBehaviour {
 
     bool actionComplete(FireBoltAction action, float  referenceTime)
     {
-        return action.EndTick() <= referenceTime;
+        return action.EndTick() < referenceTime;
     }
 
     /// <summary>

@@ -3,14 +3,14 @@
   <actions>
     <action type="create" name="step1">
       <property name="position" value="(1.744792,6.640625)" />
-      <property name="end-angle" value="0" />
+      <property name="end-angle" value="180" />
       <property name="time" value="0-1" />
       <property name="actor" value="pudge" />
     </action>
     <action type="walk" name="step2">
       <property name="origin" value="(1.744792,6.640625)" />
       <property name="destination" value="(1.692708,-5.546876)" />
-      <property name="end-angle" value="56.52724" />
+      <property name="end-angle" value="180.52724" />
       <property name="time" value="1-3047" />
       <property name="actor" value="pudge" />
     </action>

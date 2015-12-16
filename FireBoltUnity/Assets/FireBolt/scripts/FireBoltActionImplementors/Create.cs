@@ -12,6 +12,7 @@ namespace Assets.scripts
     {
         string actorName,modelName;
         Vector3 position;
+        Vector3? orientation;
 		GameObject actor;
         bool defaultedCreate;
 
@@ -27,13 +28,14 @@ namespace Assets.scripts
             return string.Format ("Create " + actorName);
         }
 
-        public Create(float startTick, string actorName, string modelName, Vector3 position, bool defaultedCreate = false) :
+        public Create(float startTick, string actorName, string modelName, Vector3 position, Vector3? orientation=null, bool defaultedCreate = false) :
             base(startTick, startTick)
         {
             this.startTick = startTick;
             this.actorName = actorName;
             this.modelName = modelName;
             this.position = position;
+            this.orientation = orientation;
             this.defaultedCreate = defaultedCreate;
 			this.actor = null;
         }
@@ -46,7 +48,8 @@ namespace Assets.scripts
             {
                 actor.SetActive(true);
                 actor.transform.position = position;
-                //actor.transform.rotation = Quaternion.identity;
+                if(orientation.HasValue)
+                    actor.transform.rotation = Quaternion.Euler(orientation.Value);
                 return true;
             }
             GameObject model = null;
@@ -61,7 +64,9 @@ namespace Assets.scripts
                                              modelName, ElPresidente.Instance.GetActiveAssetBundle().name));
                 return false;
             }
-            actor = GameObject.Instantiate(model, position, model.transform.rotation) as GameObject;
+
+            Quaternion actorOrientation = orientation.HasValue ?Quaternion.Euler(orientation.Value) : model.transform.rotation;
+            actor = GameObject.Instantiate(model, position, actorOrientation) as GameObject;
             actor.name = actorName;
             actor.transform.SetParent((GameObject.Find("InstantiatedObjects") as GameObject).transform, true);
             //add actor to the main registry for quicker lookups

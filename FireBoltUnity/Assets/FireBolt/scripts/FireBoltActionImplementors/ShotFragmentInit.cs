@@ -266,6 +266,8 @@ namespace Assets.scripts
             newFStopIndex = tempFStopIndex.HasValue ? tempFStopIndex.Value : previousFStopIndex;
             newfocusDistance = tempFocusDistance.HasValue ? tempFocusDistance.Value : previousFocusDistance;
 
+            Skip();
+
             initialized = true;
             return initialized;
         }

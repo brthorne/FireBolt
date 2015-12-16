@@ -77,12 +77,11 @@
         <param name="end-angle" />
       </params>
       <createActions>
-        <createAction actorNameParamName="actor" originParamName="position" />
+        <createAction actorNameParamName="actor" originParamName="position" orientationParamName="end-angle"/>
       </createActions>
       <destroyActions />
       <translateActions />
       <rotateActions>
-        <rotateAction actorNameParamName="actor" maxDuration="1" destinationParamName="end-angle" />
       </rotateActions>
       <animateActions />
     </domainAction>
