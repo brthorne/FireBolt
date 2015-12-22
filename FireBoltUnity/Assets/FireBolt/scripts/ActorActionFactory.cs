@@ -188,11 +188,17 @@ namespace Assets.scripts
                                 if (targetOrientation.Range.Name == "x+degrees")
                                     targetDegrees = targetDegrees.Value.convertSourceEngineToUnityRotation();
                             }
-                            else if (targetOrientation.Value.Value is Coordinate2D)
-                            {
-                                targetPoint = new Vector2((float)((Coordinate2D)targetOrientation.Value.Value).X,
-                                                          (float)((Coordinate2D)targetOrientation.Value.Value).Y);
-                            }
+                            //point based calc does not work without an origin and dest to calculate vector from one to the other
+                            //else if (targetOrientation.Value.Value is Coordinate2D)
+                            //{
+                            //    targetPoint = new Vector2((float)((Coordinate2D)targetOrientation.Value.Value).X,
+                            //                              (float)((Coordinate2D)targetOrientation.Value.Value).Y);
+                            //}
+                            //else if (targetOrientation.Value.Value is Coordinate3D)
+                            //{
+                            //    targetPoint = new Vector2((float)((Coordinate3D)targetOrientation.Value.Value).X,
+                            //                              (float)((Coordinate3D)targetOrientation.Value.Value).Z);
+                            //}
                         }
                         else
                         {
@@ -581,7 +587,15 @@ namespace Assets.scripts
                         IActionProperty coord;
                         if(storyAction.TryGetProperty(domainActionParameter.Name, out coord))
                         {
-                            destination = ((Coordinate2D)coord.Value.Value).ToVector3();
+                            if(coord.Value.Value is Coordinate2D)
+                            {
+                                destination = ((Coordinate2D)coord.Value.Value).ToVector3(cm.DomainDistancePerEngineDistance);
+                            }
+                            else if(coord.Value.Value is Coordinate3D)
+                            {
+                                destination = ((Coordinate3D)coord.Value.Value).ToVector3(cm.DomainDistancePerEngineDistance);
+                            }
+
                         }
                         else
                         {

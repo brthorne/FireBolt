@@ -53,7 +53,7 @@ namespace Assets.scripts
             //TODO this smells.  but generality in all dimensions will take too long to figure out
             //if the targetPoint is specified, prefer to use it over a bare rotation value
             if (targetPoint.HasValue)
-                this.targetOrientation = new Vector3Nullable(null, Mathf.Atan2(targetPoint.Value.x, targetPoint.Value.y) * Mathf.Rad2Deg, null);
+                this.targetOrientation = new Vector3Nullable(null, Mathf.Atan2(targetPoint.Value.y, targetPoint.Value.x) * Mathf.Rad2Deg, null);
             else
                 this.targetOrientation = targetRotation;           
         }

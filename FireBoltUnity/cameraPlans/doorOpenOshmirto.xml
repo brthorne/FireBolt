@@ -3,7 +3,7 @@
   <blocks>
     <block storyTime="0">
       <shotFragments>
-        <shotFragment duration="4750"  anchor="1,1" focus="m005" >
+        <shotFragment duration="5750"  height="1.2" anchor="0.25,10" focus="m005" >
           <angle angleSetting="Medium" target="m005"/>
           <framings>
             <framing framingTarget="m005" framingType="Full"/>
@@ -13,9 +13,9 @@
             <movement type="Focus" directive="With" subject="m005"/>
           </movements>
         </shotFragment>
-        <shotFragment duration="3000" focus="m005" >
+        <shotFragment duration="4200" focus="m005" >
           <angle angleSetting="Medium" target="m005"/>
-          <direction heading="Left" target="m005"/>
+          <direction heading="Away" target="m005"/>
           <framings>
             <framing framingTarget="m005" framingType="Full"/>
           </framings>
@@ -26,13 +26,13 @@
         </shotFragment>
       </shotFragments>
     </block>
-    <block storyTime="6250">
+    <block storyTime="9000">
       <shotFragments>
-        <shotFragment duration="4000" focus="m005" f-stop="11">
+        <shotFragment duration="3000" focus="m005" f-stop="5.6" lens="75mm">
           <angle angleSetting="Medium" target="m005"/>
           <direction heading="Away" target="containment_door"/>
           <framings>
-            <framing framingTarget="containment_door" framingType="Full"/>
+            <framing framingTarget="containment_door" framingType="Waist"/>
           </framings>
           <movements/>
         </shotFragment>

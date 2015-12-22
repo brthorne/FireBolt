@@ -1,6 +1,6 @@
 <cinematicModel xmlns="http://liquidnarrative.csc.ncsu.edu/cinematicModel/v0.1" millisPerTick="1" domainDistancePerEngineDistance="1">
   <smartModelSettings maxActorSearchDepth="2" maxAnimationSearchDepth="2" />
-  <terrain location="(0,0,0)" terrainFileName="flatDotaTerrain.prefab"/> 
+  <terrain location="(0,0,0)" terrainFileName="bioLab.prefab"/> 
   <domainActions>
     <domainAction name="open_door_with_button" >
       <params>
@@ -8,12 +8,14 @@
         <param name="default_button"/>
         <param name="pressed_button"/>
         <param name="button_position"/>
+        <param name="facing"/>
         <param name="door"/>
         <param name="door_from"/>
         <param name="door_to"/>
       </params>
+      <attachActions/>
       <animateActions>
-        <animateAction name="press_button" actorNameParamName="person" effector="true"/>
+        <animateAction name="press_button" actorNameParamName="person" effector="true" maxDuration="1100" endingAction="idle"/>
         <animateAction name="turn" actorNameParamName="person" effector="false" maxDuration="500" effectorOffsetIndexName="fully_retracted" />
       </animateActions>
       <createActions>
@@ -23,29 +25,47 @@
         <destroyAction actorNameParamName="default_button" effectorOffsetIndexName="fully_extended" />
       </destroyActions>
       <rotateActions>
-        <rotateAction actorNameParamName="person" destinationParamName="door_from" maxDuration="500" effectorOffsetIndexName="fully_retracted" />
+        <rotateAction actorNameParamName="person" destinationParamName="facing" maxDuration="500" effectorOffsetIndexName="fully_retracted" />
       </rotateActions>
       <translateActions>
-        <translateAction actorNameParamName="door" originParamName="door_from" destinationParamName="door_to" effectorOffsetIndexName="plus_two_seconds" />
+        <translateAction actorNameParamName="door" originParamName="door_from" destinationParamName="door_to" effectorOffsetIndexName="plus_two_seconds"/>
       </translateActions>
     </domainAction>
-    
+
+    <domainAction name="create" >
+      <params>
+        <param name="actor" />
+        <param name="create-position"/>
+        <param name="orientation"/>      
+      </params>
+      <attachActions/>
+      <animateActions/>
+      <createActions>
+        <createAction actorNameParamName="actor" originParamName="create-position" />
+      </createActions>
+      <destroyActions/>
+      <rotateActions/>        
+      <translateActions/>
+    </domainAction>
+
     <domainAction name="walk" >
       <params>
         <param name="actor" />
         <param name="origin"/>
         <param name="destination"/>
+        <param name="end-angle"/>
       </params>
+      <attachActions/>
       <animateActions>
         <animateAction name="walk" actorNameParamName="actor" effector="false"/>
       </animateActions>
       <createActions/>
       <destroyActions/>
       <rotateActions>
-        <rotateAction actorNameParamName="actor" destinationParamName="destination" maxDuration="500"/>
+        <rotateAction actorNameParamName="actor" destinationParamName="end-angle" maxDuration=" 600"/>
       </rotateActions>
       <translateActions>
-        <translateAction actorNameParamName="door" originParamName="door_from" destinationParamName="door_to" effectorOffsetIndexName="fully_extended" />
+        <translateAction actorNameParamName="actor" originParamName="origin" destinationParamName="destination" />
       </translateActions>
     </domainAction>
   </domainActions>
@@ -70,17 +90,20 @@
   </actors>
 
   <animations>
-    <animation fileName="finger_poke.fbx" name="finger_poke" >
+    <animation fileName="grab_idle_right.fbx" name="finger_poke" >
       <animationIndices>
-        <animationIndex name="fully_extended" timeOffset="750" />
-        <animationIndex name="fully_retracted" timeOffset="1750" />
-        <animationIndex name="plus_two_seconds" timeOffset="3750" />
+        <animationIndex name="fully_extended" timeOffset="800" />
+        <animationIndex name="fully_retracted" timeOffset="1250" />
+        <animationIndex name="plus_two_seconds" timeOffset="4250" />
       </animationIndices>
     </animation>
-    <animation fileName="slow_walk.fbx" animationName="slow_walk">
+    <animation fileName="humanoid_walk.fbx" name="slow_walk">
       <animationIndices/>
     </animation>
-    <animation fileName="foot_shuffle.fbx" animationName="foot_shuffle">
+    <animation fileName="humanoid_walk.fbx" name="foot_shuffle">
+      <animationIndices/>
+    </animation>
+    <animation fileName="humanoid_idle.fbx" name="idle">
       <animationIndices/>
     </animation>
   </animations>

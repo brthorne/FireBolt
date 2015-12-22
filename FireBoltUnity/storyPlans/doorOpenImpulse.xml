@@ -13,8 +13,13 @@
     </set>
   </objects>
   <action-types name="Actions">
+    <action-type name="has-actor">
+      <action-type-ref name="walk"/>
+      <action-type-ref name="create"/>
+    </action-type>
     <action-type name="open_door_with_button" />
     <action-type name="walk" />
+    <action-type name="create" />    
   </action-types>
   <action-properties>
     <action-property name="person" action="open_door_with_button" range="actors"/>
@@ -24,32 +29,58 @@
     <action-property name="default_button" action="open_door_with_button" range="buttons"/>
     <action-property name="pressed_button" action="open_door_with_button" range="buttons"/>
     <action-property name="button_position" action="open_door_with_button" range="coordinate3d"/>
-    <action-property name="origin" action="walk" range="coordinate3d"/>
-    <action-property name="destionation" action="walk" range="coordinate3d"/>
-    <action-property name="actor" action="walk" range="actors"/>
+    <action-property name="origin" action="walk" range="coordinate2d"/>
+    <action-property name="destination" action="walk" range="coordinate2d"/>
+    <action-property name="end-angle" action="walk" range="float"/>
+    <action-property name="actor" action="has-actor" range="actors"/>
+    <action-property name="create-position" action="create" range="coordinate3d"/>
+    <action-property name="facing" action="open_door_with_button" range="float"/>
+    <action-property name="orientation" action="create" range="float"/>
   </action-properties>
   <actions>
+    <action type="create" name="create_1">
+      <property name="actor" value="m005" />
+      <property name="create-position" value="(10, 0, 5)" />
+      <property name="orientation" value="0" />
+      <property name="time" value="1-2" />
+    </action>
+    <action type="create" name="create_2">
+      <property name="actor" value="button_green" />
+      <property name="create-position" value="(0, 1.25, 5.3)" />
+      <property name="orientation" value="0" />
+      <property name="time" value="1-2" />
+    </action>
+    <action type="create" name="create_3">
+      <property name="actor" value="containment_door" />
+      <property name="create-position" value="(1, 1, 0)" />
+      <property name="orientation" value="0" />
+      <property name="time" value="1-2" />
+    </action>
+    
     <action type="walk" name="walk_1">
       <property name="actor" value="m005" />
-      <property name="origin" value="(5, 0, 5)" />
-      <property name="destination" value="(1, 0, 5)"/>
-      <property name="time" value="10-2500" />
+      <property name="origin" value="(10, 5)" />
+      <property name="destination" value="(0.66, 5)"/>
+      <property name="end-angle" value="270.0"/>
+      <property name="time" value="10-5000" />
     </action>
     <action type="open_door_with_button" name="open_door_with_button_1">
       <property name="person" value="m005" />
       <property name="door" value="containment_door" />
-      <property name="door_from" value="(0, 0, 0)" />
-      <property name="door_to" value="(2.5, 0, 0)" />
+      <property name="facing" value="180" />
+      <property name="door_from" value="(1, 1, 0)" />
+      <property name="door_to" value="(3.25, 1, 0)" />
       <property name="default_button" value="button_green"/>
       <property name="pressed_button" value="button_red"/>
-      <property name="button_position" value="(0, 1, 5)"/>
-      <property name="time" value="2501-10000" />
+      <property name="button_position" value="(0, 1.25, 5.3)"/>
+      <property name="time" value="5000-14500" />
     </action>
     <action type="walk" name="walk_2">
       <property name="actor" value="m005" />
-      <property name="origin" value="(1, 0, 5)" />
-      <property name="destination" value="(0, 0, 1.5)"/>
-      <property name="time" value="4750-6750" />
+      <property name="origin" value="(0.66, 5)" />
+      <property name="destination" value="(0.5, 1.0)"/>
+      <property name="end-angle" value="180.0"/>
+      <property name="time" value="7250-10250" />
     </action>
   </actions>
   <sentences>
@@ -65,7 +96,7 @@
     </predicate>
     <predicate name="at">
       <constant value="button_green" />
-      <constant value="(0, 1, 5)" />
+      <constant value="(0, 1.25, 5.3)" />
       <constant value="0-1" />
     </predicate>
   </sentences>

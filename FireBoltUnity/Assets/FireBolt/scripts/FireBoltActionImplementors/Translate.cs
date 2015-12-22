@@ -23,7 +23,6 @@ namespace Assets.scripts
         Vector3Nullable destination;
 
         Vector3? possibleOrigin;
-        bool initialized = false;
 
         public static bool ValidForConstruction(string actorName)
         {
@@ -42,7 +41,7 @@ namespace Assets.scripts
 
         public override bool Init()
         {
-            if (initialized)
+            if (actor!=null)
             {
                 actor.SetActive(true);
                 return true;
@@ -57,8 +56,7 @@ namespace Assets.scripts
 
             origin = possibleOrigin.HasValue ? possibleOrigin.Value : actor.transform.position;
 
-            Debug.Log(string.Format("translate init [{0}] from [{1}] to [{2}] d:s[{3}:{4}]",actorName,origin,destination,ElPresidente.currentDiscourseTime,ElPresidente.currentStoryTime));
-            initialized = true;
+            Debug.Log(string.Format("translate init [{0}] from [{1}] to [{2}] d:s[{3}:{4}]",actorName,origin,destination,ElPresidente.currentDiscourseTime,ElPresidente.currentStoryTime));            
             return true;
         }
 

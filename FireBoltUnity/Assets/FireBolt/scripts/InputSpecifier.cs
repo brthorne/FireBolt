@@ -50,16 +50,21 @@ namespace Assets.scripts
             {
                 input.TerrainBundlePath = terrainField.text;
             }
-            ElPresidente.Instance.Init(input, null, false, false, false, true);
+            ElPresidente.Instance.Init(input, null, false, false, false, false);
         }
 
         void setNewDefaults()
         {
-            storyField.text = "storyPlans/shakespeare.xml";
-            modelField.text = "cinematicModels/DotaHierarchyModel.xml";
-            cameraField.text = "cameraPlans/dotaCamera.xml";
+            storyField.text = "storyPlans/doorOpenImpulse.xml";
+            modelField.text = "cinematicModels/doorOpenCinematicModel.xml";
+            cameraField.text = "cameraPlans/doorOpenOshmirto.xml";
             actorField.text = "AssetBundles/actorsandanimations";
             terrainField.text = "AssetBundles/terrain";
+            //storyField.text = "storyPlans/shakespeare.xml";
+            //modelField.text = "cinematicModels/DotaHierarchyModel.xml";
+            //cameraField.text = "cameraPlans/dotaCamera.xml";
+            //actorField.text = "AssetBundles/actorsandanimations";
+            //terrainField.text = "AssetBundles/terrain";
         }
 
         

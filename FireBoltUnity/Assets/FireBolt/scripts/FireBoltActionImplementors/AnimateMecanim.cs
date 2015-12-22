@@ -103,7 +103,14 @@ namespace Assets.scripts
                     Debug.LogError(string.Format("unable to find animation [{0}] in asset bundle[{1}]", animName, ElPresidente.Instance.GetActiveAssetBundle().name));
                     return false;
                 }
-                animation.wrapMode = loop ? WrapMode.Loop : WrapMode.Once;                
+                if (loop)
+                {
+                    animation.wrapMode = WrapMode.Loop;
+                }
+                else
+                {
+                    animation.wrapMode = WrapMode.Once;
+                }                
             }
             else
             {

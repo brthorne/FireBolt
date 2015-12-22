@@ -336,14 +336,14 @@ public class ElPresidente : MonoBehaviour {
 
     private void instantiateTerrain()
     {
-        var terrainPrefab = terrain.LoadAsset(cinematicModel.Terrain.TerrainFileName);
+        var terrainPrefab = terrain.LoadAsset(cinematicModel.Terrain.TerrainFileName)as GameObject;
         if (!terrainPrefab)
         {
             Debug.Log(string.Format("terrain [{0}] not found in asset bundle", cinematicModel.Terrain.TerrainFileName));
         }
         Vector3 v;
         cinematicModel.Terrain.Location.TryParseVector3(out v);
-        var t = Instantiate(terrainPrefab,v,Quaternion.identity)as GameObject;
+        var t = Instantiate(terrainPrefab,v,terrainPrefab.transform.rotation)as GameObject;
         t.name = "Terrain";
         t.transform.SetParent(GameObject.Find("FireBolt").transform,true);
         createdGameObjects.Add(t.name, t);
