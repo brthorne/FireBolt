@@ -476,7 +476,7 @@ public class ElPresidente : MonoBehaviour {
 
             // Save the texture 2D as a PNG.
             byte[] bytes = screenShot.EncodeToPNG();
-            File.WriteAllBytes(@".screens/" + videoFrameNumber + ".png", bytes);
+            File.WriteAllBytes(@".screens/" + string.Format("{0:0000}.png", videoFrameNumber), bytes);
             videoFrameNumber++;
 
             // Quit if we have passed the end of the discourse.
@@ -699,7 +699,7 @@ public class ElPresidente : MonoBehaviour {
 
             // Save the texture 2D as a PNG.
             byte[] bytes = screenShot.EncodeToPNG();
-            File.WriteAllBytes(@".screens/" + pic++ + ".png", bytes);
+            File.WriteAllBytes(@".screens/" + string.Format("{0:0000}.png", pic++), bytes);
         }
 
         // Reset the main camera to its default configuration.

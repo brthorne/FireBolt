@@ -3,7 +3,7 @@
   <blocks>
     <block storyTime="0">
       <shotFragments>
-        <shotFragment duration="5750"  height="1.2" anchor="0.25,10" focus="m005" >
+        <shotFragment duration="6250"  height="1.2" anchor="0.25,10" focus="m005" >
           <angle angleSetting="Medium" target="m005"/>
           <framings>
             <framing framingTarget="m005" framingType="Full"/>
@@ -28,7 +28,7 @@
     </block>
     <block storyTime="9000">
       <shotFragments>
-        <shotFragment duration="3000" focus="m005" f-stop="5.6" lens="75mm">
+        <shotFragment duration="3500" focus="m005" f-stop="5.6" lens="75mm">
           <angle angleSetting="Medium" target="m005"/>
           <direction heading="Away" target="containment_door"/>
           <framings>
