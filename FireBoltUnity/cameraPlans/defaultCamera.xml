@@ -6,7 +6,10 @@
         <shotFragment anchor="9.375,1.718749" pan="-92.33732" duration="4742" focus="pudge" f-stop="5.6" lens="25mm" shake="0">
           <angle angleSetting="Medium" target="pudge" />
           <framings />
-          <movements />
+          <movements >
+            <movement type="Pan" directive="With" subject="pudge"/>
+            <movement type="Tilt" directive="With" subject="pudge"/>
+          </movements>
         </shotFragment>
       </shotFragments>
     </block>

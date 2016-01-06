@@ -581,7 +581,10 @@ namespace Assets.scripts
                         IActionProperty coord;
                         if(storyAction.TryGetProperty(domainActionParameter.Name, out coord))
                         {
-                            destination = ((Coordinate2D)coord.Value.Value).ToVector3();
+                            if(coord.Value.Value is Coordinate2D)
+                                destination = ((Coordinate2D)coord.Value.Value).ToVector3(cm.DomainDistancePerEngineDistance);
+                            if (coord.Value.Value is Coordinate3D)
+                                destination = ((Coordinate3D)coord.Value.Value).ToVector3(cm.DomainDistancePerEngineDistance);
                         }
                         else
                         {

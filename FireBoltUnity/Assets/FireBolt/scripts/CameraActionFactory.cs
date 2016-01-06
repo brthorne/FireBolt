@@ -63,6 +63,7 @@ namespace Assets.scripts
 
                     var movementStartTime = fragmentStartTime + 1; //force moves to sort after inits
                     RotateRelative rotateWith = null; //collect all the relative rotations together for the camera so we can avoid representational nightmares
+                    Rotate rotateTo = null; //similarly collect absolute rotations...eventually we should cross check and/or merge this stuff 
                     foreach (var movement in fragment.CameraMovements)
                     {
                         switch (movement.Type) 
@@ -110,7 +111,14 @@ namespace Assets.scripts
                                        
                                         break;
                                     case CameraMovementDirective.To:
-                                        cameraActionList.Add(new Rotate(movementStartTime, fragmentEndTime, cameraRig, new Vector3Nullable(null, float.Parse(movement.Subject), null),null));
+                                        if(rotateTo!= null)
+                                        {
+                                            rotateTo.AppendAxisY(float.Parse(movement.Subject));
+                                        }
+                                        else
+                                        {
+                                            rotateTo = new Rotate(movementStartTime, fragmentEndTime, cameraRig, new Vector3Nullable(null, float.Parse(movement.Subject), null), null);
+                                        }
                                         break;
                                 }
                                 break;
@@ -129,7 +137,14 @@ namespace Assets.scripts
                                         }
                                         break;
                                     case CameraMovementDirective.To:
-                                        cameraActionList.Add(new Rotate(movementStartTime, fragmentEndTime, cameraRig, new Vector3Nullable(float.Parse(movement.Subject), null, null),null));
+                                        if (rotateTo != null)
+                                        {
+                                            rotateTo.AppendAxisX(float.Parse(movement.Subject));
+                                        }
+                                        else
+                                        {
+                                            rotateTo = new Rotate(movementStartTime, fragmentEndTime, cameraRig, new Vector3Nullable(float.Parse(movement.Subject), null, null), null);
+                                        }
                                         break;
                                 }
                                 break;
@@ -145,6 +160,8 @@ namespace Assets.scripts
                     }
                     if(rotateWith!=null)
                         cameraActionList.Add(rotateWith);
+                    if (rotateTo != null)
+                        cameraActionList.Add(rotateTo);
                     // Shake it off
                     if(fragment.Shake > float.Epsilon)
                         cameraActionList.Add(new Shake(movementStartTime, fragmentEndTime, cameraName, fragment.Shake));

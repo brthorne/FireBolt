@@ -2,14 +2,14 @@
 <story name="000000000" xmlns="http://liquidnarrative.csc.ncsu.edu/impulse/v1.336">
   <actions>
     <action type="create" name="step1">
-      <property name="position" value="(1.901042,6.09375)" />
+      <property name="position" value="(1.901042,0,6.09375)" />
       <property name="end-angle" value="0" />
       <property name="time" value="0-1" />
       <property name="actor" value="pudge" />
     </action>
     <action type="walk" name="step2">
-      <property name="origin" value="(1.901042,6.09375)" />
-      <property name="destination" value="(1.979167,-5.104168)" />
+      <property name="origin" value="(1.901042,0,6.09375)" />
+      <property name="destination" value="(1.979167,5,-5.104168)" />
       <property name="end-angle" value="-170.9605" />
       <property name="time" value="1-2800" />
       <property name="actor" value="pudge" />
@@ -19,7 +19,7 @@
       <property name="actor" value="pudge" />
     </action>
     <action type="create" name="step4">
-      <property name="position" value="(3.776042,1.640624)" />
+      <property name="position" value="(3.776042,0,1.640624)" />
       <property name="end-angle" value="203.3742" />
       <property name="time" value="0-1" />
       <property name="actor" value="crate" />
@@ -69,9 +69,9 @@
   <action-properties>
     <action-property name="actor" action="Actions" range="A" />
     <action-property name="time" action="Actions" range="T" />
-    <action-property name="position" action="has-position" range="coordinate2d" />
-    <action-property name="origin" action="has-origin" range="coordinate2d" />
-    <action-property name="destination" action="has-destination" range="coordinate2d" />
+    <action-property name="position" action="has-position" range="coordinate3d" />
+    <action-property name="origin" action="has-origin" range="coordinate3d" />
+    <action-property name="destination" action="has-destination" range="coordinate3d" />
     <action-property name="end-angle" action="has-end-angle" range="y-degrees" />
   </action-properties>
   <objects>
