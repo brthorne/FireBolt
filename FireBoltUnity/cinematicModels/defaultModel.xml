@@ -33,6 +33,27 @@
         <animateAction name="die" actorNameParamName="actor" effector="true"/>
       </animateActions>
     </domainAction>
+	<domainAction name="whipTo">
+	  <params>
+		<param name="origin"/>
+		<param name = "colorName"/>
+		<param name = "target"/>
+	  </params>
+	  <createActions/>
+	  <rotateActions/>
+	  <translateActions/>
+	  <destroyActions/>
+	  <animateActions/>
+	  <functionActions>
+		<functionAction name="drawWhip" >
+			<args> 
+				<arg argname = "source"  argtype="Vector3" argvalue="origin" />
+				<arg argname = "sink"  argtype="Vector3" argvalue="target" />
+				<arg argname="colour" argtype="float" argvalue = "colorName"/>
+			</args>
+		</functionAction>
+	  </functionActions>
+	</domainAction>
     <domainAction name="buy-item" >
       <params>
         <param name="actor" />

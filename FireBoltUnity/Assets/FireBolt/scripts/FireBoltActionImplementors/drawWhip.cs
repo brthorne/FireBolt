@@ -4,7 +4,7 @@ using LN.Utilities;
 using System.Collections.Generic;
 
 
-public class drawLine : MonoBehaviour {
+public class drawWhip : MonoBehaviour {
 
     public LineRenderer lineRenderer;
     public Material whipMaterial;
@@ -17,10 +17,8 @@ public class drawLine : MonoBehaviour {
     private  string color;
     private Color brown = new Color (122, 82, 48,0);
     public float width = .04f;
-    private int[] handDenom = { 0, 1, 0, 2, 0, 0, 2, 0, 0, 0, 0 };
     private bool addedComponent = false;
-    private int delay = -50;
-
+    private int delay = 0;
 	void Awake () {
        
 	}
@@ -36,8 +34,8 @@ public class drawLine : MonoBehaviour {
                 {
                     Debug.Log("Source Parent: " + tuple.Item3);
                     parent = GameObject.Find(tuple.Item3);
-                    source = getHand(parent);
-
+                    //source = getHand(parent);
+                    source = parent.transform;
                 }
                 if (tuple.Item1.Equals("sink"))
                 {
@@ -75,7 +73,7 @@ public class drawLine : MonoBehaviour {
     {
         
         lineRenderer.SetWidth(width, width);
-        source = getHand(parent);
+        source = parent.transform;
         dist = Vector3.Distance(source.position, sink.position);
         if (delay++ > 0) //delay the whip
         {
@@ -104,13 +102,5 @@ public class drawLine : MonoBehaviour {
         }
 	}
 
-    public Transform getHand(GameObject root)
-    {
-        Transform hand = root.transform;
-        foreach(int branch in handDenom){
-            hand = hand.GetChild(branch);
-        }
-        return hand;
-    }
 
 }

@@ -47,6 +47,13 @@
       <property name="actor" value="Pudge"/>
       <property name="time" value="5000-7000"/>
     </action>
+	
+	<action type="whipTo" name="step7004">
+      <property name="origin" value="Pudge"/>      
+      <property name="colorName" value="brown"/>
+	  <property name="target" value = "Pro Cam"/>
+      <property name="time" value="7000-10000"/>
+    </action>
     
     <!--<action type="rotate" name="step7003">
       <property name="start-angle" value="0"/>
@@ -130,6 +137,7 @@
       <action-type-ref name="has-amount"/>
       <action-type-ref name="has-position"/>
       <action-type-ref name="idle"/>
+	  <action-type-ref name="whipTo"/>
     </action-type>
     <action-type name="multi-inhibit">
       <action-type-ref name="crystal-nova"/>
@@ -283,6 +291,7 @@
     <action-type name="spawn-hero"/>
     <action-type name="idle" />
     <action-type name="face-position" />
+	<action-type name="whipTo"/>
   </action-types>
   <action-properties>
     <action-property name="look-at" action="face-position" range="coordinate2d"/>
@@ -316,6 +325,9 @@
     <!--<action-property name="position" action="has-position" range="coordinate2d"/>-->
     <action-property name="position" action="has-position" range="string"/>    
 	<action-property name="action" action="spawn-hero" range="string"/>
+	<action-property name="origin" action="whipTo" range="string"/>
+	<action-property name="target" action="whipTo" range="string"/>
+	<action-property name="color" action="whipTo" range="string"/>
   </action-properties>
   <objects>
     <set name="A">
