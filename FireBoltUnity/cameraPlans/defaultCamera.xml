@@ -7,8 +7,8 @@
           <angle angleSetting="Medium" target="pudge" />
           <framings />
           <movements >
-            <movement type="Pan" directive="To" subject="90"/>
-            <movement type="Tilt" directive="To" subject="30"/>
+            <movement type="Pan" directive="With" subject="pudge"/>
+            <movement type="Tilt" directive="With" subject="pudge"/>
           </movements>
         </shotFragment>
       </shotFragments>
