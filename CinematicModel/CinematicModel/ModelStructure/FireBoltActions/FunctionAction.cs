@@ -20,6 +20,20 @@ namespace CinematicModel
 
         [XmlArray("args")]
         [XmlArrayItem("arg")]
-        public List<Tuple<string, string, string>> tupleList { get; set; }
+        public List<FunctionArgs> functionArgs { get; set; }
+
     }
+
+    public class FunctionArgs
+    {
+        [XmlAttribute("argname")]
+        public string argName { get; set; }
+
+        [XmlAttribute("argtype")]
+        public string argType { get; set; }
+
+        [XmlAttribute("argvalue")]
+        public string argValue { get; set; }
+    }
+   
 }

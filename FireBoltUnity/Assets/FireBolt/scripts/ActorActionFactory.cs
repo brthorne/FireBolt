@@ -528,7 +528,7 @@ namespace Assets.scripts
             {
                 string functionName = fa.Name;
                 List<Tuple<string, string, string>> functionParams = new List<Tuple<string, string, string>>();
-                foreach (CM.FunctionAction.FunctionArgs param in fa.functionArgs)
+                foreach (CM.FunctionArgs param in fa.functionArgs)
                 {
                     string argValue = "";
                     //check each param in domain ACtion to see if argValue matches a param. If so, we want dat value.
