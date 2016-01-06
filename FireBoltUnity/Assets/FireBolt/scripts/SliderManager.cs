@@ -33,13 +33,16 @@ public class SliderManager : MonoBehaviour
         //if we are here, then el presidente attached this component to a slider
         slider = ElPresidente.Instance.whereWeAt;
 
-        registerSliderMouseEvents();
+        // Set the thumbnail to be hidden on initialization.
+        thumbnailEnabled = false;
+
+        if (!registerSliderMouseEvents())
+        {
+            return;
+        }
 
         // Get the slider's transform rectangle.
         sliderRect = slider.GetComponent<RectTransform>();
-
-        // Set the thumbnail to be hidden on initialization.
-        thumbnailEnabled = false;
 
         //create a thumbnail to use for displaying keyframes and staple it onto the canvas
         thumb = (GameObject.Instantiate(Resources.Load("Thumbnail")) as GameObject).GetComponent<UnityEngine.UI.RawImage>();
@@ -52,10 +55,15 @@ public class SliderManager : MonoBehaviour
 
     //dynamically assign slider mouse events so we can avoid requiring a bunch more stuff in the hierarchy
     //when someone imports the firebolt package and doesn't want to use sliders or keyframes
-    private void registerSliderMouseEvents()
+    private bool registerSliderMouseEvents()
     {
         //enter
         EventTrigger eventTrigger = slider.GetComponent<EventTrigger>();
+        if(!eventTrigger)
+        {
+            Debug.Log("no event trigger attached to slider object.  can't add via code b/c the api is fail.  you won't be getting any keyframes out of this thing");
+            return false;
+        }
         EventTrigger.Entry pointerEnterEntry = new EventTrigger.Entry();
         pointerEnterEntry.eventID = EventTriggerType.PointerEnter;
         pointerEnterEntry.callback = new EventTrigger.TriggerEvent();
@@ -82,6 +90,8 @@ public class SliderManager : MonoBehaviour
         endDragEntry.callback = new EventTrigger.TriggerEvent();
         endDragEntry.callback.AddListener(new UnityEngine.Events.UnityAction<BaseEventData>(ThumbnailOff));
         eventTrigger.triggers.Add(endDragEntry);
+
+        return true;
     }
 
 	void Update ()

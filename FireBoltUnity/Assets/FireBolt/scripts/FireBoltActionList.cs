@@ -61,11 +61,11 @@ namespace Assets.scripts
         /// <summary>
         /// call execute for all actions in the list.
         /// </summary>
-        public void ExecuteList()
+        public void ExecuteList(float currentTime)
         {
             foreach (FireBoltAction action in this)
             {
-                action.Execute();
+                action.Execute(currentTime);
             }
         }
 

@@ -45,7 +45,7 @@ namespace Assets.scripts
                 float.TryParse(values[0], out x )&&
                 float.TryParse(values[1], out z)) //we got two coords
             {
-                v = new Vector2(x, z);
+                v = new Vector2((float)x,(float)z);
                 return true;
             }
             return false;
@@ -173,6 +173,11 @@ namespace Assets.scripts
                 theta += 360;
             }
             return theta;
+        }
+
+        public static string AppendTimestamps(this string s)
+        {
+            return s + string.Format(" d:s[{0}:{1}]", ElPresidente.currentDiscourseTime, ElPresidente.currentStoryTime);
         }
     }
 }

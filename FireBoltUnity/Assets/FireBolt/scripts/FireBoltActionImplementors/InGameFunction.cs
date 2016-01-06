@@ -78,7 +78,7 @@ namespace Assets.scripts
             //skipMi.Invoke(classInstance, null);
         }
 
-        public override void Execute() 
+        public override void Execute(float currentTime) 
         {
             ingamescript.SendMessage("Execute");
            // execMi.Invoke(classInstance, null);
