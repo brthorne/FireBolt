@@ -26,8 +26,7 @@ namespace Assets.scripts
 
         public override bool Init()
         {
-            trackedActor = GameObject.Find(trackedActorName);
-            if (trackedActor != null)
+            if (getActorByName(trackedActorName, out trackedActor))
             {
                 trackedPositionInit = trackedActor.transform.position;
                 trackedPositionLast = trackedPositionInit;
@@ -40,7 +39,7 @@ namespace Assets.scripts
             return false;
         }
 
-        public override void Execute()
+        public override void Execute(float currentTime)
         {
             Vector3 trackedPositionCurrent = trackedActor.transform.position;
             Vector3 move = trackedPositionCurrent - trackedPositionLast;

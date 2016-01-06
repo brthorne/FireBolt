@@ -12,7 +12,9 @@ namespace Assets.scripts
     {
         string actorName,modelName;
         Vector3 position;
+        Vector3? orientation;
 		GameObject actor;
+        bool defaultedCreate;
 
         public static bool ValidForConstruction(string actorName, string modelName)
         {
@@ -26,24 +28,31 @@ namespace Assets.scripts
             return string.Format ("Create " + actorName);
         }
 
-        public Create(float startTick, string actorName, string modelName, Vector3 position) :
+        public Create(float startTick, string actorName, string modelName, Vector3 position, Vector3? orientation=null, bool defaultedCreate=false) :
             base(startTick, startTick)
         {
             this.startTick = startTick;
             this.actorName = actorName;
             this.modelName = modelName;
             this.position = position;
+            this.orientation = orientation;
+            this.defaultedCreate = defaultedCreate;
 			this.actor = null;
         }
 
         public override bool Init()
         {
             Debug.Log(string.Format("init create model[{0}] for actor [{1}]",modelName, actorName));
-            if (actor != null)
+            if (getActorByName(actorName, out actor))
             {
-                actor.SetActive(true);
+                if (defaultedCreate)
+                    actor.SetActive(false);
+                else
+                    actor.SetActive(true);
+
                 actor.transform.position = position;
-                //actor.transform.rotation = Quaternion.identity;
+                if(orientation.HasValue)
+                    actor.transform.rotation = Quaternion.Euler(orientation.Value);
                 return true;
             }
             GameObject model = null;
@@ -58,9 +67,22 @@ namespace Assets.scripts
                                              modelName, ElPresidente.Instance.GetActiveAssetBundle().name));
                 return false;
             }
-            actor = GameObject.Instantiate(model, position, model.transform.rotation) as GameObject;
+
+            Quaternion actorOrientation = orientation.HasValue ?Quaternion.Euler(orientation.Value) : model.transform.rotation;
+            actor = GameObject.Instantiate(model, position, actorOrientation) as GameObject;
             actor.name = actorName;
-            actor.transform.SetParent((GameObject.Find("InstantiatedObjects") as GameObject).transform, true);
+
+            GameObject instanceContainer;
+            if (ElPresidente.createdGameObjects.TryGet("InstantiatedObjects", out instanceContainer))
+            {               
+                actor.transform.SetParent(instanceContainer.transform, true);
+            }
+            else
+            {
+                Debug.Log(string.Format("could not find InstantiatedObjects in createdGameObjects registry.  cannot add [{0}] in the hierarchy", actor));
+            }
+            //add actor to the main registry for quicker lookups
+            ElPresidente.createdGameObjects.Add(actor.name, actor);
 
             //add a collider so we can raycast against this thing
             if (actor.GetComponent<BoxCollider>() == null)
@@ -69,6 +91,10 @@ namespace Assets.scripts
                 Bounds bounds = getBounds(actor);
                 collider.center = new Vector3(0,0.75f,0); //TODO un-hack and find proper center of model                
                 collider.size = bounds.max - bounds.min;
+            }
+            if (defaultedCreate)
+            {
+                actor.SetActive(false);
             }
             return true;
         }
@@ -98,7 +124,14 @@ namespace Assets.scripts
 		{
             Debug.Log ("Undo create");
 			if (actor != null)
-			    actor.SetActive (false);
+            {
+                actor.SetActive(false);
+            }
+            if (defaultedCreate)
+            {
+                actor.transform.position = position;
+            }
+			    
 		}
 
         public override void Skip()
@@ -106,7 +139,7 @@ namespace Assets.scripts
             // nothing to skip
         }
 
-        public override void Execute()
+        public override void Execute(float currentTime)
         {
             //nothing to do
         }

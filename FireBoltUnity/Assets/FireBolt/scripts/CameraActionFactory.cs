@@ -7,6 +7,7 @@ using LN.Utilities;
 using Impulse.v_1_336;
 using UintT = Impulse.v_1_336.Intervals.Interval<Impulse.v_1_336.Constants.ValueConstant<uint>, uint>;
 using UintV = Impulse.v_1_336.Constants.ValueConstant<uint>;
+using CM = CinematicModel;
 using Oshmirto;
 
 namespace Assets.scripts
@@ -28,13 +29,19 @@ namespace Assets.scripts
             {"1.4",0}, {"2",1}, {"2.8",2}, {"4",3}, {"5.6",4}, {"8",5}, {"11",6}, {"16",7}, {"22",8}
         };
 
-        public static void CreateActions(Story<UintV, UintT, IIntervalSet<UintV, UintT>> story, string cameraPlanPath, 
+        public static void CreateActions(Story<UintV, UintT, IIntervalSet<UintV, UintT>> story, CM.CinematicModel cinematicModel, string cameraPlanPath, 
                                                      out CameraActionList cameraActionList, out FireBoltActionList discourseActionList)
         {
             cameraActionList = new CameraActionList();
             discourseActionList = new FireBoltActionList();
             CameraPlan cameraPlan = Oshmirto.Parser.Parse(cameraPlanPath);
-  
+
+            if(cinematicModel.MillisPerTick != 1)
+            {
+                scaleTime(cinematicModel.MillisPerTick, cameraPlan);
+            }
+            
+
             uint currentDiscourseTime = 0;
             float previousStoryTimeOffset = 0;
             foreach (Block block in cameraPlan.Blocks)
@@ -56,6 +63,7 @@ namespace Assets.scripts
 
                     var movementStartTime = fragmentStartTime + 1; //force moves to sort after inits
                     RotateRelative rotateWith = null; //collect all the relative rotations together for the camera so we can avoid representational nightmares
+                    Rotate rotateTo = null; //similarly collect absolute rotations...eventually we should cross check and/or merge this stuff 
                     foreach (var movement in fragment.CameraMovements)
                     {
                         switch (movement.Type) 
@@ -71,7 +79,7 @@ namespace Assets.scripts
                                         if (movement.Subject.TryParsePlanarCoords(out destination))
                                         {
                                             cameraActionList.Add(new Translate(movementStartTime, fragmentEndTime, cameraRig,
-                                                                                Vector3.zero, new Vector3Nullable(destination.x,null,destination.y)));
+                                                                                null, new Vector3Nullable(destination.x,null,destination.y)));
                                         }
                                         break;
                                 }                               
@@ -83,7 +91,7 @@ namespace Assets.scripts
                                         break;
                                     case CameraMovementDirective.To:
                                         cameraActionList.Add(new Translate(movementStartTime, fragmentEndTime, cameraRig,
-                                                                            Vector3.zero, new Vector3Nullable(null, float.Parse(movement.Subject), null)));
+                                                                            null, new Vector3Nullable(null, float.Parse(movement.Subject), null)));
                                         break;
                                 }
                                 break;
@@ -103,7 +111,14 @@ namespace Assets.scripts
                                        
                                         break;
                                     case CameraMovementDirective.To:
-                                        cameraActionList.Add(new Rotate(movementStartTime, fragmentEndTime, cameraRig, new Vector3Nullable(null, float.Parse(movement.Subject), null),null));
+                                        if(rotateTo!= null)
+                                        {
+                                            rotateTo.AppendAxisY(float.Parse(movement.Subject));
+                                        }
+                                        else
+                                        {
+                                            rotateTo = new Rotate(movementStartTime, fragmentEndTime, cameraRig, new Vector3Nullable(null, float.Parse(movement.Subject), null), null);
+                                        }
                                         break;
                                 }
                                 break;
@@ -122,7 +137,14 @@ namespace Assets.scripts
                                         }
                                         break;
                                     case CameraMovementDirective.To:
-                                        cameraActionList.Add(new Rotate(movementStartTime, fragmentEndTime, cameraRig, new Vector3Nullable(float.Parse(movement.Subject), null, null),null));
+                                        if (rotateTo != null)
+                                        {
+                                            rotateTo.AppendAxisX(float.Parse(movement.Subject));
+                                        }
+                                        else
+                                        {
+                                            rotateTo = new Rotate(movementStartTime, fragmentEndTime, cameraRig, new Vector3Nullable(float.Parse(movement.Subject), null, null), null);
+                                        }
                                         break;
                                 }
                                 break;
@@ -138,8 +160,11 @@ namespace Assets.scripts
                     }
                     if(rotateWith!=null)
                         cameraActionList.Add(rotateWith);
+                    if (rotateTo != null)
+                        cameraActionList.Add(rotateTo);
                     // Shake it off
-                    cameraActionList.Add(new Shake(movementStartTime, fragmentEndTime, cameraName, fragment.Shake));
+                    if(fragment.Shake > float.Epsilon)
+                        cameraActionList.Add(new Shake(movementStartTime, fragmentEndTime, cameraName, fragment.Shake));
 
                     currentDiscourseTime = fragmentEndTime;
                 }
@@ -151,6 +176,20 @@ namespace Assets.scripts
                 }
             }
             cameraActionList.EndDiscourseTime = currentDiscourseTime;
+        }
+
+        private static void scaleTime(uint millisPerTick, CameraPlan cameraPlan)
+        {
+            
+            foreach(var block in cameraPlan.Blocks)
+            {
+                if (block.StoryTime.HasValue)
+                    block.StoryTime = block.StoryTime.Value * millisPerTick;
+                foreach(var fragment in block.ShotFragments)
+                {
+                    fragment.Duration *= millisPerTick;
+                }
+            }
         }
 
     }

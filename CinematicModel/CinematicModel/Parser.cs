@@ -7,22 +7,17 @@ using System.Xml.Serialization;
 
 namespace CinematicModel
 {
-    public class Parser
+    public static class Parser
     {
-        
-        static XmlSerializer xs;
-        static Parser parser;
-        private Parser()
+        private static readonly XmlSerializer xs;
+
+        static Parser()
         {
             xs = new XmlSerializer(typeof(CinematicModel));
         }
 
         public static CinematicModel Parse(string filename)
         {
-            if (parser == null)
-            {
-                parser = new Parser();
-            }
             CinematicModel model = null;
             using (FileStream fs = new FileStream(filename, FileMode.Open))
             {
@@ -31,12 +26,33 @@ namespace CinematicModel
             return model; 
         }
 
+        public static CinematicModel Parse(Stream stream)
+        {
+            return (CinematicModel)xs.Deserialize(stream);
+        }
+
+        public static void Write(this CinematicModel plan, Stream stream)
+        {
+            xs.Serialize(stream, plan);
+        }
+
+        public static void Write(this CinematicModel plan, string filePath)
+        {
+            Write(filePath, plan);
+        }
+
+        public static string WriteToXml(this CinematicModel plan)
+        {
+            using (StringWriter stream = new StringWriter())
+            {
+                xs.Serialize(stream, plan);
+                stream.Flush();
+                return stream.ToString();
+            }
+        }
+
         public static void Write(string filename, CinematicModel model)
         {
-            if (parser == null)
-            {
-                parser = new Parser();
-            }
             using (FileStream fs = new FileStream(filename, FileMode.Create))
             {
                 xs.Serialize(fs, model);

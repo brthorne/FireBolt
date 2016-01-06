@@ -12,9 +12,8 @@ namespace Assets.scripts
     {
         string cameraName;
         string targetName;
-        Transform focusLocation;
-        CameraBody camera;
         GameObject target;
+        CameraBody cameraBody;
         bool tracking, executed = false;
 
         public static bool ValidForConstruction(string actorName)
@@ -35,12 +34,14 @@ namespace Assets.scripts
         public override bool Init()
         {
             //get camera
-            camera = GameObject.Find(cameraName).GetComponent<CameraBody>() as CameraBody;
-            if (camera == null)
+            
+            GameObject camera;
+            if (!getActorByName(cameraName, out camera))
             {
                 Debug.LogError("actor name [" + cameraName + "] not found. cannot change focus");
                 return false;
             }
+            cameraBody = camera.GetComponent<CameraBody>() as CameraBody;
 
             //try to parse target as a coordinate
             Vector3 focusPosition;
@@ -51,8 +52,8 @@ namespace Assets.scripts
             }
 
             //try to find the target as an actor
-            target = GameObject.Find(targetName);
-            if (target == null)
+            if (target == null &&
+                !getActorByName(targetName, out target))
             {
                 Debug.Log("actor name [" + targetName + "] not found. cannot change focus");
                 return false;
@@ -61,7 +62,7 @@ namespace Assets.scripts
             return true;
         }
 
-        public override void Execute()
+        public override void Execute(float currentTime)
         {
             if (target == null)
             {
@@ -73,11 +74,11 @@ namespace Assets.scripts
                 Vector3 focusPosition;
                 if (target != null)
                 {
-                    camera.FocusDistance = Vector3.Distance(camera.NodalCamera.transform.position, target.transform.position);
+                    cameraBody.FocusDistance = Vector3.Distance(cameraBody.NodalCamera.transform.position, target.transform.position);
                 }
                 else if(targetName.TryParseVector3(out focusPosition))
                 {
-                    camera.FocusDistance = Vector3.Distance(camera.NodalCamera.transform.position, focusPosition);                    
+                    cameraBody.FocusDistance = Vector3.Distance(cameraBody.NodalCamera.transform.position, focusPosition);                    
                 }                
                 executed = true;
             }        

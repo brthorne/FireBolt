@@ -10,7 +10,12 @@ namespace CinematicModel
     [Serializable]
     public class Terrain
     {
-        
+
+        public Terrain()
+        {
+            Location = "(0,0,0)";
+        }
+
         [XmlAttribute("terrainFileName")]
         [DefaultValue("defaultTerrain")]
         public string TerrainFileName { get; set; }

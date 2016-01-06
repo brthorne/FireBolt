@@ -1,23 +1,16 @@
 ﻿using UnityEngine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CM=CinematicModel;
-using LN.Utilities.Collections;
 
 namespace Assets.scripts
 {
     public class Shake : FireBoltAction
     {
-        float lastUpdateTime;
         float shakeValue;
-
         string cameraName;
-
-
+        GameObject actor;
         ShakeCam shakeCam;
 
+        private Vector3 localPosition;
+        private Quaternion localRotation;
 
         public static bool ValidForConstruction(string actorName)
         {
@@ -35,27 +28,23 @@ namespace Assets.scripts
 
         public override bool Init()
         {
-            GameObject actor = GameObject.Find(cameraName);
-            if (actor == null)
+
+            if (actor == null &&
+                !getActorByName(cameraName, out actor))
             {
                 Debug.LogError("actor name [" + cameraName + "] not found. cannot shake");
                 return false;
             }
 
-            shakeCam = actor.GetComponent<ShakeCam>() as ShakeCam;
-            if (shakeCam == null)
-            {
-                Debug.LogError(string.Format("camera name [{0}] does not have ShakeCam component",cameraName));
-                return false;
-            }
-
-            Skip();
             return true;
         }
 
-        public override void Execute()
+        public override void Execute(float currentTime)
         {
-                       
+            var rotation = Quaternion.Euler(localRotation.eulerAngles + Vector3.Scale(SmoothRandom.GetVector3(shakeValue), new Vector3(4.0f, 4.0f, 4.0f)));
+            actor.transform.localRotation = rotation;
+
+            actor.transform.localPosition = localPosition + Vector3.Scale(SmoothRandom.GetVector3(shakeValue), new Vector3(0.1f, 0.1f, 0.1f));
         }
 
 		public override void Undo()
@@ -65,13 +54,12 @@ namespace Assets.scripts
 
         public override void Skip()
         {
-            shakeCam.positionShakeSpeed = shakeValue;
-            shakeCam.rotationShakeSpeed = shakeValue; 
+            //intentionally blank
         }
 
         public override void Stop()
         {
-            //nothing to stop
+            //intentionally blank
         }
     }
 }

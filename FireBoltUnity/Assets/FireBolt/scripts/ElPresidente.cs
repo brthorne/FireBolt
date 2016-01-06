@@ -43,6 +43,8 @@ public class ElPresidente : MonoBehaviour {
     private bool initNext = false;
     private bool initTriggered = false;
 
+    public static GameObjectRegistry createdGameObjects;
+
     public List<ProCamsLensDataTable.FOVData> lensFovData;
 
     private bool keyframesGenerated = false;
@@ -84,6 +86,15 @@ public class ElPresidente : MonoBehaviour {
 
     public float CurrentStoryTime { get { return currentStoryTime; } }
     public float CurrentDiscourseTime { get { return currentDiscourseTime; } }
+    public uint EndDiscourseTime {
+        get { return cameraActionList != null ? cameraActionList.EndDiscourseTime : 0; }}
+
+    //number of milliseconds to advance the story and discourse time on update
+    private uint? timeUpdateIncrement;
+    private bool generateVideoFrames;
+    private uint videoFrameNumber;
+
+    private bool implicitActorCreation;
 
     void Start()
     {
@@ -116,14 +127,15 @@ public class ElPresidente : MonoBehaviour {
         }
         return lensIndex;
     }
-    
+
     /// <summary>
     /// wrapper for default args Init to use from UI button as default args methods are not visible in UI click event assignment in inspector
     /// </summary>
     /// <param name="a"></param>
+    [Obsolete("write your own script to interact with Init(InputSet, uint?, bool, bool")]
     public void Init(float a)
     {
-        Init(null, true);
+        Init(null, null, true);
     }
 
     /// <summary>
@@ -133,17 +145,44 @@ public class ElPresidente : MonoBehaviour {
     /// <param name="generateKeyframes">toggles keyframe generation.  
     /// Keyframe generation runs the entire story through and may take 
     /// a large amount of time to initialize.</param>
+    [Obsolete("write your own script to interact with Init(InputSet, uint?, bool, bool")]
     public void Init(bool generateKeyframes)
     {
         Debug.Log(string.Format("reload keyframes[{0}]",generateKeyframes));
-        Init(null, false, generateKeyframes);
+        Init(null, null, false, generateKeyframes);
     }
 
-    //new class to hold specified input file paths.  
-
-    public void Init(InputSet newInputSet, bool forceFullReload=false, bool generateKeyframes=true)
+    /// <summary>
+    /// Use this method to start FireBolt.
+    /// </summary>
+    /// <param name="newInputSet">specify input file locations in an InputSet.  accepts null and 
+    /// uses the default paths and names.</param>
+    /// <param name="timeUpdateIncrement">optional. defaults null.  specifies number of milliseconds
+    /// to force the execution to jump everyframe.  Uses Time.deltaTime if null.</param>
+    /// <param name="forceFullReload">optional, defaults false.  true ignores timestamps on input files
+    /// and reloads the whole shebang...almost like you would expect.</param>
+    /// <param name="generateKeyframes">optional default false. makes keyframes for display over scrubber.
+    /// locks down the UI for some time at startup to execute whole cinematic once all speedy like</param>
+    public void Init(InputSet newInputSet=null, uint? timeUpdateIncrement=null, bool forceFullReload=false, 
+        bool generateKeyframes=false, bool generateVideoFrames=false, bool implicitActorCreation=false)
     {
+        this.timeUpdateIncrement = timeUpdateIncrement;
         this.generateKeyframes = generateKeyframes;
+        this.generateVideoFrames = generateVideoFrames;
+        this.implicitActorCreation = implicitActorCreation;
+
+        if (generateVideoFrames)
+        {
+            // Find the canvase game object.
+            GameObject canvasGO = GameObject.Find("Canvas");
+
+            // Get the canvas component from the game object.
+            Canvas canvas = canvasGO.GetComponent<Canvas>();
+
+            // Toggle the canvas display off.
+            canvas.enabled = false;
+
+        }
         if (whereWeAt == null) //if there is no slider to display them on, don't generate keyframes
         {
             this.generateKeyframes = false;
@@ -173,8 +212,8 @@ public class ElPresidente : MonoBehaviour {
             reloadTerrainBundle = requiresReload(currentInputSet.TerrainBundlePath, newInputSet.TerrainBundlePath, terrainBundleLastReadTimeStamp);
         }
 
-        Destroy(GameObject.Find("InstantiatedObjects") as GameObject);
-        if (reloadTerrainBundle) Destroy(GameObject.Find("Terrain") as GameObject);
+        if(createdGameObjects!=null)createdGameObjects.Destroy("InstantiatedObjects");
+        if (reloadTerrainBundle&&createdGameObjects!=null) createdGameObjects.Destroy("Terrain");
         initialized = false;
         initTriggered = true;
         currentInputSet = newInputSet;
@@ -205,8 +244,11 @@ public class ElPresidente : MonoBehaviour {
     /// </summary>
     private void init()
     {
-        
 
+        createdGameObjects = new GameObjectRegistry();
+        createdGameObjects.Add("Rig", GameObject.Find("Rig"));//get the camera where we can find it quickly
+        GameObject proCam = GameObject.Find("Pro Cam");
+        createdGameObjects.Add(proCam.name, proCam);
         if (reloadStoryPlan)
         {
             loadStructuredImpulsePlan(currentInputSet.StoryPlanPath);
@@ -249,14 +291,14 @@ public class ElPresidente : MonoBehaviour {
 
         if (reloadStoryPlan || reloadActorsAndAnimationsBundle || reloadCinematicModel)
         {        
-            actorActionList = ActorActionFactory.CreateStoryActions(story, cinematicModel);
+            actorActionList = ActorActionFactory.CreateStoryActions(story, cinematicModel, implicitActorCreation);
             Debug.Log(string.Format("upstream components reloaded, rebuilding actor action queue @ [{0}].",
                                     DateTime.Now.ToString(timestampFormat)));
         }
 
         if (reloadStoryPlan || reloadCameraPlan)
         {            
-            CameraActionFactory.CreateActions(story, currentInputSet.CameraPlanPath, out cameraActionList, out discourseActionList);
+            CameraActionFactory.CreateActions(story, cinematicModel, currentInputSet.CameraPlanPath,  out cameraActionList, out discourseActionList);
             Debug.Log(string.Format("upstream components reloaded, rebuilding camera action queue @ [{0}].",
                                     DateTime.Now.ToString(timestampFormat)));
             cameraPlanLastReadTimeStamp = DateTime.Now;
@@ -266,11 +308,14 @@ public class ElPresidente : MonoBehaviour {
         currentStoryTime = 0;
         actorActionList.NextActionIndex = 0;
         cameraActionList.NextActionIndex = 0;
+        discourseActionList.NextActionIndex = 0;
 
         executingActorActions = new FireBoltActionList(new ActionTypeComparer());
         executingCameraActions = new FireBoltActionList(new ActionTypeComparer());
         executingDiscourseActions = new FireBoltActionList(new ActionTypeComparer());
-        new GameObject("InstantiatedObjects").transform.SetParent((GameObject.Find("FireBolt") as GameObject).transform);
+        GameObject instantiatedObjects = new GameObject("InstantiatedObjects");
+        instantiatedObjects.transform.SetParent((GameObject.Find("FireBolt") as GameObject).transform);
+        createdGameObjects.Add(instantiatedObjects.name, instantiatedObjects);
 
         if (generateKeyframes) 
         {
@@ -291,13 +336,17 @@ public class ElPresidente : MonoBehaviour {
 
     private void instantiateTerrain()
     {
-        GameObject go = (terrain.LoadAsset(cinematicModel.Terrain.TerrainFileName) as GameObject);
-        var t = Instantiate(go)as GameObject;
-        t.name = "Terrain";
+        var terrainPrefab = terrain.LoadAsset(cinematicModel.Terrain.TerrainFileName);
+        if (!terrainPrefab)
+        {
+            Debug.Log(string.Format("terrain [{0}] not found in asset bundle", cinematicModel.Terrain.TerrainFileName));
+        }
         Vector3 v;
         cinematicModel.Terrain.Location.TryParseVector3(out v);
-        t.transform.position = v; 
+        var t = Instantiate(terrainPrefab,v,Quaternion.identity)as GameObject;
+        t.name = "Terrain";
         t.transform.SetParent(GameObject.Find("FireBolt").transform,true);
+        createdGameObjects.Add(t.name, t);
     }
 
     private void loadStructuredImpulsePlan(string storyPlanPath)
@@ -320,6 +369,13 @@ public class ElPresidente : MonoBehaviour {
             return null;
         }
         return actorsAndAnimations;
+    }
+
+
+
+    public bool IsPaused()
+    {
+        return Time.timeScale == 0f;
     }
 
     /// <summary>
@@ -349,6 +405,20 @@ public class ElPresidente : MonoBehaviour {
         }            
     }
 
+    private void updateCurrentTime()
+    {
+        if (timeUpdateIncrement.HasValue)
+        {
+            currentStoryTime += timeUpdateIncrement.Value;
+            currentDiscourseTime += timeUpdateIncrement.Value;
+        }
+        else
+        {
+            currentStoryTime += Time.deltaTime * 1000;
+            currentDiscourseTime += Time.deltaTime * 1000;
+        }        
+    }
+
     void Update()
     {
         if (!initialized && initNext)
@@ -356,9 +426,8 @@ public class ElPresidente : MonoBehaviour {
         else if (!initialized)
             return;
 
-        currentStoryTime += Time.deltaTime * 1000;
-        currentDiscourseTime += Time.deltaTime * 1000;
-
+        updateCurrentTime();
+        
         if (debugText != null)
             debugText.text = currentDiscourseTime.ToString() + " : " + currentStoryTime.ToString();
         if (whereWeAt && currentDiscourseTime < cameraActionList.EndDiscourseTime)
@@ -381,9 +450,39 @@ public class ElPresidente : MonoBehaviour {
         else if (!initialized)
             return;
 
-        executingDiscourseActions.ExecuteList();
-        executingActorActions.ExecuteList();
-        executingCameraActions.ExecuteList();
+        executingDiscourseActions.ExecuteList(ElPresidente.currentDiscourseTime);
+        executingActorActions.ExecuteList(ElPresidente.currentStoryTime);
+        executingCameraActions.ExecuteList(ElPresidente.currentDiscourseTime);
+
+        if (generateVideoFrames)
+        {
+            // Initialize the render texture and texture 2D.
+            RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 24);
+            Texture2D screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+
+            // Render the texture.
+            Camera.main.targetTexture = rt;
+            Camera.main.Render();
+
+            // Read the rendered texture into the texture 2D.
+            RenderTexture.active = rt;
+            screenShot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+
+            // Clean everything up.
+            Camera.main.targetTexture = null;
+            RenderTexture.active = null;
+            Destroy(rt);
+            Destroy(screenShot);
+
+            // Save the texture 2D as a PNG.
+            byte[] bytes = screenShot.EncodeToPNG();
+            File.WriteAllBytes(@".screens/" + videoFrameNumber + ".png", bytes);
+            videoFrameNumber++;
+
+            // Quit if we have passed the end of the discourse.
+            if (cameraActionList.EndDiscourseTime < currentDiscourseTime)
+                Application.Quit();
+        }
     }
 
     /// <summary>
@@ -565,6 +664,8 @@ public class ElPresidente : MonoBehaviour {
         Camera.main.backgroundColor = Color.black;
         Camera.main.cullingMask = 0;
 
+        int pic = 1;
+
         // Loop through discourse time at intervals of 5%.
         for (float i = 0; i < 100; i = i + 5)
         {
@@ -598,7 +699,7 @@ public class ElPresidente : MonoBehaviour {
 
             // Save the texture 2D as a PNG.
             byte[] bytes = screenShot.EncodeToPNG();
-            File.WriteAllBytes(@"Assets/.screens/" + i + ".png", bytes);
+            File.WriteAllBytes(@".screens/" + pic++ + ".png", bytes);
         }
 
         // Reset the main camera to its default configuration.
@@ -614,5 +715,8 @@ public class ElPresidente : MonoBehaviour {
 
         // Set that the keyframes have been generated.
         keyframesGenerated = true;
+
+        //UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
 }
