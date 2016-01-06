@@ -5,7 +5,7 @@ using System.Linq;
 using System.Xml.Serialization;
 using System.Text;
 
-namespace CinematicModel.ModelStructure.FireBoltActions
+namespace CinematicModel
 {
 
 
@@ -14,6 +14,9 @@ namespace CinematicModel.ModelStructure.FireBoltActions
         public FunctionAction()
         {
         }
+
+        [XmlAttribute("name")]
+        public string Name { get; set; }
 
         [XmlArray("args")]
         [XmlArrayItem("arg")]
