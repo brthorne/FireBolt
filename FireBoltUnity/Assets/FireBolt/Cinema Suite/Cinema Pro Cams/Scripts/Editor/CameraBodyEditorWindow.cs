@@ -87,7 +87,7 @@ public class CameraBodyEditorWindow : EditorWindow {
 		
 		_togglePreview = EditorGUILayout.Toggle("Show Preview", _togglePreview);
 		
-        //DrawCameraPreview(_togglePreview);
+        DrawCameraPreview(_togglePreview);
 		
 		EditorGUILayout.EndScrollView();
 	}
