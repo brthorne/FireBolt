@@ -80,7 +80,6 @@
     <action-property name="origin" action="has-origin" range="coordinate3d" />
     <action-property name="destination" action="has-destination" range="coordinate3d" />
     <action-property name="end-angle" action="has-end-angle" range="y-degrees" />
-	<!-- <action-property name="action" action="spawn-hero" range="string"/> -->
 	<action-property name="start" action="whipTo" range="A"/>
 	<action-property name="finish" action="whipTo" range="A"/>
   </action-properties>
