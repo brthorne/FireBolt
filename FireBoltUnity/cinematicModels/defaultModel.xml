@@ -3,6 +3,26 @@
   <smartModelSettings maxAnimationSearchDepth="2" maxActorSearchDepth="2" />
   <terrain terrainFileName="warehouse_prefab.prefab" />
   <domainActions>
+  <domainAction name="whipTo">
+	  <params>
+		<param name="start"/>
+		<param name = "finish"/>
+	  </params>
+	  <createActions/>
+	  <rotateActions/>
+	  <translateActions/>
+	  <attachActions/>
+	  <destroyActions/>
+	  <animateActions/>
+	  <functionActions>
+		<functionAction name="drawWhip" >
+			<args> 
+				<arg argname = "source"  argtype="Vector3" argvalue="start" />
+				<arg argname = "sink"  argtype="Vector3" argvalue="finish" />
+			</args>
+		</functionAction>
+	  </functionActions>
+	</domainAction>
     <domainAction name="move">
       <params>
         <param name="actor" />
@@ -20,9 +40,7 @@
         <rotateAction actorNameParamName="actor" maxDuration="400" destinationParamName="end-angle" />
       </rotateActions>
       <animateActions />
-	  <functionActions/>
     </domainAction>
-	
     <domainAction name="walk">
       <params>
         <param name="actor" />
@@ -42,33 +60,7 @@
       <animateActions>
         <animateAction actorNameParamName="actor" name="walk" />
       </animateActions>
-	  <functionActions/>
     </domainAction>
-	
-	<domainAction name="whipTo">
-	  <params>
-		<param name="start"/>
-		<param name = "colorName"/>
-		<param name = "finish"/>
-	  </params>
-	  <createActions/>
-	  <rotateActions/>
-	  <translateActions/>
-	  <attachActions/>
-	  <destroyActions/>
-	  <animateActions/>
-	  <functionActions>
-		<functionAction name="drawWhip" >
-			<args> 
-				<arg argname = "source"  argtype="Vector3" argvalue="start" />
-				<arg argname = "sink"  argtype="Vector3" argvalue="finish" />
-				<arg argname="colour" argtype="float" argvalue = "colorName"/>
-			</args>
-		</functionAction>
-	  </functionActions>
-	</domainAction>
-	
-    <domainAction name="buy-item" >
     <domainAction name="run">
       <params>
         <param name="actor" />
@@ -88,7 +80,6 @@
       <animateActions>
         <animateAction actorNameParamName="actor" name="walk" />
       </animateActions>
-	  <functionActions/>
     </domainAction>
     <domainAction name="idle">
       <params>
@@ -102,7 +93,6 @@
       <animateActions>
         <animateAction actorNameParamName="actor" name="idle" />
       </animateActions>
-	  <functionActions/>
     </domainAction>
     <domainAction name="create">
       <params>
@@ -117,7 +107,6 @@
       <attachActions />
       <translateActions />
       <rotateActions />
-	  <functionActions/>
       <animateActions />
     </domainAction>
     <domainAction name="remove">
@@ -131,7 +120,6 @@
       <attachActions />
       <translateActions />
       <rotateActions />
-	  <functionActions/>
       <animateActions />
     </domainAction>
     <domainAction name="attack">
@@ -146,7 +134,6 @@
       <animateActions>
         <animateAction actorNameParamName="actor" name="attack" />
       </animateActions>
-	  <functionActions/>
     </domainAction>
   </domainActions>
   <actors>

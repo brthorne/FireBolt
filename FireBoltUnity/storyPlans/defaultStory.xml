@@ -9,7 +9,7 @@
     </action>
     <action type="walk" name="step2">
       <property name="origin" value="(1.901042,0,6.09375)" />
-      <property name="destination" value="(1.979167,5,-5.104168)" />
+      <property name="destination" value="(1.979167,0, -5.104168)" />
       <property name="end-angle" value="-170.9605" />
       <property name="time" value="2-2800" />
       <property name="actor" value="pudge" />
@@ -26,7 +26,6 @@
     </action>
 	<action type="whipTo" name="step6">
       <property name="start" value="pudge"/>      
-      <property name="colorName" value="brown"/>
 	  <property name="finish" value = "crate"/>
       <property name="time" value="7000-10000"/>
     </action>
@@ -81,11 +80,9 @@
     <action-property name="origin" action="has-origin" range="coordinate3d" />
     <action-property name="destination" action="has-destination" range="coordinate3d" />
     <action-property name="end-angle" action="has-end-angle" range="y-degrees" />
-	<action-property name="position" action="has-position" range="string"/>    
-	<action-property name="action" action="spawn-hero" range="string"/>
-	<action-property name="start" action="whipTo" range="string"/>
-	<action-property name="finish" action="whipTo" range="string"/>
-	<action-property name="color" action="whipTo" range="string"/>
+	<!-- <action-property name="action" action="spawn-hero" range="string"/> -->
+	<action-property name="start" action="whipTo" range="A"/>
+	<action-property name="finish" action="whipTo" range="A"/>
   </action-properties>
   <objects>
     <set name="A">
