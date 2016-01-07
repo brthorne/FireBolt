@@ -11,7 +11,7 @@
       <property name="origin" value="(1.901042,0,6.09375)" />
       <property name="destination" value="(1.979167,5,-5.104168)" />
       <property name="end-angle" value="-170.9605" />
-      <property name="time" value="1-2800" />
+      <property name="time" value="2-2800" />
       <property name="actor" value="pudge" />
     </action>
     <action type="idle" name="step3">
@@ -24,191 +24,19 @@
       <property name="time" value="0-1" />
       <property name="actor" value="crate" />
     </action>
-<<<<<<< HEAD
-	
-	<action type="whipTo" name="step7004">
-      <property name="origin" value="Pudge"/>      
+	<action type="whipTo" name="step6">
+      <property name="start" value="pudge"/>      
       <property name="colorName" value="brown"/>
-	  <property name="target" value = "Pro Cam"/>
+	  <property name="finish" value = "crate"/>
       <property name="time" value="7000-10000"/>
     </action>
-    
-    <!--<action type="rotate" name="step7003">
-      <property name="start-angle" value="0"/>
-      <property name="end-angle" value="130"/>
-      <property name="actor" value="Skywrath Mage"/>
-      <property name="time" value="3000-4000"/>
-    </action>-->
-
-    <!--<action type="spawn-hero" name="step7000">
-      <property name="location" value="(2,3)"/>
-      <property name="actor" value="Tower"/>
-      <property name="time" value="0-1"/>
-    </action>-->
-    
-    <!--<action type="spawn-hero" name="step7540">
-      <property name="location" value="(0,0)"/>
-      <property name="actor" value="Pudge"/>
-      <property name="time" value="0-1"/>
-=======
-    <action type="idle" name="step5">
+	<action type="idle" name="step5">
       <property name="time" value="1-60000" />
       <property name="actor" value="crate" />
->>>>>>> 4008e2ab33352c86c98e59f144841d803e02f745
     </action>
-  </actions>
-  <action-types>
-    <action-type name="Actions">
-<<<<<<< HEAD
-      <action-type-ref name="multi-inhibit"/>
-      <action-type-ref name="inhibit"/>
-      <action-type-ref name="teleport"/>
-      <action-type-ref name="heal"/>
-      <action-type-ref name="debuff"/>
-      <action-type-ref name="summon"/>
-      <action-type-ref name="multi-attack"/>
-      <action-type-ref name="attack"/>
-      <action-type-ref name="disable"/>
-      <action-type-ref name="kill"/>
-      <action-type-ref name="multi-buff"/>
-      <action-type-ref name="buff"/>
-      <action-type-ref name="spawn-creep"/>
-      <action-type-ref name="move"/>
-      <action-type-ref name="buy-item-courier"/>
-      <action-type-ref name="spawn-courier"/>
-      <action-type-ref name="hero-death"/>
-      <action-type-ref name="generic-ability"/>
-      <action-type-ref name="spawn-rune"/>
-      <action-type-ref name="ability-level-up"/>
-      <action-type-ref name="creep-attack"/>
-      <action-type-ref name="chat-all"/>
-      <action-type-ref name="rune-death"/>
-      <action-type-ref name="spawn-ward"/>
-      <action-type-ref name="rotate"/>
-      <action-type-ref name="die"/>
-      <action-type-ref name="ward-expired"/>
-      <action-type-ref name="remove-item"/>
-      <action-type-ref name="courier-upgrade"/>
-      <action-type-ref name="spawn-hero"/>
-      <action-type-ref name="has-targets"/>
-      <action-type-ref name="has-source"/>
-      <action-type-ref name="has-location"/>
-      <action-type-ref name="has-ability"/>
-      <action-type-ref name="has-count"/>
-      <action-type-ref name="has-target"/>
-      <action-type-ref name="has-level"/>
-      <action-type-ref name="has-item"/>
-      <action-type-ref name="has-amount"/>
-      <action-type-ref name="has-position"/>
-      <action-type-ref name="idle"/>
-	  <action-type-ref name="whipTo"/>
-    </action-type>
-    <action-type name="multi-inhibit">
-      <action-type-ref name="crystal-nova"/>
-    </action-type>
-    <action-type name="inhibit">
-      <action-type-ref name="frostbite"/>
-    </action-type>
-    <action-type name="teleport">
-      <action-type-ref name="leap"/>
-      <action-type-ref name="town-portal-scroll"/>
-    </action-type>
-    <action-type name="heal">
-      <action-type-ref name="tango"/>
-    </action-type>
-    <action-type name="debuff">
-      <action-type-ref name="concussive-shot"/>
-    </action-type>
-    <action-type name="summon">
-      <action-type-ref name="create-replica"/>
-      <action-type-ref name="create-illusion"/>
-    </action-type>
-    <action-type name="multi-attack">
-      <action-type-ref name="starfall"/>
-      <action-type-ref name="crystal-nova"/>
-    </action-type>
-    <action-type name="attack">
-      <action-type-ref name="damage"/>
-      <action-type-ref name="frostbite"/>
-      <action-type-ref name="concussive-shot"/>
-      <action-type-ref name="meat-hook"/>
-      <action-type-ref name="arcane-bolt"/>
-      <action-type-ref name="arrow"/>
-    </action-type>
-    <action-type name="disable">
-      <action-type-ref name="meat-hook"/>
-      <action-type-ref name="arrow"/>
-    </action-type>
-    <action-type name="kill">
-      <action-type-ref name="kill-illusion"/>
-      <action-type-ref name="kill-replica"/>
-      <action-type-ref name="last-hit"/>
-    </action-type>
-    <action-type name="multi-buff">
-      <action-type-ref name="leap"/>
-    </action-type>
-    <action-type name="buff">
-      <action-type-ref name="rot"/>
-      <action-type-ref name="buy-item"/>
-      <action-type-ref name="level-up"/>
-      <action-type-ref name="flesh-heap"/>
-    </action-type>
-    <action-type name="has-targets">
-      <action-type-ref name="multi-inhibit"/>
-      <action-type-ref name="multi-attack"/>
-      <action-type-ref name="multi-buff"/>
-    </action-type>
-    <action-type name="has-source">
-      <action-type-ref name="heal"/>
-      <action-type-ref name="damage"/>
-      <action-type-ref name="arcane-bolt"/>
-    </action-type>
-    <action-type name="has-location">
-      <action-type-ref name="multi-inhibit"/>
-      <action-type-ref name="summon"/>
-      <action-type-ref name="hero-death"/>
-      <action-type-ref name="creep-attack"/>
-      <action-type-ref name="spawn-hero"/>
-    </action-type>
-    <action-type name="has-ability">
-      <action-type-ref name="damage"/>
-      <action-type-ref name="arcane-bolt"/>
-      <action-type-ref name="kill"/>
-      <action-type-ref name="generic-ability"/>
-      <action-type-ref name="ability-level-up"/>
-    </action-type>
-    <action-type name="has-count">
-      <action-type-ref name="last-hit"/>
-      <action-type-ref name="flesh-heap"/>
-    </action-type>
-    <action-type name="has-target">
-      <action-type-ref name="inhibit"/>
-      <action-type-ref name="town-portal-scroll"/>
-      <action-type-ref name="heal"/>
-      <action-type-ref name="debuff"/>
-      <action-type-ref name="attack"/>
-      <action-type-ref name="disable"/>
-      <action-type-ref name="buff"/>
-      <action-type-ref name="remove-item"/>
-    </action-type>
-    <action-type name="has-level">
-      <action-type-ref name="level-up"/>
-      <action-type-ref name="spawn-creep"/>
-      <action-type-ref name="spawn-courier"/>
-      <action-type-ref name="ability-level-up"/>
-      <action-type-ref name="spawn-ward"/>
-      <action-type-ref name="courier-upgrade"/>
-    </action-type>
-    <action-type name="has-item">
-      <action-type-ref name="buy-item"/>
-      <action-type-ref name="buy-item-courier"/>
-      <action-type-ref name="remove-item"/>
-    </action-type>
-    <action-type name="has-amount">
-      <action-type-ref name="heal"/>
-      <action-type-ref name="damage"/>
-      <action-type-ref name="arcane-bolt"/>
-=======
+	</actions>
+    <action-types>
+   <action-type name="Actions">
       <action-type-ref name="move" />
       <action-type-ref name="walk" />
       <action-type-ref name="run" />
@@ -216,7 +44,7 @@
       <action-type-ref name="create" />
       <action-type-ref name="remove" />
       <action-type-ref name="attack" />
->>>>>>> 4008e2ab33352c86c98e59f144841d803e02f745
+	  <action-type-ref name="whipTo" />
     </action-type>
     <action-type name="has-position">
       <action-type-ref name="create" />
@@ -237,54 +65,15 @@
       <action-type-ref name="run" />
       <action-type-ref name="create" />
     </action-type>
-    <action-type name="move" />
-    <action-type name="walk" />
-    <action-type name="run" />
-    <action-type name="idle" />
-<<<<<<< HEAD
-    <action-type name="face-position" />
-	<action-type name="whipTo"/>
-  </action-types>
-  <action-properties>
-    <action-property name="look-at" action="face-position" range="coordinate2d"/>
-    <action-property name="origin" action="move" range="coordinate2d"/>
-    <action-property name="experience-now" action="last-hit" range="int"/>
-    <action-property name="old" action="ability-level-up" range="int"/>
-    <action-property name="target-guessed" action="damage" range="bool"/>
-    <action-property name="player" action="chat-all" range="string"/>
-    <action-property name="victim" action="kill" range="Targets"/>
-    <action-property name="message" action="chat-all" range="string"/>
-    <action-property name="targets" action="has-targets" range="P(A)"/>
-    <action-property name="destination" action="move" range="coordinate2d"/>
-    <action-property name="start-angle" action="rotate" range="y-degrees"/>
-    <action-property name="actor" action="Actions" range="A"/>
-    <action-property name="source" action="has-source" range="A"/>
-    <action-property name="location" action="has-location" range="coordinate2d"/>
-    <action-property name="type" action="spawn-rune" range="string"/>
-    <action-property name="end-angle" action="rotate" range="y-degrees"/>
-    <action-property name="ability" action="has-ability" range="string"/>
-    <action-property name="courier" action="buy-item-courier" range="string"/>
-    <action-property name="secondary-targets" action="starfall" range="P(A)"/>
-    <action-property name="rotation" action="creep-attack" range="double"/>
-    <action-property name="name" action="summon" range="string"/>
-    <action-property name="count" action="has-count" range="int"/>
-    <action-property name="target" action="has-target" range="Targets"/>
-    <action-property name="target-location" action="disable" range="coordinate2d"/>
-    <action-property name="level" action="has-level" range="int"/>
-    <action-property name="item" action="has-item" range="string"/>
-    <action-property name="amount" action="has-amount" range="double"/>
-    <action-property name="time" action="Actions" range="T"/>
-    <!--<action-property name="position" action="has-position" range="coordinate2d"/>-->
-    <action-property name="position" action="has-position" range="string"/>    
-	<action-property name="action" action="spawn-hero" range="string"/>
-	<action-property name="origin" action="whipTo" range="string"/>
-	<action-property name="target" action="whipTo" range="string"/>
-	<action-property name="color" action="whipTo" range="string"/>
-=======
-    <action-type name="create" />
-    <action-type name="remove" />
-    <action-type name="attack" />
-  </action-types>
+		<action-type name="move" />
+		<action-type name="walk" />
+		<action-type name="run" />
+		<action-type name="idle" />
+		<action-type name="create" />
+		<action-type name="remove" />
+		<action-type name="attack" />
+		<action-type name="whipTo"/>
+	</action-types>
   <action-properties>
     <action-property name="actor" action="Actions" range="A" />
     <action-property name="time" action="Actions" range="T" />
@@ -292,7 +81,11 @@
     <action-property name="origin" action="has-origin" range="coordinate3d" />
     <action-property name="destination" action="has-destination" range="coordinate3d" />
     <action-property name="end-angle" action="has-end-angle" range="y-degrees" />
->>>>>>> 4008e2ab33352c86c98e59f144841d803e02f745
+	<action-property name="position" action="has-position" range="string"/>    
+	<action-property name="action" action="spawn-hero" range="string"/>
+	<action-property name="start" action="whipTo" range="string"/>
+	<action-property name="finish" action="whipTo" range="string"/>
+	<action-property name="color" action="whipTo" range="string"/>
   </action-properties>
   <objects>
     <set name="A">

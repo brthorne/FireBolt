@@ -659,7 +659,7 @@ namespace Assets.scripts
                     {
                         if (domainActionParameter.Name == param.argValue)
                         {
-                            if (!getActionParameterValueName(storyAction, domainActionParameter, out argValue))
+                            if (!getActionParameterValue(storyAction, domainActionParameter, out argValue))
                             {
                                 break;
                             }

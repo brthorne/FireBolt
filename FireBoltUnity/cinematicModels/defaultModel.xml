@@ -20,7 +20,9 @@
         <rotateAction actorNameParamName="actor" maxDuration="400" destinationParamName="end-angle" />
       </rotateActions>
       <animateActions />
+	  <functionActions/>
     </domainAction>
+	
     <domainAction name="walk">
       <params>
         <param name="actor" />
@@ -40,33 +42,34 @@
       <animateActions>
         <animateAction actorNameParamName="actor" name="walk" />
       </animateActions>
+	  <functionActions/>
     </domainAction>
-<<<<<<< HEAD
+	
 	<domainAction name="whipTo">
 	  <params>
-		<param name="origin"/>
+		<param name="start"/>
 		<param name = "colorName"/>
-		<param name = "target"/>
+		<param name = "finish"/>
 	  </params>
 	  <createActions/>
 	  <rotateActions/>
 	  <translateActions/>
+	  <attachActions/>
 	  <destroyActions/>
 	  <animateActions/>
 	  <functionActions>
 		<functionAction name="drawWhip" >
 			<args> 
-				<arg argname = "source"  argtype="Vector3" argvalue="origin" />
-				<arg argname = "sink"  argtype="Vector3" argvalue="target" />
+				<arg argname = "source"  argtype="Vector3" argvalue="start" />
+				<arg argname = "sink"  argtype="Vector3" argvalue="finish" />
 				<arg argname="colour" argtype="float" argvalue = "colorName"/>
 			</args>
 		</functionAction>
 	  </functionActions>
 	</domainAction>
+	
     <domainAction name="buy-item" >
-=======
     <domainAction name="run">
->>>>>>> 4008e2ab33352c86c98e59f144841d803e02f745
       <params>
         <param name="actor" />
         <param name="origin" />
@@ -85,6 +88,7 @@
       <animateActions>
         <animateAction actorNameParamName="actor" name="walk" />
       </animateActions>
+	  <functionActions/>
     </domainAction>
     <domainAction name="idle">
       <params>
@@ -98,6 +102,7 @@
       <animateActions>
         <animateAction actorNameParamName="actor" name="idle" />
       </animateActions>
+	  <functionActions/>
     </domainAction>
     <domainAction name="create">
       <params>
@@ -112,6 +117,7 @@
       <attachActions />
       <translateActions />
       <rotateActions />
+	  <functionActions/>
       <animateActions />
     </domainAction>
     <domainAction name="remove">
@@ -125,6 +131,7 @@
       <attachActions />
       <translateActions />
       <rotateActions />
+	  <functionActions/>
       <animateActions />
     </domainAction>
     <domainAction name="attack">
@@ -139,6 +146,7 @@
       <animateActions>
         <animateAction actorNameParamName="actor" name="attack" />
       </animateActions>
+	  <functionActions/>
     </domainAction>
   </domainActions>
   <actors>
