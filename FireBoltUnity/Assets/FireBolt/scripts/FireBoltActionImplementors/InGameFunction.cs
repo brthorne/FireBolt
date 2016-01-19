@@ -12,29 +12,30 @@ namespace Assets.scripts
     public class InGameFunction : FireBoltAction
     {
 
-        GameObject gameController;
+        GameObject hostObject;
         List<Tuple<string,string,string>> tupleList;
         Component ingamescript;
-
+        String objectName;
 
 
         public InGameFunction(float startTick, float endTick, string functionName, List<Tuple<string,string,string>> paramNames) :
             base(startTick, endTick)
         {
-            if (!ElPresidente.createdGameObjects.TryGet("GameController", out gameController))
+            objectName = startTick.ToString() + " " + endTick.ToString() + " " +  functionName;
+            if (!ElPresidente.createdGameObjects.TryGet(objectName, out hostObject))
             {
-                gameController = new GameObject();
-                gameController.name = "GameController";
+                hostObject = GameObject.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/FireBolt/Resources/" + functionName + "_prefab.prefab")) as GameObject;
+                //Debug.Log(hostObject.name);
                 GameObject fireBolt;
-                ElPresidente.createdGameObjects.TryGet("FireBolt", out fireBolt);
-                gameController.transform.SetParent(fireBolt.transform);
-                ElPresidente.createdGameObjects.Add("GameController",gameController);
+                if (ElPresidente.createdGameObjects.TryGet("FireBolt", out fireBolt))
+                {
+                    hostObject.transform.SetParent(fireBolt.transform);
+                }
+                ElPresidente.createdGameObjects.Add(objectName, hostObject);
+                tupleList = paramNames;
+                ingamescript = hostObject.GetComponent(functionName);
             }
             
-          // gameController.AddComponent(functionName);
-            //Check that tuple list is okay, then...
-           tupleList = paramNames;
-           ingamescript = gameController.GetComponent(functionName);
 
         }
 

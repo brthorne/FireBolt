@@ -1,0 +1,1935 @@
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:20:39 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-4fd8490aa101bf1478de43b79611b5e9
+Exit code: 0
+Elapsed time: 0.66 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:20:41 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-1d9d658ca9c629d4e9dc08831ab435ef
+Exit code: 0
+Elapsed time: 0.42 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.11 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:22:03 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-0497eed0ec93f224399898d251601bd5
+Exit code: 0
+Elapsed time: 0.61 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.20 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:22:04 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-c2e0d9c2fa3774d4993fd4ce5ca63339
+Exit code: 0
+Elapsed time: 0.46 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.12 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:24:16 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-36b471b045302224f88bc3f22556dc9b
+Exit code: 0
+Elapsed time: 0.62 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+3: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.17 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:24:17 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-948828b0dca9b3146a4274b4ae6c0793
+Exit code: 0
+Elapsed time: 0.44 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.12 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:27:11 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-c711d31dd122d594ea7759360f4218e4
+Exit code: 0
+Elapsed time: 0.58 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+3: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.17 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:27:12 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-324000a805f8b004d9c22c5ed77739cd
+Exit code: 0
+Elapsed time: 0.43 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.12 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:27:58 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-1e57105ceaa6a2c4bae7520d4cf68ca5
+Exit code: 0
+Elapsed time: 0.59 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:27:59 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-676c9cb322c7c3e45a33c0b133c45955
+Exit code: 0
+Elapsed time: 0.42 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.11 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:28:48 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-b97054246e25cef48a1b673d350a1016
+Exit code: 0
+Elapsed time: 0.58 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.16 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:28:50 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-b696d1712a0f6874aa73038a5add8e8d
+Exit code: 0
+Elapsed time: 0.42 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.12 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:31:16 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-99ee6881d68bccd4ca34d261fdcf86ad
+Exit code: 0
+Elapsed time: 0.59 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+3: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:31:17 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-5f9fa22147f18264c865af740fceb6e9
+Exit code: 0
+Elapsed time: 0.42 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.11 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:31:32 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-34ba513b0a64aff4d90ea577604ada62
+Exit code: 0
+Elapsed time: 0.57 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.15 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:31:33 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-d7d11e9cb6084d2448b5d006e9ea99e5
+Exit code: 0
+Elapsed time: 0.42 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.12 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:33:09 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-7aeed4458802dc74294bbd2e2f14b848
+Exit code: 0
+Elapsed time: 0.56 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:33:10 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-f4579ae0a9538d542a5a68dde2a77150
+Exit code: 0
+Elapsed time: 0.43 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.12 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:33:42 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-efc58a6aff4074c448c13b1f946a1724
+Exit code: 1
+Elapsed time: 0.42 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (5 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\InGameFunctions\drawWhip.cs(26,13): error CS0201: Only assignment, call, increment, decrement, and new object expressions can be used as a statement
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+4: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:33:50 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-27de5163138993c4ca6187db4850d227
+Exit code: 0
+Elapsed time: 0.57 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:33:51 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-aee723f78bf0dca4884d917c178423d1
+Exit code: 0
+Elapsed time: 0.41 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.11 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:35:46 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-c60c6d4604c8d3b498ca6c937ba68c88
+Exit code: 0
+Elapsed time: 0.55 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:35:48 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-6acbae36c3eea6f4a9dc2a3782071f76
+Exit code: 0
+Elapsed time: 0.46 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:36:43 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-cae6325257a28ba47a0e0e706542c502
+Exit code: 0
+Elapsed time: 0.61 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (5 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\InGameFunction.cs(17,19): warning CS0649: Field 'InGameFunction.ingamescript' is never assigned to, and will always have its default value null
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+4: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:36:45 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-f6168fa7558a7ba4fb3db666005402b8
+Exit code: 0
+Elapsed time: 0.41 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.11 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:37:47 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-672192f420b626a47bfad4cf76f10d44
+Exit code: 0
+Elapsed time: 0.59 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (5 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+3: Assets\FireBolt\scripts\FireBoltActionImplementors\InGameFunction.cs(17,19): warning CS0649: Field 'InGameFunction.ingamescript' is never assigned to, and will always have its default value null
+4: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.15 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:37:48 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-82e55eb4523c0274c84513641184211a
+Exit code: 0
+Elapsed time: 0.42 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.16 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:40:18 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-b3a305bba4a37e746af088c4cbb7265e
+Exit code: 0
+Elapsed time: 0.60 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (5 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+3: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+4: Assets\FireBolt\scripts\FireBoltActionImplementors\InGameFunction.cs(17,19): warning CS0649: Field 'InGameFunction.ingamescript' is never assigned to, and will always have its default value null
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.15 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:40:19 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-e32c7730bca2af943ab9550ac1ab118f
+Exit code: 0
+Elapsed time: 0.43 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.13 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:41:03 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-196449b44d094934e8095dac45cb94b2
+Exit code: 0
+Elapsed time: 0.57 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (5 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+3: Assets\FireBolt\scripts\FireBoltActionImplementors\InGameFunction.cs(17,19): warning CS0649: Field 'InGameFunction.ingamescript' is never assigned to, and will always have its default value null
+4: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:41:04 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-8504be43d15df964bbfd5da4e1b118ed
+Exit code: 0
+Elapsed time: 0.42 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.11 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:41:52 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-e37c03bf739d04f48a8f76dd0c256d8d
+Exit code: 0
+Elapsed time: 0.59 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (5 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+3: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+4: Assets\FireBolt\scripts\FireBoltActionImplementors\InGameFunction.cs(17,19): warning CS0649: Field 'InGameFunction.ingamescript' is never assigned to, and will always have its default value null
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:41:53 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-80034d0b7f35bfa409436b2e246bad70
+Exit code: 0
+Elapsed time: 0.44 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.12 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:42:45 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-758e3737665bbab41ab3453313ca52e3
+Exit code: 0
+Elapsed time: 0.59 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:42:46 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-a79e63e8469509a49a57886b872eacfc
+Exit code: 0
+Elapsed time: 0.41 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.10 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:44:07 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-3747c69fed97e12489722c1f6fa4c6e7
+Exit code: 0
+Elapsed time: 0.55 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:44:08 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-04e152b8671f0aa499ccf9217d8dbf24
+Exit code: 0
+Elapsed time: 0.42 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.13 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:44:34 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-f76f4cfa34748d4469550971fb0cf0ed
+Exit code: 0
+Elapsed time: 0.59 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:44:36 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-5e1fd753e0ab4d24fa5a0ae9ac64733b
+Exit code: 0
+Elapsed time: 0.44 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.11 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:45:51 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-42ce3cc654a58d244b350a01296dbd89
+Exit code: 1
+Elapsed time: 0.45 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (5 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\InGameFunction.cs(29,60): error CS0246: The type or namespace name 'Gameobject' could not be found (are you missing a using directive or an assembly reference?)
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+4: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:46:38 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-68b3438578070fe4d9815dadf9c6d986
+Exit code: 0
+Elapsed time: 0.59 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+3: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.15 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:46:39 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-beb02a74eadd3714ebb0a73a42c4ec25
+Exit code: 0
+Elapsed time: 0.41 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.11 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:46:54 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-5dab78475d25f9e428b851876a8dcde4
+Exit code: 0
+Elapsed time: 0.58 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+3: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:46:56 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-a3a59362df3c15b45b7c8cf169051fd6
+Exit code: 0
+Elapsed time: 0.41 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.12 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:48:54 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-effe8674a6da4cd4791d67d04ad1d64d
+Exit code: 0
+Elapsed time: 0.61 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+3: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.16 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:48:55 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-9cd9699096158264ea98407c9603a9cd
+Exit code: 0
+Elapsed time: 0.44 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.12 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:50:18 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-0bf93c84e732cda4182ec33a96439757
+Exit code: 0
+Elapsed time: 0.59 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:50:19 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-2b3c72cf5b0dccb43ab30a90c239f6c0
+Exit code: 0
+Elapsed time: 0.43 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.11 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:53:39 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-c9bdcf6c301f1104ba69d0d037f45477
+Exit code: 0
+Elapsed time: 0.57 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+3: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.16 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:53:40 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-5e3ac55185f4cae45a33a6a10e0ea797
+Exit code: 0
+Elapsed time: 0.43 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.11 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:54:31 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-f1359d004c6885448b6caeb1a8018036
+Exit code: 0
+Elapsed time: 0.58 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+3: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:54:33 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-b9375bf435d9ce94182757e2470b286c
+Exit code: 0
+Elapsed time: 0.45 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.12 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:55:18 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-2b266afa161835f4298c12ac1b571a15
+Exit code: 0
+Elapsed time: 0.59 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.17 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:55:19 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-0a3d8a7e9e7c3a34fb159ca3d4265b2f
+Exit code: 0
+Elapsed time: 0.43 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.11 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:57:43 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-a78c520887ba98c408009f723b2c598c
+Exit code: 0
+Elapsed time: 0.60 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.14 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 1:57:44 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-7a800133a5e988047b7f05070f7a6d69
+Exit code: 0
+Elapsed time: 0.42 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.11 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 2:00:12 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-d2b00e452e9b5194d8780324e0a346ff
+Exit code: 0
+Elapsed time: 0.57 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (4 lines):
+0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
+1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
+2: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
+3: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp.dll
+Exit code: 0
+Elapsed time: 0.15 sec
+
+- pdb2mdb.exe output (0 lines):
+********************************************************************************
+*                     Tuesday, January 19, 2016 2:00:14 PM                     *
+********************************************************************************
+CSharpCompilerWrapper.exe version: 1.6.1.0
+Platform: Windows
+Target assembly: Assembly-CSharp-Editor.dll
+Project directory: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity
+Unity 'Data' or 'Frameworks' directory: D:/PeripheralPrograms/Unity 5.2/Editor/Data
+Compiler: Microsoft C# 6.0
+
+- Compilation -----------------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-71b5a488646a7f343b670c73dd0c16cb
+Exit code: 0
+Elapsed time: 0.43 sec
+
+- Compiler output (2 lines):
+0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
+1: Copyright (C) Microsoft Corporation. All rights reserved.
+
+- Compiler errors (1 line):
+0: Assets\FireBolt\Cinema Suite\About\Editor\AboutCinemaSuiteWindow.cs(54,9): warning CS0618: 'EditorWindow.title' is obsolete: 'Use titleContent instead (it supports setting a title icon as well).'
+
+- PDB to MDB conversion --------------------------------------
+
+Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
+Arguments: Temp\Assembly-CSharp-Editor.dll
+Exit code: 0
+Elapsed time: 0.12 sec
+
+- pdb2mdb.exe output (0 lines):
