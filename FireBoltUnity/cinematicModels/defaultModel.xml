@@ -117,11 +117,11 @@
     </domainAction>
   </domainActions>
   <actors>
-    <actor name="pudge" model="pudge_model.fbx" pointOfInterest="0">
+    <actor name="hero" model="m005.fbx" pointOfInterest=".7">
       <animationMappings>
-        <animationMapping animateActionName="walk" animationName="pudge_walk" loopAnimation="true" />
-        <animationMapping animateActionName="idle" animationName="pudge_idle" loopAnimation="true" />
-        <animationMapping animateActionName="attack" animationName="pudge_attack" loopAnimation="true" />
+        <animationMapping animateActionName="walk" animationName="humanoid_sneak" loopAnimation="true" />
+        <animationMapping animateActionName="idle" animationName="humanoid_idle" loopAnimation="true" />
+        <animationMapping animateActionName="die" animationName="humanoid_dying" loopAnimation="true" />
       </animationMappings>
     </actor>
     <actor name="skywrath_mage" model="skywrath_mage_model.fbx" pointOfInterest="0">
@@ -155,6 +155,16 @@
       <animationIndices />
     </animation>
     <animation name="pudge_attack" fileName="pudge_attack1.fbx">
+      <animationIndices />
+    </animation>
+	
+	<animation name="humanoid_sneak" fileName="humanoid_sneak.fbx">
+      <animationIndices />
+    </animation>
+	<animation name="humanoid_idle" fileName="humanoid_idle.fbx">
+      <animationIndices />
+    </animation>
+	<animation name="humanoid_dying" fileName="humanoid_dying.fbx">
       <animationIndices />
     </animation>
   </animations>

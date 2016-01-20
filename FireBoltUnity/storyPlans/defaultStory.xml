@@ -5,18 +5,18 @@
       <property name="position" value="(1.901042,0,6.09375)" />
       <property name="end-angle" value="0" />
       <property name="time" value="0-1" />
-      <property name="actor" value="pudge" />
+      <property name="actor" value="hero" />
     </action>
     <action type="walk" name="step2">
       <property name="origin" value="(1.901042,0,6.09375)" />
       <property name="destination" value="(1.979167,5,-5.104168)" />
       <property name="end-angle" value="-170.9605" />
       <property name="time" value="1-2800" />
-      <property name="actor" value="pudge" />
+      <property name="actor" value="hero" />
     </action>
     <action type="idle" name="step3">
       <property name="time" value="2800-60000" />
-      <property name="actor" value="pudge" />
+      <property name="actor" value="hero" />
     </action>
     <action type="create" name="step4">
       <property name="position" value="(3.776042,0,1.640624)" />
@@ -76,6 +76,7 @@
   </action-properties>
   <objects>
     <set name="A">
+	  <constant value="hero" />
       <constant value="pudge" />
       <constant value="skywrath_mage" />
       <constant value="crate" />
