@@ -1,5 +1,5 @@
 ********************************************************************************
-*                     Tuesday, January 19, 2016 2:05:36 PM                     *
+*                     Tuesday, January 19, 2016 2:15:43 PM                     *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.6.1.0
 Platform: Windows
@@ -11,9 +11,9 @@ Compiler: Microsoft C# 6.0
 - Compilation -----------------------------------------------
 
 Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
-Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-932dba97b49502140b598898cd40cffb
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-f467b8b5724cd494c92b5cd0143a7089
 Exit code: 0
-Elapsed time: 0.60 sec
+Elapsed time: 0.59 sec
 
 - Compiler output (2 lines):
 0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
@@ -22,8 +22,8 @@ Elapsed time: 0.60 sec
 - Compiler errors (4 lines):
 0: Assets\FireBolt\scripts\activate_FireBolt.cs(11,9): warning CS0618: 'ElPresidente.Init(bool)' is obsolete: 'write your own script to interact with Init(InputSet, uint?, bool, bool'
 1: warning CS1702: Assuming assembly reference 'LN.Utilities, Version=0.1.0.1, Culture=neutral, PublicKeyToken=77e33826e94724f2' used by 'Impulse' matches identity 'LN.Utilities, Version=0.1.0.2, Culture=neutral, PublicKeyToken=77e33826e94724f2' of 'LN.Utilities', you may need to supply runtime policy
-2: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
-3: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+2: Assets\FireBolt\scripts\FireBoltActionImplementors\Shake.cs(12,25): warning CS0649: Field 'Shake.localPosition' is never assigned to, and will always have its default value
+3: Assets\FireBolt\Standard Assets\Cameras\Scripts\LookatTarget.cs(22,42): warning CS0649: Field 'LookatTarget.m_RotationRange' is never assigned to, and will always have its default value
 
 - PDB to MDB conversion --------------------------------------
 
@@ -34,7 +34,7 @@ Elapsed time: 0.14 sec
 
 - pdb2mdb.exe output (0 lines):
 ********************************************************************************
-*                     Tuesday, January 19, 2016 2:05:38 PM                     *
+*                     Tuesday, January 19, 2016 2:15:44 PM                     *
 ********************************************************************************
 CSharpCompilerWrapper.exe version: 1.6.1.0
 Platform: Windows
@@ -46,9 +46,9 @@ Compiler: Microsoft C# 6.0
 - Compilation -----------------------------------------------
 
 Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\csc.exe
-Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-93c30bb2dcc3bb241a0e922eb4dfe067
+Arguments: -nostdlib+ -noconfig -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/mscorlib.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Core.dll" -r:"D:/PeripheralPrograms/Unity 5.2/Editor/Data\Mono/lib/mono/2.0/System.Xml.dll" @Temp/UnityTempFile-105d95cff82f9b649ab0f1d6edf44dba
 Exit code: 0
-Elapsed time: 0.44 sec
+Elapsed time: 0.42 sec
 
 - Compiler output (2 lines):
 0: Microsoft (R) Visual C# Compiler version 1.0.0.50618
@@ -62,6 +62,6 @@ Elapsed time: 0.44 sec
 Process: D:\NP-FireBolt\NP-Firebolt\FireBoltUnity\CSharp60Support\Roslyn\pdb2mdb.exe
 Arguments: Temp\Assembly-CSharp-Editor.dll
 Exit code: 0
-Elapsed time: 0.11 sec
+Elapsed time: 0.13 sec
 
 - pdb2mdb.exe output (0 lines):
