@@ -12,7 +12,6 @@ namespace Assets.scripts
         private Animator animator;
         private int stopTriggerHash;
         private int animatingHash;
-        bool assignEndState = false;
 
         public static bool ValidForConstruction(string actorName, int emotionTime)
         {

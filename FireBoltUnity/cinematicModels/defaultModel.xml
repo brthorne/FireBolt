@@ -20,6 +20,7 @@
         <rotateAction actorNameParamName="actor" maxDuration="400" destinationParamName="end-angle" />
       </rotateActions>
       <animateActions />
+	  <faceActions/>
     </domainAction>
     <domainAction name="walk">
       <params>
@@ -40,6 +41,7 @@
       <animateActions>
         <animateAction actorNameParamName="actor" name="walk" />
       </animateActions>
+	  <faceActions/>
     </domainAction>
     <domainAction name="run">
       <params>
@@ -60,6 +62,7 @@
       <animateActions>
         <animateAction actorNameParamName="actor" name="walk" />
       </animateActions>
+	  <faceActions/>
     </domainAction>
     <domainAction name="idle">
       <params>
@@ -73,7 +76,27 @@
       <animateActions>
         <animateAction actorNameParamName="actor" name="idle" />
       </animateActions>
+	  <faceActions/>
     </domainAction>
+	
+	<!-- Testing faceAction -->
+	<domainAction name="surprise">
+      <params>
+        <param name="actor" />
+      </params>
+      <createActions />
+      <destroyActions />
+      <attachActions />
+      <translateActions />
+      <rotateActions />
+      <animateActions>
+        <animateAction actorNameParamName="actor" name="idle" />
+      </animateActions>
+	  <faceActions>
+		<faceAction actorNameParamName="actor" timeInClip="62"/>
+	  </faceActions>
+    </domainAction>
+	
     <domainAction name="create">
       <params>
         <param name="actor" />
@@ -88,6 +111,7 @@
       <translateActions />
       <rotateActions />
       <animateActions />
+	  <faceActions/>
     </domainAction>
     <domainAction name="remove">
       <params>
@@ -101,6 +125,7 @@
       <translateActions />
       <rotateActions />
       <animateActions />
+	  <faceActions/>
     </domainAction>
     <domainAction name="attack">
       <params>
@@ -114,6 +139,7 @@
       <animateActions>
         <animateAction actorNameParamName="actor" name="attack" />
       </animateActions>
+	  <faceActions/>
     </domainAction>
   </domainActions>
   <actors>

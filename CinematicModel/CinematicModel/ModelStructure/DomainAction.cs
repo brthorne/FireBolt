@@ -41,7 +41,7 @@ namespace CinematicModel
 
         [XmlArray("faceActions")]
         [XmlArrayItem("faceActions")]
-        public List<AnimateAction> FaceActions { get; set; }
+        public List<FaceAction> FaceActions { get; set; }
 
     }
 }

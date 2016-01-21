@@ -59,6 +59,7 @@ namespace Assets.scripts
                 enqueuetranslateActions(storyAction, domainAction, effectingAnimation, aaq, implicitActorCreation);
                 enqueueRotateActions(storyAction, domainAction, effectingAnimation, aaq, implicitActorCreation);
                 enqueueAttachActions(storyAction, domainAction, effectingAnimation, aaq, implicitActorCreation);
+                enqueueFaceActions(storyAction, domainAction, effectingAnimation, aaq, implicitActorCreation);
             }            
             return aaq;
         }
@@ -671,6 +672,38 @@ namespace Assets.scripts
                     aaq.Add(new Attach(startTick, actorName, parentName, attach));
                 }
             }
+        }
+
+        private static void enqueueFaceActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, CM.Animation effectingAnimation,
+                                                 FireBoltActionList aaq, bool implicitActorInstantiation)
+        {
+            foreach (CM.FaceAction fa in domainAction.FaceActions)
+            {
+
+                float startTick = 0;
+                float endTick = 0;
+                int emoTime = 40;
+                string actorName = null;
+                foreach (CM.DomainActionParameter domainActionParameter in domainAction.Params)
+                {
+                    if (domainActionParameter.Name == fa.ActorNameParamName)
+                    {
+                        getActionParameterValue(storyAction, domainActionParameter, out actorName);
+                        //TODO fail gracefully if we don't find actor param value                       
+                    }
+                    emoTime = fa.TimeInClip;
+                  
+                }
+                startTick = getStartTick(storyAction, fa, effectingAnimation);
+                endTick = getEndTick(storyAction, fa, effectingAnimation, startTick);
+                if ((!implicitActorInstantiation || actorWillBeInstantiated(actorName)) &&
+                    AnimateEmotion.ValidForConstruction(actorName, emoTime))
+                {
+                    aaq.Add(new AnimateEmotion(startTick, endTick, actorName, emoTime));
+                }
+            }
+
+
         }
 
         private static CM.DomainAction getStoryDomainAction(IStoryAction action)

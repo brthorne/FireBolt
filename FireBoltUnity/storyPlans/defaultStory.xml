@@ -14,7 +14,7 @@
       <property name="time" value="1-2800" />
       <property name="actor" value="hero" />
     </action>
-    <action type="idle" name="step3">
+    <action type="surprise" name="step3">
       <property name="time" value="2800-60000" />
       <property name="actor" value="hero" />
     </action>
@@ -35,6 +35,7 @@
       <action-type-ref name="walk" />
       <action-type-ref name="run" />
       <action-type-ref name="idle" />
+	  <action-type-ref name="surprise" />
       <action-type-ref name="create" />
       <action-type-ref name="remove" />
       <action-type-ref name="attack" />
@@ -62,6 +63,7 @@
     <action-type name="walk" />
     <action-type name="run" />
     <action-type name="idle" />
+	<action-type name="surprise"/>
     <action-type name="create" />
     <action-type name="remove" />
     <action-type name="attack" />
