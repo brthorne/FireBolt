@@ -11,7 +11,7 @@ namespace CinematicModel
     public class FaceAction : FireBoltAction
     {
 
-        [XmlAttribute("timeInClip")]
-        public float TimeInClip { get; set; }
+        [XmlAttribute("emotion")]
+        public string Emotion { get; set; }
     }
 }

@@ -88,7 +88,7 @@
         <animateAction actorNameParamName="actor" name="idle" />
       </animateActions>
 	  <faceActions>
-		<faceAction actorNameParamName="actor" timeInClip="62"/>
+		<faceAction actorNameParamName="actor" emotion="surprised"/>
 	  </faceActions>
     </domainAction>
 	

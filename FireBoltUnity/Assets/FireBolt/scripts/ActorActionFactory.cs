@@ -24,6 +24,14 @@ namespace Assets.scripts
         //private static string[] orderedActionTypes;
         private static Story<UintV, UintT, IIntervalSet<UintV, UintT>> story;
         private static Dictionary<string, bool> implicitActorInstantiations;
+        public static Dictionary<string, float> emotions = new Dictionary<string, float>() 
+        { 
+            {"angry",0f}, {"angry2",2f}, {"angry3",4f}, {"angry4",6f}, {"bored",8f}, {"disgusted",10f}, {"eye_left_closed",12f}, 
+            {"eye_right_closed",14f}, {"facial_shrug",16f}, {"friendly",18f}, {"frightened",20f}, {"frightened2",22}, {"grin",24f}, {"grin_left",26f},
+            {"grin_right",28f}, {"kiss",30f}, {"laugh",32f}, {"laugh2",34f}, {"laugh3",36f}, {"narrow",38f}, {"neutral",40f}, {"pain",42f}, {"puh",44f},
+            {"sad",46f}, {"sad2",48f}, {"sad3",50f}, {"sad4",52f}, {"shouting",54f}, {"smile",56f}, {"smile2",58f}, {"smile3",60f}, {"surprised",62f}
+
+        };
 
         /// <summary>
         /// 
@@ -689,10 +697,17 @@ namespace Assets.scripts
                 {
                     if (domainActionParameter.Name == fa.ActorNameParamName)
                     {
-                        getActionParameterValue(storyAction, domainActionParameter, out actorName);
-                        //TODO fail gracefully if we don't find actor param value                       
+                        getActionParameterValue(storyAction, domainActionParameter, out actorName);                    
                     }
-                    emoTime = fa.TimeInClip;
+                    if (emotions.ContainsKey(fa.Emotion))
+                    {
+                        emoTime = emotions[fa.Emotion];
+                    }
+                    else
+                    {
+                        Debug.LogError("emotion name not valid for stepId[" + storyAction.Name + "]");
+                        emoTime = emotions["neutral"];
+                    }
                   
                 }
                 startTick = getStartTick(storyAction, fa, effectingAnimation);
