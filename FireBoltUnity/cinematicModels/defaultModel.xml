@@ -89,6 +89,7 @@
       <attachActions />
       <translateActions />
       <rotateActions />
+	  <attachActions />
       <animateActions>
         <animateAction actorNameParamName="actor" name="idle" />
       </animateActions>

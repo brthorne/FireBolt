@@ -40,7 +40,7 @@ namespace CinematicModel
         public List<AnimateAction> AnimateActions { get; set; }
 
         [XmlArray("faceActions")]
-        [XmlArrayItem("faceActions")]
+        [XmlArrayItem("faceAction")]
         public List<FaceAction> FaceActions { get; set; }
 
     }

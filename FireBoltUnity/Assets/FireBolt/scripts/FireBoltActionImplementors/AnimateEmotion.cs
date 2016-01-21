@@ -8,12 +8,12 @@ namespace Assets.scripts
     {
         private string actorName;
         private GameObject actor;
-        private int emotionTime;
+        private float emotionTime;
         private Animator animator;
         private int stopTriggerHash;
         private int animatingHash;
 
-        public static bool ValidForConstruction(string actorName, int emotionTime)
+        public static bool ValidForConstruction(string actorName, float emotionTime)
         {
             if (string.IsNullOrEmpty(actorName) || emotionTime >62 || emotionTime < 0)
                 return false;
@@ -21,13 +21,14 @@ namespace Assets.scripts
         }
 
 
-        public AnimateEmotion(float startTick, float endTick, string actorName, int emotionTime) :
+        public AnimateEmotion(float startTick, float endTick, string actorName, float emotionTime) :
             base(startTick, endTick)
         {
             this.actorName = actorName;
             this.emotionTime = emotionTime;
             stopTriggerHash = Animator.StringToHash("stopEmotion");
             animatingHash = Animator.StringToHash("animating");
+            
         }
 
         public override bool Init()
@@ -54,7 +55,8 @@ namespace Assets.scripts
                 Debug.LogError("This actor[" + actorName + "] needs an animator controller first, not supported to put one on");
                 return false;
             }
-
+            Debug.Log("Initialized AnimateEmotion");
+            
             return true;
         }
 
@@ -70,6 +72,7 @@ namespace Assets.scripts
         public override void Execute(float currentTime) 
         {
             animator.Play(animatingHash, 1, emotionTime);
+            Debug.Log("Played AnimateEmotion");
 	    }
 
         public override void Stop()

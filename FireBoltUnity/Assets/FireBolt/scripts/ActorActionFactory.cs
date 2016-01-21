@@ -677,12 +677,13 @@ namespace Assets.scripts
         private static void enqueueFaceActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, CM.Animation effectingAnimation,
                                                  FireBoltActionList aaq, bool implicitActorInstantiation)
         {
+           
             foreach (CM.FaceAction fa in domainAction.FaceActions)
             {
-
+                Debug.Log("We the best.");
                 float startTick = 0;
                 float endTick = 0;
-                int emoTime = 40;
+                float emoTime = 40;
                 string actorName = null;
                 foreach (CM.DomainActionParameter domainActionParameter in domainAction.Params)
                 {
@@ -701,6 +702,7 @@ namespace Assets.scripts
                 {
                     aaq.Add(new AnimateEmotion(startTick, endTick, actorName, emoTime));
                 }
+                
             }
 
 

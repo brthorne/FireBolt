@@ -12,10 +12,10 @@ namespace CinematicModel
     {
         public FaceAction()
         {
-            TimeInClip = 40;
+            TimeInClip = 40f;
         }
 
         [XmlAttribute("timeInClip")]
-        public int TimeInClip { get; set; }
+        public float TimeInClip { get; set; }
     }
 }
