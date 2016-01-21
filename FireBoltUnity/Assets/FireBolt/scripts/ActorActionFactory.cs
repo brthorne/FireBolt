@@ -680,7 +680,7 @@ namespace Assets.scripts
            
             foreach (CM.FaceAction fa in domainAction.FaceActions)
             {
-                Debug.Log("We the best.");
+                
                 float startTick = 0;
                 float endTick = 0;
                 float emoTime = 40;
@@ -701,6 +701,7 @@ namespace Assets.scripts
                     AnimateEmotion.ValidForConstruction(actorName, emoTime))
                 {
                     aaq.Add(new AnimateEmotion(startTick, endTick, actorName, emoTime));
+                    Debug.Log("We the best.");
                 }
                 
             }

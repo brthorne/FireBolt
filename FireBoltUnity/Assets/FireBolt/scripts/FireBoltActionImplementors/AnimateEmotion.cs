@@ -72,7 +72,7 @@ namespace Assets.scripts
         public override void Execute(float currentTime) 
         {
             animator.Play(animatingHash, 1, emotionTime);
-            Debug.Log("Played AnimateEmotion");
+            //1 is the emotionLayer
 	    }
 
         public override void Stop()

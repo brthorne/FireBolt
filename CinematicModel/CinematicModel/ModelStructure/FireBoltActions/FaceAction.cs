@@ -10,10 +10,6 @@ namespace CinematicModel
     //TODO: delineate which clip/animationLayer of Generic animator controller to animate. Only supporting emotion for now so no delineation needed.
     public class FaceAction : FireBoltAction
     {
-        public FaceAction()
-        {
-            TimeInClip = 40f;
-        }
 
         [XmlAttribute("timeInClip")]
         public float TimeInClip { get; set; }
