@@ -1,3 +1,4 @@
+#if !UNITY_WEBPLAYER
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
@@ -27,3 +28,4 @@ public class UnitySynchronizationContext : SynchronizationContext
 		}
 	}
 }
+#endif

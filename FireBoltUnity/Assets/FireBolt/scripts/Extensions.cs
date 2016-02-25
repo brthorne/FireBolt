@@ -1,8 +1,4 @@
-﻿using System;
-using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using UnityEngine;
 using LN.Utilities;
 using System.Text.RegularExpressions;
 
@@ -51,11 +47,23 @@ namespace Assets.scripts
             return false;
         }
 
+        public static void RenderColliders()
+        {
+            foreach (GameObject obj in Object.FindObjectsOfType(typeof(GameObject)))
+            {
+                BoxCollider collider = obj.GetComponent<BoxCollider>();
+                if (collider != null)
+                {
+                    collider.bounds.BuildDebugBox(5, Color.green);
+                }
+            }
+        }
+
         /// <summary>
         /// gives a pretty cyan box at the bounds...only in scene view as it's a debug thinger
         /// </summary>
         /// <param name="bounds"></param>
-        public static void BuildDebugBox(this Bounds bounds)
+        public static void BuildDebugBox(this Bounds bounds, float duration, Color color)
         {
             //add some debugging box for the area we think we are framing
             Vector3 center = bounds.center;
@@ -77,7 +85,8 @@ namespace Assets.scripts
                 for (int j = 0; j < 8; j++)
                 {
                     if (i == j) continue;
-                    Debug.DrawLine(corners[i], corners[j], Color.cyan, 150);
+                    Debug.DrawLine(corners[i], corners[j], color, duration);
+                    //Gizmos.DrawLine(corners[i], corners[j]);//, Color.cyan, 150);
                 }
             }
         }
