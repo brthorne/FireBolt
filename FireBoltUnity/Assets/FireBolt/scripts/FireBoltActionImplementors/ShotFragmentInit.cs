@@ -140,7 +140,7 @@ namespace Assets.scripts
                 Bounds targetBounds = framingTarget.GetComponent<BoxCollider>().bounds;
                 targetBounds.BuildDebugBox(5, Color.cyan);
 
-                Debug.Log(string.Format("framing target[{0}] bounds[{1},{2}]", framings[0].FramingTarget, 
+                Debug.Log(string.Format("framing target[{0}] bounds[{1},{2}]", framingTarget.name, 
                                         targetBounds.min.y, targetBounds.max.y));
 
                 FramingParameters framingParameters = FramingParameters.FramingTable[framings[0].FramingType];
@@ -164,7 +164,7 @@ namespace Assets.scripts
                     //need to keep from stepping up and down over some boundary
                     bool incremented = false;
                     bool decremented = false;
-                    while (targetFov < float.Epsilon && !(incremented && decremented))  //if we haven't set a value and we haven't stepped both up and down.  
+                    while (!(incremented && decremented))  //if we haven't set a value and we haven't stepped both up and down.  
                     {
                         //find where on the screen the extents are.  using viewport space so this will be in %. z is world units away from camera
                         Vector3 bMax = cameraBody.NodalCamera.WorldToViewportPoint(targetBounds.max);
@@ -200,7 +200,8 @@ namespace Assets.scripts
                     (!tempCameraPosition.X.HasValue || !tempCameraPosition.Z.HasValue))//also assuming we get x,z in a pair.  if only one is provided, it is invalid and will be ignored
                 {
                     //allow full exploration of circle about target since we can't move in or out and keep the same framing                        
-                    if (!findCameraPositionForLens(framingTarget, targetBounds, framingParameters, 1.0f))
+                    if (!findCameraPositionForLens(framingTarget, targetBounds, framingParameters, 
+                                                   getIdealCameraPlacementDirection(framingTarget), 1.0f))
                     {
                         Debug.Log(string.Format("failed to find satisfactory position for camera to frame [{0}] [{1}] with lens [{2}]. view will be obstructed",
                                                 framings[0].FramingTarget, framings[0].FramingType.ToString(), ElPresidente.Instance.lensFovData[tempLensIndex.Value]._focalLength));
@@ -217,7 +218,8 @@ namespace Assets.scripts
                     bool sign = true;
                     short iterations = 0;
                     ushort maxLensChangeIterations = 6;
-                    while (!findCameraPositionForLens(framingTarget, targetBounds, framingParameters, 0.35f))
+                    Vector2 subjectToCamera = getIdealCameraPlacementDirection(framingTarget);
+                    while (!findCameraPositionForLens(framingTarget, targetBounds, framingParameters, subjectToCamera, 0.35f))
                     {
                         iterations++;
                         if (iterations > maxLensChangeIterations)
@@ -341,15 +343,17 @@ namespace Assets.scripts
         }
 
         /// <summary>
-        /// finds ideal distance based on lens and target percent height in viewport for the given framing
-        /// 
+        /// using the current templens, attempts to find position x,z to place the camera 
+        /// that allows for Line of Sight to the framing target
         /// </summary>
-        /// <param name="framingTarget"></param>
-        /// <param name="targetBounds"></param>
-        /// <param name="framingParameters"></param>
-        /// <param name="maxSearchPercent"></param>
-        /// <returns></returns>
-        private bool findCameraPositionForLens(GameObject framingTarget, Bounds targetBounds, FramingParameters framingParameters, float maxSearchPercent)
+        /// <param name="framingTarget">subject of the shot</param>
+        /// <param name="targetBounds">bounding box encapsulating subject</param>
+        /// <param name="framingParameters">default camera parameters for shot of this framing type</param>
+        /// <param name="subjectToCamera">vector from subject to ideal camera location</param>
+        /// <param name="maxSearchPercent">% of the circle's circumference to allow camera position to be offset left or right</param>
+        /// <returns>true if satisfying position can be found.  also sets temp camera position x,z for that location</returns>
+        private bool findCameraPositionForLens(GameObject framingTarget, Bounds targetBounds, FramingParameters framingParameters, 
+                                               Vector2 subjectToCamera, float maxSearchPercent)
         {
             //converting to radians when we lookup so we don't have to worry about it later
             float vFov = ElPresidente.Instance.lensFovData[tempLensIndex.Value]._unityVFOV * Mathf.Deg2Rad;
@@ -357,9 +361,6 @@ namespace Assets.scripts
             float frustumHeight = (1 / framingParameters.TargetPercent) * (targetBounds.max.y - targetBounds.min.y);
 
             float distanceToCamera = frustumHeight / Mathf.Tan(vFov / 2);
-
-            //use facing to determine direction
-            Vector2 subjectToCamera = getIdealCameraPlacementDirection(framingTarget);
 
             bool searchSign = true;
             float searchStepSize = 5f * Mathf.Deg2Rad;
