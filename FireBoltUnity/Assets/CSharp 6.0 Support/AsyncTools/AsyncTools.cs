@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !UNITY_WEBPLAYER
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
@@ -10,7 +11,7 @@ using Debug = UnityEngine.Debug;
 
 public static class AsyncTools
 {
-	private static readonly Awaiter updateAwaiter = new SynchronizationContextAwaiter(UnityScheduler.UpdateScheduler.Context);
+    private static readonly Awaiter updateAwaiter = new SynchronizationContextAwaiter(UnityScheduler.UpdateScheduler.Context);
 	private static readonly Awaiter fixedAwaiter = new SynchronizationContextAwaiter(UnityScheduler.FixedUpdateScheduler.Context);
 	private static readonly Awaiter lateUpdateAwaiter = new SynchronizationContextAwaiter(UnityScheduler.LateUpdateScheduler.Context);
 	private static readonly Awaiter threadPoolAwaiter = new ThreadPoolContextAwaiter();
@@ -163,7 +164,7 @@ public static class AsyncTools
 		return tcs.Task.GetAwaiter();
 	}
 
-	#region Context switching awaiter classes
+#region Context switching awaiter classes
 
 	public abstract class Awaiter : INotifyCompletion
 	{
@@ -198,5 +199,6 @@ public static class AsyncTools
 		public override void OnCompleted(Action action) => ThreadPool.QueueUserWorkItem(state => action(), null);
 	}
 
-	#endregion
+#endregion
 }
+#endif

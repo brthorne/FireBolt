@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !UNITY_WEBPLAYER
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -84,3 +85,4 @@ public class UnityTaskScheduler : TaskScheduler
 		}
 	}
 }
+#endif

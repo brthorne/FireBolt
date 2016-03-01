@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !UNITY_WEBPLAYER
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -52,9 +53,11 @@ public class UnityScheduler : MonoBehaviour
 		SynchronizationContext.SetSynchronizationContext(UpdateScheduler.Context);
 	}
 
-	private void Update() => UpdateScheduler.Activate();
+    private void Update() => UpdateScheduler.Activate();
 
 	private void LateUpdate() => LateUpdateScheduler.Activate();
 
 	private void FixedUpdate() => FixedUpdateScheduler.Activate();
+
 }
+#endif
