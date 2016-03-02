@@ -55,9 +55,14 @@ namespace Assets.scripts
 
         void setNewDefaults()
         {
-            storyField.text = "storyPlans/shakespeare.xml";
-            modelField.text = "cinematicModels/DotaHierarchyModel.xml";
-            cameraField.text = "cameraPlans/dotaCamera.xml";
+            //storyField.text = "storyPlans/shakespeare.xml";
+            //modelField.text = "cinematicModels/DotaHierarchyModel.xml";
+            //cameraField.text = "cameraPlans/dotaCamera.xml";
+            //actorField.text = "AssetBundles/actorsandanimations";
+            //terrainField.text = "AssetBundles/terrain";
+            storyField.text = "tests/defaultStory.xml";
+            modelField.text = "tests/defaultModel.xml";
+            cameraField.text = "tests/defaultCamera.xml";
             actorField.text = "AssetBundles/actorsandanimations";
             terrainField.text = "AssetBundles/terrain";
         }

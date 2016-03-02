@@ -207,8 +207,7 @@ namespace Assets.scripts
                     (!tempCameraPosition.X.HasValue || !tempCameraPosition.Z.HasValue))//also assuming we get x,z in a pair.  if only one is provided, it is invalid and will be ignored
                 {
                     //allow full exploration of circle about target since we can't move in or out and keep the same framing                        
-                    if (!findCameraPositionByRadius(framingTarget, targetBounds, framingParameters, 
-                                                   getIdealCameraPlacementDirection(framingTarget), 1.0f))
+                    if (!findCameraPositionByRadius(framingTarget, targetBounds, framingParameters, 1.0f))
                     {
                         Debug.Log(string.Format("failed to find satisfactory position for camera to frame [{0}] [{1}] with lens [{2}]. view will be obstructed",
                                                 framings[0].FramingTarget, framings[0].FramingType.ToString(), ElPresidente.Instance.lensFovData[tempLensIndex.Value]._focalLength));
@@ -225,8 +224,7 @@ namespace Assets.scripts
                     bool sign = true;
                     short iterations = 0;
                     ushort maxLensChangeIterations = 6;
-                    Vector2 subjectToCamera = getIdealCameraPlacementDirection(framingTarget);
-                    while (!findCameraPositionByRadius(framingTarget, targetBounds, framingParameters, subjectToCamera, 0.35f))
+                    while (!findCameraPositionByRadius(framingTarget, targetBounds, framingParameters, 0.35f))
                     {
                         iterations++;
                         if (iterations > maxLensChangeIterations)
@@ -354,8 +352,34 @@ namespace Assets.scripts
             return targetLookAtPoint;
         }
 
+        private Vector3 getPointofInterestPosition(GameObject actorObject)
+        {
+            CinematicModel.Actor logicalActor;
+            ElPresidente.Instance.CinematicModel.TryGetActor(actorObject.name, out logicalActor); //find the CM definition for the actor we are supposed to angle against
+            
+            float pointOfInterestScalar = 0;
+            pointOfInterestScalar = logicalActor.PointOfInterest;
+
+            Vector3 pointOfInterestPosition = new Vector3();
+            var collider = actorObject.GetComponent<BoxCollider>();
+            if (collider != null)
+            {
+                pointOfInterestPosition = new Vector3(collider.bounds.center.x,
+                                            collider.bounds.center.y + pointOfInterestScalar * collider.bounds.extents.y,
+                                            collider.bounds.center.z);
+            }
+            else
+            {
+                pointOfInterestPosition = actorObject.transform.position;
+                Debug.Log(string.Format("actor [{0}] has no collider to calculate point of interest position.  using actor root",
+                                        actorObject.name).AppendTimestamps());
+            }
+            return pointOfInterestPosition;
+
+        }
+
         private bool findCameraPositionByRadius(GameObject framingTarget, Bounds targetBounds, FramingParameters framingParameters,
-                                                Vector2 subjectToCamera, float maxHorizontalSearchPercent)
+                                                float maxHorizontalSearchPercent)
         {
             //converting to radians when we lookup so we don't have to worry about it later
             float vFov = ElPresidente.Instance.lensFovData[tempLensIndex.Value]._unityVFOV * Mathf.Deg2Rad;
@@ -364,30 +388,40 @@ namespace Assets.scripts
 
             float distanceToCamera = frustumHeight / Mathf.Tan(vFov / 2);
 
-            bool horizontalSearchSign = true;
+            Vector3 pointOfInterestPosition = getPointofInterestPosition(framingTarget);
+
+            float horizontalSearchSign = 1;
             float horizontalSearchStepSize = 5f * Mathf.Deg2Rad;
             ushort horizontalSearchIterations = 0;
+            float horizontalSearchAngleCurrent = 0;
             //bool verticalSearchSign = true; only searching up atm
-            float verticalSearchStepSize = 3f;
+            float verticalSearchStepSize = 1.5f;
             ushort verticalSearchIterations = 0;
-            ushort verticalSearchIterationsMax = 5;            
+            ushort verticalSearchIterationsMax = 10;            
             float verticalSearchAngleInitial = cameraAngle==null? 0f : CameraActionFactory.angles[cameraAngle.AngleSetting];
             bool subjectVisible = false;
             while (!subjectVisible)//search over the range about ideal position
             {
                 horizontalSearchIterations++;
-                //put camera at ideal position on the r=distance circle 
-                tempCameraPosition.X = targetBounds.center.x + subjectToCamera.x * distanceToCamera;
-                tempCameraPosition.Z = targetBounds.center.z + subjectToCamera.y * distanceToCamera;
+
 
                 float verticalSearchAngleCurrent = verticalSearchAngleInitial;
                 verticalSearchIterations = 0;
                 while (!subjectVisible && verticalSearchIterations < verticalSearchIterationsMax)
                 {
+                    
+
+                    //find direction vector given "direction" and angle measure
+                    Vector3 subjectToCamera = get3DDirection(framingTarget, new Vector3(verticalSearchAngleCurrent,horizontalSearchAngleCurrent));
+                    //put camera at position on the r=distance sphere
+                    tempCameraPosition.X = targetBounds.center.x + subjectToCamera.x * distanceToCamera;
+                    tempCameraPosition.Y = targetBounds.center.y + subjectToCamera.y * distanceToCamera;
+                    tempCameraPosition.Z = targetBounds.center.z + subjectToCamera.z * distanceToCamera;
+
                     //raycast to check for LoS
                     RaycastHit hit;
                     Vector3 from = tempCameraPosition.Merge(previousCameraPosition);
-                    Vector3 direction = targetBounds.center - tempCameraPosition.Merge(previousCameraPosition);
+                    Vector3 direction = pointOfInterestPosition - tempCameraPosition.Merge(previousCameraPosition);
                     if (Physics.Raycast(from, direction, out hit) &&
                         hit.transform == framingTarget.transform)
                     {
@@ -397,74 +431,73 @@ namespace Assets.scripts
                     }
                     else //we can't see the subject.  change camera height and try again
                     {
-
-                        tempCameraPosition.Y = findCameraYPosition(verticalSearchAngleCurrent, 
-                                                                   tempCameraPosition.Merge(previousCameraPosition),targetLookAtPoint);
                         verticalSearchAngleCurrent += verticalSearchStepSize;
                         verticalSearchIterations++;
                     }
                 }
                 if (!subjectVisible)//search around the circle
                 {
-                    //convert unit vector to rotation
-                    float theta = Mathf.Atan2(subjectToCamera.y, subjectToCamera.x);
+                    horizontalSearchSign = -horizontalSearchSign;
+                    horizontalSearchAngleCurrent = horizontalSearchSign * horizontalSearchIterations * horizontalSearchStepSize;
 
-                    //adjust rotation 
-                    float rotationOffset = horizontalSearchIterations * horizontalSearchStepSize;
-                    rotationOffset = horizontalSearchSign ? rotationOffset : -rotationOffset;
-                    theta = theta + rotationOffset;
-                    horizontalSearchSign = !horizontalSearchSign;
-
-                    if (Mathf.Abs(rotationOffset) > 6 * maxHorizontalSearchPercent) //have we gone more than the allotted amount around the circle?
+                    if (Mathf.Abs(horizontalSearchAngleCurrent) > 1.8 * maxHorizontalSearchPercent) //have we gone more than the allotted amount around the circle?
                     {
                         break;
                     }
-                    //convert rotation back to unit vector
-                    subjectToCamera = new Vector2(Mathf.Cos(theta), Mathf.Sin(theta)).normalized;
                 }
 
             }
             return subjectVisible;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="framingTarget">subject</param>
-        /// <returns>unit vector from subject toward camera location</returns>
-        private Vector2 getIdealCameraPlacementDirection(GameObject framingTarget)
+        Vector3 get3DDirection(GameObject framingTarget, Vector3 angleOffsets)
         {
+            //convert incoming angles to radians
+            angleOffsets.Scale(new Vector3(Mathf.Deg2Rad, Mathf.Deg2Rad, Mathf.Deg2Rad));
             //default to framing target in case direction wasn't specified
-            Vector2 subjectToCameraIdeal = new Vector2(framingTarget.transform.forward.x, framingTarget.transform.forward.z);
+            Vector3 subjectToCamera = framingTarget.transform.forward;
+            float directionBasedYRotation = 0;
             if (direction != null)
             {
                 GameObject directionTarget;
                 if (getActorByName(direction.Target, out directionTarget) &&
                     directionTarget != null)
                 {
-                    Quaternion savedRotation = directionTarget.transform.rotation;
+                    //Quaternion savedRotation = directionTarget.transform.rotation;
+
                     switch (direction.Heading)
                     {
                         case Heading.Toward:
                             ;//exists for completeness.  
                             break;
                         case Heading.Away:
-                            directionTarget.transform.Rotate(Vector3.up, 180);
+                            directionBasedYRotation = Mathf.PI;
                             break;
                         case Heading.Left:
-                            directionTarget.transform.Rotate(Vector3.up, -90);
+                            directionBasedYRotation = -Mathf.PI / 2;
                             break;
                         case Heading.Right:
-                            directionTarget.transform.Rotate(Vector3.up, 90);
+                            directionBasedYRotation = Mathf.PI / 2;
                             break;
                         default:
                             break;
                     }
-                    subjectToCameraIdeal = new Vector2(directionTarget.transform.forward.x, directionTarget.transform.forward.z);
-                    directionTarget.transform.rotation = savedRotation;
+                    //add on the rotation from the direction target's orientation about y
+                    directionBasedYRotation += directionTarget.transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
                 }
             }
-            return subjectToCameraIdeal.normalized;
+            else //get the root y rotation from the framing target
+            {
+                directionBasedYRotation += framingTarget.transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
+            }
+
+            //convert from spherical to rectangular coordinates
+            float theta = angleOffsets.y + directionBasedYRotation;
+            float phi = Mathf.PI/2 - angleOffsets.x;
+            subjectToCamera = new Vector3(Mathf.Cos(theta) * Mathf.Sin(phi),
+                                          Mathf.Cos(phi), //not using traditional mathematical coordinates, swapping z and y calculations
+                                          Mathf.Sin(theta) * Mathf.Sin(phi));
+            return subjectToCamera.normalized;
         }
         
         /// <summary>
