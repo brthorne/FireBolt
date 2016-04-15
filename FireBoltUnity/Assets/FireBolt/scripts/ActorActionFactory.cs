@@ -363,9 +363,14 @@ namespace Assets.scripts
                         if (getActionParameterValue(storyAction, domainActionParameter, out actorName) &&
                             (!implicitActorInstantiation || actorWillBeInstantiated(actorName)))
                         {
-                            abstractActorName = actorName;
-                            if(getAbstractActorName(actorName, out abstractActorName))
+                            //abstractActorName = actorName;
+                            if (!getAbstractActorName(actorName, out abstractActorName))
                             {
+                                //can't figure out what this actor name is supposed to be.  don't try to animate it.
+                                break;
+                            }
+                            else
+                            { 
                                 //this forces all levels of hierarchy to implement all animations if we want them played
                                 //we can't partially look up levels above for some things
                                 //iterate back and forth between finding matching hierarchical parents and looking for mappings to alleviate
