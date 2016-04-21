@@ -85,7 +85,7 @@ namespace Assets.scripts
                 for (int j = 0; j < 8; j++)
                 {
                     if (i == j) continue;
-                    Debug.DrawLine(corners[i], corners[j], color, duration);
+                    UnityEngine.Debug.DrawLine(corners[i], corners[j], color, duration);
                     //Gizmos.DrawLine(corners[i], corners[j]);//, Color.cyan, 150);
                 }
             }
@@ -187,6 +187,12 @@ namespace Assets.scripts
         public static string AppendTimestamps(this string s)
         {
             return s + string.Format(" d:s[{0}:{1}]", ElPresidente.currentDiscourseTime, ElPresidente.currentStoryTime);
+        }
+
+        public static void Log(string formatString, params object[] values)
+        {
+            if(ElPresidente.Instance.LogDebugStatements)
+                Debug.Log(string.Format(formatString,values).AppendTimestamps());
         }
     }
 }

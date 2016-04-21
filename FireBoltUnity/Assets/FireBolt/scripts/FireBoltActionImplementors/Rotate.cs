@@ -83,7 +83,7 @@ namespace Assets.scripts
                                                           targetOrientation.Y ?? startOrientation.y,
                                                           targetOrientation.Z ?? startOrientation.z));
 
-            Debug.Log(this.ToString());
+            Extensions.Log(this.ToString());
             return true;
         }
 
@@ -130,8 +130,8 @@ namespace Assets.scripts
         {
             if (targetOrientation.X.HasValue)
             {
-                Debug.Log(string.Format("Cannot merge multiple x axis rotations. Attempt to append rotate to tilt[{0}] to exsisting rotate with tilt[{1}].",
-                                        xOrientation, targetOrientation.X.Value));
+                Extensions.Log("Cannot merge multiple x axis rotations. Attempt to append rotate to tilt[{0}] to exsisting rotate with tilt[{1}].",
+                                        xOrientation, targetOrientation.X.Value);
                 return;
             }
             targetOrientation.X = xOrientation;
@@ -141,8 +141,8 @@ namespace Assets.scripts
         {
             if (targetOrientation.Y.HasValue)
             {
-                Debug.Log(string.Format("Cannot merge multiple y axis rotations. Attempt to append rotate to pan[{0}] to exsisting rotate with pan[{1}].",
-                                        yOrientation, targetOrientation.Y.Value));
+                Extensions.Log("Cannot merge multiple y axis rotations. Attempt to append rotate to pan[{0}] to exsisting rotate with pan[{1}].",
+                                        yOrientation, targetOrientation.Y.Value);
                 return;
             }
             targetOrientation.Y = yOrientation;

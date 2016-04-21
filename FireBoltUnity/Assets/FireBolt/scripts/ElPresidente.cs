@@ -53,6 +53,8 @@ public class ElPresidente : MonoBehaviour {
         get { return keyframesGenerated; }
     }
 
+    public bool LogDebugStatements { get; set; }
+
     private CM.CinematicModel cinematicModel = null;
     public CM.CinematicModel CinematicModel { get { return cinematicModel; } }
 
@@ -91,6 +93,7 @@ public class ElPresidente : MonoBehaviour {
 
     //number of milliseconds to advance the story and discourse time on update
     private uint? timeUpdateIncrement;
+    public bool GenerateVideoFrames { get { return generateVideoFrames; } }
     private bool generateVideoFrames;
     private uint videoFrameNumber;
 
@@ -440,6 +443,24 @@ public class ElPresidente : MonoBehaviour {
         updateFireBoltActions(cameraActionList, executingCameraActions, currentDiscourseTime);
     }
 
+    private bool videoGenerationInitialized = false;
+    private RenderTexture rt;
+    Texture2D screenShot;
+
+    //void OnPostRender()
+    //{
+    //    if (generateVideoFrames)
+    //    {
+    //        // Read the rendered texture into the texture 2D.
+    //        screenShot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+
+    //        // Save the texture 2D as a PNG.
+    //        byte[] bytes = screenShot.EncodeToPNG();
+    //        File.WriteAllBytes(@".screens/" + videoFrameNumber + ".png", bytes);
+    //        videoFrameNumber++;
+    //    }
+    //}
+
     void LateUpdate()
     {
         if (!initialized && initTriggered)
@@ -456,33 +477,53 @@ public class ElPresidente : MonoBehaviour {
 
         if (generateVideoFrames)
         {
-            // Initialize the render texture and texture 2D.
-            RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 24);
-            Texture2D screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        //    if (!videoGenerationInitialized)
+        //    {
+        //        // Initialize the render texture and texture 2D.
+        //        //rt = new RenderTexture(Screen.width, Screen.height, 24);
+        //        screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
 
-            // Render the texture.
-            Camera.main.targetTexture = rt;
-            Camera.main.Render();
+        //        // set render path to texture.
+        //        //RenderTexture.active = rt;
+        //        //Camera.main.targetTexture = rt;
 
-            // Read the rendered texture into the texture 2D.
-            RenderTexture.active = rt;
-            screenShot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
-
-            // Clean everything up.
-            Camera.main.targetTexture = null;
-            RenderTexture.active = null;
-            Destroy(rt);
-            Destroy(screenShot);
-
-            // Save the texture 2D as a PNG.
-            byte[] bytes = screenShot.EncodeToPNG();
-            File.WriteAllBytes(@".screens/" + videoFrameNumber + ".png", bytes);
-            videoFrameNumber++;
-
+        //        videoGenerationInitialized = true;
+        //    }
+            
             // Quit if we have passed the end of the discourse.
             if (cameraActionList.EndDiscourseTime < currentDiscourseTime)
                 Application.Quit();
         }
+
+        //if (generateVideoFrames)
+        //{
+        //    // Initialize the render texture and texture 2D.
+        //    RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 24);
+        //    Texture2D screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+
+        //    // Render the texture.
+        //    Camera.main.targetTexture = rt;
+        //    Camera.main.Render();
+
+        //    // Read the rendered texture into the texture 2D.
+        //    RenderTexture.active = rt;
+        //    screenShot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+
+        //    // Clean everything up.
+        //    Camera.main.targetTexture = null;
+        //    RenderTexture.active = null;
+        //    Destroy(rt);
+        //    Destroy(screenShot);
+
+        //    // Save the texture 2D as a PNG.
+        //    byte[] bytes = screenShot.EncodeToPNG();
+        //    File.WriteAllBytes(@".screens/" + videoFrameNumber + ".png", bytes);
+        //    videoFrameNumber++;
+
+        //    // Quit if we have passed the end of the discourse.
+        //    if (cameraActionList.EndDiscourseTime < currentDiscourseTime)
+        //        Application.Quit();
+        //}
     }
 
     /// <summary>
@@ -542,9 +583,9 @@ public class ElPresidente : MonoBehaviour {
             currentIndex--;
         }
         if (actions.Count > actions.NextActionIndex)
-            Debug.Log("rewind to " + actions.NextActionIndex + ": " + actions[actions.NextActionIndex]);
+            Extensions.Log("rewind to " + actions.NextActionIndex + ": " + actions[actions.NextActionIndex]);
         else
-            Debug.Log("rewind to action #" + actions.NextActionIndex);
+            Extensions.Log("rewind to action #" + actions.NextActionIndex);
     }
 
     void fastForwardFireBoltActions(FireBoltActionList actions, float targetTime, FireBoltActionList executingActions, float currentTime)
@@ -580,7 +621,7 @@ public class ElPresidente : MonoBehaviour {
 	{
         if (time < 0)
             time = 0;
-        Debug.Log ("goto story " + time);
+        Extensions.Log("goto story " + time);
 		if (time < currentStoryTime)
         {
             currentStoryTime = time;
@@ -598,7 +639,7 @@ public class ElPresidente : MonoBehaviour {
     {
         if (time < 0)
             time = 0;
-        Debug.Log("goto discourse " + time);
+        Extensions.Log("goto discourse " + time);
         lastTickLogged = time;
         if (time < currentDiscourseTime)
         {
@@ -630,7 +671,7 @@ public class ElPresidente : MonoBehaviour {
     {
         if (currentDiscourseTime - lastTickLogged > 1000)
         {
-            Debug.Log(currentDiscourseTime + " : " + currentStoryTime);
+            Extensions.Log(currentDiscourseTime + " : " + currentStoryTime);
             lastTickLogged = currentDiscourseTime;
         }
     }

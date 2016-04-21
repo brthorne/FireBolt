@@ -42,7 +42,7 @@ namespace Assets.scripts
 
         public override bool Init()
         {
-            Debug.Log(string.Format("init create model[{0}] for actor [{1}]",modelName, actorName));
+            Extensions.Log("init create model[{0}] for actor [{1}]",modelName, actorName);
             if (getActorByName(actorName, out actor))
             {
                 if (defaultedCreate)
@@ -79,7 +79,7 @@ namespace Assets.scripts
             }
             else
             {
-                Debug.Log(string.Format("could not find InstantiatedObjects in createdGameObjects registry.  cannot add [{0}] in the hierarchy", actor));
+                Extensions.Log("could not find InstantiatedObjects in createdGameObjects registry.  cannot add [{0}] in the hierarchy", actor);
             }
             //add actor to the main registry for quicker lookups
             ElPresidente.createdGameObjects.Add(actor.name, actor);
@@ -122,7 +122,7 @@ namespace Assets.scripts
 
         public override void Undo()
 		{
-            Debug.Log ("Undo create");
+            Extensions.Log("Undo create" + ToString());
 			if (actor != null)
             {
                 actor.SetActive(false);
