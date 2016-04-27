@@ -48,39 +48,6 @@
         </shotFragment>
       </shotFragments>
     </block>
-    <block storyTime="61182">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61182">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61182">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
     <block storyTime="61184">
       <shotFragments>
         <shotFragment height="2" duration="34" f-stop="f8" focus="Ember Spirit">
@@ -106,117 +73,7 @@
         </shotFragment>
       </shotFragments>
     </block>
-    <block storyTime="61188">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61188">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61188">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
     <block storyTime="61194">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61194">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61194">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61194">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61200">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61200">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61200">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61200">
       <shotFragments>
         <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
           <angle target="Ember Spirit" angleSetting="High" />
@@ -249,84 +106,7 @@
         </shotFragment>
       </shotFragments>
     </block>
-    <block storyTime="61206">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61206">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
     <block storyTime="61256">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61256">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61256">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61292">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61292">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61292">
       <shotFragments>
         <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
           <angle target="Ember Spirit" angleSetting="High" />
@@ -349,39 +129,6 @@
       </shotFragments>
     </block>
     <block storyTime="61328">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61328">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61380">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61380">
       <shotFragments>
         <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
           <angle target="Ember Spirit" angleSetting="High" />
@@ -415,17 +162,6 @@
       </shotFragments>
     </block>
     <block storyTime="61453">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61487">
       <shotFragments>
         <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
           <angle target="Ember Spirit" angleSetting="High" />
@@ -491,62 +227,7 @@
         </shotFragment>
       </shotFragments>
     </block>
-    <block storyTime="61637">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
     <block storyTime="61854">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61854">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61854">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61854">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="50mm" f-stop="f5.6" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="Medium" />
-          <framings>
-            <framing framingType="Waist" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61860">
       <shotFragments>
         <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
           <angle target="Ember Spirit" angleSetting="High" />
@@ -558,28 +239,6 @@
       </shotFragments>
     </block>
     <block storyTime="61860">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61860">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61866">
       <shotFragments>
         <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
           <angle target="Ember Spirit" angleSetting="High" />
@@ -607,39 +266,6 @@
           <angle target="npc_dota_creep_badguys_ranged 2090462" angleSetting="Medium" />
           <framings>
             <framing framingType="Waist" framingTarget="npc_dota_creep_badguys_ranged 2090462" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61872">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61879">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
-          </framings>
-          <movements />
-        </shotFragment>
-      </shotFragments>
-    </block>
-    <block storyTime="61879">
-      <shotFragments>
-        <shotFragment height="2" duration="31" lens="28mm" f-stop="f16" focus="Ember Spirit">
-          <angle target="Ember Spirit" angleSetting="High" />
-          <framings>
-            <framing framingType="Long" framingTarget="Ember Spirit" />
           </framings>
           <movements />
         </shotFragment>

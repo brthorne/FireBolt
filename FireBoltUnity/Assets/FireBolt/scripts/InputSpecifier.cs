@@ -68,9 +68,14 @@ namespace Assets.scripts
             //storyField.text = "tests/test004/defaultStory.xml";
             //modelField.text = "tests/test004/defaultModel.xml";
             //cameraField.text = "tests/test004/defaultCamera.xml";
-            storyField.text = "tests/fireblock/story1.xml";
-            modelField.text = "tests/fireblock/cinematic1.xml";
-            cameraField.text = "tests/fireblock/camera1.xml";
+            //storyField.text = "tests/fireblock/MoreComplexStory.xml";
+            //modelField.text = "tests/fireblock/MoreComplexCinematic.xml";
+            //cameraField.text = "tests/fireblock/MoreComplexCamera.xml";
+            //actorField.text = "AssetBundles/actorsandanimations";
+            //terrainField.text = "AssetBundles/terrain";
+            storyField.text = "MoreComplexStory.xml";
+            modelField.text = "MoreComplexCinematic.xml";
+            cameraField.text = "MoreComplexCamera.xml";
             actorField.text = "AssetBundles/actorsandanimations";
             terrainField.text = "AssetBundles/terrain";
         }

@@ -92,7 +92,7 @@ public class ElPresidente : MonoBehaviour {
         get { return cameraActionList != null ? cameraActionList.EndDiscourseTime : 0; }}
 
     //number of milliseconds to advance the story and discourse time on update
-    private uint? timeUpdateIncrement;
+    public uint? timeUpdateIncrement;
     public bool GenerateVideoFrames { get { return generateVideoFrames; } }
     private bool generateVideoFrames;
     private uint videoFrameNumber;
@@ -492,7 +492,11 @@ public class ElPresidente : MonoBehaviour {
             
             // Quit if we have passed the end of the discourse.
             if (cameraActionList.EndDiscourseTime < currentDiscourseTime)
+            {
+                FrameSaver.StopCapture();
                 Application.Quit();
+            }
+                
         }
 
         //if (generateVideoFrames)
