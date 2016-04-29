@@ -50,7 +50,7 @@ namespace Assets.scripts
             {
                 input.TerrainBundlePath = terrainField.text;
             }
-            ElPresidente.Instance.Init(input);
+            ElPresidente.Instance.Init(false, input);
         }
 
         void setNewDefaults()

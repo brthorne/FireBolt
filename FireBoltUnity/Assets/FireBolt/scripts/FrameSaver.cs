@@ -2,10 +2,12 @@
 using System.IO;
 using System;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Assets.scripts
 {
-    
+
 
     public class FrameSaver : MonoBehaviour
     {
@@ -22,24 +24,26 @@ namespace Assets.scripts
         static System.Diagnostics.Process ffmpeg;
         BinaryWriter framewriter;
 
-        void Start()
+        public void Initialize(VideoInputSet videoInputSet)
         {
-            //add post-render hook only when generating video
-            if (ElPresidente.Instance.GenerateVideoFrames)
-            {               
-                pixels = new byte[Screen.width * Screen.height * 4];
-                Camera.onPostRender += PostRender;
-                ffmpeg = initializeFFMPEGCommand();
-            }
-
+            pixels = new byte[Screen.width * Screen.height * 4];
+            Camera.onPostRender += PostRender;
+            ffmpeg = initializeFFMPEGCommand(videoInputSet);
         }
 
-        private System.Diagnostics.Process initializeFFMPEGCommand()
+        private System.Diagnostics.Process initializeFFMPEGCommand(VideoInputSet videoInputSet)
         {
             var p = new System.Diagnostics.Process();
-            p.StartInfo = new System.Diagnostics.ProcessStartInfo("ffmpeg.exe",string.Format("-y -r {0} -f rawvideo -s {1}x{2} -pix_fmt rgba " +
-                                                                                             "-i - -pix_fmt yuv420p -crf {0} -vf vflip {3}",
-                                                                                             30, Screen.width, Screen.height, "output.mp4"));
+            StringBuilder videoOutputs = new StringBuilder();
+            foreach(var encoding in videoInputSet.Encodings)
+            {
+                videoOutputs.Append(string.Format(" {0} {1}.{2} ",
+                                                encoding.Value, videoInputSet.OutputPath, encoding.Key));
+            }
+            string ffmpegArgs = string.Format("-y -s {1}x{2} -f rawvideo -pix_fmt rgba -i - -framerate {0}  ", 
+                                              videoInputSet.FrameRate, Screen.width, Screen.height) + videoOutputs.ToString();
+            Debug.LogWarning("ffmpegArgs = " + ffmpegArgs);
+            p.StartInfo = new System.Diagnostics.ProcessStartInfo(videoInputSet.FFMPEGPath, ffmpegArgs);
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardInput = true;
             p.StartInfo.RedirectStandardOutput = false;
@@ -49,26 +53,28 @@ namespace Assets.scripts
 
         public void PostRender(Camera camera)
         {
-
-            if (!init)
+            if (ElPresidente.Instance.GenerateVideoFrames)
             {
-                ffmpeg.Start();
-                framewriter = new BinaryWriter(ffmpeg.StandardInput.BaseStream);
-                init = true;
-            }
-
-            unsafe
-            {
-                fixed (void* ptr = &(pixels[0]))
+                if (!init)
                 {
-                    IntPtr buffer = (IntPtr)ptr;
-                    glReadPixels(0, 0, Screen.width, Screen.height, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+                    ffmpeg.Start();
+                    framewriter = new BinaryWriter(ffmpeg.StandardInput.BaseStream);
+                    init = true;
                 }
+
+                unsafe
+                {
+                    fixed (void* ptr = &(pixels[0]))
+                    {
+                        IntPtr buffer = (IntPtr)ptr;
+                        glReadPixels(0, 0, Screen.width, Screen.height, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+                        framewriter.Write(pixels, 0, pixels.Length);
+                    }
+                }               
             }
-            framewriter.Write(pixels, 0, pixels.Length);
         }
 
-        public static void StopCapture()
+        public void StopCapture()
         {
             ffmpeg.StandardInput.WriteLine('q');
         }

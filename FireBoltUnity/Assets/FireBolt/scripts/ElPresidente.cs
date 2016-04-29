@@ -53,7 +53,14 @@ public class ElPresidente : MonoBehaviour {
         get { return keyframesGenerated; }
     }
 
-    public bool LogDebugStatements { get; set; }
+    public bool LogDebugStatements
+    {
+        get
+        {
+            return logDebugStatements;
+        }
+    }
+    private bool logDebugStatements = false;
 
     private CM.CinematicModel cinematicModel = null;
     public CM.CinematicModel CinematicModel { get { return cinematicModel; } }
@@ -92,10 +99,10 @@ public class ElPresidente : MonoBehaviour {
         get { return cameraActionList != null ? cameraActionList.EndDiscourseTime : 0; }}
 
     //number of milliseconds to advance the story and discourse time on update
-    public uint? timeUpdateIncrement;
+    public uint? timeUpdateIncrement = null;
     public bool GenerateVideoFrames { get { return generateVideoFrames; } }
-    private bool generateVideoFrames;
-    private uint videoFrameNumber;
+    private bool generateVideoFrames = false;
+    FrameSaver frameSaver;
 
     private bool implicitActorCreation;
 
@@ -132,30 +139,6 @@ public class ElPresidente : MonoBehaviour {
     }
 
     /// <summary>
-    /// wrapper for default args Init to use from UI button as default args methods are not visible in UI click event assignment in inspector
-    /// </summary>
-    /// <param name="a"></param>
-    [Obsolete("write your own script to interact with Init(InputSet, uint?, bool, bool")]
-    public void Init(float a)
-    {
-        Init(null, null, true);
-    }
-
-    /// <summary>
-    /// re Initialize using default paths and only reloading files when 
-    /// they are updated
-    /// </summary>
-    /// <param name="generateKeyframes">toggles keyframe generation.  
-    /// Keyframe generation runs the entire story through and may take 
-    /// a large amount of time to initialize.</param>
-    [Obsolete("write your own script to interact with Init(InputSet, uint?, bool, bool")]
-    public void Init(bool generateKeyframes)
-    {
-        Debug.Log(string.Format("reload keyframes[{0}]",generateKeyframes));
-        Init(null, null, false, generateKeyframes);
-    }
-
-    /// <summary>
     /// Use this method to start FireBolt.
     /// </summary>
     /// <param name="newInputSet">specify input file locations in an InputSet.  accepts null and 
@@ -166,13 +149,20 @@ public class ElPresidente : MonoBehaviour {
     /// and reloads the whole shebang...almost like you would expect.</param>
     /// <param name="generateKeyframes">optional default false. makes keyframes for display over scrubber.
     /// locks down the UI for some time at startup to execute whole cinematic once all speedy like</param>
-    public void Init(InputSet newInputSet=null, uint? timeUpdateIncrement=null, bool forceFullReload=false, 
-        bool generateKeyframes=false, bool generateVideoFrames=false, bool implicitActorCreation=false)
+    public void Init(bool logDebug = false, InputSet newInputSet=null, VideoInputSet videoInputSet=null, 
+        bool forceFullReload=false, bool generateKeyframes=false, bool implicitActorCreation=false)
     {
-        this.timeUpdateIncrement = timeUpdateIncrement;
-        this.generateKeyframes = generateKeyframes;
-        this.generateVideoFrames = generateVideoFrames;
+        if(videoInputSet != null)
+        {
+            this.timeUpdateIncrement = (uint?)(1000f / (float?)videoInputSet.FrameRate);
+            this.generateVideoFrames = true;
+            frameSaver = gameObject.AddComponent<FrameSaver>();
+            frameSaver.Initialize(videoInputSet);
+        }
+        
+        this.generateKeyframes = generateKeyframes;        
         this.implicitActorCreation = implicitActorCreation;
+        this.logDebugStatements = logDebug;
 
         if (generateVideoFrames)
         {
@@ -447,20 +437,6 @@ public class ElPresidente : MonoBehaviour {
     private RenderTexture rt;
     Texture2D screenShot;
 
-    //void OnPostRender()
-    //{
-    //    if (generateVideoFrames)
-    //    {
-    //        // Read the rendered texture into the texture 2D.
-    //        screenShot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
-
-    //        // Save the texture 2D as a PNG.
-    //        byte[] bytes = screenShot.EncodeToPNG();
-    //        File.WriteAllBytes(@".screens/" + videoFrameNumber + ".png", bytes);
-    //        videoFrameNumber++;
-    //    }
-    //}
-
     void LateUpdate()
     {
         if (!initialized && initTriggered)
@@ -477,57 +453,12 @@ public class ElPresidente : MonoBehaviour {
 
         if (generateVideoFrames)
         {
-        //    if (!videoGenerationInitialized)
-        //    {
-        //        // Initialize the render texture and texture 2D.
-        //        //rt = new RenderTexture(Screen.width, Screen.height, 24);
-        //        screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
-
-        //        // set render path to texture.
-        //        //RenderTexture.active = rt;
-        //        //Camera.main.targetTexture = rt;
-
-        //        videoGenerationInitialized = true;
-        //    }
-            
-            // Quit if we have passed the end of the discourse.
             if (cameraActionList.EndDiscourseTime < currentDiscourseTime)
             {
-                FrameSaver.StopCapture();
+                frameSaver.StopCapture();
                 Application.Quit();
-            }
-                
+            }                
         }
-
-        //if (generateVideoFrames)
-        //{
-        //    // Initialize the render texture and texture 2D.
-        //    RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 24);
-        //    Texture2D screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
-
-        //    // Render the texture.
-        //    Camera.main.targetTexture = rt;
-        //    Camera.main.Render();
-
-        //    // Read the rendered texture into the texture 2D.
-        //    RenderTexture.active = rt;
-        //    screenShot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
-
-        //    // Clean everything up.
-        //    Camera.main.targetTexture = null;
-        //    RenderTexture.active = null;
-        //    Destroy(rt);
-        //    Destroy(screenShot);
-
-        //    // Save the texture 2D as a PNG.
-        //    byte[] bytes = screenShot.EncodeToPNG();
-        //    File.WriteAllBytes(@".screens/" + videoFrameNumber + ".png", bytes);
-        //    videoFrameNumber++;
-
-        //    // Quit if we have passed the end of the discourse.
-        //    if (cameraActionList.EndDiscourseTime < currentDiscourseTime)
-        //        Application.Quit();
-        //}
     }
 
     /// <summary>
