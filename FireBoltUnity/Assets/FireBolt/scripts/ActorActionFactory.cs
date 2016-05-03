@@ -84,21 +84,21 @@ namespace Assets.scripts
         //                                 story.IntervalSet.IncludesOrMeetsStartOf<UintV, UintT>((UintT)p.Time, interval) 
         //                           select new { Actor = p.Terms[0].Name, Location = (p.Terms[1] as IConstant<Coordinate2D>).Value };
 
-        //    Debug.Log("building init state creation actions");
+        //    Extensions.Log("building init state creation actions");
         //    foreach (var initPos in initialPositions)
         //    {
-        //        Debug.Log(initPos.Actor + ", " + initPos.Location.ToString());
+        //        Extensions.Log(initPos.Actor + ", " + initPos.Location.ToString());
         //        CM.Actor actor;
         //        if (!cm.TryGetActor(initPos.Actor,out actor))
         //        {
-        //            Debug.Log("actor [" + initPos.Actor + "] not found in cinematic model.");
+        //            Extensions.Log("actor [" + initPos.Actor + "] not found in cinematic model.");
         //            continue;
         //        }
 
         //        string modelFileName = actor.Model;
         //        if (string.IsNullOrEmpty(modelFileName))
         //        {
-        //            Debug.Log("model name for actor[" + initPos.Actor + "] not found in cinematic model.");
+        //            Extensions.Log("model name for actor[" + initPos.Actor + "] not found in cinematic model.");
         //            continue;
         //        }
         //        aaq.Add(new Create(0, initPos.Actor, modelFileName, initPos.Location.ToVector3()));
@@ -109,21 +109,21 @@ namespace Assets.scripts
         {
             var actorNames = (story.ObjectSets[Impulse.v_1_336.Xml.Story.ObjectsSetName] as IFiniteObjectSet).Items.Select(c => c.Name).ToList();
 
-            Debug.Log("building object set based creation actions");
+            Extensions.Log("building object set based creation actions");
             foreach (var actorName in actorNames)
             {
                 if (!actorActuallyDoesStuff(actorName))
                 {
-                    //Debug.Log(string.Format("not instantiating actor[{0}] as he does nothing in this impulse", actorName));
+                    //Extensions.Log("not instantiating actor[{0}] as he does nothing in this impulse", actorName);
                     continue;
                 }
                 string modelFileName;
                 if (!getAbstractActorModelName(actorName, out modelFileName))
                 {
-                    Debug.Log(string.Format("cannot auto-create actor[{0}]", actorName));
+                    Extensions.Log("cannot auto-create actor[{0}]", actorName);
                     continue;
                 }
-                Debug.Log(string.Format("building object set based create for actor[{0}]", actorName));
+                Extensions.Log("building object set based create for actor[{0}]", actorName);
                 Create create = new Create(0, actorName, modelFileName, new Vector3(-10000, 0, -10000), null, true);
                 aaq.Add(create);
                 implicitActorInstantiations.Add(actorName, true);
@@ -297,19 +297,19 @@ namespace Assets.scripts
                     string abstractEffectorActorName;
                     if(!getAbstractActorName(effectorActorName, out abstractEffectorActorName))
                     {
-                        Debug.Log(string.Format("Failed to find effectorActorName[{0}] in hierarchy for stepid[{1}]", effectorActorName, storyAction.Name));
+                        Extensions.Log("Failed to find effectorActorName[{0}] in hierarchy for stepid[{1}]", effectorActorName, storyAction.Name);
                         return null;
                     }
 
                     CM.Actor effectorActor;
                     if (!cm.TryGetActor(abstractEffectorActorName, out effectorActor))
                     {
-                        Debug.Log(string.Format("effector actor [{0}] undefined for step[{1}]",effectorActorName,storyAction.Name));
+                        Extensions.Log("effector actor [{0}] undefined for step[{1}]",effectorActorName,storyAction.Name);
                         return null;
                     }
                     if(!effectorActor.TryGetAnimationMapping(effectorAnimateAction.Name, out effectorAnimationMapping))
                     {
-                        Debug.Log("cinematic model animation instance undefined for actor[" +
+                        Extensions.Log("cinematic model animation instance undefined for actor[" +
                             effectorActorName + "] action[" + domainAction.Name + "] paramName[" + domainActionParameter.Name + "]");
                         return null;
                     }
@@ -347,7 +347,7 @@ namespace Assets.scripts
                 foreach (CM.DomainActionParameter domainActionParameter in domainAction.Params)
                 {
                     //endName = string.Empty; //The endName should not be string.Empty if the below propety is never true.
-                    //  Debug.Log("beforeset: " + animateAction.Name + " " +  domainActionParameter.Name);
+                    // Extensions.Log("beforeset: " + animateAction.Name + " " +  domainActionParameter.Name);
                     if (domainActionParameter.Name.Equals(animateAction.Name))
                     {
                         getActionParameterValue(storyAction, domainActionParameter, out animateActionName);
@@ -376,7 +376,7 @@ namespace Assets.scripts
                                 //iterate back and forth between finding matching hierarchical parents and looking for mappings to alleviate
                                 if(!getAnimationMapping(abstractActorName, animateActionName, out animMapping))
                                 {
-                                    Debug.Log("cinematic model animation instance undefined for actor[" +
+                                    Extensions.Log("cinematic model animation instance undefined for actor[" +
                                     abstractActorName + "] animateAction[" + animateActionName + "]");
                                     break;
                                 }
@@ -386,7 +386,7 @@ namespace Assets.scripts
                             animation = cm.FindAnimation(animMapping.AnimationName);
                             if (animation == null)
                             {
-                                Debug.Log(string.Format("animation name [{0}] undefined", animMapping.AnimationName));
+                                Extensions.Log("animation name [{0}] undefined", animMapping.AnimationName);
                                 break;
                             }
 
@@ -400,7 +400,7 @@ namespace Assets.scripts
 
                                     if(stateAnimation == null)
                                     {
-                                        Debug.Log(string.Format("state animation name [{0}] undefined", stateMapping.AnimationName));
+                                        Extensions.Log("state animation name [{0}] undefined", stateMapping.AnimationName);
                                         break;
                                     }                                    
                                 }
@@ -413,7 +413,7 @@ namespace Assets.scripts
 
                 if (AnimateMecanim.ValidForConstruction(actorName, animation))
                 {
-                    //   Debug.Log("actor: " + actorName + " animMappingName: " + animMapping.AnimationName + " animateActionName: " + animMapping.AnimateActionName + " loop: " + animMapping.LoopAnimation);
+                    //   Extensions.Log("actor: " + actorName + " animMappingName: " + animMapping.AnimationName + " animateActionName: " + animMapping.AnimateActionName + " loop: " + animMapping.LoopAnimation);
                     aaq.Add(new AnimateMecanim(startTick, endTick, actorName, animation.FileName, animMapping.LoopAnimation, stateAnimation.FileName));
                 }
             }
@@ -461,7 +461,7 @@ namespace Assets.scripts
                 parameterValueName = ParamNameProperty.Value.Name;
                 return true;
             }
-            Debug.Log(domainActionParameter.Name + " not set for stepId[" + storyAction.Name + "]");
+            Extensions.Log(domainActionParameter.Name + " not set for stepId[" + storyAction.Name + "]");
             return false;
         }
 
@@ -471,7 +471,7 @@ namespace Assets.scripts
             CM.Actor actor;
             if (!cm.TryGetActor(actorName, out actor))
             {
-                //Debug.Log("actor[" + actorName + "] not found in cinematic model");
+                //Extensions.Log("actor[" + actorName + "] not found in cinematic model");
             }
             else
             {                
@@ -482,7 +482,7 @@ namespace Assets.scripts
                 }
                 else
                 {
-                    Debug.Log("model name for actor[" + actorName + "] not found in cinematic model.");
+                    Extensions.Log("model name for actor[" + actorName + "] not found in cinematic model.");
                 }
             }
             return false;
@@ -516,14 +516,14 @@ namespace Assets.scripts
                 {                    
                     if (getActorModel(orderedObjectSets[objectSetIndex], out modelName))
                     {
-                        Debug.Log(string.Format("using abstract actor[{0}] for actor[{1}] level[{2}] above exact actor", orderedObjectSets[objectSetIndex], actorName, actorHierarchyStepLevel));
+                        Extensions.Log("using abstract actor[{0}] for actor[{1}] level[{2}] above exact actor", orderedObjectSets[objectSetIndex], actorName, actorHierarchyStepLevel);
                         return true;//quit looking up the hierarchy.  we found a more generic actor
                     }
                     actorHierarchyStepLevel++;
                 }
                 objectSetIndex++;
             }
-            Debug.Log(string.Format("could not find actor def in hierarchy for [{0}]",actorName));
+            Extensions.Log("could not find actor def in hierarchy for [{0}]",actorName);
             return false;//didn't find actor definition.  give up on this create action and move to the next one
         }
 
@@ -549,14 +549,14 @@ namespace Assets.scripts
                     if (cm.TryGetActor(orderedObjectSets[objectSetIndex], out actor))
                     {
                         abstractActorName = actor.Name;
-                        Debug.Log(string.Format("using abstract actor[{0}] for actor[{1}] level[{2}] above exact actor", abstractActorName, actorName, actorHierarchyStepLevel));
+                        Extensions.Log("using abstract actor[{0}] for actor[{1}] level[{2}] above exact actor", abstractActorName, actorName, actorHierarchyStepLevel);
                         return true;//quit looking up the hierarchy.  we found a more generic actor
                     }
                     actorHierarchyStepLevel++;
                 }
                 objectSetIndex++;
             }
-            Debug.Log(string.Format("could not find actor def in hierarchy for [{0}]", actorName));
+            Extensions.Log("could not find actor def in hierarchy for [{0}]", actorName);
             return false;
         }
 

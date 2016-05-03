@@ -574,7 +574,7 @@ namespace Assets.scripts
                 return false;
             }
             focusPosition = target.transform.position;
-            //Debug.Log(string.Format("focus target[{0}] @{1} tracking[{2}]", focusTarget, target.transform.position));
+            //Extensions.Log("focus target[{0}] @{1} tracking[{2}]", focusTarget, target.transform.position));
 
             return true;
         }
