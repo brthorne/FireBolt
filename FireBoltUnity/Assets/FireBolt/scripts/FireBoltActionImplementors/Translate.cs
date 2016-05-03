@@ -57,7 +57,8 @@ namespace Assets.scripts
 
             origin = possibleOrigin.HasValue ? possibleOrigin.Value : actor.transform.position;
 
-            Debug.Log(string.Format("translate init [{0}] from [{1}] to [{2}] d:s[{3}:{4}]",actorName,origin,destination,ElPresidente.currentDiscourseTime,ElPresidente.currentStoryTime));
+            Extensions.Log("translate init [{0}] from [{1}] to [{2}]",
+                           actorName,origin,destination);
             initialized = true;
             return true;
         }

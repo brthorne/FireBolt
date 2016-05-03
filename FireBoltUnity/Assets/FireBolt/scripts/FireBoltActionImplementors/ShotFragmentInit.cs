@@ -76,9 +76,9 @@ namespace Assets.scripts
             if (existsFraming())
                 framingDescriptor = framings[0].ToString();
 
-            Debug.Log(string.Format("init shot fragment start[{0}] end[{1}] anchor[{2}] height[{3}] lens[{4}] fStop[{5}] framing[{6}] direction[{7}] angle[{8}] focus[{9}] d:s[{10}:{11}]",
+            Extensions.Log("init shot fragment start[{0}] end[{1}] anchor[{2}] height[{3}] lens[{4}] fStop[{5}] framing[{6}] direction[{7}] angle[{8}] focus[{9}] d:s[{10}:{11}]",
                                     startTick, endTick, anchor, height, lensName, fStopName, framingDescriptor, direction, cameraAngle, focusTarget,
-                                    ElPresidente.Instance.CurrentDiscourseTime, ElPresidente.Instance.CurrentStoryTime));
+                                    ElPresidente.Instance.CurrentDiscourseTime, ElPresidente.Instance.CurrentStoryTime);
             if (!findCamera()) return false;
             savePreviousCameraState();
 
@@ -90,7 +90,7 @@ namespace Assets.scripts
             Vector2 anchorPosition;
             if (calculateAnchor(anchor, out anchorPosition))
             {
-                Debug.Log(string.Format("setting camera anchor[{0}]", anchorPosition));
+                Extensions.Log("setting camera anchor[{0}]", anchorPosition);
                 tempCameraPosition.X = anchorPosition.x;
                 tempCameraPosition.Z = anchorPosition.y;
             }
@@ -147,8 +147,8 @@ namespace Assets.scripts
                 Bounds targetBounds = framingTarget.GetComponent<BoxCollider>().bounds;
                 targetBounds.BuildDebugBox(5, Color.cyan);
 
-                Debug.Log(string.Format("framing target[{0}] bounds[{1},{2}]", framingTarget.name, 
-                                        targetBounds.min.y, targetBounds.max.y).AppendTimestamps());
+                Extensions.Log("framing target[{0}] bounds[{1},{2}]", framingTarget.name, 
+                                        targetBounds.min.y, targetBounds.max.y);
 
                 FramingParameters framingParameters = FramingParameters.FramingTable[framings[0].FramingType];
 
@@ -209,8 +209,8 @@ namespace Assets.scripts
                     //allow full exploration of circle about target since we can't move in or out and keep the same framing                        
                     if (!findCameraPositionByRadius(framingTarget, targetBounds, framingParameters, 1.0f))
                     {
-                        Debug.Log(string.Format("failed to find satisfactory position for camera to frame [{0}] [{1}] with lens [{2}]. view will be obstructed",
-                                                framings[0].FramingTarget, framings[0].FramingType.ToString(), ElPresidente.Instance.lensFovData[tempLensIndex.Value]._focalLength));
+                        Extensions.Log("failed to find satisfactory position for camera to frame [{0}] [{1}] with lens [{2}]. view will be obstructed",
+                                                framings[0].FramingTarget, framings[0].FramingType.ToString(), ElPresidente.Instance.lensFovData[tempLensIndex.Value]._focalLength);
                     }
                 }
                 else //we are calculating everything by framing and direction.  
@@ -229,8 +229,8 @@ namespace Assets.scripts
                         iterations++;
                         if (iterations > maxLensChangeIterations)
                         {
-                            Debug.Log(string.Format("exceeded max lens change iterations[{0}] solving framing[{1}] on target[{2}]",
-                                                    maxLensChangeIterations, framingParameters.Type, framingTarget).AppendTimestamps());
+                            Extensions.Log("exceeded max lens change iterations[{0}] solving framing[{1}] on target[{2}]",
+                                                    maxLensChangeIterations, framingParameters.Type, framingTarget);
                             break; //framing is just not working out.  we will return a shot that's not so good and get on with things
                         }
                         int offset = sign ? iterations : -iterations;
@@ -292,7 +292,7 @@ namespace Assets.scripts
             if(!subject &&
                 !getActorByName(cameraAngle.Target, out subject))
             {
-                Debug.Log("Cannot find subject to as framing target or angle target to tilt toward".AppendTimestamps());
+                Extensions.Log("Cannot find subject to as framing target or angle target to tilt toward");
                 return;
             }
             tempCameraOrientation.X = Quaternion.LookRotation(framingTarget.transform.position - tempCameraPosition.Merge(previousCameraPosition)).eulerAngles.x;
@@ -346,8 +346,8 @@ namespace Assets.scripts
             else
             {
                 targetLookAtPoint = target.transform.position;
-                Debug.Log(string.Format("actor [{0}] has no collider to calculate look-at point.  using actor root",
-                                        target.name).AppendTimestamps());
+                Extensions.Log("actor [{0}] has no collider to calculate look-at point.  using actor root",
+                                        target.name);
             }
             return targetLookAtPoint;
         }
@@ -371,8 +371,8 @@ namespace Assets.scripts
             else
             {
                 pointOfInterestPosition = actorObject.transform.position;
-                Debug.Log(string.Format("actor [{0}] has no collider to calculate point of interest position.  using actor root",
-                                        actorObject.name).AppendTimestamps());
+                Extensions.Log("actor [{0}] has no collider to calculate point of interest position.  using actor root",
+                                        actorObject.name);
             }
             return pointOfInterestPosition;
 
@@ -562,7 +562,7 @@ namespace Assets.scripts
             //try to parse target as a coordinate                
             if (focusTarget.TryParseVector3(out focusPosition))
             {
-                Debug.Log("focus @" + focusPosition);
+                Extensions.Log("focus @" + focusPosition);
                 return true;
             }
 
@@ -570,7 +570,7 @@ namespace Assets.scripts
             GameObject target;
             if (!getActorByName(focusTarget, out target))
             {
-                Debug.Log("actor name [" + focusTarget + "] not found. cannot change focus");
+                Extensions.Log("actor name [" + focusTarget + "] not found. cannot change focus");
                 return false;
             }
             focusPosition = target.transform.position;

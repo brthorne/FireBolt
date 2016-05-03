@@ -47,7 +47,7 @@ namespace Assets.scripts
             Vector3 focusPosition;
             if (targetName.TryParseVector3(out focusPosition))
             {
-                Debug.Log("focus @" + focusPosition);
+                Extensions.Log("focus @" + focusPosition);
                 return true;
             }
 
@@ -55,10 +55,10 @@ namespace Assets.scripts
             if (target == null &&
                 !getActorByName(targetName, out target))
             {
-                Debug.Log("actor name [" + targetName + "] not found. cannot change focus");
+                Extensions.Log("actor name [" + targetName + "] not found. cannot change focus");
                 return false;
             }
-            Debug.Log(string.Format("focus target[{0}] @{1} tracking[{2}]", targetName, target.transform.position, tracking));
+            Extensions.Log("focus target[{0}] @{1} tracking[{2}]", targetName, target.transform.position, tracking);
             return true;
         }
 

@@ -137,20 +137,20 @@ namespace Assets.scripts
         {
             if (trackedActorName != this.trackedActorName)
             {
-                Debug.Log(string.Format("Cannot merge on multiple tracking targets. Attempt to append rotate relative with tracked actor[{0}], to existing rotate with tracked actor[{1}].",
-                                        trackedActorName, this.trackedActorName));                
+                Extensions.Log("Cannot merge on multiple tracking targets. Attempt to append rotate relative with tracked actor[{0}], to existing rotate with tracked actor[{1}].",
+                                        trackedActorName, this.trackedActorName);                
                 return;
             }
             if (actorName != this.actorName)
             {
-                Debug.Log(string.Format("Cannot merge on multiple actors. Attempt to append rotate relative with actor[{0}], to existing rotate with actor[{1}].",
-                                        actorName, this.actorName));
+                Extensions.Log("Cannot merge on multiple actors. Attempt to append rotate relative with actor[{0}], to existing rotate with actor[{1}].",
+                                        actorName, this.actorName);
                 return;
             }
             if(pan && this.pan)
             {
-                Debug.Log(string.Format("Cannot merge multiple same axis rotations. Attempt to append rotate relative with pan[{0}] to exsisting rotate with pan[{1}].",
-                                        pan, this.pan));
+                Extensions.Log("Cannot merge multiple same axis rotations. Attempt to append rotate relative with pan[{0}] to exsisting rotate with pan[{1}].",
+                                        pan, this.pan);
                 return;
             }
             else if (pan && !this.pan)
@@ -159,8 +159,8 @@ namespace Assets.scripts
             }
             if (tilt && this.tilt)
             {
-                Debug.Log(string.Format("Cannot merge multiple same axis tilts. Attempt to append rotate relative with tilt[{0}] to exsisting rotate with tilt[{1}].",
-                                        tilt, this.tilt));
+                Extensions.Log("Cannot merge multiple same axis tilts. Attempt to append rotate relative with tilt[{0}] to exsisting rotate with tilt[{1}].",
+                                        tilt, this.tilt);
                 return;
             }
             else if (tilt && !this.tilt)

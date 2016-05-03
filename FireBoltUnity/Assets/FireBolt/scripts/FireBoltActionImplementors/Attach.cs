@@ -35,15 +35,15 @@ namespace Assets.scripts
             Debug.Log("init " + ToString().AppendTimestamps());
             if (actor == null &&
                 !getActorByName(actorName, out actor))
-            { 
-                Debug.Log(string.Format("attach failed to find actor[{0}] to attach", actorName).AppendTimestamps());
+            {
+                Extensions.Log("attach failed to find actor[{0}] to attach", actorName);
                 return false;                              
             }
 
             if (parent == null &&
                 !getActorByName(parentName, out parent))
             {
-                Debug.Log(string.Format("attach failed to find parent[{0}] to attach to", parentName).AppendTimestamps());
+                Extensions.Log("attach failed to find parent[{0}] to attach to", parentName);
                 return false;
 
             }
@@ -67,7 +67,7 @@ namespace Assets.scripts
 
         public override void Undo()
 		{
-            Debug.Log ("Undo " + ToString().AppendTimestamps());
+            Extensions.Log("Undo " + ToString());
             performAttach(!attach);
 		}
 

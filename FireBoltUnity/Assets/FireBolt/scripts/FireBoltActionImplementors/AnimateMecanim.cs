@@ -107,7 +107,7 @@ namespace Assets.scripts
             }
             else
             {
-                Debug.Log(string.Format("asset bundle [{0}] does not contain animation[{1}]", ElPresidente.Instance.GetActiveAssetBundle().name, animName));
+                Extensions.Log("asset bundle [{0}] does not contain animation[{1}]", ElPresidente.Instance.GetActiveAssetBundle().name, animName);
                 return false;
             }
 
@@ -123,7 +123,7 @@ namespace Assets.scripts
             }
             else if (!string.IsNullOrEmpty(stateName) && !ElPresidente.Instance.GetActiveAssetBundle().Contains(stateName))
             {
-                Debug.Log(string.Format("should have looked up a state animation[{0}] and failed ", stateName));
+                Extensions.Log("should have looked up a state animation[{0}] and failed ", stateName);
                 return false;
             }
             return true;
@@ -135,7 +135,12 @@ namespace Assets.scripts
 
         public override void Skip()
         {
-            animator.SetTrigger(stopTriggerHash);
+            //if (animator)
+            //{
+            //    animator.SetTrigger(stopTriggerHash);
+            //}
+            
+                
         }
 
         public override void Execute(float currentTime) 

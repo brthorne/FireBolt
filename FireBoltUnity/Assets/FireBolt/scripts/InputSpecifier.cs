@@ -50,7 +50,7 @@ namespace Assets.scripts
             {
                 input.TerrainBundlePath = terrainField.text;
             }
-            ElPresidente.Instance.Init(input);
+            ElPresidente.Instance.Init(false, input);
         }
 
         void setNewDefaults()
@@ -65,9 +65,17 @@ namespace Assets.scripts
             //cameraField.text = "tests/defaultCamera.xml";
             //actorField.text = "AssetBundles/actorsandanimations";
             //terrainField.text = "AssetBundles/terrain";
-            storyField.text = "tests/test002/defaultStory.xml";
-            modelField.text = "tests/test002/defaultModel.xml";
-            cameraField.text = "tests/test002/defaultCamera.xml";
+            //storyField.text = "tests/test004/defaultStory.xml";
+            //modelField.text = "tests/test004/defaultModel.xml";
+            //cameraField.text = "tests/test004/defaultCamera.xml";
+            //storyField.text = "tests/fireblock/MoreComplexStory.xml";
+            //modelField.text = "tests/fireblock/MoreComplexCinematic.xml";
+            //cameraField.text = "tests/fireblock/MoreComplexCamera.xml";
+            //actorField.text = "AssetBundles/actorsandanimations";
+            //terrainField.text = "AssetBundles/terrain";
+            storyField.text = "MoreComplexStory.xml";
+            modelField.text = "MoreComplexCinematic.xml";
+            cameraField.text = "MoreComplexCamera.xml";
             actorField.text = "AssetBundles/actorsandanimations";
             terrainField.text = "AssetBundles/terrain";
         }

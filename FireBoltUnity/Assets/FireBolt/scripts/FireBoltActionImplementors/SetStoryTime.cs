@@ -48,13 +48,13 @@ namespace Assets.scripts
 
         public override void Undo()
         {
-            Debug.Log(string.Format("set story time[{0}] ", startTick + previousStoryTimeOffset));
+            Extensions.Log("set story time[{0}] ", startTick + previousStoryTimeOffset);
             ElPresidente.Instance.goToStoryTime(startTick + previousStoryTimeOffset);
         }
 
         public override void Skip()
         {
-            Debug.Log(string.Format("set story time[{0}] ", endTick + storyTimeOffset));
+            Extensions.Log("set story time[{0}] ", endTick + storyTimeOffset);
             ElPresidente.Instance.goToStoryTime(endTick + storyTimeOffset);
         }
     }
