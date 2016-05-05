@@ -264,7 +264,7 @@ public class ElPresidente : MonoBehaviour {
 
         if (reloadActorsAndAnimationsBundle)
         {
-            actorsAndAnimations = AssetBundle.CreateFromFile(currentInputSet.ActorsAndAnimationsBundlePath);
+            actorsAndAnimations = AssetBundle.LoadFromFile(currentInputSet.ActorsAndAnimationsBundlePath);
             Debug.Log(string.Format("loading actors bundle[{0}] @ [{1}].  last read [{2}]",
                          currentInputSet.ActorsAndAnimationsBundlePath, DateTime.Now.ToString(timestampFormat), storyPlanLastReadTimeStamp.ToString(timestampFormat)));
             actorsAndAnimationsBundleLastReadTimeStamp = DateTime.Now;
@@ -275,7 +275,7 @@ public class ElPresidente : MonoBehaviour {
 
         if (reloadTerrainBundle)
         {
-            terrain = AssetBundle.CreateFromFile(currentInputSet.TerrainBundlePath);
+            terrain = AssetBundle.LoadFromFile(currentInputSet.TerrainBundlePath);
             Debug.Log(string.Format("loading terrain bundle[{0}] @ [{1}].  last read [{2}]",
                                     currentInputSet.TerrainBundlePath, DateTime.Now.ToString(timestampFormat), storyPlanLastReadTimeStamp.ToString(timestampFormat)));
             terrainBundleLastReadTimeStamp = DateTime.Now;
