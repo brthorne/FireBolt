@@ -61,7 +61,7 @@ namespace Assets.scripts
                     framewriter = new BinaryWriter(ffmpeg.StandardInput.BaseStream);
                     init = true;
                 }
-
+#if VIDEO_GEN
                 unsafe
                 {
                     fixed (void* ptr = &(pixels[0]))
@@ -71,12 +71,18 @@ namespace Assets.scripts
                         framewriter.Write(pixels, 0, pixels.Length);
                     }
                 }               
+#endif
             }
         }
 
         public void StopCapture()
         {
             ffmpeg.StandardInput.WriteLine('q');
+            ffmpeg.WaitForExit(2500);
+            if (!ffmpeg.HasExited)
+            {
+                ffmpeg.Kill();
+            }            
         }
 
     }
