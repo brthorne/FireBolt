@@ -37,10 +37,10 @@ namespace Assets.scripts
             StringBuilder videoOutputs = new StringBuilder();
             foreach(var encoding in videoInputSet.Encodings)
             {
-                videoOutputs.Append(string.Format(" {0} {1}.{2} ",
-                                                encoding.Value, videoInputSet.OutputPath, encoding.Key));
+                videoOutputs.Append(string.Format(" {0} -r {1} {2}.{3} ",
+                                                encoding.Value, videoInputSet.FrameRate, videoInputSet.OutputPath, encoding.Key));
             }
-            string ffmpegArgs = string.Format("-y -s {1}x{2} -f rawvideo -pix_fmt rgba -i - -framerate {0}  ", 
+            string ffmpegArgs = string.Format("-y -framerate {0} -s {1}x{2} -f rawvideo -pix_fmt rgba -i - ", 
                                               videoInputSet.FrameRate, Screen.width, Screen.height) + videoOutputs.ToString();
             Debug.LogWarning("ffmpegArgs = " + ffmpegArgs);
             p.StartInfo = new System.Diagnostics.ProcessStartInfo(videoInputSet.FFMPEGPath, ffmpegArgs);
@@ -77,11 +77,10 @@ namespace Assets.scripts
 
         public void StopCapture()
         {
-            ffmpeg.StandardInput.WriteLine('q');
-            ffmpeg.WaitForExit(2500);
-            if (!ffmpeg.HasExited)
+            ffmpeg.StandardInput.Close();
+            while (!ffmpeg.HasExited)
             {
-                ffmpeg.Kill();
+                ffmpeg.WaitForExit(500);
             }            
         }
 
