@@ -138,9 +138,7 @@ namespace Assets.scripts
             //if (animator)
             //{
             //    animator.SetTrigger(stopTriggerHash);
-            //}
-            
-                
+            //}                
         }
 
         public override void Execute(float currentTime) 

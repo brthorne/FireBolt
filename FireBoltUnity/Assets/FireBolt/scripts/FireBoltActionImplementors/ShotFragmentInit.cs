@@ -303,27 +303,27 @@ namespace Assets.scripts
             return framings.Count > 0 && framings[0] != null;
         }
 
-        private void setCameraHeightForAngle(string targetName, AngleSetting angleSetting)
-        {
-            // Look up the target game object given its name.
-            GameObject angleTarget;
+        //private void setCameraHeightForAngle(string targetName, AngleSetting angleSetting)
+        //{
+        //    // Look up the target game object given its name.
+        //    GameObject angleTarget;
 
-            // Check if the target was found in the scene.
-            if (getActorByName(targetName, out angleTarget))
-            {
-                Bounds targetBounds = angleTarget.GetComponent<BoxCollider>().bounds;
-                if (!tempCameraPosition.Y.HasValue)//only allow angle to adjust height if it is not set manually
-                {
-                    tempCameraPosition.Y = findCameraYPosition(CameraActionFactory.angles[angleSetting], tempCameraPosition.Merge(previousCameraPosition),
-                                                               findTargetLookAtPoint(angleTarget));
-                }                
-            }
-            else
-            {
-                Debug.LogError(string.Format("could not find actor [{0}] as angling target. ",
-                cameraAngle.Target).AppendTimestamps());
-            }
-        }
+        //    // Check if the target was found in the scene.
+        //    if (getActorByName(targetName, out angleTarget))
+        //    {
+        //        Bounds targetBounds = angleTarget.GetComponent<BoxCollider>().bounds;
+        //        if (!tempCameraPosition.Y.HasValue)//only allow angle to adjust height if it is not set manually
+        //        {
+        //            tempCameraPosition.Y = findCameraYPosition(CameraActionFactory.angles[angleSetting], tempCameraPosition.Merge(previousCameraPosition),
+        //                                                       findTargetLookAtPoint(angleTarget));
+        //        }                
+        //    }
+        //    else
+        //    {
+        //        Debug.LogError(string.Format("could not find actor [{0}] as angling target. ",
+        //        cameraAngle.Target).AppendTimestamps());
+        //    }
+        //}
 
         private Vector3 findTargetLookAtPoint(GameObject target)
         {
@@ -500,25 +500,25 @@ namespace Assets.scripts
             return subjectToCamera.normalized;
         }
         
-        /// <summary>
-        /// Given a shot angle, finds the distance to travel from the target's baseline y position.
-        /// Finds the distance by solving the equation: tan(base/hyp angle) * base = height.
-        /// Returns the height found by solving the equation.
-        /// </summary>
-        private float findCameraYPosition(float alpha, Vector3 sourcePosition, Vector3 targetPosition)
-        {
-            // If the shot is a medium angle it is on the same y-plane as the target.
-            if (float.Epsilon > alpha && -float.Epsilon < alpha) return targetPosition.y;
+        ///// <summary>
+        ///// Given a shot angle, finds the distance to travel from the target's baseline y position.
+        ///// Finds the distance by solving the equation: tan(base/hyp angle) * base = height.
+        ///// Returns the height found by solving the equation.
+        ///// </summary>
+        //private float findCameraYPosition(float alpha, Vector3 sourcePosition, Vector3 targetPosition)
+        //{
+        //    // If the shot is a medium angle it is on the same y-plane as the target.
+        //    if (float.Epsilon > alpha && -float.Epsilon < alpha) return targetPosition.y;
 
-            // Otherwise, find the length of the triangle's base by finding the (x,z) distance between the camera and target.
-            float baseLength = Mathf.Abs(targetPosition.x - sourcePosition.x) + Mathf.Abs(targetPosition.z - sourcePosition.z);
+        //    // Otherwise, find the length of the triangle's base by finding the (x,z) distance between the camera and target.
+        //    float baseLength = Mathf.Abs(targetPosition.x - sourcePosition.x) + Mathf.Abs(targetPosition.z - sourcePosition.z);
 
-            // Next, find the tangent of the shot angle converted to radians.
-            float tanAlpha = Mathf.Tan(Mathf.Deg2Rad * alpha);
+        //    // Next, find the tangent of the shot angle converted to radians.
+        //    float tanAlpha = Mathf.Tan(Mathf.Deg2Rad * alpha);
                 
-            //return ratio-scaled height offset by target height
-            return baseLength * tanAlpha + targetPosition.y;
-        }
+        //    //return ratio-scaled height offset by target height
+        //    return baseLength * tanAlpha + targetPosition.y;
+        //}
 
         /// <summary>
         /// capturing state for Undo()'ing

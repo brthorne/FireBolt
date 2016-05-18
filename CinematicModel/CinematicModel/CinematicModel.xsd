@@ -7,7 +7,7 @@
   <xs:complexType name="CinematicModel">
     <xs:annotation>
       <xs:documentation>
-        get documented birches!
+        
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -18,7 +18,7 @@
       <xs:element minOccurs="1" maxOccurs="1" name="animations" type="ArrayOfAnimation" />
     </xs:all>
     <xs:attribute name="millisPerTick" type="xs:unsignedInt" use="optional" default="1"/>
-    <xs:attribute name="domainDistancePerEngineDistance" type="xs:float" use="optional" default="1.0"/>
+    <xs:attribute name="domainDistancePerEngineDistance" type="xs:string" use="optional" default="1,1,1"/>
   </xs:complexType>
   
   <xs:complexType name="SmartModelSettings">
