@@ -4,6 +4,8 @@ using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Text;
+using System.IO.Pipes;
+using System.ComponentModel;
 
 namespace Assets.scripts
 {
@@ -40,8 +42,8 @@ namespace Assets.scripts
                 videoOutputs.Append(string.Format(" {0} -r {1} {2}.{3} ",
                                                 encoding.Value, videoInputSet.FrameRate, videoInputSet.OutputPath, encoding.Key));
             }
-            string ffmpegArgs = string.Format("-y -framerate {0} -s {1}x{2} -f rawvideo -pix_fmt rgba -i - ", 
-                                              videoInputSet.FrameRate, Screen.width, Screen.height) + videoOutputs.ToString();
+            string ffmpegArgs = string.Format("-y -framerate {0} -s {1}x{2} -f rawvideo -pix_fmt rgba -i - ",            
+                                  videoInputSet.FrameRate, Screen.width, Screen.height) + videoOutputs.ToString();
             Debug.LogWarning("ffmpegArgs = " + ffmpegArgs);
             p.StartInfo = new System.Diagnostics.ProcessStartInfo(videoInputSet.FFMPEGPath, ffmpegArgs);
             p.StartInfo.UseShellExecute = false;
@@ -57,6 +59,7 @@ namespace Assets.scripts
             {
                 if (!init)
                 {
+                    Debug.LogWarning("starting ffmpeg");
                     ffmpeg.Start();
                     framewriter = new BinaryWriter(ffmpeg.StandardInput.BaseStream);
                     init = true;
@@ -77,12 +80,41 @@ namespace Assets.scripts
 
         public void StopCapture()
         {
+            Camera.onPostRender -= PostRender;
             ffmpeg.StandardInput.Close();
             while (!ffmpeg.HasExited)
             {
                 ffmpeg.WaitForExit(500);
-            }            
+            }
         }
 
     }
 }
+
+//leaving named pipes alone for the time being...no useful performance gains to be had in encoding
+
+//string ffmpegArgs = string.Format(@"-y -framerate {0} -s {1}x{2} -f rawvideo -pix_fmt rgba -i  \\.\pipe\{3}",
+
+//pipeName = "framePipe" + System.Diagnostics.Process.GetCurrentProcess().Id +"-"+ DateTime.Now.Ticks;
+//Debug.LogWarning("creating pipe: " + pipeName);
+//try
+//{
+//    framePipe = new NamedPipeServerStream(pipeName, PipeDirection.Out, 1, PipeTransmissionMode.Byte,
+//                                          PipeOptions.None, 1024, int.MaxValue);//TODO pid based name
+//}
+//catch ( Win32Exception stupidException)
+//{
+//    if(!stupidException.Message.Contains("The operation completed successfully."))//exceptional success
+//    {
+//        throw new IOException("failed in creating named pipe", stupidException);
+//    }
+//    else
+//    {
+//        Debug.LogError("failure : succesful encountered");   
+//    }
+//}
+
+//if(framePipe == null)
+//{
+//    Debug.LogError("framePipe is null after create");
+//}

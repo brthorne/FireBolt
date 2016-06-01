@@ -95,7 +95,8 @@ namespace Assets.scripts
             inputFiles.StoryPlanPath = "tests/lowAngle/defaultStory.xml";
 
             videoInputSet = new VideoInputSet();
-            videoInputSet.AddEncoding("webm");
+            videoInputSet.AddEncoding("mp4");
+            videoInputSet.FrameRate = 3;
 
             ElPresidente.Instance.Init(logDebug, inputFiles, videoInputSet, false, false, false, true, "statfile.txt");
 #endif

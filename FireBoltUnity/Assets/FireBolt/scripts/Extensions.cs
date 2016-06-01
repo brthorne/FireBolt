@@ -1,6 +1,10 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 using LN.Utilities;
+using System;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Assets.scripts
 {
@@ -49,7 +53,7 @@ namespace Assets.scripts
 
         public static void RenderColliders()
         {
-            foreach (GameObject obj in Object.FindObjectsOfType(typeof(GameObject)))
+            foreach (GameObject obj in UnityEngine.Object.FindObjectsOfType(typeof(GameObject)))
             {
                 BoxCollider collider = obj.GetComponent<BoxCollider>();
                 if (collider != null)
@@ -197,6 +201,37 @@ namespace Assets.scripts
         {
             if(ElPresidente.Instance.LogDebugStatements)
                 Debug.Log(string.Format(formatString,values).AppendTimestamps());
+        }
+
+        private static bool statLogInitialized = false;
+        public static void InitStatFile()
+        {
+            if (File.Exists(ElPresidente.Instance.StatFile))
+            {
+                File.Delete(ElPresidente.Instance.StatFile);
+                statLogInitialized = true;
+            }
+        }
+        public static void LogStatistics(Dictionary<string,string> stats)
+        {
+            if (!statLogInitialized)
+            {
+                InitStatFile();
+            }
+            StringBuilder keys = new StringBuilder();
+            StringBuilder values = new StringBuilder();
+            foreach(var key in stats.Keys)
+            {
+                keys.Append(key);
+                keys.Append(',');
+
+                values.Append(stats[key]);
+                values.Append(',');
+            }
+            keys.Append(Environment.NewLine);
+            values.Append(Environment.NewLine);
+
+            File.AppendAllText(ElPresidente.Instance.StatFile, keys.ToString() + values.ToString());            
         }
     }
 }
