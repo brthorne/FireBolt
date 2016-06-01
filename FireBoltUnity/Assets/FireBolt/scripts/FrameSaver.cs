@@ -26,36 +26,10 @@ namespace Assets.scripts
         static System.Diagnostics.Process ffmpeg;
         BinaryWriter framewriter;
 
-        NamedPipeServerStream framePipe;
-        string pipeName;
-
         public void Initialize(VideoInputSet videoInputSet)
         {
             pixels = new byte[Screen.width * Screen.height * 4];
             Camera.onPostRender += PostRender;
-            pipeName = "framePipe" + System.Diagnostics.Process.GetCurrentProcess().Id +"-"+ DateTime.Now.Ticks;
-            Debug.LogWarning("creating pipe: " + pipeName);
-            try
-            {
-                framePipe = new NamedPipeServerStream(pipeName, PipeDirection.Out, 1, PipeTransmissionMode.Byte,
-                                                      PipeOptions.None, 1024, int.MaxValue);//TODO pid based name
-            }
-            catch ( Win32Exception stupidException)
-            {
-                if(!stupidException.Message.Contains("The operation completed successfully."))//exceptional success
-                {
-                    throw new IOException("failed in creating named pipe", stupidException);
-                }
-                else
-                {
-                    Debug.LogError("failure : succesful encountered");   
-                }
-            }
-            
-            if(framePipe == null)
-            {
-                Debug.LogError("framePipe is null after create");
-            }
             ffmpeg = initializeFFMPEGCommand(videoInputSet);
         }
 
@@ -68,14 +42,12 @@ namespace Assets.scripts
                 videoOutputs.Append(string.Format(" {0} -r {1} {2}.{3} ",
                                                 encoding.Value, videoInputSet.FrameRate, videoInputSet.OutputPath, encoding.Key));
             }
-            //string ffmpegArgs = string.Format("-y -framerate {0} -s {1}x{2} -f rawvideo -pix_fmt rgba -i - ",
-            string ffmpegArgs = string.Format(@"-y -framerate {0} -s {1}x{2} -f rawvideo -pix_fmt rgba -i  \\.\pipe\{3}",
-                                  videoInputSet.FrameRate, Screen.width, Screen.height, pipeName) + videoOutputs.ToString();
+            string ffmpegArgs = string.Format("-y -framerate {0} -s {1}x{2} -f rawvideo -pix_fmt rgba -i - ",            
+                                  videoInputSet.FrameRate, Screen.width, Screen.height) + videoOutputs.ToString();
             Debug.LogWarning("ffmpegArgs = " + ffmpegArgs);
             p.StartInfo = new System.Diagnostics.ProcessStartInfo(videoInputSet.FFMPEGPath, ffmpegArgs);
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardInput = true;
-            p.StartInfo.RedirectStandardInput = false;
             p.StartInfo.RedirectStandardOutput = false;
             p.StartInfo.RedirectStandardError = false;
             return p;
@@ -89,10 +61,7 @@ namespace Assets.scripts
                 {
                     Debug.LogWarning("starting ffmpeg");
                     ffmpeg.Start();
-                    Debug.LogWarning("waiting for client to connect to pipe");
-                    framePipe.WaitForConnection();
-                    Debug.LogWarning("client connected to pipe");
-                    //framewriter = new BinaryWriter(ffmpeg.StandardInput.BaseStream);
+                    framewriter = new BinaryWriter(ffmpeg.StandardInput.BaseStream);
                     init = true;
                 }
 #if VIDEO_GEN
@@ -102,9 +71,7 @@ namespace Assets.scripts
                     {
                         IntPtr buffer = (IntPtr)ptr;
                         glReadPixels(0, 0, Screen.width, Screen.height, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
-                        //framewriter.Write(pixels, 0, pixels.Length);
-                        framePipe.Write(pixels, 0, pixels.Length);
-                        framePipe.Flush();
+                        framewriter.Write(pixels, 0, pixels.Length);
                     }
                 }               
 #endif
@@ -113,20 +80,41 @@ namespace Assets.scripts
 
         public void StopCapture()
         {
-            //ffmpeg.StandardInput.Close();
-            ffmpeg.StandardInput.WriteLine("q");
-            //framePipe.WaitForPipeDrain();
-            //Camera.onPostRender -= PostRender;
-            //framePipe.Close();
-
-            
+            Camera.onPostRender -= PostRender;
+            ffmpeg.StandardInput.Close();
             while (!ffmpeg.HasExited)
             {
                 ffmpeg.WaitForExit(500);
             }
-            //framePipe.Dispose();
-            //framePipe = null;   
         }
 
     }
 }
+
+//leaving named pipes alone for the time being...no useful performance gains to be had in encoding
+
+//string ffmpegArgs = string.Format(@"-y -framerate {0} -s {1}x{2} -f rawvideo -pix_fmt rgba -i  \\.\pipe\{3}",
+
+//pipeName = "framePipe" + System.Diagnostics.Process.GetCurrentProcess().Id +"-"+ DateTime.Now.Ticks;
+//Debug.LogWarning("creating pipe: " + pipeName);
+//try
+//{
+//    framePipe = new NamedPipeServerStream(pipeName, PipeDirection.Out, 1, PipeTransmissionMode.Byte,
+//                                          PipeOptions.None, 1024, int.MaxValue);//TODO pid based name
+//}
+//catch ( Win32Exception stupidException)
+//{
+//    if(!stupidException.Message.Contains("The operation completed successfully."))//exceptional success
+//    {
+//        throw new IOException("failed in creating named pipe", stupidException);
+//    }
+//    else
+//    {
+//        Debug.LogError("failure : succesful encountered");   
+//    }
+//}
+
+//if(framePipe == null)
+//{
+//    Debug.LogError("framePipe is null after create");
+//}
