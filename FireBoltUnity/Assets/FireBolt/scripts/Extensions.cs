@@ -110,29 +110,33 @@ namespace Assets.scripts
             return radians * 180/Mathf.PI;
         }
 
-        public static Vector3 ToVector3(this Impulse.v_1_336.Constants.Coordinate2D from)
+        //public static Vector3 ToVector3(this Impulse.v_1_336.Constants.Coordinate2D from)
+        //{
+        //    //return new Vector3((float)from.X, 0, (float)from.Y);
+        //}
+
+        public static Vector3 ToVector3(this Impulse.v_1_336.Constants.Coordinate2D from, 
+                                        float domainToEngineX, float domainToEngineY, float domainToEngineZ)
         {
-            return new Vector3((float)from.X, 0, (float)from.Y);
+            return new Vector3((float)(from.X / domainToEngineX), 0, (float)(from.Y / domainToEngineZ));
         }
 
-        public static Vector3 ToVector3(this Impulse.v_1_336.Constants.Coordinate2D from, float domainToEngine)
+        public static Vector3Nullable ToVector3Nullable(this Impulse.v_1_336.Constants.Coordinate2D from,
+                                                        float domainToEngineX, float domainToEngineY, float domainToEngineZ)
         {
-            return new Vector3((float)from.X, 0, (float)from.Y)*1/domainToEngine;
+            return new Vector3Nullable((float)(from.X / domainToEngineX), null, (float)(from.Y / domainToEngineZ));
         }
 
-        public static Vector3Nullable ToVector3Nullable(this Impulse.v_1_336.Constants.Coordinate2D from, float domainToEngine)
+        public static Vector3Nullable ToVector3Nullable(this Impulse.v_1_336.Constants.Coordinate3D from,
+                                                        float domainToEngineX, float domainToEngineY, float domainToEngineZ)
         {
-            return new Vector3Nullable((float)from.X * 1 / domainToEngine, null, (float)from.Y * 1 / domainToEngine);
+            return new Vector3Nullable((float)(from.X / domainToEngineX), (float)(from.Y / domainToEngineY), (float)(from.Z / domainToEngineZ));
         }
 
-        public static Vector3Nullable ToVector3Nullable(this Impulse.v_1_336.Constants.Coordinate3D from, float domainToEngine)
+        public static Vector3 ToVector3(this Impulse.v_1_336.Constants.Coordinate3D from,
+                                        float domainToEngineX, float domainToEngineY, float domainToEngineZ)
         {
-            return new Vector3Nullable((float)from.X * 1 / domainToEngine, (float)from.Y * 1 / domainToEngine, (float)from.Z * 1 / domainToEngine);
-        }
-
-        public static Vector3 ToVector3(this Impulse.v_1_336.Constants.Coordinate3D from, float domainToEngine)
-        {
-            return new Vector3((float)from.X, (float)from.Y, (float)from.Z) * 1 / domainToEngine;
+            return new Vector3((float)(from.X / domainToEngineX), (float)(from.Y / domainToEngineY), (float)(from.Z / domainToEngineZ));
         }
 
         public static float ToMillis(this uint tick, uint millisPerTick)

@@ -228,9 +228,9 @@ namespace Assets.scripts
                         if (storyAction.TryGetProperty(domainActionParameter.Name, out coord))
                         {
                             if (coord.Value.Value is Coordinate2D)
-                                origin = ((Coordinate2D)coord.Value.Value).ToVector3(cm.DomainDistancePerEngineDistance);
+                                origin = ((Coordinate2D)coord.Value.Value).ToVector3(cm.DomainDistancePerEngineDistanceX, cm.DomainDistancePerEngineDistanceY, cm.DomainDistancePerEngineDistanceZ);
                             else if (coord.Value.Value is Coordinate3D)
-                                origin = ((Coordinate3D)coord.Value.Value).ToVector3(cm.DomainDistancePerEngineDistance);
+                                origin = ((Coordinate3D)coord.Value.Value).ToVector3(cm.DomainDistancePerEngineDistanceX, cm.DomainDistancePerEngineDistanceY, cm.DomainDistancePerEngineDistanceZ);
                         }
                         else
                         {
@@ -243,9 +243,9 @@ namespace Assets.scripts
                         if (storyAction.TryGetProperty(domainActionParameter.Name, out coord))
                         {
                             if(coord.Value.Value is Coordinate2D)
-                                destination = ((Coordinate2D)coord.Value.Value).ToVector3Nullable(cm.DomainDistancePerEngineDistance);
+                                destination = ((Coordinate2D)coord.Value.Value).ToVector3Nullable(cm.DomainDistancePerEngineDistanceX, cm.DomainDistancePerEngineDistanceY, cm.DomainDistancePerEngineDistanceZ);
                             else if (coord.Value.Value is Coordinate3D)
-                                destination = ((Coordinate3D)coord.Value.Value).ToVector3Nullable(cm.DomainDistancePerEngineDistance);                            
+                                destination = ((Coordinate3D)coord.Value.Value).ToVector3Nullable(cm.DomainDistancePerEngineDistanceX, cm.DomainDistancePerEngineDistanceY, cm.DomainDistancePerEngineDistanceZ);                            
                         }
                         else
                         {
@@ -587,9 +587,9 @@ namespace Assets.scripts
                         if(storyAction.TryGetProperty(domainActionParameter.Name, out coord))
                         {
                             if(coord.Value.Value is Coordinate2D)
-                                destination = ((Coordinate2D)coord.Value.Value).ToVector3(cm.DomainDistancePerEngineDistance);
+                                destination = ((Coordinate2D)coord.Value.Value).ToVector3(cm.DomainDistancePerEngineDistanceX, cm.DomainDistancePerEngineDistanceY, cm.DomainDistancePerEngineDistanceZ);
                             if (coord.Value.Value is Coordinate3D)
-                                destination = ((Coordinate3D)coord.Value.Value).ToVector3(cm.DomainDistancePerEngineDistance);
+                                destination = ((Coordinate3D)coord.Value.Value).ToVector3(cm.DomainDistancePerEngineDistanceX, cm.DomainDistancePerEngineDistanceY, cm.DomainDistancePerEngineDistanceZ);
                         }
                         else
                         {
