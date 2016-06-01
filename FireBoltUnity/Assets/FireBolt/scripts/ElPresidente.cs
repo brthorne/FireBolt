@@ -62,6 +62,23 @@ public class ElPresidente : MonoBehaviour {
     }
     private bool logDebugStatements = false;
 
+    public bool LogStatistics
+    {
+        get
+        {
+            return logStatistics;
+        }
+    }
+    private bool logStatistics = false;
+    public string StatFile
+    {
+        get
+        {
+            return statFile;
+        }
+    }
+    private string statFile;
+
     private CM.CinematicModel cinematicModel = null;
     public CM.CinematicModel CinematicModel { get { return cinematicModel; } }
 
@@ -149,8 +166,9 @@ public class ElPresidente : MonoBehaviour {
     /// and reloads the whole shebang...almost like you would expect.</param>
     /// <param name="generateKeyframes">optional default false. makes keyframes for display over scrubber.
     /// locks down the UI for some time at startup to execute whole cinematic once all speedy like</param>
-    public void Init(bool logDebug = false, InputSet newInputSet=null, VideoInputSet videoInputSet=null, 
-        bool forceFullReload=false, bool generateKeyframes=false, bool implicitActorCreation=false)
+    public void Init(bool logDebug = false, InputSet newInputSet = null, VideoInputSet videoInputSet = null,
+        bool forceFullReload = false, bool generateKeyframes = false, bool implicitActorCreation = false, bool logStatistics = false,
+        string statFile = null)
     {
         if(videoInputSet != null)
         {
@@ -163,6 +181,13 @@ public class ElPresidente : MonoBehaviour {
         this.generateKeyframes = generateKeyframes;        
         this.implicitActorCreation = implicitActorCreation;
         this.logDebugStatements = logDebug;
+        this.logStatistics = logStatistics;
+        this.statFile = statFile;
+
+        if (logStatistics)
+        {
+            Extensions.InitStatFile();
+        }
 
         if (generateVideoFrames)
         {
@@ -231,30 +256,40 @@ public class ElPresidente : MonoBehaviour {
         return File.GetLastWriteTime(path);        
     }
 
+    private double getElapsedTimeMillis(DateTime startTime)
+    {
+        return (DateTime.Now - startTime).TotalMilliseconds;
+    }
+
     /// <summary>
     /// does the actual re-init work.  should only be called after destroy has had time to process.  
     /// currently this involves an elaborate set of bools to keep up with engine execution
     /// </summary>
     private void init()
     {
-
+        var loadStats = new Dictionary<string, string>();
+        var loadStart = DateTime.Now;
         createdGameObjects = new GameObjectRegistry();
         createdGameObjects.Add("Rig", GameObject.Find("Rig"));//get the camera where we can find it quickly
         GameObject proCam = GameObject.Find("Pro Cam");
         createdGameObjects.Add(proCam.name, proCam);
         if (reloadStoryPlan)
         {
-            loadStructuredImpulsePlan(currentInputSet.StoryPlanPath);
-            Debug.Log(string.Format("loading story plan[{0}] @ [{1}].  last read [{2}]", 
+            Debug.Log(string.Format("loading story plan[{0}] @ [{1}].  last read [{2}]",
                                     currentInputSet.StoryPlanPath, DateTime.Now.ToString(timestampFormat), storyPlanLastReadTimeStamp.ToString(timestampFormat)));
+            var impulseLoadStart = DateTime.Now;
+            loadStructuredImpulsePlan(currentInputSet.StoryPlanPath);
+            loadStats.Add("story plan", getElapsedTimeMillis(impulseLoadStart).ToString());
             storyPlanLastReadTimeStamp = DateTime.Now;
         }
 
         if (reloadCinematicModel)
         {
-            cinematicModel = CM.Parser.Parse(currentInputSet.CinematicModelPath); 
             Debug.Log(string.Format("loading cinematic model[{0}] @ [{1}].  last read [{2}]",
                                      currentInputSet.CinematicModelPath, DateTime.Now.ToString(timestampFormat), storyPlanLastReadTimeStamp.ToString(timestampFormat)));
+            var cmLoadStart = DateTime.Now;
+            cinematicModel = CM.Parser.Parse(currentInputSet.CinematicModelPath);
+            loadStats.Add("cinematic model", getElapsedTimeMillis(cmLoadStart).ToString());
             cinematicModelPlanLastReadTimeStamp = DateTime.Now;
         }
 
@@ -264,9 +299,11 @@ public class ElPresidente : MonoBehaviour {
 
         if (reloadActorsAndAnimationsBundle)
         {
-            actorsAndAnimations = AssetBundle.LoadFromFile(currentInputSet.ActorsAndAnimationsBundlePath);
             Debug.Log(string.Format("loading actors bundle[{0}] @ [{1}].  last read [{2}]",
                          currentInputSet.ActorsAndAnimationsBundlePath, DateTime.Now.ToString(timestampFormat), storyPlanLastReadTimeStamp.ToString(timestampFormat)));
+            var actorBundleLoadStart = DateTime.Now;
+            actorsAndAnimations = AssetBundle.LoadFromFile(currentInputSet.ActorsAndAnimationsBundlePath);
+            loadStats.Add("actor bundle", getElapsedTimeMillis(actorBundleLoadStart).ToString());
             actorsAndAnimationsBundleLastReadTimeStamp = DateTime.Now;
         }            
 
@@ -275,25 +312,33 @@ public class ElPresidente : MonoBehaviour {
 
         if (reloadTerrainBundle)
         {
-            terrain = AssetBundle.LoadFromFile(currentInputSet.TerrainBundlePath);
             Debug.Log(string.Format("loading terrain bundle[{0}] @ [{1}].  last read [{2}]",
                                     currentInputSet.TerrainBundlePath, DateTime.Now.ToString(timestampFormat), storyPlanLastReadTimeStamp.ToString(timestampFormat)));
+            var terrainBundleLoadStart = DateTime.Now;
+            terrain = AssetBundle.LoadFromFile(currentInputSet.TerrainBundlePath);
+            loadStats.Add("terrain bundle", getElapsedTimeMillis(terrainBundleLoadStart).ToString());
             terrainBundleLastReadTimeStamp = DateTime.Now;
+            var terrainCreateStart = DateTime.Now;
             instantiateTerrain();
+            loadStats.Add("terrain create", getElapsedTimeMillis(terrainCreateStart).ToString());
         }  
 
         if (reloadStoryPlan || reloadActorsAndAnimationsBundle || reloadCinematicModel)
-        {        
-            actorActionList = ActorActionFactory.CreateStoryActions(story, cinematicModel, implicitActorCreation);
+        {
             Debug.Log(string.Format("upstream components reloaded, rebuilding actor action queue @ [{0}].",
                                     DateTime.Now.ToString(timestampFormat)));
+            var actionCreateStart = DateTime.Now;
+            actorActionList = ActorActionFactory.CreateStoryActions(story, cinematicModel, implicitActorCreation);
+            loadStats.Add("actor action create", getElapsedTimeMillis(actionCreateStart).ToString());
         }
 
         if (reloadStoryPlan || reloadCameraPlan)
-        {            
-            CameraActionFactory.CreateActions(story, cinematicModel, currentInputSet.CameraPlanPath,  out cameraActionList, out discourseActionList);
+        {
             Debug.Log(string.Format("upstream components reloaded, rebuilding camera action queue @ [{0}].",
                                     DateTime.Now.ToString(timestampFormat)));
+            var discourseActionCreateStart = DateTime.Now;
+            CameraActionFactory.CreateActions(story, cinematicModel, currentInputSet.CameraPlanPath,  out cameraActionList, out discourseActionList);
+            loadStats.Add("discourse action create", getElapsedTimeMillis(discourseActionCreateStart).ToString());
             cameraPlanLastReadTimeStamp = DateTime.Now;
         }
 
@@ -325,6 +370,8 @@ public class ElPresidente : MonoBehaviour {
         reloadCinematicModel = false;
         reloadStoryPlan = false;
         reloadTerrainBundle = false;
+        loadStats.Add("total", getElapsedTimeMillis(loadStart).ToString());
+        Extensions.LogStatistics(loadStats);
     }
 
     private void instantiateTerrain()
@@ -340,17 +387,29 @@ public class ElPresidente : MonoBehaviour {
         t.name = "Terrain";
         t.transform.SetParent(GameObject.Find("FireBolt").transform,true);
         createdGameObjects.Add(t.name, t);
+        Terrain activeTerrain = Terrain.activeTerrain;
+        //foreach(var treePrototype in activeTerrain.terrainData.treePrototypes)
+        //{
+        //    OcclusionDescriptor descriptor = treePrototype.prefab.AddComponent<OcclusionDescriptor>();
+        //    descriptor.colliderOpacity = Opacity.Low;
+        //}
+        //activeTerrain.terrainData.RefreshPrototypes();
+
+        //Opacity opacity = activeTerrain.terrainData.treePrototypes[
+        //                    activeTerrain.terrainData.treeInstances[0].prototypeIndex
+        //                  ].prefab.GetComponent<OcclusionDescriptor>().colliderOpacity;
     }
 
     private void loadStructuredImpulsePlan(string storyPlanPath)
     {
-        Debug.Log("begin story plan xml load");
+        Extensions.Log("begin story plan xml load");
         var xml = Impulse.v_1_336.Xml.Story.LoadFromFile(storyPlanPath);
-        Debug.Log("end story plan xml load");
+        Extensions.Log("end story plan xml load");
+        
         var factory = Impulse.v_1_336.StoryParsingFactories.GetUnsignedIntergerIntervalFactory();
-        Debug.Log("begin story plan parse");
+        Extensions.Log("begin story plan parse");
         story = factory.ParseStory(xml, false);//TODO true! get crackin with that validation, colin!
-        Debug.Log("end story plan parse");
+        Extensions.Log("end story plan parse");
     }
 
     public AssetBundle GetActiveAssetBundle()
