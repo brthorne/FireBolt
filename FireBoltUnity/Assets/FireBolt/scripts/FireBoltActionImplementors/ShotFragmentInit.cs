@@ -70,6 +70,7 @@ namespace Assets.scripts
         public override bool Init()
         {
             if (initialized) return true;
+            Profiler.BeginSample("init shot frag");
             Extensions.RenderColliders();
             //don't throw null refs in the debug statement if framing isn't there.  it's not required
             string framingDescriptor = string.Empty;
@@ -269,7 +270,7 @@ namespace Assets.scripts
             }
             else if (framingTarget != null)//we didn't specify what to focus on, but we framed something.  let's focus on that by default
             {
-                tempFocusDistance = Vector3.Distance(tempCameraPosition.Merge(previousCameraPosition), findTargetLookAtPoint(framingTarget));
+                tempFocusDistance = Vector3.Distance(tempCameraPosition.Merge(previousCameraPosition), targetLookAtPoint);
             }
 
             //sort out what wins where and assign to final camera properties
@@ -283,6 +284,7 @@ namespace Assets.scripts
             Skip();
 
             initialized = true;
+            Profiler.EndSample();
             return initialized;
         }
 
@@ -327,14 +329,16 @@ namespace Assets.scripts
 
         private Vector3 findTargetLookAtPoint(GameObject target)
         {
-            CinematicModel.Actor actor;
-            ElPresidente.Instance.CinematicModel.TryGetActor(target.name, out actor); //find the CM definition for the actor we are supposed to angle against
+            var cmMetaData = target.GetComponent<CinematicModelMetaDataComponent>();
+            //CinematicModel.Actor actor;
+            //ElPresidente.Instance.CinematicModel.TryGetActor(target.name, out actor); //find the CM definition for the actor we are supposed to angle against
             Framing framing = framings.Find(x => x.FramingTarget == target.name); //see if there is a target being framed with that name
 
-            float pointOfInterestScalar = 0;
+            float pointOfInterestScalar = 0;            
             if (framing != null && framing.FramingType <= FramingType.Waist)
-                pointOfInterestScalar = actor.PointOfInterest;
-
+            {
+                pointOfInterestScalar = cmMetaData.PointOfInterestScalar;
+            }
             Vector3 targetLookAtPoint = new Vector3();
             var collider = target.GetComponent<BoxCollider>();
             if (collider != null)
@@ -352,32 +356,6 @@ namespace Assets.scripts
             return targetLookAtPoint;
         }
 
-        private Vector3 getPointofInterestPosition(GameObject actorObject)
-        {
-            CinematicModel.Actor logicalActor;
-            ElPresidente.Instance.CinematicModel.TryGetActor(actorObject.name, out logicalActor); //find the CM definition for the actor we are supposed to angle against
-            
-            float pointOfInterestScalar = 0;
-            pointOfInterestScalar = logicalActor.PointOfInterest;
-
-            Vector3 pointOfInterestPosition = new Vector3();
-            var collider = actorObject.GetComponent<BoxCollider>();
-            if (collider != null)
-            {
-                pointOfInterestPosition = new Vector3(collider.bounds.center.x,
-                                            collider.bounds.center.y + pointOfInterestScalar * collider.bounds.extents.y,
-                                            collider.bounds.center.z);
-            }
-            else
-            {
-                pointOfInterestPosition = actorObject.transform.position;
-                Extensions.Log("actor [{0}] has no collider to calculate point of interest position.  using actor root",
-                                        actorObject.name);
-            }
-            return pointOfInterestPosition;
-
-        }
-
         private bool findCameraPositionByRadius(GameObject framingTarget, Bounds targetBounds, FramingParameters framingParameters,
                                                 float maxHorizontalSearchPercent)
         {
@@ -387,8 +365,6 @@ namespace Assets.scripts
             float frustumHeight = (1 / framingParameters.TargetPercent) * (targetBounds.max.y - targetBounds.min.y);
 
             float distanceToCamera = frustumHeight / Mathf.Tan(vFov / 2);
-
-            Vector3 pointOfInterestPosition = getPointofInterestPosition(framingTarget);
 
             float horizontalSearchSign = 1;
             float horizontalSearchStepSize = 5f * Mathf.Deg2Rad;
@@ -421,7 +397,7 @@ namespace Assets.scripts
                     //raycast to check for LoS
                     RaycastHit hit;
                     Vector3 from = tempCameraPosition.Merge(previousCameraPosition);
-                    Vector3 direction = pointOfInterestPosition - tempCameraPosition.Merge(previousCameraPosition);
+                    Vector3 direction = targetLookAtPoint - tempCameraPosition.Merge(previousCameraPosition);
                     if (Physics.Raycast(from, direction, out hit) &&
                         hit.transform == framingTarget.transform)
                     {

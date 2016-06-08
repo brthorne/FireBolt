@@ -41,9 +41,10 @@ namespace Assets.scripts
 
         public override bool Init()
         {
+            
             //short circuit if this has clearly been initialized before
-            if(animator && overrideController && animation && 
-                (!assignEndState ||(assignEndState && state)))
+            if((animator && animator.isInitialized && overrideController && animation && 
+                (!assignEndState ||(assignEndState && state))))
             {
                 assignAnimations();
                 animator.runtimeAnimatorController = overrideController;
@@ -64,9 +65,8 @@ namespace Assets.scripts
             animator = actor.GetComponent<Animator>();
             if (animator == null)
             {
-                animator = actor.AddComponent<Animator>();
-            }
-            animator.applyRootMotion = false;
+                animator = actor.AddComponent<Animator>();                
+            }          
 
             //find or make an override controller
             if (animator.runtimeAnimatorController is AnimatorOverrideController)
@@ -81,6 +81,7 @@ namespace Assets.scripts
             }
 
             assignAnimations();
+            animator.applyRootMotion = false;
             return true;
         }
 
@@ -150,7 +151,11 @@ namespace Assets.scripts
 
         public override void Stop()
         {
-            animator.SetTrigger(stopTriggerHash);
+            //if (!animator.isInitialized)
+            //{
+            //    animator.Rebind();
+            //}
+            //animator.SetTrigger(stopTriggerHash);
         }
     }
 }

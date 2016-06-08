@@ -15,6 +15,7 @@ namespace Assets.scripts
         Vector3? orientation;
 		GameObject actor;
         bool defaultedCreate;
+        CinematicModelMetaData metaData;
 
         public static bool ValidForConstruction(string actorName, string modelName)
         {
@@ -28,20 +29,22 @@ namespace Assets.scripts
             return string.Format ("Create " + actorName);
         }
 
-        public Create(float startTick, string actorName, string modelName, Vector3 position, Vector3? orientation=null, bool defaultedCreate=false) :
+        public Create(float startTick, string actorName, string modelName, Vector3 position,
+                      CinematicModelMetaData metaData, Vector3? orientation=null, bool defaultedCreate=false) :
             base(startTick, startTick)
         {
             this.startTick = startTick;
             this.actorName = actorName;
             this.modelName = modelName;
             this.position = position;
+            this.metaData = metaData;
             this.orientation = orientation;
             this.defaultedCreate = defaultedCreate;
 			this.actor = null;
         }
 
         public override bool Init()
-        {
+        {            
             Extensions.Log("init create model[{0}] for actor [{1}]",modelName, actorName);
             if (getActorByName(actorName, out actor))
             {
@@ -55,6 +58,7 @@ namespace Assets.scripts
                     actor.transform.rotation = Quaternion.Euler(orientation.Value);
                 return true;
             }
+            Profiler.BeginSample("init create actor");
             GameObject model = null;
             if (ElPresidente.Instance.GetActiveAssetBundle().Contains(modelName))
             {
@@ -92,10 +96,16 @@ namespace Assets.scripts
                 collider.center = new Vector3(0,0.75f,0); //TODO un-hack and find proper center of model                
                 collider.size = bounds.max - bounds.min;
             }
+
+            //staple the cinematic model metadata onto it
+            var newData = actor.AddComponent<CinematicModelMetaDataComponent>();
+            newData.LoadFromStruct(metaData);
+
             if (defaultedCreate)
             {
                 actor.SetActive(false);
             }
+            Profiler.EndSample();
             return true;
         }
 

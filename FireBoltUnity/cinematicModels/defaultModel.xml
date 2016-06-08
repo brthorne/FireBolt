@@ -3,6 +3,81 @@
   <terrain location="(-100,0,-96.7)" terrainFileName="dota_terrain flatter.prefab"/>
   <!-- animation search depth should generally be at least as deep as actor search depth-->
   <domainActions>
+
+    <domainAction name="kill-illusion">
+      <params>
+        <param name="actor" />
+        <param name="target" />
+        <param name="ability" />
+      </params>
+      <createActions/>
+      <destroyActions>
+        <destroyAction actorNameParamName="target"/>
+      </destroyActions>
+      <rotateActions/>
+      <translateActions/>
+      <animateActions/>
+    </domainAction>
+
+    <domainAction name="create-illusion">
+      <params>
+        <param name="actor" />
+        <param name="position" />
+        <param name="name" />
+      </params>      
+      <createActions>
+        <createAction actorNameParamName="name" originParamName="position" />
+      </createActions>
+      <destroyActions/>
+      <rotateActions/>
+      <translateActions/>
+      <animateActions/>
+    </domainAction>
+
+    <domainAction name="kill-replica">
+      <params>
+        <param name="actor" />
+        <param name="target" />
+        <param name="ability" />
+      </params>
+      <createActions/>
+      <destroyActions>
+        <destroyAction actorNameParamName="target"/>
+      </destroyActions>
+      <rotateActions/>
+      <translateActions/>
+      <animateActions/>
+    </domainAction>
+
+    <domainAction name="create-replica">
+      <params>
+        <param name="actor" />
+        <param name="position" />
+        <param name="name" />
+      </params>
+      <createActions>
+        <createAction actorNameParamName="name" originParamName="position" />
+      </createActions>
+      <destroyActions/>
+      <rotateActions/>
+      <translateActions/>
+      <animateActions/>
+    </domainAction>
+
+    <domainAction name="spawn-rune" >
+      <params>
+        <param name="actor" />
+        <param name="position" />
+      </params>
+      <createActions>
+        <createAction actorNameParamName="actor" originParamName="position" />
+      </createActions>
+      <destroyActions/>
+      <rotateActions/>
+      <translateActions/>
+      <animateActions/>
+    </domainAction>
+
     <domainAction name="spawn-creep" >
       <params>
         <param name="actor" />
@@ -294,6 +369,27 @@
       </animationMappings>
     </actor>
 
+    <actor name="Ember Spirit Illusion" model="templar_assassin_model.fbx" pointOfInterest="0.8">
+      <animationMappings>
+        <animationMapping animateActionName="walk" animationName="rikimaru_walk" loopAnimation="true" />
+        <animationMapping animateActionName="idle" animationName="rikimaru_idle" loopAnimation="true" />
+        <animationMapping animateActionName="frozen" animationName="rikimaru_idle" loopAnimation="true"/>
+        <animationMapping animateActionName="die" animationName="rikimaru_die" loopAnimation="false"/>
+        <animationMapping animateActionName="attack" animationName="rikimaru_attack_2" loopAnimation="false"/>
+      </animationMappings>
+    </actor>
+
+    <actor name="Ember Spirit Replica" model="templar_assassin_model.fbx" pointOfInterest="0.8">
+      <animationMappings>
+        <animationMapping animateActionName="walk" animationName="rikimaru_walk" loopAnimation="true" />
+        <animationMapping animateActionName="idle" animationName="rikimaru_idle" loopAnimation="true" />
+        <animationMapping animateActionName="frozen" animationName="rikimaru_idle" loopAnimation="true"/>
+        <animationMapping animateActionName="die" animationName="rikimaru_die" loopAnimation="false"/>
+        <animationMapping animateActionName="attack" animationName="rikimaru_attack_2" loopAnimation="false"/>
+      </animationMappings>
+    </actor>
+    
+
     <actor name="Towers" model="tower.prefab" pointOfInterest="0.8">
       <animationMappings/>
     </actor>
@@ -303,7 +399,7 @@
     <actor name="Ancients" model="Ancient.prefab" pointOfInterest="0.8">
       <animationMappings/>
     </actor>
-    <actor name="Runes" model="m005.fbx">
+    <actor name="Runes" model="double_damage_rune.prefab">
       <animationMappings/>
     </actor>
     <actor name="Wards" model="ward_model.prefab" >

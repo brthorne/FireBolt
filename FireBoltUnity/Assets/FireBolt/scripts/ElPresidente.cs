@@ -487,9 +487,15 @@ public class ElPresidente : MonoBehaviour {
         myTime = currentStoryTime;
         logTicks();
 
+        Profiler.BeginSample("discourse actions");
         updateFireBoltActions(discourseActionList, executingDiscourseActions, currentDiscourseTime);
+        Profiler.EndSample();
+        Profiler.BeginSample("actor actions");
         updateFireBoltActions(actorActionList, executingActorActions, currentStoryTime);
+        Profiler.EndSample();
+        Profiler.BeginSample("camera actions");
         updateFireBoltActions(cameraActionList, executingCameraActions, currentDiscourseTime);
+        Profiler.EndSample();
     }
 
     private bool videoGenerationInitialized = false;
