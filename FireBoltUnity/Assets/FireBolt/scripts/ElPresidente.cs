@@ -677,15 +677,11 @@ public class ElPresidente : MonoBehaviour
         }
         else //going forward in time
         {
-            //currentDiscourseTime = targetDiscourseTime;
-            //fastForwardFireBoltActions(discourseActionList, currentDiscourseTime, executingDiscourseActions, currentDiscourseTime);
-            //fastForwardFireBoltActions(cameraActionList, currentDiscourseTime, executingCameraActions, currentDiscourseTime);
-
-            //lets seek to the right discourse action without doing anything
+            //lets seek to the right discourse action before we start moving the story world
             //purge executing lists
             Profiler.BeginSample("fast forward");
             executingDiscourseActions = new FireBoltActionList(new StartTickComparer());
-            executingCameraActions = new CameraActionList();
+            executingCameraActions = new FireBoltActionList(new ActionTypeComparer());
 
             //iterate over the discourse list until we find the first one beyond our target discourse time point
             //back up one element to set time properly, then run it forward.            
@@ -710,12 +706,9 @@ public class ElPresidente : MonoBehaviour
 
             Profiler.BeginSample("update camera and story to new time");
             while (cameraActionList.NextActionIndex < cameraActionList.Count &&
-                  //cameraActionList[cameraActionList.NextActionIndex].StartTick() < targetDiscourseTime && 
                   currentDiscourseTime < targetDiscourseTime)
             {
-                ////assuming next camera action is a shot frag init...should be <.<
-                //if(cameraActionList[cameraActionList.NextActionIndex] is ShotFragmentInit)
-                //{
+                //assuming next camera action is a shot frag init...should be <.<
                 //update discourse time to be the beginning of this shot
                 if (cameraActionList[cameraActionList.NextActionIndex].StartTick() <= targetDiscourseTime)
                 {
@@ -734,13 +727,23 @@ public class ElPresidente : MonoBehaviour
                 goToStoryTime(currentDiscourseTime + storyTimeOffset);
                 Profiler.EndSample();
 
-                //finish up all the executing cameraMovements
-                foreach (var movement in executingCameraActions)
+                //run the camera actions that are in progress
+                //movements tracking actors should arrive at target time or 
+                //the end of the shot they are defined for, setting up an initial state for 
+                //the next shot frag init
+                List<FireBoltAction> removeList = new List<FireBoltAction>();
+                foreach (FireBoltAction action in executingCameraActions)
                 {
-                    movement.Skip();
+                    if (actionComplete(action, targetDiscourseTime))
+                    {
+                        action.Skip();
+                        removeList.Add(action);
+                    }
                 }
-                //reset the executing camera list
-                executingCameraActions = new CameraActionList();
+                foreach (FireBoltAction action in removeList)
+                {
+                    executingCameraActions.Remove(action);
+                }
 
                 if (currentDiscourseTime >= targetDiscourseTime)
                 {
@@ -766,7 +769,6 @@ public class ElPresidente : MonoBehaviour
             }
             Profiler.EndSample();
             Profiler.EndSample();
-            //}
         }
     }
 
