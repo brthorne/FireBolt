@@ -112,7 +112,9 @@ namespace Assets.scripts
 
         public override void Skip()
         {
+            Profiler.BeginSample("skip rotate");
             actor.transform.rotation = endOrientation;
+            Profiler.EndSample();
         }
 
         public override void Stop()

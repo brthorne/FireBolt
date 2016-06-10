@@ -35,10 +35,10 @@ namespace Assets.scripts
 
         public override void Execute(float currentTime)
         {
-            if (Mathf.Abs(ElPresidente.Instance.CurrentStoryTime - (ElPresidente.Instance.CurrentDiscourseTime + storyTimeOffset)) > ElPresidente.MILLIS_PER_FRAME)
-            {
-                ElPresidente.Instance.goToStoryTime(ElPresidente.Instance.CurrentDiscourseTime + storyTimeOffset);
-            }
+            //if (Mathf.Abs(ElPresidente.Instance.CurrentStoryTime - (ElPresidente.Instance.CurrentDiscourseTime + storyTimeOffset)) > ElPresidente.MILLIS_PER_FRAME)
+            //{
+            //    ElPresidente.Instance.goToStoryTime(ElPresidente.Instance.CurrentDiscourseTime + storyTimeOffset);
+            //}
         }
 
         public override void Stop()
@@ -56,6 +56,11 @@ namespace Assets.scripts
         {
             Extensions.Log("set story time[{0}] ", endTick + storyTimeOffset);
             ElPresidente.Instance.goToStoryTime(endTick + storyTimeOffset);
+        }
+
+        public float GetStoryTimeOffset()
+        {
+            return storyTimeOffset;
         }
     }
 }

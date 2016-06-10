@@ -93,12 +93,14 @@ namespace Assets.scripts
         public override void Skip()
         {
             //Debug.Log(string.Format("skipping translate [{0}]-[{1}] d:s[{2}:{3}]", 
-              //  origin, destination, ElPresidente.currentDiscourseTime, ElPresidente.currentStoryTime));
+            //  origin, destination, ElPresidente.currentDiscourseTime, ElPresidente.currentStoryTime));
+            Profiler.BeginSample("skip translate");
             Vector3 newPosition;
             newPosition.x = destination.X ?? actor.transform.position.x;
             newPosition.y = destination.Y ?? actor.transform.position.y;
             newPosition.z = destination.Z ?? actor.transform.position.z;
             actor.transform.position = newPosition;
+            Profiler.EndSample();
         }
 
         public override void Stop()

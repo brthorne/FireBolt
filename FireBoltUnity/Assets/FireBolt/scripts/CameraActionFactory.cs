@@ -58,7 +58,7 @@ namespace Assets.scripts
                 float blockEndTime = Single.MinValue;
                 foreach (var fragment in block.ShotFragments)
                 {
-                    uint fragmentStartTime = currentDiscourseTime++;
+                    uint fragmentStartTime = currentDiscourseTime;//removing increment.  cameras always execute after discourse actions currentDiscourseTime++;
                     uint fragmentEndTime = fragmentStartTime + fragment.Duration;
                     
                     if (fragmentStartTime < blockStartTime) //assumes same time scale for discourse and story
@@ -174,7 +174,7 @@ namespace Assets.scripts
                     if(fragment.Shake > float.Epsilon)
                         cameraActionList.Add(new Shake(movementStartTime, fragmentEndTime, cameraName, fragment.Shake));
 
-                    currentDiscourseTime = fragmentEndTime;
+                    currentDiscourseTime = fragmentEndTime+1; //set fragments to end and next to start on next tick
                 }
                 if (block.StoryTime.HasValue)
                 {
