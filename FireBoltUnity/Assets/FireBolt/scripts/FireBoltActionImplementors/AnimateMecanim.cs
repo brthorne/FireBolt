@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using CM = CinematicModel;
 
 namespace Assets.scripts
@@ -19,6 +19,8 @@ namespace Assets.scripts
         private static readonly string animationToOverride = "_87_a_U1_M_P_idle_Neutral__Fb_p0_No_1";
         private static readonly string stateToOverride = "state";
         bool assignEndState = false;
+
+        private static Dictionary<string, AnimationClip> cachedAnimationClips = new Dictionary<string, AnimationClip>();
 
         public static bool ValidForConstruction(string actorName, CM.Animation animation)
         {
@@ -53,8 +55,9 @@ namespace Assets.scripts
             }
 
             if (!findAnimations()) return false;
+            animation.wrapMode = loop ? WrapMode.Loop : WrapMode.Once;
             //get the actor this animate action is supposed to affect
-            if(actor == null &&
+            if (actor == null &&
                !getActorByName(actorName, out actor))
             {
                 Debug.LogError("actor[" + actorName + "] not found.  cannot animate");
@@ -93,38 +96,51 @@ namespace Assets.scripts
         }
 
         private bool findAnimations()
-        {
-            //find animations
-            if (ElPresidente.Instance.GetActiveAssetBundle().Contains(animName))
+        {            
+            AnimationClip animationClip;
+            if(!lookupAnimation(animName, out animationClip))
             {
-                animation = ElPresidente.Instance.GetActiveAssetBundle().LoadAsset<AnimationClip>(animName);
+                return false;
+            }
+            animation = animationClip;
 
-                if (animation == null)
+            //using different variables to keep from reassigning references in the cache....this is super sketchy
+            AnimationClip stateClip;
+            if (!string.IsNullOrEmpty(stateName))
+            {                
+                if(!lookupAnimation(stateName, out stateClip))
                 {
-                    Debug.LogError(string.Format("unable to find animation [{0}] in asset bundle[{1}]", animName, ElPresidente.Instance.GetActiveAssetBundle().name));
                     return false;
                 }
-                animation.wrapMode = loop ? WrapMode.Loop : WrapMode.Once;                
+                state = stateClip;
+            }            
+            return true;
+        }
+
+        private bool lookupAnimation(string animationName, out AnimationClip clip)
+        {
+            clip = null;
+            if (cachedAnimationClips.ContainsKey(animationName))
+            {
+                Profiler.BeginSample("cached animation lookup");
+                clip = cachedAnimationClips[animationName];
+                Profiler.EndSample();
+            }
+            else if (ElPresidente.Instance.GetActiveAssetBundle().Contains(animationName))
+            {
+                Profiler.BeginSample("bundle animation lookup");
+                clip = ElPresidente.Instance.GetActiveAssetBundle().LoadAsset<AnimationClip>(animationName);
+                Profiler.EndSample();
+                if (clip == null)
+                {
+                    Debug.LogError(string.Format("unable to find animation [{0}] in asset bundle[{1}]", animationName, ElPresidente.Instance.GetActiveAssetBundle().name));
+                    return false;
+                }
+                cachedAnimationClips.Add(animationName, clip);            
             }
             else
             {
-                Extensions.Log("asset bundle [{0}] does not contain animation[{1}]", ElPresidente.Instance.GetActiveAssetBundle().name, animName);
-                return false;
-            }
-
-            if (!string.IsNullOrEmpty(stateName) && ElPresidente.Instance.GetActiveAssetBundle().Contains(stateName))
-            {
-                assignEndState = true;
-                state = ElPresidente.Instance.GetActiveAssetBundle().LoadAsset<AnimationClip>(stateName);
-                if (state == null)
-                {
-                    Debug.LogError(string.Format("unable to find animation [{0}] in asset bundle[{1}]", stateName, ElPresidente.Instance.GetActiveAssetBundle().name));
-                    if (state == null) return false;
-                }
-            }
-            else if (!string.IsNullOrEmpty(stateName) && !ElPresidente.Instance.GetActiveAssetBundle().Contains(stateName))
-            {
-                Extensions.Log("should have looked up a state animation[{0}] and failed ", stateName);
+                Extensions.Log("asset bundle [{0}] does not contain animation[{1}]", ElPresidente.Instance.GetActiveAssetBundle().name, animationName);
                 return false;
             }
             return true;
@@ -144,9 +160,10 @@ namespace Assets.scripts
 
         public override void Execute(float currentTime) 
         {
-		    //let it roll          
+            Profiler.BeginSample("exec animate");
             float at = Mathf.Repeat ((currentTime - startTick)/1000, animation.length);
             animator.CrossFade( "animating", 0, 0, at/animation.length);
+            Profiler.EndSample();
 	    }
 
         public override void Stop()

@@ -17,6 +17,8 @@ namespace Assets.scripts
         bool defaultedCreate;
         CinematicModelMetaData metaData;
 
+        private static Dictionary<string, GameObject> cachedModels = new Dictionary<string, GameObject>();
+
         public static bool ValidForConstruction(string actorName, string modelName)
         {
             if (string.IsNullOrEmpty(actorName) || string.IsNullOrEmpty(modelName))
@@ -60,9 +62,18 @@ namespace Assets.scripts
             }
             Profiler.BeginSample("init create actor");
             GameObject model = null;
-            if (ElPresidente.Instance.GetActiveAssetBundle().Contains(modelName))
+            if (cachedModels.ContainsKey(modelName))
             {
+                Profiler.BeginSample("cached model lookup");
+                model = cachedModels[modelName];
+                Profiler.EndSample();
+            }
+            else if (ElPresidente.Instance.GetActiveAssetBundle().Contains(modelName))
+            {
+                Profiler.BeginSample("bundle model lookup");
                 model = ElPresidente.Instance.GetActiveAssetBundle().LoadAsset<GameObject>(modelName);
+                Profiler.EndSample();
+                cachedModels.Add(modelName, model);
             }
 
             if (model == null)
