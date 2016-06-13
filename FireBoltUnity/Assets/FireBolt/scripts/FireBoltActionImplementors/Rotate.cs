@@ -58,13 +58,14 @@ namespace Assets.scripts
 
         public override bool Init()
         {
+            
             if (actor != null)
             {
                 startOrientation = actor.transform.rotation;
                 actor.SetActive(true);
                 return true;
             }
-
+            Profiler.BeginSample("init rotate");
             if (actor == null &&
                !getActorByName(actorName, out actor))
             {
@@ -84,6 +85,7 @@ namespace Assets.scripts
                                                           targetOrientation.Z ?? startOrientation.z));
 
             Extensions.Log(this.ToString());
+            Profiler.EndSample();
             return true;
         }
 
@@ -91,12 +93,12 @@ namespace Assets.scripts
         {
             if (endTick - startTick < 1)
                 return;
-
+            Profiler.BeginSample("exec rotate");
             //how much of our rotate duration has elapsed?
             float percentCompleted = (currentTime - startTick) / (endTick - startTick);
 
             actor.transform.rotation = Quaternion.Slerp(startOrientation, endOrientation, percentCompleted);
-
+            Profiler.EndSample();
             //Debug.DrawRay(actor.transform.position + Vector3.up, actor.transform.forward,Color.magenta);
         }
 
@@ -110,7 +112,9 @@ namespace Assets.scripts
 
         public override void Skip()
         {
+            Profiler.BeginSample("skip rotate");
             actor.transform.rotation = endOrientation;
+            Profiler.EndSample();
         }
 
         public override void Stop()

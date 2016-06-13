@@ -29,33 +29,81 @@ public class SliderManager : MonoBehaviour
 
 	// Use this for initialization
 	void Start () 
-    {
+    {             
         //if we are here, then el presidente attached this component to a slider
         slider = ElPresidente.Instance.whereWeAt;
 
         // Set the thumbnail to be hidden on initialization.
         thumbnailEnabled = false;
 
-        if (!registerSliderMouseEvents())
+        //attach scrubbing mouse events to the slider
+        if (!registerSliderScrubEvents())
         {
             return;
         }
 
-        // Get the slider's transform rectangle.
-        sliderRect = slider.GetComponent<RectTransform>();
+        //don't set up the thumbnail if we don't want the keyframes displayed
+        if (ElPresidente.Instance.GenerateKeyframes)
+        {            
+            if (!registerSliderThumbnailEvents())
+            {
+                return;
+            }
 
-        //create a thumbnail to use for displaying keyframes and staple it onto the canvas
-        thumb = (GameObject.Instantiate(Resources.Load("Thumbnail")) as GameObject).GetComponent<UnityEngine.UI.RawImage>();
-        var canvas = GameObject.Find("Canvas");
-        thumb.transform.SetParent(canvas.transform);
+            // Get the slider's transform rectangle.
+            sliderRect = slider.GetComponent<RectTransform>();
 
-        // Remember that initialization has not occurred.
-        hasInitialized = false;
+            //create a thumbnail to use for displaying keyframes and staple it onto the canvas
+            thumb = (GameObject.Instantiate(Resources.Load("Thumbnail")) as GameObject).GetComponent<UnityEngine.UI.RawImage>();
+            var canvas = GameObject.Find("Canvas");
+            thumb.transform.SetParent(canvas.transform);
+
+            // Remember that initialization has not occurred.
+            hasInitialized = false;
+        }
 	}
+
+    private bool registerSliderScrubEvents()
+    {
+        EventTrigger eventTrigger = slider.GetComponent<EventTrigger>();
+        if (!eventTrigger)
+        {
+            Debug.Log("no event trigger attached to slider object.  can't add via code b/c the api is fail.  you won't be getting any keyframes out of this thing");
+            return false;
+        }
+
+        EventTrigger.Entry pointerDownEntry = new EventTrigger.Entry();
+        pointerDownEntry.eventID = EventTriggerType.PointerDown;
+        pointerDownEntry.callback = new EventTrigger.TriggerEvent();
+        pointerDownEntry.callback.AddListener(new UnityEngine.Events.UnityAction<BaseEventData>(ElPresidente.Instance.SuspendTimeUpdate));
+        eventTrigger.triggers.Add(pointerDownEntry);
+
+        EventTrigger.Entry pointerUpEntry = new EventTrigger.Entry();
+        pointerUpEntry.eventID = EventTriggerType.PointerUp;
+        pointerUpEntry.callback = new EventTrigger.TriggerEvent();
+        pointerUpEntry.callback.AddListener(new UnityEngine.Events.UnityAction<BaseEventData>(ElPresidente.Instance.ResumeTimeUpdate));
+        eventTrigger.triggers.Add(pointerUpEntry);
+
+        EventTrigger.Entry beginDragEntry = new EventTrigger.Entry();
+        beginDragEntry.eventID = EventTriggerType.BeginDrag;
+        beginDragEntry.callback = new EventTrigger.TriggerEvent();
+        beginDragEntry.callback.AddListener(new UnityEngine.Events.UnityAction<BaseEventData>(ElPresidente.Instance.SuspendTimeUpdate));
+        eventTrigger.triggers.Add(beginDragEntry);
+
+        EventTrigger.Entry endDragEntry = new EventTrigger.Entry();
+        endDragEntry.eventID = EventTriggerType.EndDrag;
+        endDragEntry.callback = new EventTrigger.TriggerEvent();
+        endDragEntry.callback.AddListener(new UnityEngine.Events.UnityAction<BaseEventData>(ElPresidente.Instance.ResumeTimeUpdate));
+        eventTrigger.triggers.Add(endDragEntry);
+
+        slider.onValueChanged.AddListener(new UnityEngine.Events.UnityAction<float>(ElPresidente.Instance.setTime));
+
+        return true;        
+    }
 
     //dynamically assign slider mouse events so we can avoid requiring a bunch more stuff in the hierarchy
     //when someone imports the firebolt package and doesn't want to use sliders or keyframes
-    private bool registerSliderMouseEvents()
+    private bool registerSliderThumbnailEvents()
     {
         //enter
         EventTrigger eventTrigger = slider.GetComponent<EventTrigger>();
@@ -96,6 +144,11 @@ public class SliderManager : MonoBehaviour
 
 	void Update ()
     {
+        if (!ElPresidente.Instance.GenerateKeyframes) //don't draw keyframes
+        {
+            return;
+        }
+
         // If keyframes have not been loaded and El Presidente has initialized the keyframes...
         if (!hasInitialized && ElPresidente.Instance.KeyframesGenerated)
         {
