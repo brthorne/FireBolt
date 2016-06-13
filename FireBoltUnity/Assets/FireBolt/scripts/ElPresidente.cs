@@ -10,6 +10,8 @@ using Impulse.v_1_336;
 using UintT = Impulse.v_1_336.Intervals.Interval<Impulse.v_1_336.Constants.ValueConstant<uint>, uint>;
 using UintV = Impulse.v_1_336.Constants.ValueConstant<uint>;
 using CM = CinematicModel;
+using System.Text;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// commander-in-chief of cinematic realization.
@@ -31,6 +33,7 @@ public class ElPresidente : MonoBehaviour
 
     private float lastTickLogged;
     public Text debugText;
+    //public Text debugCameraText;
     public float myTime;
     public Slider whereWeAt;
     public static readonly ushort MILLIS_PER_FRAME = 15;
@@ -100,6 +103,8 @@ public class ElPresidente : MonoBehaviour
     bool reloadTerrainBundle = false;
 
     bool generateKeyframes = true;
+
+    public bool GenerateKeyframes { get { return generateKeyframes; } }
 
     /// <summary>
     /// story time.  controlled by discourse actions
@@ -439,9 +444,13 @@ public class ElPresidente : MonoBehaviour
     public void PauseToggle()
     {
         if (Time.timeScale < float.Epsilon)
+        {
             Time.timeScale = 1f;
+        }
         else
+        {            
             Time.timeScale = 0f;
+        }
     }
 
     public void speedToggle()
@@ -451,12 +460,12 @@ public class ElPresidente : MonoBehaviour
 
     private bool automaticTimeUpdate = true;
 
-    public void SuspendTimeUpdate()
+    public void SuspendTimeUpdate(BaseEventData eventData)
     {
         automaticTimeUpdate = false;
     }
 
-    public void ResumeTimeUpdate()
+    public void ResumeTimeUpdate(BaseEventData eventData)
     {
         automaticTimeUpdate = true;
     }
@@ -503,7 +512,7 @@ public class ElPresidente : MonoBehaviour
             init();
         else if (!initialized)
             return;
-
+        
         updateCurrentTime();
 
         if (debugText != null)
@@ -680,8 +689,7 @@ public class ElPresidente : MonoBehaviour
             //lets seek to the right discourse action before we start moving the story world
             //purge executing lists
             Profiler.BeginSample("fast forward");
-            executingDiscourseActions = new FireBoltActionList(new StartTickComparer());
-            executingCameraActions = new FireBoltActionList(new ActionTypeComparer());
+            executingDiscourseActions = new FireBoltActionList(new StartTickComparer());           
 
             //iterate over the discourse list until we find the first one beyond our target discourse time point
             //back up one element to set time properly, then run it forward.            
@@ -771,6 +779,20 @@ public class ElPresidente : MonoBehaviour
             Profiler.EndSample();
         }
     }
+
+    ///// <summary>
+    ///// attempts to list camera actions in debugCameraText UI element
+    ///// </summary>
+    //public void ShowCameraExecuting()
+    //{
+    //    if (!debugCameraText) return;        
+    //    StringBuilder outputText = new StringBuilder("Executing Camera" + Environment.NewLine);
+    //    foreach(var action in executingCameraActions)
+    //    {
+    //        outputText.Append(action.ToString()).Append(Environment.NewLine);
+    //    }
+    //    debugCameraText.text = outputText.ToString();
+    //}
 
 
     public void scaleTime(float scale)
