@@ -62,5 +62,10 @@ namespace Assets.scripts
         {
             return storyTimeOffset;
         }
+
+        public override string GetMainActorName()
+        {
+            return string.Empty;
+        }
     }
 }

@@ -329,9 +329,7 @@ namespace Assets.scripts
 
         private Vector3 findTargetLookAtPoint(GameObject target)
         {
-            var cmMetaData = target.GetComponent<CinematicModelMetaDataComponent>();
-            //CinematicModel.Actor actor;
-            //ElPresidente.Instance.CinematicModel.TryGetActor(target.name, out actor); //find the CM definition for the actor we are supposed to angle against
+            var cmMetaData = target.GetComponent<CinematicModelMetaDataComponent>();            
             Framing framing = framings.Find(x => x.FramingTarget == target.name); //see if there is a target being framed with that name
 
             float pointOfInterestScalar = 0;            
@@ -421,7 +419,6 @@ namespace Assets.scripts
                         break;
                     }
                 }
-
             }
             return subjectVisible;
         }
@@ -617,5 +614,41 @@ namespace Assets.scripts
             cameraBody.FocusDistance = newfocusDistance;
         }
 
+        public override string ToString()
+        {
+            string framingString = "no frame";
+            if (framings[0] != null)
+            {
+                framingString = string.Format("frame {0} {1};", framings[0].FramingTarget, framings[0].FramingType);
+            }
+            string directionString = "no dir;";
+            if (direction!=null)
+            {
+                directionString = string.Format("dir {0} {1};", direction.Target, direction.Heading);
+            }
+            string angleString = "no angle;";
+            if (cameraAngle != null)
+            {
+                angleString = string.Format("angle {0} {1};", cameraAngle.Target, cameraAngle.AngleSetting);
+            }
+            return string.Format("SFInit {0} {1} {2} {3} {4}", 
+                                 framingString, directionString, angleString, 
+                                 string.IsNullOrEmpty(lensName)?"no lens;":lensName,
+                                 string.IsNullOrEmpty(fStopName)?"no fstop;":fStopName);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>main framing subject</returns>
+        public override string GetMainActorName()
+        {                 
+            var subject = string.Empty;
+            if(framings != null && framings[0] != null)
+            {
+                subject = framings[0].FramingTarget;
+            }
+            return subject;
+        }
     }
 }

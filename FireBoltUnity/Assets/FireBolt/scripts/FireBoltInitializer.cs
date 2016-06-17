@@ -5,7 +5,7 @@ using Mono;
 
 namespace Assets.scripts
 {
-
+    [RequireComponent(typeof(ElPresidente))]
     public class FireBoltInitializer : MonoBehaviour
     {
         private static readonly char encodingDelimiter = ':';

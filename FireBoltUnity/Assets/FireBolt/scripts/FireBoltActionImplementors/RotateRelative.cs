@@ -169,5 +169,22 @@ namespace Assets.scripts
             }
             
         }
+
+        public override string ToString()
+        {
+            string direction = string.Empty;
+            if (pan) direction += "pan";
+            if (tilt) direction += " tilt";
+            return string.Format("{0} {2} with {1}", actorName, trackedActorName, direction);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>target of tracking rather than actor turning.  camera oriented</returns>
+        public override string GetMainActorName()
+        {
+            return trackedActorName;
+        }
     }
 }
