@@ -9,7 +9,7 @@ namespace Assets.scripts
     {
 
         public float fixedTimeStep = 33f;
-        public float fixedTimeStepIncrement = 5f;
+        public float fixedTimeStepIncrement = 1f;
         public Text fixedTimeStepDisplayText;
         public MiniMapController MinimapController;
 
@@ -46,18 +46,18 @@ namespace Assets.scripts
                 ElPresidente.Instance.PauseToggle();
             }
 
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKey(KeyCode.UpArrow))
             {
                 fixedTimeStep += fixedTimeStepIncrement;
                 fixedTimeStepDisplayText.text = fixedTimeStep.ToString();
             }
 
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKey(KeyCode.DownArrow))
             {
                 fixedTimeStep -= fixedTimeStepIncrement;
-                if (fixedTimeStep < 0.1f)
+                if (fixedTimeStep < ElPresidente.MILLIS_PER_FRAME)
                 {
-                    fixedTimeStep = 0.1f;
+                    fixedTimeStep = ElPresidente.MILLIS_PER_FRAME;
                 }
                 fixedTimeStepDisplayText.text = fixedTimeStep.ToString();
             }
