@@ -73,6 +73,8 @@ namespace Assets.scripts
         /// pointer to the next action from the queue
         /// </summary>
         public int NextActionIndex { get; set; }
+
+       
     }
 
     public class CameraActionList : FireBoltActionList

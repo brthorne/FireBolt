@@ -11,7 +11,7 @@ namespace Assets.scripts
 {
     public class Translate : FireBoltAction
     {
-        string actorName;
+        protected string actorName;
         protected GameObject actor;
         /// <summary>
         /// intended position of the actor when the interval begins
@@ -42,13 +42,14 @@ namespace Assets.scripts
 
         public override bool Init()
         {
+            
             if (initialized)
             {
                 actor.SetActive(true);
                 return true;
             }
-                            
-            if(actor == null && 
+            Profiler.BeginSample("init translate");
+            if (actor == null && 
                 !getActorByName(actorName, out actor))
             {
                 Debug.LogError("actor name [" + actorName + "] not found. cannot move");
@@ -60,6 +61,7 @@ namespace Assets.scripts
             Extensions.Log("translate init [{0}] from [{1}] to [{2}]",
                            actorName,origin,destination);
             initialized = true;
+            Profiler.EndSample();
             return true;
         }
 
@@ -67,6 +69,7 @@ namespace Assets.scripts
         {
             if (endTick - startTick < 1)
                 return;
+            Profiler.BeginSample("exec translate");
             float lerpPercent = (currentTime - startTick)/(endTick-startTick);
             Vector3 lerpd;
             lerpd.x = destination.X.HasValue ? Mathf.Lerp(origin.x,destination.X.Value, lerpPercent) : actor.transform.position.x;
@@ -76,6 +79,7 @@ namespace Assets.scripts
               //  ElPresidente.currentDiscourseTime, ElPresidente.currentStoryTime));
 
             actor.transform.position = lerpd;
+            Profiler.EndSample();
         }
 
         public override void Undo()
@@ -89,17 +93,29 @@ namespace Assets.scripts
         public override void Skip()
         {
             //Debug.Log(string.Format("skipping translate [{0}]-[{1}] d:s[{2}:{3}]", 
-              //  origin, destination, ElPresidente.currentDiscourseTime, ElPresidente.currentStoryTime));
+            //  origin, destination, ElPresidente.currentDiscourseTime, ElPresidente.currentStoryTime));
+            Profiler.BeginSample("skip translate");
             Vector3 newPosition;
             newPosition.x = destination.X ?? actor.transform.position.x;
             newPosition.y = destination.Y ?? actor.transform.position.y;
             newPosition.z = destination.Z ?? actor.transform.position.z;
             actor.transform.position = newPosition;
+            Profiler.EndSample();
         }
 
         public override void Stop()
         {
             //nothing to stop
+        }
+
+        public override string GetMainActorName()
+        {
+            return actorName;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("translate {0} from {1} to {2}", actorName, origin, destination);
         }
     }
 }

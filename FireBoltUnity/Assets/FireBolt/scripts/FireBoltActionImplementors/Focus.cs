@@ -99,5 +99,19 @@ namespace Assets.scripts
             //nothing to stop
         }
 
+        public override string ToString()
+        {
+            return string.Format("focus with {0}", targetName);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>the target of the focus rather than the camera focusing</returns>
+        public override string GetMainActorName()
+        {
+            return targetName;
+        }
+
     }
 }

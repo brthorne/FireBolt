@@ -743,5 +743,10 @@ namespace Assets.scripts
             cameraBody.FocusDistance = newfocusDistance;
         }
 
+        public override string GetMainActorName()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

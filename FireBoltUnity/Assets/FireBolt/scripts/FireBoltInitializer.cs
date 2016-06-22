@@ -5,7 +5,7 @@ using Mono;
 
 namespace Assets.scripts
 {
-
+    [RequireComponent(typeof(ElPresidente))]
     public class FireBoltInitializer : MonoBehaviour
     {
         private static readonly char encodingDelimiter = ':';
@@ -89,16 +89,13 @@ namespace Assets.scripts
             }
             ElPresidente.Instance.Init(logDebug, inputFiles, videoInputSet, false, false, false, logStatistics, statFile);
 #else
-            inputFiles.CameraPlanPath = "tests/lowAngle/defaultCamera.xml";
+            Profiler.maxNumberOfSamplesPerFrame = -1;
+            inputFiles.CameraPlanPath = "tests/longCamera.xml";
             //inputFiles.CinematicModelPath = "tests/lowAngle/defaultModel.xml";
             inputFiles.CinematicModelPath = "cinematicModels/defaultModel.xml";
-            inputFiles.StoryPlanPath = "tests/lowAngle/defaultStory.xml";
+            inputFiles.StoryPlanPath = "tests/longStory.xml";
 
-            videoInputSet = new VideoInputSet();
-            videoInputSet.AddEncoding("mp4");
-            videoInputSet.FrameRate = 3;
-
-            ElPresidente.Instance.Init(logDebug, inputFiles, videoInputSet, false, false, false, true, "statfile.txt");
+            ElPresidente.Instance.Init(logDebug, inputFiles, videoInputSet, false, false, false, false, "statfile.txt");
 #endif
         }
     }
