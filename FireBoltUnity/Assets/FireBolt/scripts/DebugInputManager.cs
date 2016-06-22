@@ -57,7 +57,7 @@ namespace Assets.scripts
                 fixedTimeStep -= fixedTimeStepIncrement;
                 if (fixedTimeStep < ElPresidente.MILLIS_PER_FRAME)
                 {
-                    fixedTimeStep = ElPresidente.MILLIS_PER_FRAME;
+                    fixedTimeStep = ElPresidente.MILLIS_PER_FRAME+2;
                 }
                 fixedTimeStepDisplayText.text = fixedTimeStep.ToString();
             }
