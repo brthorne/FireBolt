@@ -33,11 +33,13 @@ public class ElPresidente : MonoBehaviour
 
     private float lastTickLogged;
     public Text debugText;
-    //public Text debugCameraText;
+    public Text debugCameraText;
+    public Text debugStoryText;
     public float myTime;
     public Slider whereWeAt;
     public static readonly ushort MILLIS_PER_FRAME = 15;
     private Story<UintV, UintT, IIntervalSet<UintV, UintT>> story;
+    public MiniMapController miniMapController;
 
     public static ElPresidente Instance;
 
@@ -369,6 +371,18 @@ public class ElPresidente : MonoBehaviour
             StartCoroutine(CreateScreenshots());
         }
 
+        if(miniMapController != null)
+        {
+            List<string> actorNames = new List<string>();
+            //get list of main actors to show on the minimap
+            foreach (var actor in (story.ObjectSets["Main-Actors"] as IFiniteObjectSet).Items)
+            {
+                actorNames.Add(actor.Value.ToString());
+            }
+            miniMapController.InitializeMiniMap(actorNames);
+        }
+            
+
         initialized = true;
         initNext = false;
         initTriggered = false;
@@ -395,7 +409,9 @@ public class ElPresidente : MonoBehaviour
         t.name = "Terrain";
         t.transform.SetParent(GameObject.Find("FireBolt").transform, true);
         createdGameObjects.Add(t.name, t);
+        t.layer = LayerMask.NameToLayer("Terrain");
         Terrain activeTerrain = Terrain.activeTerrain;
+
         //foreach(var treePrototype in activeTerrain.terrainData.treePrototypes)
         //{
         //    OcclusionDescriptor descriptor = treePrototype.prefab.AddComponent<OcclusionDescriptor>();
@@ -780,19 +796,81 @@ public class ElPresidente : MonoBehaviour
         }
     }
 
-    ///// <summary>
-    ///// attempts to list camera actions in debugCameraText UI element
-    ///// </summary>
-    //public void ShowCameraExecuting()
-    //{
-    //    if (!debugCameraText) return;        
-    //    StringBuilder outputText = new StringBuilder("Executing Camera" + Environment.NewLine);
-    //    foreach(var action in executingCameraActions)
-    //    {
-    //        outputText.Append(action.ToString()).Append(Environment.NewLine);
-    //    }
-    //    debugCameraText.text = outputText.ToString();
-    //}
+    /// <summary>
+    /// attempts to list camera actions in debugCameraText UI element
+    /// </summary>
+    public void ToggleCameraExecuting()
+    {
+        //if there's no text to write to, don't do anything
+        if (!debugCameraText) return;
+
+        //if the text is not populated do stuff. gives us a toggle effect
+        if (string.IsNullOrEmpty(debugCameraText.text))
+        {
+            StringBuilder outputText = new StringBuilder("Executing Camera" + Environment.NewLine);
+            FireBoltAction cameraAction;
+            if(getRecentShotInit(out cameraAction))
+            {
+                outputText.Append(cameraAction.ToString() + Environment.NewLine);
+            }           
+            foreach (var action in executingCameraActions)
+            {
+                outputText.Append(action.ToString()).Append(Environment.NewLine);
+            }
+            debugCameraText.text = outputText.ToString();
+        }
+        else
+        {
+            debugCameraText.text = string.Empty;
+        }
+    }
+
+    private bool getRecentShotInit(out FireBoltAction cameraAction)
+    {
+        //walk back in the camera action list to find the last shot fragment init executed
+        int cameraActionIndex = cameraActionList.NextActionIndex;
+        cameraAction = null;
+        while(cameraActionIndex > 0)
+        {
+            cameraActionIndex--;
+            cameraAction = cameraActionList[cameraActionIndex];
+            if (cameraAction is ShotFragmentInit)
+            {
+                return true;
+            }
+        }
+        return false;        
+    }
+
+    public void ToggleStoryExecuting()
+    {
+        if (!debugStoryText) return;
+        if (string.IsNullOrEmpty(debugStoryText.text))
+        {
+            FireBoltAction shotInit;
+            if (!getRecentShotInit(out shotInit))
+            {
+                debugStoryText.text = "No shot init found";
+                return;
+            }
+
+            string mainSubjectName = shotInit.GetMainActorName();
+            var outputText = new StringBuilder(string.Format("Executing target actor [{0}] actions", mainSubjectName) + Environment.NewLine);
+            foreach (var action in executingActorActions)
+            {
+                if (action.GetMainActorName() == mainSubjectName)
+                {
+                    outputText.Append(action.ToString() + Environment.NewLine);
+                }
+                
+            }
+            debugStoryText.text = outputText.ToString();
+        }
+        else
+        {
+            debugStoryText.text = string.Empty;
+        }
+    }
 
 
     public void scaleTime(float scale)

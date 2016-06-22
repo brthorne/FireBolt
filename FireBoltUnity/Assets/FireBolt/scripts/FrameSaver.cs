@@ -16,9 +16,7 @@ namespace Assets.scripts
         [DllImport("opengl32")]
         public static extern int glReadPixels(int x, int y, int width, int height, int format, int type, IntPtr buffer);
         private const int GL_UNSIGNED_BYTE = 0x1401;
-        private const int GL_UNSIGNED_INT_8_8_8_8_REV = 33639;
         private const int GL_RGBA = 0x1908;
-        private const int GL_BGRA = 32993;
 
         byte[] pixels;
         bool init = false;

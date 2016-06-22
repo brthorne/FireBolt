@@ -32,7 +32,7 @@ namespace Assets.scripts
 
         public override string ToString()
         {
-            return "Rotate " + actorName + " from " + startOrientation + " to " + targetOrientation;
+            return "Rotate " + actorName + " from " + startOrientation.eulerAngles + " to " + targetOrientation;
         }
 
         /// <summary>
@@ -150,6 +150,11 @@ namespace Assets.scripts
                 return;
             }
             targetOrientation.Y = yOrientation;
+        }
+
+        public override string GetMainActorName()
+        {
+            return actorName;
         }
     }
 }

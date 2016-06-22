@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Linq;
+using System;
 
 namespace Assets.scripts
 {
@@ -84,6 +85,11 @@ namespace Assets.scripts
         public override void Stop()
         {
             //nothing to stop
+        }
+
+        public override string GetMainActorName()
+        {
+            return actorName;
         }
     }
 }

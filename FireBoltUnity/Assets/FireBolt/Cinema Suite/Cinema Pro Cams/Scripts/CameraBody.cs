@@ -277,6 +277,178 @@ public class CameraBody : MonoBehaviour {
 			}
 		}
 	}
+
+    bool frustumInitialized = false;
+    GameObject[] frustumLines;
+    LineRenderer[] frustumLineRenderers;
+    Material lineMaterial;
+    public void drawFrustum(Color frustumColor, Color focusColor, Color dofColor)
+    {
+        
+        if (!frustumInitialized)
+        {
+            lineMaterial = new Material(Shader.Find("Particles/Additive"));
+            GameObject rig;
+            ElPresidente.createdGameObjects.TryGet("Rig", out rig);
+            int cameraFrustumLayerId = LayerMask.NameToLayer("CameraFrustum");
+            //make some line rendering game objects
+            frustumLines = new GameObject[7];
+            frustumLineRenderers = new LineRenderer[7];
+            for (int i = 0; i < 7; i++)
+            {
+                frustumLines[i] = new GameObject();
+                frustumLines[i].transform.SetParent(rig.transform);
+                frustumLines[i].transform.localPosition = Vector3.zero;
+                frustumLines[i].transform.localRotation = Quaternion.identity;
+                frustumLines[i].layer = cameraFrustumLayerId;
+
+                var lineRenderer = frustumLines[i].AddComponent<LineRenderer>();                
+                lineRenderer.SetWidth(0.5f, 0.5f);                
+                lineRenderer.useWorldSpace = false;
+                lineRenderer.material = lineMaterial;
+                lineRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+
+                frustumLineRenderers[i] = lineRenderer;
+            }
+
+            //set up frustum edges
+            for(int i=0; i<4; i++)
+            {
+                frustumLineRenderers[i].SetColors(Color.white, Color.white);
+                frustumLineRenderers[i].SetVertexCount(2);
+            }
+
+            //set up the far and near dof planes and focus plane
+            frustumLineRenderers[4].SetColors(dofColor, dofColor);
+            frustumLineRenderers[4].SetVertexCount(8);
+
+            frustumLineRenderers[5].SetColors(dofColor, dofColor);
+            frustumLineRenderers[5].SetVertexCount(8);
+
+            frustumLineRenderers[6].SetColors(focusColor, focusColor);
+            frustumLineRenderers[6].SetVertexCount(8);
+
+            frustumInitialized = true;
+        }
+
+
+        float dofNearM = _dofNearLimit * 0.3048f;// feet to meters
+        float dofFarM = _dofFarLimit * 0.3048f; // feet to meters
+        float dofFocusM = _focusDist;   // feet to meters
+
+        if (_unitOfMeasure == UnitOfMeasure.Imperial)
+        {
+            dofNearM = _dofNearLimit * 0.3048f;// feet to meters
+            dofFarM = _dofFarLimit * 0.3048f;   // feet to meters
+            dofFocusM = _focusDist * 0.3048f;   // feet to meters
+        }
+
+        Transform camTransform = _nodalCamera.transform;
+
+        //Gizmos.matrix = Matrix4x4.TRS(
+        //camTransform.position, camTransform.rotation, camTransform.lossyScale);
+
+        Vector3 toNear = Vector3.forward * dofNearM;
+        Vector3 toFar = Vector3.forward * dofFarM;
+        Vector3 toFocus = Vector3.forward * dofFocusM;
+        Vector3 toNearClip = Vector3.forward * _nodalCamera.nearClipPlane;
+        Vector3 toFarClip = Vector3.forward * _nodalCamera.farClipPlane;
+
+        float fov = 0;
+        ProCamsLensDataTable.FilmFormatData curFilmFormat = ProCamsLensDataTable.Instance.GetFilmFormat(_filmFormatName);
+        if (curFilmFormat != null)
+        {
+            fov = Lens.GetHorizontalFOV(curFilmFormat._aspect, _lensFOVList[_lensIndex]._unityVFOV);
+        }
+
+        float ang = Mathf.Tan(Mathf.Deg2Rad * (fov / 2f));
+
+        float oppNear = ang * dofNearM;
+        float oppFar = ang * dofFarM;
+        float oppFocus = ang * dofFocusM;
+        float oppNearClip = ang * _nodalCamera.nearClipPlane;
+        float oppFarClip = ang * _nodalCamera.farClipPlane;
+
+        Vector3 toNearR = Vector3.right * oppNear;
+        Vector3 toFarR = Vector3.right * oppFar;
+        Vector3 toFocusR = Vector3.right * oppFocus;
+        Vector3 toNearClipR = Vector3.right * oppNearClip;
+        Vector3 toFarClipR = Vector3.right * oppFarClip;
+
+        fov = _lensFOVList[_lensIndex]._unityVFOV;
+        ang = Mathf.Tan(Mathf.Deg2Rad * (fov / 2f));
+
+        oppNear = ang * dofNearM;
+        oppFar = ang * dofFarM;
+        oppFocus = ang * dofFocusM;
+        oppNearClip = ang * _nodalCamera.nearClipPlane;
+        oppFarClip = ang * _nodalCamera.farClipPlane;
+
+        Vector3 toNearT = Vector3.up * oppNear;
+        Vector3 toFarT = Vector3.up * oppFar;
+        Vector3 toFocusT = Vector3.up * oppFocus;
+        Vector3 toNearClipT = Vector3.up * oppNearClip;
+        Vector3 toFarClipT = Vector3.up * oppFarClip;
+
+        // Calculate all the points (L = Left, R = Right, T = top, B = bottom)
+        Vector3 nearLB = toNear - toNearR - toNearT;
+        Vector3 nearLT = toNear - toNearR + toNearT;
+        Vector3 nearRB = toNear + toNearR - toNearT;
+        Vector3 nearRT = toNear + toNearR + toNearT;
+        Vector3 focusLB = toFocus - toFocusR - toFocusT;
+        Vector3 focusLT = toFocus - toFocusR + toFocusT;
+        Vector3 focusRB = toFocus + toFocusR - toFocusT;
+        Vector3 focusRT = toFocus + toFocusR + toFocusT;
+        Vector3 farLB = toFar - toFarR - toFarT;
+        Vector3 farLT = toFar - toFarR + toFarT;
+        Vector3 farRB = toFar + toFarR - toFarT;
+        Vector3 farRT = toFar + toFarR + toFarT;
+        Vector3 nearCLB = toNearClip - toNearClipR - toNearClipT;
+        Vector3 nearCLT = toNearClip - toNearClipR + toNearClipT;
+        Vector3 nearCRB = toNearClip + toNearClipR - toNearClipT;
+        Vector3 nearCRT = toNearClip + toNearClipR + toNearClipT;
+        Vector3 farCLB = toFarClip - toFarClipR - toFarClipT;
+        Vector3 farCLT = toFarClip - toFarClipR + toFarClipT;
+        Vector3 farCRB = toFarClip + toFarClipR - toFarClipT;
+        Vector3 farCRT = toFarClip + toFarClipR + toFarClipT;
+
+
+        // camera frustum
+        frustumLineRenderers[0].SetPositions(new Vector3[] { nearCLB, farCLB });
+        frustumLineRenderers[1].SetPositions(new Vector3[] { nearCRB, farCRB });
+        frustumLineRenderers[2].SetPositions(new Vector3[] { nearCLT, farCLT });
+        frustumLineRenderers[3].SetPositions(new Vector3[] { nearCRT, farCRT });
+
+        // near dof rectangle
+        frustumLineRenderers[4].SetPositions(new Vector3[]
+        {
+            nearLB, nearRB,
+            nearRB, nearRT,
+            nearRT, nearLT,
+            nearLT, nearLB            
+        });
+
+        if (_dofFarLimit >= 0)
+        {
+            // far rectangle
+            frustumLineRenderers[5].SetPositions(new Vector3[]
+            {
+                farLB, farRB,
+                farRB, farRT,
+                farRT, farLT,
+                farLT, farLB                
+            });
+        }
+
+        // focus rectangle
+        frustumLineRenderers[6].SetPositions(new Vector3[]
+        {
+            focusLB, focusRB,
+            focusRB, focusRT,
+            focusRT, focusLT,
+            focusLT, focusLB
+        });
+    }
 	
 	public void CallUpdate () {
 		if (_focusDist < 0)														_focusDist = 0;

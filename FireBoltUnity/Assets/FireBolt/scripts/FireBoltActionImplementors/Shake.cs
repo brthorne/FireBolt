@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.scripts
 {
@@ -60,6 +61,11 @@ namespace Assets.scripts
         public override void Stop()
         {
             //intentionally blank
+        }
+
+        public override string GetMainActorName()
+        {
+            return string.Empty;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using CM = CinematicModel;
+using System;
 
 namespace Assets.scripts
 {
@@ -173,6 +174,16 @@ namespace Assets.scripts
             //    animator.Rebind();
             //}
             //animator.SetTrigger(stopTriggerHash);
+        }
+
+        public override string GetMainActorName()
+        {
+            return actorName;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("animate {0} with {1}", actorName, animName);
         }
     }
 }
