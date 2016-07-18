@@ -96,7 +96,7 @@ public class SliderManager : MonoBehaviour
         endDragEntry.callback.AddListener(new UnityEngine.Events.UnityAction<BaseEventData>(ElPresidente.Instance.ResumeTimeUpdate));
         eventTrigger.triggers.Add(endDragEntry);
 
-        slider.onValueChanged.AddListener(new UnityEngine.Events.UnityAction<float>(ElPresidente.Instance.setTime));
+        slider.onValueChanged.AddListener(new UnityEngine.Events.UnityAction<float>(ElPresidente.Instance.SetTime));
 
         return true;        
     }

@@ -53,12 +53,12 @@ namespace Assets.scripts
 
                 CM.Animation effectingAnimation = getEffectingAnimation(storyAction, domainAction);
 
-                enqueueCreateActions(storyAction, domainAction, effectingAnimation, aaq);
-                enqueueAnimateActions(storyAction, domainAction, effectingAnimation, aaq, implicitActorCreation);
-                enqueueDestroyActions(storyAction, domainAction, effectingAnimation, aaq, implicitActorCreation);
-                enqueuetranslateActions(storyAction, domainAction, effectingAnimation, aaq, implicitActorCreation);
-                enqueueRotateActions(storyAction, domainAction, effectingAnimation, aaq, implicitActorCreation);
-                enqueueAttachActions(storyAction, domainAction, effectingAnimation, aaq, implicitActorCreation);
+                enqueueCreateActions(storyAction, domainAction, effectingAnimation, aaq, storyAction.Name);
+                enqueueAnimateActions(storyAction, domainAction, effectingAnimation, aaq, storyAction.Name, implicitActorCreation);
+                enqueueDestroyActions(storyAction, domainAction, effectingAnimation, aaq, storyAction.Name, implicitActorCreation);
+                enqueuetranslateActions(storyAction, domainAction, effectingAnimation, aaq, storyAction.Name, implicitActorCreation);
+                enqueueRotateActions(storyAction, domainAction, effectingAnimation, aaq, storyAction.Name, implicitActorCreation);
+                enqueueAttachActions(storyAction, domainAction, effectingAnimation, aaq, storyAction.Name, implicitActorCreation);
             }            
             return aaq;
         }
@@ -159,7 +159,8 @@ namespace Assets.scripts
         }
 
         private static void enqueueRotateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, 
-                                                 CM.Animation effectingAnimation, FireBoltActionList aaq, bool implicitActorInstantiation)
+                                                 CM.Animation effectingAnimation, FireBoltActionList aaq, 
+                                                 string parentActionId, bool implicitActorInstantiation)
         {
             foreach (CM.RotateAction ra in domainAction.RotateActions)
             {
@@ -206,13 +207,15 @@ namespace Assets.scripts
                 var targetRotation = new Vector3Nullable(null, targetDegrees, null);
                 if (Rotate.ValidForConstruction(actorName, targetRotation, targetPoint))
                 {                    
-                    aaq.Add(new Rotate(startTick, endTick, actorName, targetRotation, targetPoint));
+                    aaq.Add(new Rotate(startTick, endTick, actorName, targetRotation, targetPoint)
+                                      { ParentActionId = parentActionId });
                 }                
             }
         }
 
         private static void enqueuetranslateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, 
-                                               CM.Animation effectingAnimation, FireBoltActionList aaq, bool implicitActorInstantiation)
+                                                    CM.Animation effectingAnimation, FireBoltActionList aaq, 
+                                                    string parentActionId, bool implicitActorInstantiation)
         {
             foreach (CM.TranslateAction ta in domainAction.TranslateActions)
             {
@@ -266,7 +269,8 @@ namespace Assets.scripts
                 endTick = getEndTick(storyAction, ta, effectingAnimation, startTick);
                 if (Translate.ValidForConstruction(actorName))
                 {
-                    aaq.Add(new Translate(startTick, endTick, actorName, origin, destination));
+                    aaq.Add(new Translate(startTick, endTick, actorName, origin, destination)
+                                         { ParentActionId = parentActionId });
                 }
             }
         }
@@ -325,7 +329,8 @@ namespace Assets.scripts
         }
 
         private static void enqueueAnimateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction,
-                                                  CM.Animation effectingAnimation, FireBoltActionList aaq, bool implicitActorInstantiation)
+                                                  CM.Animation effectingAnimation, FireBoltActionList aaq, 
+                                                  string parentActionId, bool implicitActorInstantiation)
         {
             foreach (CM.AnimateAction animateAction in domainAction.AnimateActions)
             {
@@ -415,7 +420,9 @@ namespace Assets.scripts
                 if (AnimateMecanim.ValidForConstruction(actorName, animation))
                 {
                     //   Extensions.Log("actor: " + actorName + " animMappingName: " + animMapping.AnimationName + " animateActionName: " + animMapping.AnimateActionName + " loop: " + animMapping.LoopAnimation);
-                    aaq.Add(new AnimateMecanim(startTick, endTick, actorName, animation.FileName, animMapping.LoopAnimation, stateAnimation.FileName));
+                    aaq.Add(new AnimateMecanim(startTick, endTick, actorName, animation.FileName,
+                                               animMapping.LoopAnimation, stateAnimation.FileName)
+                                               { ParentActionId = parentActionId });
                 }
             }
         }
@@ -608,7 +615,8 @@ namespace Assets.scripts
             return false;
         }
 
-        private static void enqueueCreateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, CM.Animation effectingAnimation, FireBoltActionList aaq )
+        private static void enqueueCreateActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, 
+                                                 CM.Animation effectingAnimation, FireBoltActionList aaq, string parentActionId )
         {
             foreach (CM.CreateAction ca in domainAction.CreateActions)
             {
@@ -671,14 +679,15 @@ namespace Assets.scripts
                 startTick = getStartTick(storyAction, ca, effectingAnimation);                
                 if(Create.ValidForConstruction(actorName,metaData.ModelName))
                 {
-                    aaq.Add(new Create(startTick, actorName, metaData.ModelName, destination, metaData, orientation));
+                    aaq.Add(new Create(startTick, actorName, metaData.ModelName, destination, metaData, orientation)
+                                      { ParentActionId = parentActionId });
                 }                
             }
         }
 
         private static void enqueueDestroyActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, 
                                                   CM.Animation effectingAnimation, FireBoltActionList aaq,
-                                                  bool implicitActorInstantiation)
+                                                  string parentActionId, bool implicitActorInstantiation)
         {
             foreach (CM.DestroyAction da in domainAction.DestroyActions)
             {
@@ -698,13 +707,13 @@ namespace Assets.scripts
                 startTick = getStartTick(storyAction,da,effectingAnimation);
                 if (Destroy.ValidForConstruction(actorName))
                 {
-                    aaq.Add(new Destroy(startTick, actorName));
+                    aaq.Add(new Destroy(startTick, actorName) { ParentActionId = parentActionId });
                 }
             }
         }
 
         private static void enqueueAttachActions(IStoryAction<UintT> storyAction, CM.DomainAction domainAction, CM.Animation effectingAnimation, 
-                                                 FireBoltActionList aaq, bool implicitActorInstantiation)
+                                                 FireBoltActionList aaq, string parentActionId, bool implicitActorInstantiation)
         {
             foreach (CM.AttachAction aa in domainAction.AttachActions)
             {
@@ -730,7 +739,8 @@ namespace Assets.scripts
                 if ((!implicitActorInstantiation || actorWillBeInstantiated(actorName)) && 
                     Create.ValidForConstruction(actorName, parentName))
                 {
-                    aaq.Add(new Attach(startTick, actorName, parentName, attach));
+                    aaq.Add(new Attach(startTick, actorName, parentName, attach)
+                                      { ParentActionId = parentActionId });
                 }
             }
         }

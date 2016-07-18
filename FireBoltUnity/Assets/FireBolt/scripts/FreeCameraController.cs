@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Talis.Highlight;
 using System.Collections;
 
 namespace Assets.scripts
@@ -12,14 +13,42 @@ namespace Assets.scripts
         float fieldOfViewMin = 3f;
         Camera freeCamera;
         Camera baseCamera;
+
         Vector3 previousMousePosition;
+
+        //highlight things
+        Shader outlineShader;
+        HighlightCamera highlightCameraController;
+        GameObject highlit;
+        int actorLayer;
+        int highlightLayer;
 
         void Start()
         {
             freeCamera = gameObject.AddComponent<Camera>();
             freeCamera.tag = "MainCamera";
+
+            //layers
+            highlightLayer = LayerMask.NameToLayer("Highlight");
+            actorLayer = LayerMask.NameToLayer("Actor");
+
+            //attach a highlight camera
+            //var highlightCameraRig = new GameObject("HighlightCamera");
+            //highlightCameraRig.transform.SetParent(gameObject.transform);
+            //highlightCameraRig.transform.localPosition = Vector3.zero;
+            //highlightCameraRig.transform.localRotation = Quaternion.identity;
+            //var highlightCamera = highlightCameraRig.AddComponent<Camera>();
+            //highlightCameraController = highlightCameraRig.AddComponent<HighlightCamera>();
+            //highlightCameraController.replacementShader = Shader.Find("Custom/SolidColor");
+            //highlightCameraController.outlineMaterial = Resources.Load<Material>("Materials/outlineposteff");
+            //highlightCamera.cullingMask = highlightLayer;
+            //highlightCamera.clearFlags = CameraClearFlags.Depth;
+            //highlightCamera.depth = 1;
+
             freeCamera.enabled = false;
             enabled = false;
+
+
         }
 
         public void StopFreeLook()
@@ -45,8 +74,23 @@ namespace Assets.scripts
 
         }
 
+        void moveMouseOverToHighlight()
+        {
+            if(highlit!=null)
+            {
+                highlit.layer = actorLayer;
+            }
+            RaycastHit hit;
+            if (Physics.Raycast(freeCamera.ScreenPointToRay(Input.mousePosition), out hit, 1000f, 1<<actorLayer))
+            {
+                highlit = hit.transform.gameObject;
+                highlit.layer = highlightLayer;
+            }
+        }
+
         void Update()
         {
+            //moveMouseOverToHighlight();
             if (Input.GetKey(KeyCode.W))
             {
                 gameObject.transform.position += gameObject.transform.forward * translateSpeed;

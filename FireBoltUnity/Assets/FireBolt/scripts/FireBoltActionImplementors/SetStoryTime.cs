@@ -29,7 +29,7 @@ namespace Assets.scripts
         {
             //normally we allow the skip to handle any instantaneous executions, but here we need to have the 
             //full block time as the duration for undoing and redoing over the edges
-            ElPresidente.Instance.goToStoryTime(ElPresidente.Instance.CurrentDiscourseTime + storyTimeOffset);
+            ElPresidente.Instance.GoToStoryTime(ElPresidente.Instance.CurrentDiscourseTime + storyTimeOffset);
             return true;
         }
 
@@ -49,13 +49,13 @@ namespace Assets.scripts
         public override void Undo()
         {
             Extensions.Log("set story time[{0}] ", startTick + previousStoryTimeOffset);
-            ElPresidente.Instance.goToStoryTime(startTick + previousStoryTimeOffset);
+            ElPresidente.Instance.GoToStoryTime(startTick + previousStoryTimeOffset);
         }
 
         public override void Skip()
         {
             Extensions.Log("set story time[{0}] ", endTick + storyTimeOffset);
-            ElPresidente.Instance.goToStoryTime(endTick + storyTimeOffset);
+            ElPresidente.Instance.GoToStoryTime(endTick + storyTimeOffset);
         }
 
         public float GetStoryTimeOffset()
