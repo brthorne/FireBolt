@@ -90,10 +90,10 @@ namespace Assets.scripts
             ElPresidente.Instance.Init(logDebug, inputFiles, videoInputSet, false, false, false, logStatistics, statFile);
 #else
             Profiler.maxNumberOfSamplesPerFrame = -1;
-            inputFiles.CameraPlanPath = "tests/longCamera.xml";
+            inputFiles.CameraPlanPath = "tests/1v1/1v1Camera.xml";
             //inputFiles.CinematicModelPath = "tests/lowAngle/defaultModel.xml";
             inputFiles.CinematicModelPath = "cinematicModels/defaultModel.xml";
-            inputFiles.StoryPlanPath = "tests/longStory.xml";
+            inputFiles.StoryPlanPath = "tests/1v1/1v1Story.xml";
 
             ElPresidente.Instance.Init(logDebug, inputFiles, videoInputSet, false, false, false, false, "statfile.txt");
 #endif

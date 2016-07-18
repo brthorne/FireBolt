@@ -99,6 +99,8 @@ namespace Assets.scripts
             //add actor to the main registry for quicker lookups
             ElPresidente.createdGameObjects.Add(actor.name, actor);
 
+            actor.layer = LayerMask.NameToLayer("Actor");
+
             //add a collider so we can raycast against this thing
             if (actor.GetComponent<BoxCollider>() == null)
             {

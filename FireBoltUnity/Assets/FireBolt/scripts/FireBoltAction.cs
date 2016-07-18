@@ -9,8 +9,7 @@ namespace Assets.scripts
     public abstract class FireBoltAction {
 
         protected float startTick;
-        protected float endTick;
-        
+        protected float endTick;        
 
         public FireBoltAction(float startTick, float endTick)
         {

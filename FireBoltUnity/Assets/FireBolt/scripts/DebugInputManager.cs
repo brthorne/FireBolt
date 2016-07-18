@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Text;
+using System;
 
 namespace Assets.scripts
 {
@@ -11,6 +13,7 @@ namespace Assets.scripts
         public float fixedTimeStep = 33f;
         public float fixedTimeStepIncrement = 1f;
         public Text fixedTimeStepDisplayText;
+        public Text impulseActionText;
         public MiniMapController MinimapController;
 
         //using the unity event system requires that we send event data...which we don't care about
@@ -66,7 +69,7 @@ namespace Assets.scripts
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 ElPresidente.Instance.SuspendTimeUpdate(garbageEventData);
-                ElPresidente.Instance.setTime(getTargetPercentComplete(-fixedTimeStep));
+                ElPresidente.Instance.SetTime(getTargetPercentComplete(-fixedTimeStep));
                 ElPresidente.Instance.ResumeTimeUpdate(garbageEventData);
             }
 
@@ -74,7 +77,7 @@ namespace Assets.scripts
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 ElPresidente.Instance.SuspendTimeUpdate(garbageEventData);
-                ElPresidente.Instance.setTime(getTargetPercentComplete(fixedTimeStep));
+                ElPresidente.Instance.SetTime(getTargetPercentComplete(fixedTimeStep));
                 ElPresidente.Instance.ResumeTimeUpdate(garbageEventData);
             }
 
@@ -105,6 +108,28 @@ namespace Assets.scripts
                     freelooking = true;
                 }
                 
+            }
+
+            //get impulse actions for a target
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                if (!string.IsNullOrEmpty(impulseActionText.text))
+                {
+                    impulseActionText.text = null;
+                    return;
+                }
+                if (impulseActionText == null) return;
+                var actions = ElPresidente.Instance.GetCurrentStoryActions("Pudge");
+                StringBuilder sb = new StringBuilder();
+                foreach (var action in actions)
+                {
+                
+                    sb.Append(action.Key);
+                    sb.Append(":");
+                    sb.Append(action.Value.ActionType.Name);
+                    sb.Append(Environment.NewLine);
+                }
+                impulseActionText.text = sb.ToString();
             }
         }
 

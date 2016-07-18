@@ -110,7 +110,7 @@ namespace Assets.scripts
 
 
             Camera  camera =  obj.AddComponent<Camera>();
-            camera.depth = 1;
+            camera.depth = 2;
             camera.clearFlags = CameraClearFlags.Depth;
             camera.orthographic = true;            
             //make minimap bottom right, one third of height, square

@@ -375,9 +375,16 @@ public class ElPresidente : MonoBehaviour
         {
             List<string> actorNames = new List<string>();
             //get list of main actors to show on the minimap
-            foreach (var actor in (story.ObjectSets["Main-Actors"] as IFiniteObjectSet).Items)
+            if (story.ObjectSets.ContainsKey("Main-Actors"))
             {
-                actorNames.Add(actor.Value.ToString());
+                foreach (var actor in (story.ObjectSets["Main-Actors"] as IFiniteObjectSet).Items)
+                {
+                    actorNames.Add(actor.Value.ToString());
+                }
+            }
+            else
+            {
+                Debug.Log("Main-Actors group not defined.  Actors will not be shown on the minimap.");
             }
             miniMapController.InitializeMiniMap(actorNames);
         }
@@ -486,7 +493,7 @@ public class ElPresidente : MonoBehaviour
         automaticTimeUpdate = true;
     }
 
-    public void setTime(float targetPercentComplete)
+    public void SetTime(float targetPercentComplete)
     {
         if (automaticTimeUpdate)
         {
@@ -495,11 +502,11 @@ public class ElPresidente : MonoBehaviour
 
         if (cameraActionList == null)
         {
-            goToDiscourseTime(0);
+            GoToDiscourseTime(0);
         }            
         else if (Mathf.Abs(targetPercentComplete * cameraActionList.EndDiscourseTime - currentDiscourseTime) > MILLIS_PER_FRAME)
         {
-            goToDiscourseTime(targetPercentComplete * cameraActionList.EndDiscourseTime);
+            GoToDiscourseTime(targetPercentComplete * cameraActionList.EndDiscourseTime);
         }
     }
 
@@ -669,7 +676,7 @@ public class ElPresidente : MonoBehaviour
         }
     }
 
-    public void goToStoryTime(float time)
+    public void GoToStoryTime(float time)
     {
         if (time < 0)
             time = 0;
@@ -687,7 +694,7 @@ public class ElPresidente : MonoBehaviour
         currentStoryTime = time;
     }
 
-    public void goToDiscourseTime(float targetDiscourseTime)
+    public void GoToDiscourseTime(float targetDiscourseTime)
     {
         if (targetDiscourseTime < 0)
             targetDiscourseTime = 0;
@@ -748,7 +755,7 @@ public class ElPresidente : MonoBehaviour
 
                 Profiler.BeginSample("advance story actions");
                 //move the story time
-                goToStoryTime(currentDiscourseTime + storyTimeOffset);
+                GoToStoryTime(currentDiscourseTime + storyTimeOffset);
                 Profiler.EndSample();
 
                 //run the camera actions that are in progress
@@ -825,6 +832,24 @@ public class ElPresidente : MonoBehaviour
         }
     }
 
+    public Dictionary<string, IStoryAction> GetCurrentStoryActions(string targetName)
+    {
+        Dictionary<string, IStoryAction> storyActions = new Dictionary<string, IStoryAction>();
+        foreach(var action in executingActorActions)
+        {
+            var impulseAction = story.Actions[action.ParentActionId];
+            IActionProperty actorProperty;
+            if (!storyActions.ContainsKey(action.ParentActionId) &&
+                impulseAction.TryGetProperty("actor", out actorProperty) &&
+                actorProperty.Value.Name == targetName) 
+            {
+                storyActions.Add(action.ParentActionId, impulseAction);
+            }
+            
+        }
+        return storyActions;
+    }
+
     private bool getRecentShotInit(out FireBoltAction cameraAction)
     {
         //walk back in the camera action list to find the last shot fragment init executed
@@ -873,14 +898,14 @@ public class ElPresidente : MonoBehaviour
     }
 
 
-    public void scaleTime(float scale)
+    public void ScaleTime(float scale)
     {
         Time.timeScale = scale;
     }
 
-    public void goToRel(float time)
+    public void GoToRel(float time)
     {
-        goToStoryTime(currentStoryTime + time);
+        GoToStoryTime(currentStoryTime + time);
     }
 
     void logTicks()
@@ -896,6 +921,8 @@ public class ElPresidente : MonoBehaviour
     {
         return action.EndTick() < referenceTime;
     }
+
+
 
     /// <summary>
     /// Creates a series of screenshots to be used as keyframes for scrubbing.
@@ -927,7 +954,7 @@ public class ElPresidente : MonoBehaviour
         for (float i = 0; i < 100; i = i + 5)
         {
             // Set the time based on the current loop.
-            setTime(i / 100);
+            SetTime(i / 100);
 
             // Allow the frame to process.
             yield return new WaitForEndOfFrame();
@@ -968,12 +995,13 @@ public class ElPresidente : MonoBehaviour
         canvas.enabled = true;
 
         // Reset the time to zero.
-        setTime(0);
+        SetTime(0);
 
         // Set that the keyframes have been generated.
         keyframesGenerated = true;
 
         //UnityEditor.EditorApplication.isPlaying = false;
+        //TODO: we probably don't actually want to quit any time we finish making keyframes
         Application.Quit();
     }
 }
